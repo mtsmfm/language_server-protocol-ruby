@@ -139,10 +139,10 @@ Handlebars.registerHelper("const", s => {
   const modules = definitions.filter(d => d.module);
 
   interfaces.forEach(definition => {
-    createFile(path.join(rootDir, "lib", "language_server", "protocol", "interfaces", `${snake(definition.interface.name)}.rb`), Handlebars.compile(`
+    createFile(path.join(rootDir, "lib", "language_server", "protocol", "interface", `${snake(definition.interface.name)}.rb`), Handlebars.compile(`
 module LanguageServer
   module Protocol
-    module Interfaces
+    module Interface
       {{#if definition.interface.documentation}}
       #
 {{comment definition.interface.documentation indent=6}}
@@ -184,10 +184,10 @@ end
   });
 
   modules.forEach(definition => {
-    createFile(path.join(rootDir, "lib", "language_server", "protocol", "constants", `${snake(definition.module.name)}.rb`), Handlebars.compile(`
+    createFile(path.join(rootDir, "lib", "language_server", "protocol", "constant", `${snake(definition.module.name)}.rb`), Handlebars.compile(`
 module LanguageServer
   module Protocol
-    module Constants
+    module Constant
       {{#if definition.module.documentation}}
       #
 {{comment definition.module.documentation indent=6}}
@@ -209,15 +209,15 @@ end
 `.slice(1), {noEscape: true})({definition}));
   });
 
-  createFile(path.join(rootDir, "lib", "language_server", "protocol", "interfaces.rb"), Handlebars.compile(`
+  createFile(path.join(rootDir, "lib", "language_server", "protocol", "interface.rb"), Handlebars.compile(`
 {{#each interfaces}}
-require "language_server/protocol/interfaces/{{snake interface.name}}"
+require "language_server/protocol/interface/{{snake interface.name}}"
 {{/each}}
 `.slice(1), {noEscape: true})({interfaces}));
 
-  createFile(path.join(rootDir, "lib", "language_server", "protocol", "constants.rb"), Handlebars.compile(`
+  createFile(path.join(rootDir, "lib", "language_server", "protocol", "constant.rb"), Handlebars.compile(`
 {{#each modules}}
-require "language_server/protocol/constants/{{snake module.name}}"
+require "language_server/protocol/constant/{{snake module.name}}"
 {{/each}}
 `.slice(1), {noEscape: true})({modules}));
 
