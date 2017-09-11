@@ -3,16 +3,6 @@ module LanguageServer
     module Transport
       module Stdio
         class Writer
-          def respond(id:, result:)
-            write(id: id, result: result)
-          end
-
-          def notify(method:, params: {})
-            write(method: method, params: params)
-          end
-
-          private
-
           def write(response)
             response_str = response.merge(
               jsonrpc: "2.0"
