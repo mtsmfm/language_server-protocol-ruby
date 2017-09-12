@@ -1,8 +1,6 @@
 # LanguageServer::Protocol
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/language_server/protocol`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A Language Server Protocol SDK for Ruby.
 
 ## Installation
 
@@ -22,7 +20,37 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require "language_server-protocol"
+
+module LanguageServer::Protocol
+  writer = Transport::Stdio::Writer.new
+  reader = Transport::Stdio::Reader.new
+
+  subscribers = {
+    initialize: -> {
+      Interface::InitializeResult.new(
+        capabilities: Interface::ServerCapabilities.new(
+          text_document_sync: Interface::TextDocumentSyncOptions.new(
+          change: Constant::TextDocumentSyncKind::FULL
+        ),
+        completion_provider: Interface::CompletionOptions.new(
+          resolve_provider: true,
+          trigger_characters: %w(.)
+        ),
+        definition_provider: true
+        )
+      )
+    }
+  }
+
+  reader.read do |request|
+    result = subscribers[request[:method].to_sym].call
+    writer.write(id: request[:id], result: result)
+    exit
+  end
+end
+```
 
 ## Development
 
