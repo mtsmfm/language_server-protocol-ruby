@@ -1,28 +1,8 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ApplyWorkspaceEditResponse
-        def initialize(applied:)
-          @attributes = {}
-
-          @attributes[:applied] = applied
-
-          @attributes.freeze
-        end
-
-        #
-        # Indicates whether the edit was applied or not.
-        #
-        # @return [boolean]
-        def applied
-          attributes.fetch(:applied)
-        end
-
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
-        end
+      class ApplyWorkspaceEditResponse < Base
+        attr_required_keys :applied
       end
     end
   end

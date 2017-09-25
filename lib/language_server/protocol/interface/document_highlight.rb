@@ -6,37 +6,9 @@ module LanguageServer
       # special attention. Usually a document highlight is visualized by changing
       # the background color of its range.
       #
-      class DocumentHighlight
-        def initialize(range:, kind: nil)
-          @attributes = {}
-
-          @attributes[:range] = range
-          @attributes[:kind] = kind if kind
-
-          @attributes.freeze
-        end
-
-        #
-        # The range this highlight applies to.
-        #
-        # @return [Range]
-        def range
-          attributes.fetch(:range)
-        end
-
-        #
-        # The highlight kind, default is DocumentHighlightKind.Text.
-        #
-        # @return [number]
-        def kind
-          attributes.fetch(:kind)
-        end
-
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
-        end
+      class DocumentHighlight < Base
+        attr_required_keys :range
+        attr_optional_keys :kind
       end
     end
   end

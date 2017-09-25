@@ -1,25 +1,8 @@
 module LanguageServer
   module Protocol
     module Interface
-      class Message
-        def initialize(jsonrpc:)
-          @attributes = {}
-
-          @attributes[:jsonrpc] = jsonrpc
-
-          @attributes.freeze
-        end
-
-        # @return [string]
-        def jsonrpc
-          attributes.fetch(:jsonrpc)
-        end
-
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
-        end
+      class Message < Base
+        attr_required_keys :jsonrpc
       end
     end
   end

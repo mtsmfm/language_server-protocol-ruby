@@ -1,25 +1,8 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ReferenceParams
-        def initialize(context:)
-          @attributes = {}
-
-          @attributes[:context] = context
-
-          @attributes.freeze
-        end
-
-        # @return [ReferenceContext]
-        def context
-          attributes.fetch(:context)
-        end
-
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
-        end
+      class ReferenceParams < Base
+        attr_required_keys :context
       end
     end
   end

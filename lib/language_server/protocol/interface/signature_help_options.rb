@@ -4,29 +4,8 @@ module LanguageServer
       #
       # Signature help options.
       #
-      class SignatureHelpOptions
-        def initialize(trigger_characters: nil)
-          @attributes = {}
-
-          @attributes[:triggerCharacters] = trigger_characters if trigger_characters
-
-          @attributes.freeze
-        end
-
-        #
-        # The characters that trigger signature help
-        # automatically.
-        #
-        # @return [string[]]
-        def trigger_characters
-          attributes.fetch(:triggerCharacters)
-        end
-
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
-        end
+      class SignatureHelpOptions < Base
+        attr_optional_keys :trigger_characters
       end
     end
   end

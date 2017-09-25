@@ -1,28 +1,8 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DidChangeConfigurationParams
-        def initialize(settings:)
-          @attributes = {}
-
-          @attributes[:settings] = settings
-
-          @attributes.freeze
-        end
-
-        #
-        # The actual changed settings
-        #
-        # @return [any]
-        def settings
-          attributes.fetch(:settings)
-        end
-
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
-        end
+      class DidChangeConfigurationParams < Base
+        attr_required_keys :settings
       end
     end
   end

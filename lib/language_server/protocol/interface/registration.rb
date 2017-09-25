@@ -4,47 +4,9 @@ module LanguageServer
       #
       # General paramters to to regsiter for a capability.
       #
-      class Registration
-        def initialize(id:, method:, register_options: nil)
-          @attributes = {}
-
-          @attributes[:id] = id
-          @attributes[:method] = method
-          @attributes[:registerOptions] = register_options if register_options
-
-          @attributes.freeze
-        end
-
-        #
-        # The id used to register the request. The id can be used to deregister
-        # the request again.
-        #
-        # @return [string]
-        def id
-          attributes.fetch(:id)
-        end
-
-        #
-        # The method / capability to register for.
-        #
-        # @return [string]
-        def method
-          attributes.fetch(:method)
-        end
-
-        #
-        # Options necessary for the registration.
-        #
-        # @return [any]
-        def register_options
-          attributes.fetch(:registerOptions)
-        end
-
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
-        end
+      class Registration < Base
+        attr_required_keys :id, :method
+        attr_optional_keys :register_options
       end
     end
   end
