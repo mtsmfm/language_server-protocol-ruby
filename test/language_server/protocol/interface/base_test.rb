@@ -5,11 +5,6 @@ class LanguageServer::Protocol::Interface::BaseTest < Minitest::Test
     Class.new(parent_class)
   end
 
-  def test_that_it_has_a_contained_rpc_version
-    base = LanguageServer::Protocol::Interface::Base.new
-    assert { base.attributes[:jsonrpc] == '2.0' }
-  end
-
   def test_that_it_defines_required_keys
     inherited_interface = build_class
     inherited_interface.attr_required_keys(:required)

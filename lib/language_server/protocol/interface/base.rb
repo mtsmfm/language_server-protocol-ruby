@@ -1,13 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
-      DEFAULT_ATTRIBUTES = {
-        jsonrpc: '2.0'
-      }.freeze
-
       class Base
         def self.define_attribute_method(key)
-          lower_camel_case = LanguageServer::Protocol::Utils.to_lower_camerize(key.to_s)
+          lower_camel_case = Protocol::Utils.to_lower_camerize(key.to_s)
 
           class_eval(<<-METHOD, __FILE__, __LINE__ + 1)
             def #{key}; @attributes[:#{lower_camel_case}] end
@@ -37,7 +33,7 @@ module LanguageServer
         def initialize(attributes = {})
           reject_extra_keys!(attributes.keys)
 
-          @attributes = (self.class.required_keys + self.class.optional_keys).each_with_object(DEFAULT_ATTRIBUTES.dup) { |key, h|
+          @attributes = (self.class.required_keys + self.class.optional_keys).each_with_object({}) { |key, h|
             next unless attributes.key?(key)
 
             # attributes[:text_document] => h[:textDocument]
