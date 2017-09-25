@@ -2,8 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class DidSaveTextDocumentParams < Base
-        attr_required_keys :text_document
-        attr_optional_keys :text
+        define_attribute_methods(:text_document, :text)
+
+        def initialize(text_document:, text: nil)
+          super
+        end
       end
     end
   end

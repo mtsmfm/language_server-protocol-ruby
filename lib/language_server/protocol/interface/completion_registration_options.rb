@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class CompletionRegistrationOptions < Base
-        attr_optional_keys :trigger_characters, :resolve_provider
+        define_attribute_methods(:trigger_characters, :resolve_provider)
+
+        def initialize(trigger_characters: nil, resolve_provider: nil)
+          super
+        end
       end
     end
   end

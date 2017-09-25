@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class ApplyWorkspaceEditResponse < Base
-        attr_required_keys :applied
+        define_attribute_methods(:applied)
+
+        def initialize(applied:)
+          super
+        end
       end
     end
   end

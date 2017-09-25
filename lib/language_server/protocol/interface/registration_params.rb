@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class RegistrationParams < Base
-        attr_required_keys :registrations
+        define_attribute_methods(:registrations)
+
+        def initialize(registrations:)
+          super
+        end
       end
     end
   end

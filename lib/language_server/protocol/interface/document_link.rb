@@ -6,8 +6,11 @@ module LanguageServer
       # text document or a web site.
       #
       class DocumentLink < Base
-        attr_required_keys :range
-        attr_optional_keys :target
+        define_attribute_methods(:range, :target)
+
+        def initialize(range:, target: nil)
+          super
+        end
       end
     end
   end

@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class DocumentFormattingParams < Base
-        attr_required_keys :text_document, :options
+        define_attribute_methods(:text_document, :options)
+
+        def initialize(text_document:, options:)
+          super
+        end
       end
     end
   end

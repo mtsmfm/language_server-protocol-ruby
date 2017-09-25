@@ -7,8 +7,11 @@ module LanguageServer
       # active and only one active parameter.
       #
       class SignatureHelp < Base
-        attr_required_keys :signature
-        attr_optional_keys :active_signature, :active_parameter
+        define_attribute_methods(:signature, :active_signature, :active_parameter)
+
+        def initialize(signature:, active_signature: nil, active_parameter: nil)
+          super
+        end
       end
     end
   end

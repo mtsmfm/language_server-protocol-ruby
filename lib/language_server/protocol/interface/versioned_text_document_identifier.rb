@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class VersionedTextDocumentIdentifier < Base
-        attr_required_keys :version
+        define_attribute_methods(:version)
+
+        def initialize(version:)
+          super
+        end
       end
     end
   end

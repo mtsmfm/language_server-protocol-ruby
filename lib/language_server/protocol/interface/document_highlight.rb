@@ -7,8 +7,11 @@ module LanguageServer
       # the background color of its range.
       #
       class DocumentHighlight < Base
-        attr_required_keys :range
-        attr_optional_keys :kind
+        define_attribute_methods(:range, :kind)
+
+        def initialize(range:, kind: nil)
+          super
+        end
       end
     end
   end

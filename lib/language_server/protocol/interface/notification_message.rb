@@ -2,8 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class NotificationMessage < Base
-        attr_required_keys :method
-        attr_optional_keys :params
+        define_attribute_methods(:method, :params)
+
+        def initialize(method:, params: nil)
+          super
+        end
       end
     end
   end

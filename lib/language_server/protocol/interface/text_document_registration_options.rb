@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class TextDocumentRegistrationOptions < Base
-        attr_required_keys :document_selector
+        define_attribute_methods(:document_selector)
+
+        def initialize(document_selector:)
+          super
+        end
       end
     end
   end

@@ -6,8 +6,11 @@ module LanguageServer
       # have a label and a doc-comment.
       #
       class ParameterInformation < Base
-        attr_required_keys :label
-        attr_optional_keys :documentation
+        define_attribute_methods(:label, :documentation)
+
+        def initialize(label:, documentation: nil)
+          super
+        end
       end
     end
   end

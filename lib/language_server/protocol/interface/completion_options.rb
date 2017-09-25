@@ -5,7 +5,11 @@ module LanguageServer
       # Completion options.
       #
       class CompletionOptions < Base
-        attr_optional_keys :resolve_provider, :trigger_characters
+        define_attribute_methods(:resolve_provider, :trigger_characters)
+
+        def initialize(resolve_provider: nil, trigger_characters: nil)
+          super
+        end
       end
     end
   end

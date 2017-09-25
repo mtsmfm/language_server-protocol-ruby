@@ -6,8 +6,11 @@ module LanguageServer
       # interfaces etc.
       #
       class SymbolInformation < Base
-        attr_required_keys :name, :kind, :location
-        attr_optional_keys :container_name
+        define_attribute_methods(:name, :kind, :location, :container_name)
+
+        def initialize(name:, kind:, location:, container_name: nil)
+          super
+        end
       end
     end
   end

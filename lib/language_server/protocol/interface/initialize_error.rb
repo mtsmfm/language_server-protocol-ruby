@@ -5,7 +5,11 @@ module LanguageServer
       # Known error codes for an `InitializeError`;
       #
       class InitializeError < Base
-        attr_required_keys :retry
+        define_attribute_methods(:retry)
+
+        def initialize(retry:)
+          super
+        end
       end
     end
   end

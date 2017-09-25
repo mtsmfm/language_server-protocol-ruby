@@ -2,8 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class Diagnostic < Base
-        attr_required_keys :range, :message
-        attr_optional_keys :severity, :code, :source
+        define_attribute_methods(:range, :message, :severity, :code, :source)
+
+        def initialize(range:, message:, severity: nil, code: nil, source: nil)
+          super
+        end
       end
     end
   end

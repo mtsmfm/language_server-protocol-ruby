@@ -7,8 +7,11 @@ module LanguageServer
       # a set of parameters.
       #
       class SignatureInformation < Base
-        attr_required_keys :label
-        attr_optional_keys :documentation, :parameters
+        define_attribute_methods(:label, :documentation, :parameters)
+
+        def initialize(label:, documentation: nil, parameters: nil)
+          super
+        end
       end
     end
   end

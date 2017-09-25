@@ -2,8 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class ExecuteCommandParams < Base
-        attr_required_keys :command
-        attr_optional_keys :arguments
+        define_attribute_methods(:command, :arguments)
+
+        def initialize(command:, arguments: nil)
+          super
+        end
       end
     end
   end

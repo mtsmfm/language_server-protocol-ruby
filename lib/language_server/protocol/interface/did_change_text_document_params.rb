@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class DidChangeTextDocumentParams < Base
-        attr_required_keys :text_document, :content_changes
+        define_attribute_methods(:text_document, :content_changes)
+
+        def initialize(text_document:, content_changes:)
+          super
+        end
       end
     end
   end

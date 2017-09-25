@@ -5,7 +5,11 @@ module LanguageServer
       # Save options.
       #
       class SaveOptions < Base
-        attr_optional_keys :include_text
+        define_attribute_methods(:include_text)
+
+        def initialize(include_text: nil)
+          super
+        end
       end
     end
   end

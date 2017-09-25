@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class InitializeResult < Base
-        attr_required_keys :capabilities
+        define_attribute_methods(:capabilities)
+
+        def initialize(capabilities:)
+          super
+        end
       end
     end
   end

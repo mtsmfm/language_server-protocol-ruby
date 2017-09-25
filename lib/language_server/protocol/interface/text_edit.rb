@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class TextEdit < Base
-        attr_required_keys :range, :new_text
+        define_attribute_methods(:range, :new_text)
+
+        def initialize(range:, new_text:)
+          super
+        end
       end
     end
   end

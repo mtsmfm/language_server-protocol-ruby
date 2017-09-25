@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class TextDocumentItem < Base
-        attr_required_keys :uri, :language_id, :version, :text
+        define_attribute_methods(:uri, :language_id, :version, :text)
+
+        def initialize(uri:, language_id:, version:, text:)
+          super
+        end
       end
     end
   end

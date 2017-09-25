@@ -2,8 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class Command < Base
-        attr_required_keys :title, :command
-        attr_optional_keys :arguments
+        define_attribute_methods(:title, :command, :arguments)
+
+        def initialize(title:, command:, arguments: nil)
+          super
+        end
       end
     end
   end

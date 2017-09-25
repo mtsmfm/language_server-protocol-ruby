@@ -5,7 +5,11 @@ module LanguageServer
       # Code Lens options.
       #
       class CodeLensOptions < Base
-        attr_optional_keys :resolve_provider
+        define_attribute_methods(:resolve_provider)
+
+        def initialize(resolve_provider: nil)
+          super
+        end
       end
     end
   end

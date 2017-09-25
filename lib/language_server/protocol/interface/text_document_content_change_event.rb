@@ -6,8 +6,11 @@ module LanguageServer
       # the new text is considered to be the full content of the document.
       #
       class TextDocumentContentChangeEvent < Base
-        attr_required_keys :text
-        attr_optional_keys :range, :range_length
+        define_attribute_methods(:text, :range, :range_length)
+
+        def initialize(text:, range: nil, range_length: nil)
+          super
+        end
       end
     end
   end

@@ -5,8 +5,11 @@ module LanguageServer
       # The result of a hover request.
       #
       class Hover < Base
-        attr_required_keys :contents
-        attr_optional_keys :range
+        define_attribute_methods(:contents, :range)
+
+        def initialize(contents:, range: nil)
+          super
+        end
       end
     end
   end

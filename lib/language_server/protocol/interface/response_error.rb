@@ -2,8 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class ResponseError < Base
-        attr_required_keys :code, :message
-        attr_optional_keys :data
+        define_attribute_methods(:code, :message, :data)
+
+        def initialize(code:, message:, data: nil)
+          super
+        end
       end
     end
   end

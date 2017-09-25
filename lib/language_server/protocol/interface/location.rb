@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class Location < Base
-        attr_required_keys :uri, :range
+        define_attribute_methods(:uri, :range)
+
+        def initialize(uri:, range:)
+          super
+        end
       end
     end
   end

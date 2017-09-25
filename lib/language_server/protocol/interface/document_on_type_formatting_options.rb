@@ -5,8 +5,11 @@ module LanguageServer
       # Format document on type options
       #
       class DocumentOnTypeFormattingOptions < Base
-        attr_required_keys :first_trigger_character
-        attr_optional_keys :more_trigger_character
+        define_attribute_methods(:first_trigger_character, :more_trigger_character)
+
+        def initialize(first_trigger_character:, more_trigger_character: nil)
+          super
+        end
       end
     end
   end

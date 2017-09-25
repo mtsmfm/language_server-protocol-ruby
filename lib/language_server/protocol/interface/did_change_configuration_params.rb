@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class DidChangeConfigurationParams < Base
-        attr_required_keys :settings
+        define_attribute_methods(:settings)
+
+        def initialize(settings:)
+          super
+        end
       end
     end
   end

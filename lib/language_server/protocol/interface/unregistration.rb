@@ -5,7 +5,11 @@ module LanguageServer
       # General parameters to unregister a capability.
       #
       class Unregistration < Base
-        attr_required_keys :id, :method
+        define_attribute_methods(:id, :method)
+
+        def initialize(id:, method:)
+          super
+        end
       end
     end
   end

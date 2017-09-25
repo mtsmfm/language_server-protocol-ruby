@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class ReferenceParams < Base
-        attr_required_keys :context
+        define_attribute_methods(:context)
+
+        def initialize(context:)
+          super
+        end
       end
     end
   end

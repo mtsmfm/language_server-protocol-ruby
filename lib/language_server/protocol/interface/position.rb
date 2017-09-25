@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class Position < Base
-        attr_required_keys :line, :character
+        define_attribute_methods(:line, :character)
+
+        def initialize(line:, character:)
+          super
+        end
       end
     end
   end

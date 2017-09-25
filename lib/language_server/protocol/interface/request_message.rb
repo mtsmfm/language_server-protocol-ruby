@@ -2,8 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class RequestMessage < Base
-        attr_required_keys :id, :method
-        attr_optional_keys :params
+        define_attribute_methods(:id, :method, :params)
+
+        def initialize(id:, method:, params: nil)
+          super
+        end
       end
     end
   end

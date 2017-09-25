@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class DocumentSymbolParams < Base
-        attr_required_keys :text_document
+        define_attribute_methods(:text_document)
+
+        def initialize(text_document:)
+          super
+        end
       end
     end
   end

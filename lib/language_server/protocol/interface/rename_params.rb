@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class RenameParams < Base
-        attr_required_keys :text_document, :position, :new_name
+        define_attribute_methods(:text_document, :position, :new_name)
+
+        def initialize(text_document:, position:, new_name:)
+          super
+        end
       end
     end
   end

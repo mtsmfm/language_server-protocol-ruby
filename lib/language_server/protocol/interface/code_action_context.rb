@@ -6,7 +6,11 @@ module LanguageServer
       # a code action is run.
       #
       class CodeActionContext < Base
-        attr_required_keys :diagnostics
+        define_attribute_methods(:diagnostics)
+
+        def initialize(diagnostics:)
+          super
+        end
       end
     end
   end

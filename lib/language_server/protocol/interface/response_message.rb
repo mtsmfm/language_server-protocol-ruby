@@ -2,8 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class ResponseMessage < Base
-        attr_required_keys :id
-        attr_optional_keys :result, :error
+        define_attribute_methods(:id, :result, :error)
+
+        def initialize(id:, result: nil, error: nil)
+          super
+        end
       end
     end
   end

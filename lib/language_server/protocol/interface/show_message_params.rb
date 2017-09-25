@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class ShowMessageParams < Base
-        attr_required_keys :type, :message
+        define_attribute_methods(:type, :message)
+
+        def initialize(type:, message:)
+          super
+        end
       end
     end
   end

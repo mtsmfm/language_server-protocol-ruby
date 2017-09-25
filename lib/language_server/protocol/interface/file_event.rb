@@ -5,7 +5,11 @@ module LanguageServer
       # An event describing a file change.
       #
       class FileEvent < Base
-        attr_required_keys :uri, :type
+        define_attribute_methods(:uri, :type)
+
+        def initialize(uri:, type:)
+          super
+        end
       end
     end
   end

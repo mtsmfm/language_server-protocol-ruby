@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class TextDocumentEdit < Base
-        attr_required_keys :text_document, :edits
+        define_attribute_methods(:text_document, :edits)
+
+        def initialize(text_document:, edits:)
+          super
+        end
       end
     end
   end

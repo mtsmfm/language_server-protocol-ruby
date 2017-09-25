@@ -5,7 +5,11 @@ module LanguageServer
       # Params for the CodeActionRequest
       #
       class CodeActionParams < Base
-        attr_required_keys :text_document, :range, :context
+        define_attribute_methods(:text_document, :range, :context)
+
+        def initialize(text_document:, range:, context:)
+          super
+        end
       end
     end
   end

@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class TextDocumentSaveRegistrationOptions < Base
-        attr_optional_keys :include_text
+        define_attribute_methods(:include_text)
+
+        def initialize(include_text: nil)
+          super
+        end
       end
     end
   end

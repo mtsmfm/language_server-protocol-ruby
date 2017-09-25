@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class Message < Base
-        attr_required_keys :jsonrpc
+        define_attribute_methods(:jsonrpc)
+
+        def initialize(jsonrpc:)
+          super
+        end
       end
     end
   end

@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class PublishDiagnosticsParams < Base
-        attr_required_keys :uri, :diagnostics
+        define_attribute_methods(:uri, :diagnostics)
+
+        def initialize(uri:, diagnostics:)
+          super
+        end
       end
     end
   end

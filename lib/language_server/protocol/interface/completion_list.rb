@@ -6,7 +6,11 @@ module LanguageServer
       # in the editor.
       #
       class CompletionList < Base
-        attr_required_keys :is_incomplete, :items
+        define_attribute_methods(:is_incomplete, :items)
+
+        def initialize(is_incomplete:, items:)
+          super
+        end
       end
     end
   end

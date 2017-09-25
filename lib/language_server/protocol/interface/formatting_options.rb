@@ -5,7 +5,11 @@ module LanguageServer
       # Value-object describing what options formatting should use.
       #
       class FormattingOptions < Base
-        attr_required_keys :tab_size, :insert_spaces
+        define_attribute_methods(:tab_size, :insert_spaces)
+
+        def initialize(tab_size:, insert_spaces:)
+          super
+        end
       end
     end
   end

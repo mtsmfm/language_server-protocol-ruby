@@ -9,8 +9,11 @@ module LanguageServer
       # reasons the creation of a code lens and resolving should be done in two stages.
       #
       class CodeLens < Base
-        attr_required_keys :range
-        attr_optional_keys :command, :data
+        define_attribute_methods(:range, :command, :data)
+
+        def initialize(range:, command: nil, data: nil)
+          super
+        end
       end
     end
   end

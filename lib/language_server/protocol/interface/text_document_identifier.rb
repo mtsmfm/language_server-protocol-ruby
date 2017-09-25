@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class TextDocumentIdentifier < Base
-        attr_required_keys :uri
+        define_attribute_methods(:uri)
+
+        def initialize(uri:)
+          super
+        end
       end
     end
   end

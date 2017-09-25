@@ -5,7 +5,11 @@ module LanguageServer
       # Execute command options.
       #
       class ExecuteCommandOptions < Base
-        attr_required_keys :commands
+        define_attribute_methods(:commands)
+
+        def initialize(commands:)
+          super
+        end
       end
     end
   end

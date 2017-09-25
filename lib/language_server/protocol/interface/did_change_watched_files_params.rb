@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class DidChangeWatchedFilesParams < Base
-        attr_required_keys :changes
+        define_attribute_methods(:changes)
+
+        def initialize(changes:)
+          super
+        end
       end
     end
   end

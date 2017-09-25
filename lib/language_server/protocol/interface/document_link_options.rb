@@ -5,7 +5,11 @@ module LanguageServer
       # Document link options
       #
       class DocumentLinkOptions < Base
-        attr_optional_keys :resolve_provider
+        define_attribute_methods(:resolve_provider)
+
+        def initialize(resolve_provider: nil)
+          super
+        end
       end
     end
   end
