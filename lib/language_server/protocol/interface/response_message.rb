@@ -1,10 +1,10 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ResponseMessage < Base
+      class ResponseMessage < Message
         define_attribute_methods(:id, :result, :error)
 
-        def initialize(id:, result: nil, error: nil)
+        def initialize(id:, result: nil, error: nil, jsonrpc: Message::VERSION)
           super
         end
       end
