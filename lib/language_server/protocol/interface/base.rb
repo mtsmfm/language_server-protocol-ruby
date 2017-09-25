@@ -10,7 +10,7 @@ module LanguageServer
           @required_keys ||= []
         end
 
-        def self.define_required_keys=(*keys)
+        def self.define_required_keys(*keys)
           @required_keys = required_keys + keys
         end
 
