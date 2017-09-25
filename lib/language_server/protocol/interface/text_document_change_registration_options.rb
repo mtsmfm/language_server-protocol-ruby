@@ -4,10 +4,10 @@ module LanguageServer
       #
       # Descibe options to be used when registered for text document change events.
       #
-      class TextDocumentChangeRegistrationOptions < Base
+      class TextDocumentChangeRegistrationOptions < TextDocumentRegistrationOptions
         define_attribute_methods(:sync_kind)
 
-        def initialize(sync_kind:)
+        def initialize(sync_kind:, document_selector:)
           super
         end
       end

@@ -1,10 +1,10 @@
 module LanguageServer
   module Protocol
     module Interface
-      class CompletionRegistrationOptions < Base
+      class CompletionRegistrationOptions < TextDocumentRegistrationOptions
         define_attribute_methods(:trigger_characters, :resolve_provider)
 
-        def initialize(trigger_characters: nil, resolve_provider: nil)
+        def initialize(document_selector:, trigger_characters: nil, resolve_provider: nil)
           super
         end
       end

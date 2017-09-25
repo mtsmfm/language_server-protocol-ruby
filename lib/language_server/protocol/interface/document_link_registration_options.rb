@@ -1,10 +1,10 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DocumentLinkRegistrationOptions < Base
+      class DocumentLinkRegistrationOptions < TextDocumentRegistrationOptions
         define_attribute_methods(:resolve_provider)
 
-        def initialize(resolve_provider:)
+        def initialize(document_selector:, resolve_provider:)
           super
         end
       end
