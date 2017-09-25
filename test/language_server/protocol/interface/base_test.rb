@@ -30,4 +30,12 @@ class LanguageServer::Protocol::Interface::BaseTest < Minitest::Test
     child_class = build_class(parent_class)
     assert_empty(child_class.required_keys)
   end
+
+  def test_that_it_defines_accessor_method
+    klass = build_class
+    klass.define_required_keys(:key)
+
+    instance = klass.new(key: 'value')
+    assert(instance.key, 'value')
+  end
 end

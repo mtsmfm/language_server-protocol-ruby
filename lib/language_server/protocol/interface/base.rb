@@ -11,6 +11,12 @@ module LanguageServer
         end
 
         def self.define_required_keys(*keys)
+          keys.each do |key|
+            class_eval <<-METHOD, __FILE__, __LINE__ + 1
+              def #{key}; @attributes.fetch(:#{key}) end
+            METHOD
+          end
+
           @required_keys = required_keys + keys
         end
 
