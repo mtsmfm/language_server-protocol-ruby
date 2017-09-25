@@ -7,8 +7,10 @@ module LanguageServer
 
       class Base
         def self.define_attribute_method(key)
-          class_eval <<-METHOD, __FILE__, __LINE__ + 1
-            def #{key}; @attributes[:#{key}] end
+          lower_camel_case = LanguageServer::Protocol::Utils.to_lower_camerize(key.to_s)
+
+          class_eval(<<-METHOD, __FILE__, __LINE__ + 1)
+            def #{key}; @attributes[:#{lower_camel_case}] end
           METHOD
         end
 
@@ -33,13 +35,15 @@ module LanguageServer
         attr_reader :attributes
 
         def initialize(attributes = {})
-          validate_attr_keys!(attributes)
+          reject_extra_keys!(attributes.keys)
 
-          @attributes = (self.class.required_keys + self.class.optional_keys).each_with_object(DEFAULT_ATTRIBUTES.dup) do |key, h|
-            h[key] = attributes[key] if attributes.key?(key)
-          end
+          @attributes = (self.class.required_keys + self.class.optional_keys).each_with_object(DEFAULT_ATTRIBUTES.dup) { |key, h|
+            next unless attributes.key?(key)
 
-          @attributes.freeze
+            # attributes[:text_document] => h[:textDocument]
+            lower_camel_case = LanguageServer::Protocol::Utils.to_lower_camerize(key.to_s)
+            h[lower_camel_case.to_sym] = attributes[key]
+          }.freeze
 
           validate_required_keys!
         end
@@ -50,15 +54,16 @@ module LanguageServer
 
         private
 
-        def validate_attr_keys!(attributes)
-          attr_keys = self.class.required_keys + self.class.optional_keys
-          extra_keys = attributes.keys - attr_keys
+        def reject_extra_keys!(keys)
+          allowed_keys = self.class.required_keys + self.class.optional_keys
+          extra_keys = keys - allowed_keys
 
-          raise ArgumentError, "extra keys given: #{extra_keys}. allowed keys are #{attr_keys}" unless extra_keys.empty?
+          raise ArgumentError, "extra keys given: #{extra_keys}. allowed keys are #{allowed_keys}" unless extra_keys.empty?
         end
 
         def validate_required_keys!
-          missing_keys = self.class.required_keys - @attributes.keys
+          required_keys = self.class.required_keys.map { |key| LanguageServer::Protocol::Utils.to_lower_camerize(key.to_s).to_sym }
+          missing_keys = required_keys - @attributes.keys
           raise ArgumentError, "missing required key: #{missing_keys}" unless missing_keys.empty?
         end
       end
