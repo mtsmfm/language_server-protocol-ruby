@@ -1,10 +1,14 @@
 module LanguageServer
   module Protocol
     module Interface
-      class TextDocumentSaveRegistrationOptions < TextDocumentRegistrationOptions
-        define_attribute_methods(:include_text)
+      class TextDocumentSaveRegistrationOptions < Base
+        #
+        # The client is supposed to include the content on save.
+        #
+        # @return [boolean]
+        define_attribute_method :include_text
 
-        def initialize(document_selector:, include_text: nil)
+        def initialize(include_text: nil)
           super
         end
       end

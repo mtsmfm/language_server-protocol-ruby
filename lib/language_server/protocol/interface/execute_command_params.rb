@@ -2,7 +2,17 @@ module LanguageServer
   module Protocol
     module Interface
       class ExecuteCommandParams < Base
-        define_attribute_methods(:command, :arguments)
+        #
+        # The identifier of the actual command handler.
+        #
+        # @return [string]
+        define_attribute_method :command
+
+        #
+        # Arguments that the command should be invoked with.
+        #
+        # @return [any[]]
+        define_attribute_method :arguments
 
         def initialize(command:, arguments: nil)
           super

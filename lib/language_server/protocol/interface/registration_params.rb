@@ -2,7 +2,8 @@ module LanguageServer
   module Protocol
     module Interface
       class RegistrationParams < Base
-        define_attribute_methods(:registrations)
+        # @return [Registration[]]
+        define_attribute_method :registrations
 
         def initialize(registrations:)
           super

@@ -5,7 +5,17 @@ module LanguageServer
       # Format document on type options
       #
       class DocumentOnTypeFormattingOptions < Base
-        define_attribute_methods(:first_trigger_character, :more_trigger_character)
+        #
+        # A character on which formatting should be triggered, like `}`.
+        #
+        # @return [string]
+        define_attribute_method :first_trigger_character
+
+        #
+        # More trigger characters.
+        #
+        # @return [string[]]
+        define_attribute_method :more_trigger_character
 
         def initialize(first_trigger_character:, more_trigger_character: nil)
           super

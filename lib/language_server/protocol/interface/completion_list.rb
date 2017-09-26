@@ -6,7 +6,18 @@ module LanguageServer
       # in the editor.
       #
       class CompletionList < Base
-        define_attribute_methods(:is_incomplete, :items)
+        #
+        # This list it not complete. Further typing should result in recomputing
+        # this list.
+        #
+        # @return [boolean]
+        define_attribute_method :is_incomplete
+
+        #
+        # The completion items.
+        #
+        # @return [CompletionItem[]]
+        define_attribute_method :items
 
         def initialize(is_incomplete:, items:)
           super

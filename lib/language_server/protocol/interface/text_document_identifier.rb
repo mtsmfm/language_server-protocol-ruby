@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class TextDocumentIdentifier < Base
-        define_attribute_methods(:uri)
+        #
+        # The text document's URI.
+        #
+        # @return [string]
+        define_attribute_method :uri
 
         def initialize(uri:)
           super

@@ -5,7 +5,11 @@ module LanguageServer
       # Code Lens options.
       #
       class CodeLensOptions < Base
-        define_attribute_methods(:resolve_provider)
+        #
+        # Code lens has a resolve provider as well.
+        #
+        # @return [boolean]
+        define_attribute_method :resolve_provider
 
         def initialize(resolve_provider: nil)
           super

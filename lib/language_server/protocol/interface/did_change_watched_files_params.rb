@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class DidChangeWatchedFilesParams < Base
-        define_attribute_methods(:changes)
+        #
+        # The actual file events.
+        #
+        # @return [FileEvent[]]
+        define_attribute_method :changes
 
         def initialize(changes:)
           super

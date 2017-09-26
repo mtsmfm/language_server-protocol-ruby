@@ -1,10 +1,20 @@
 module LanguageServer
   module Protocol
     module Interface
-      class NotificationMessage < Message
-        define_attribute_methods(:method, :params)
+      class NotificationMessage < Base
+        #
+        # The method to be invoked.
+        #
+        # @return [string]
+        define_attribute_method :method
 
-        def initialize(method:, params: nil, jsonrpc: Message::VERSION)
+        #
+        # The notification's params.
+        #
+        # @return [any]
+        define_attribute_method :params
+
+        def initialize(method:, params: nil)
           super
         end
       end

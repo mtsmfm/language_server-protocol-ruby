@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class DocumentSymbolParams < Base
-        define_attribute_methods(:text_document)
+        #
+        # The text document.
+        #
+        # @return [TextDocumentIdentifier]
+        define_attribute_method :text_document
 
         def initialize(text_document:)
           super

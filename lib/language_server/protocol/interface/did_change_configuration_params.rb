@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class DidChangeConfigurationParams < Base
-        define_attribute_methods(:settings)
+        #
+        # The actual changed settings
+        #
+        # @return [any]
+        define_attribute_method :settings
 
         def initialize(settings:)
           super

@@ -5,7 +5,11 @@ module LanguageServer
       # Execute command options.
       #
       class ExecuteCommandOptions < Base
-        define_attribute_methods(:commands)
+        #
+        # The commands to be executed on the server
+        #
+        # @return [string[]]
+        define_attribute_method :commands
 
         def initialize(commands:)
           super

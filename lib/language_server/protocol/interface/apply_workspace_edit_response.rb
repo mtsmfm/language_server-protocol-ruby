@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class ApplyWorkspaceEditResponse < Base
-        define_attribute_methods(:applied)
+        #
+        # Indicates whether the edit was applied or not.
+        #
+        # @return [boolean]
+        define_attribute_method :applied
 
         def initialize(applied:)
           super

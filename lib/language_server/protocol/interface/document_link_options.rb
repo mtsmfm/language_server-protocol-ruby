@@ -5,7 +5,11 @@ module LanguageServer
       # Document link options
       #
       class DocumentLinkOptions < Base
-        define_attribute_methods(:resolve_provider)
+        #
+        # Document links have a resolve provider as well.
+        #
+        # @return [boolean]
+        define_attribute_method :resolve_provider
 
         def initialize(resolve_provider: nil)
           super

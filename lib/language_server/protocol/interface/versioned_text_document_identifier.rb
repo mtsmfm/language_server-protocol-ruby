@@ -1,8 +1,12 @@
 module LanguageServer
   module Protocol
     module Interface
-      class VersionedTextDocumentIdentifier < TextDocumentIdentifier
-        define_attribute_methods(:version)
+      class VersionedTextDocumentIdentifier < Base
+        #
+        # The version number of this document.
+        #
+        # @return [number]
+        define_attribute_method :version
 
         def initialize(version:)
           super

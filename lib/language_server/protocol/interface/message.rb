@@ -2,11 +2,10 @@ module LanguageServer
   module Protocol
     module Interface
       class Message < Base
-        VERSION = '2.0'
+        # @return [string]
+        define_attribute_method :jsonrpc
 
-        define_attribute_methods(:jsonrpc)
-
-        def initialize(jsonrpc: VERSION)
+        def initialize(jsonrpc:)
           super
         end
       end

@@ -6,7 +6,17 @@ module LanguageServer
       # text document or a web site.
       #
       class DocumentLink < Base
-        define_attribute_methods(:range, :target)
+        #
+        # The range this link applies to.
+        #
+        # @return [Range]
+        define_attribute_method :range
+
+        #
+        # The uri this link points to. If missing a resolve request is sent later.
+        #
+        # @return [string]
+        define_attribute_method :target
 
         def initialize(range:, target: nil)
           super

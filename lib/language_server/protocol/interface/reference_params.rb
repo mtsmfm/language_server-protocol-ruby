@@ -1,10 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ReferenceParams < TextDocumentPositionParams
-        define_attribute_methods(:context)
+      class ReferenceParams < Base
+        # @return [ReferenceContext]
+        define_attribute_method :context
 
-        def initialize(text_document:, position:, context:)
+        def initialize(context:)
           super
         end
       end

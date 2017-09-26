@@ -1,10 +1,15 @@
 module LanguageServer
   module Protocol
     module Interface
-      class SignatureHelpRegistrationOptions < TextDocumentRegistrationOptions
-        define_attribute_methods(:trigger_characters)
+      class SignatureHelpRegistrationOptions < Base
+        #
+        # The characters that trigger signature help
+        # automatically.
+        #
+        # @return [string[]]
+        define_attribute_method :trigger_characters
 
-        def initialize(document_selector:, trigger_characters: nil)
+        def initialize(trigger_characters: nil)
           super
         end
       end

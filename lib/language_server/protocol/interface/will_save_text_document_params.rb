@@ -5,7 +5,17 @@ module LanguageServer
       # The parameters send in a will save text document notification.
       #
       class WillSaveTextDocumentParams < Base
-        define_attribute_methods(:text_document, :reason)
+        #
+        # The document that will be saved.
+        #
+        # @return [TextDocumentIdentifier]
+        define_attribute_method :text_document
+
+        #
+        # The 'TextDocumentSaveReason'.
+        #
+        # @return [number]
+        define_attribute_method :reason
 
         def initialize(text_document:, reason:)
           super

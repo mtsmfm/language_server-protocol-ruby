@@ -2,7 +2,8 @@ module LanguageServer
   module Protocol
     module Interface
       class UnregistrationParams < Base
-        define_attribute_methods(:unregisterations)
+        # @return [Unregistration[]]
+        define_attribute_method :unregisterations
 
         def initialize(unregisterations:)
           super

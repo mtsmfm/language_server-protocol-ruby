@@ -5,7 +5,11 @@ module LanguageServer
       # The parameters of a Workspace Symbol Request.
       #
       class WorkspaceSymbolParams < Base
-        define_attribute_methods(:query)
+        #
+        # A non-empty query string
+        #
+        # @return [string]
+        define_attribute_method :query
 
         def initialize(query:)
           super

@@ -7,7 +7,17 @@ module LanguageServer
       # the background color of its range.
       #
       class DocumentHighlight < Base
-        define_attribute_methods(:range, :kind)
+        #
+        # The range this highlight applies to.
+        #
+        # @return [Range]
+        define_attribute_method :range
+
+        #
+        # The highlight kind, default is DocumentHighlightKind.Text.
+        #
+        # @return [number]
+        define_attribute_method :kind
 
         def initialize(range:, kind: nil)
           super

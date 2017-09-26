@@ -5,7 +5,17 @@ module LanguageServer
       # An event describing a file change.
       #
       class FileEvent < Base
-        define_attribute_methods(:uri, :type)
+        #
+        # The file's URI.
+        #
+        # @return [string]
+        define_attribute_method :uri
+
+        #
+        # The change type.
+        #
+        # @return [number]
+        define_attribute_method :type
 
         def initialize(uri:, type:)
           super

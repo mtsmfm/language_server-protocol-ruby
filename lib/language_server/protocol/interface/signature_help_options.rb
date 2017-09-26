@@ -5,7 +5,12 @@ module LanguageServer
       # Signature help options.
       #
       class SignatureHelpOptions < Base
-        define_attribute_methods(:trigger_characters)
+        #
+        # The characters that trigger signature help
+        # automatically.
+        #
+        # @return [string[]]
+        define_attribute_method :trigger_characters
 
         def initialize(trigger_characters: nil)
           super

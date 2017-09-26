@@ -6,9 +6,25 @@ module LanguageServer
       # the new text is considered to be the full content of the document.
       #
       class TextDocumentContentChangeEvent < Base
-        define_attribute_methods(:text, :range, :range_length)
+        #
+        # The range of the document that changed.
+        #
+        # @return [Range]
+        define_attribute_method :range
 
-        def initialize(text:, range: nil, range_length: nil)
+        #
+        # The length of the range that got replaced.
+        #
+        # @return [number]
+        define_attribute_method :range_length
+
+        #
+        # The new text of the range/document.
+        #
+        # @return [string]
+        define_attribute_method :text
+
+        def initialize(range: nil, range_length: nil, text:)
           super
         end
       end

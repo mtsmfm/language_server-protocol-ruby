@@ -5,7 +5,18 @@ module LanguageServer
       # Completion options.
       #
       class CompletionOptions < Base
-        define_attribute_methods(:resolve_provider, :trigger_characters)
+        #
+        # The server provides support to resolve additional
+        # information for a completion item.
+        #
+        # @return [boolean]
+        define_attribute_method :resolve_provider
+
+        #
+        # The characters that trigger completion automatically.
+        #
+        # @return [string[]]
+        define_attribute_method :trigger_characters
 
         def initialize(resolve_provider: nil, trigger_characters: nil)
           super

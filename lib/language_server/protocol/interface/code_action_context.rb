@@ -6,7 +6,11 @@ module LanguageServer
       # a code action is run.
       #
       class CodeActionContext < Base
-        define_attribute_methods(:diagnostics)
+        #
+        # An array of diagnostics.
+        #
+        # @return [Diagnostic[]]
+        define_attribute_method :diagnostics
 
         def initialize(diagnostics:)
           super

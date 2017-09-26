@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class InitializeResult < Base
-        define_attribute_methods(:capabilities)
+        #
+        # The capabilities the language server provides.
+        #
+        # @return [ServerCapabilities]
+        define_attribute_method :capabilities
 
         def initialize(capabilities:)
           super

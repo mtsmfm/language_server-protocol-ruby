@@ -2,7 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class ReferenceContext < Base
-        define_attribute_methods(:include_declaration)
+        #
+        # Include the declaration of the current symbol.
+        #
+        # @return [boolean]
+        define_attribute_method :include_declaration
 
         def initialize(include_declaration:)
           super

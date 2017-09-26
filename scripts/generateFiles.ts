@@ -148,33 +148,19 @@ module LanguageServer
 {{comment definition.interface.documentation indent=6}}
       #
       {{/if}}
-      class {{definition.interface.name}}
-        def initialize({{params definition.members}})
-          @attributes = {}
-
-          {{#each definition.members}}
-          @attributes[:{{name}}] = {{local_var name}}{{#if optional}} if {{local_var name}}{{/if}}
-          {{/each}}
-
-          @attributes.freeze
-        end
+      class {{definition.interface.name}} < Base
         {{#each definition.members}}
-
         {{#if documentation}}
         #
 {{comment documentation indent=8}}
         #
         {{/if}}
         # @return [{{type}}{{#if nullable}}, nil{{/if}}]
-        def {{snake name}}
-          attributes.fetch(:{{name}})
-        end
+        define_attribute_method :{{snake name}}
+
         {{/each}}
-
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize({{params definition.members}})
+          super
         end
       end
     end
@@ -210,6 +196,7 @@ end
   });
 
   createFile(path.join(rootDir, "lib", "language_server", "protocol", "interface.rb"), Handlebars.compile(`
+require "language_server/protocol/interface/base"
 {{#each interfaces}}
 require "language_server/protocol/interface/{{snake interface.name}}"
 {{/each}}
