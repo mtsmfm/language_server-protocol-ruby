@@ -10,10 +10,6 @@ module LanguageServer
           METHOD
         end
 
-        def self.define_attribute_methods(*keys)
-          keys.each { |key| define_attribute_method(key) }
-        end
-
         attr_reader :attributes
 
         def initialize(attributes = {})
