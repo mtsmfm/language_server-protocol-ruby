@@ -3,7 +3,8 @@ jobs:
   build:
     docker:
       - image: tmaier/docker-compose
-    working_directory: /project
+        environment:
+          COMPOSE_FILE: docker-compose.yml:docker-compose.ci.yml
     steps:
       - checkout
       - setup_remote_docker:
@@ -13,11 +14,14 @@ jobs:
           command: |
             set -x
             docker info
-            docker volume create mtsmfm-language-server-protocol-sync
-            docker create -v mtsmfm-language-server-protocol-sync:/app --name mtsmfm-language-server-protocol-sync busybox chown -R 1000:1000 /app
-            docker cp . mtsmfm-language-server-protocol-sync:/app
-            docker start mtsmfm-language-server-protocol-sync
+            docker volume create project
+            docker create -v project:/app --name project busybox chown -R 1000:1000 /app
+            docker cp . project:/app
+            docker start project
             docker-compose build
-            docker-compose run app bin/setup
-            docker-compose run ruby-2-3 bin/setup
-            docker-compose run ruby-2-2 bin/setup
+      - run:
+          name: test
+          command: |
+            docker-compose run app bundle exec rake test
+            docker-compose run ruby-2-3 bundle exec rake test
+            docker-compose run ruby-2-2 bundle exec rake test
