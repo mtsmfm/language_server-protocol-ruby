@@ -1,30 +1,15 @@
 module LanguageServer
   module Protocol
     module Interface
-      class Location
-        def initialize(uri:, range:)
-          @attributes = {}
-
-          @attributes[:uri] = uri
-          @attributes[:range] = range
-
-          @attributes.freeze
-        end
-
+      class Location < Base
         # @return [string]
-        def uri
-          attributes.fetch(:uri)
-        end
+        define_attribute_method :uri
 
         # @return [Range]
-        def range
-          attributes.fetch(:range)
-        end
+        define_attribute_method :range
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(uri:, range:)
+          super
         end
       end
     end

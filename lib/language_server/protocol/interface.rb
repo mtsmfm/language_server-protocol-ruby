@@ -1,3 +1,4 @@
+require "language_server/protocol/interface/base"
 require "language_server/protocol/interface/message"
 require "language_server/protocol/interface/request_message"
 require "language_server/protocol/interface/response_message"

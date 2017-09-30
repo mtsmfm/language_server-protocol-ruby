@@ -1,45 +1,27 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DocumentRangeFormattingParams
-        def initialize(text_document:, range:, options:)
-          @attributes = {}
-
-          @attributes[:textDocument] = text_document
-          @attributes[:range] = range
-          @attributes[:options] = options
-
-          @attributes.freeze
-        end
-
+      class DocumentRangeFormattingParams < Base
         #
         # The document to format.
         #
         # @return [TextDocumentIdentifier]
-        def text_document
-          attributes.fetch(:textDocument)
-        end
+        define_attribute_method :text_document
 
         #
         # The range to format
         #
         # @return [Range]
-        def range
-          attributes.fetch(:range)
-        end
+        define_attribute_method :range
 
         #
         # The format options
         #
         # @return [FormattingOptions]
-        def options
-          attributes.fetch(:options)
-        end
+        define_attribute_method :options
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(text_document:, range:, options:)
+          super
         end
       end
     end

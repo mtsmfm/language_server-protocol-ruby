@@ -1,55 +1,34 @@
 module LanguageServer
   module Protocol
     module Interface
-      class TextDocumentItem
-        def initialize(uri:, language_id:, version:, text:)
-          @attributes = {}
-
-          @attributes[:uri] = uri
-          @attributes[:languageId] = language_id
-          @attributes[:version] = version
-          @attributes[:text] = text
-
-          @attributes.freeze
-        end
-
+      class TextDocumentItem < Base
         #
         # The text document's URI.
         #
         # @return [string]
-        def uri
-          attributes.fetch(:uri)
-        end
+        define_attribute_method :uri
 
         #
         # The text document's language identifier.
         #
         # @return [string]
-        def language_id
-          attributes.fetch(:languageId)
-        end
+        define_attribute_method :language_id
 
         #
         # The version number of this document (it will strictly increase after each
         # change, including undo/redo).
         #
         # @return [number]
-        def version
-          attributes.fetch(:version)
-        end
+        define_attribute_method :version
 
         #
         # The content of the opened text document.
         #
         # @return [string]
-        def text
-          attributes.fetch(:text)
-        end
+        define_attribute_method :text
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(uri:, language_id:, version:, text:)
+          super
         end
       end
     end

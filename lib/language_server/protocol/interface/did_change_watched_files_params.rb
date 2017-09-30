@@ -1,27 +1,15 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DidChangeWatchedFilesParams
-        def initialize(changes:)
-          @attributes = {}
-
-          @attributes[:changes] = changes
-
-          @attributes.freeze
-        end
-
+      class DidChangeWatchedFilesParams < Base
         #
         # The actual file events.
         #
         # @return [FileEvent[]]
-        def changes
-          attributes.fetch(:changes)
-        end
+        define_attribute_method :changes
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(changes:)
+          super
         end
       end
     end

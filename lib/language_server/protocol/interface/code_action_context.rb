@@ -5,27 +5,15 @@ module LanguageServer
       # Contains additional diagnostic information about the context in which
       # a code action is run.
       #
-      class CodeActionContext
-        def initialize(diagnostics:)
-          @attributes = {}
-
-          @attributes[:diagnostics] = diagnostics
-
-          @attributes.freeze
-        end
-
+      class CodeActionContext < Base
         #
         # An array of diagnostics.
         #
         # @return [Diagnostic[]]
-        def diagnostics
-          attributes.fetch(:diagnostics)
-        end
+        define_attribute_method :diagnostics
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(diagnostics:)
+          super
         end
       end
     end

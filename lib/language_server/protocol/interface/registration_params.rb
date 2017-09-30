@@ -1,24 +1,12 @@
 module LanguageServer
   module Protocol
     module Interface
-      class RegistrationParams
-        def initialize(registrations:)
-          @attributes = {}
-
-          @attributes[:registrations] = registrations
-
-          @attributes.freeze
-        end
-
+      class RegistrationParams < Base
         # @return [Registration[]]
-        def registrations
-          attributes.fetch(:registrations)
-        end
+        define_attribute_method :registrations
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(registrations:)
+          super
         end
       end
     end

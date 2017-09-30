@@ -1,32 +1,18 @@
 module LanguageServer
   module Protocol
     module Interface
-      class RenameParams
-        def initialize(text_document:, position:, new_name:)
-          @attributes = {}
-
-          @attributes[:textDocument] = text_document
-          @attributes[:position] = position
-          @attributes[:newName] = new_name
-
-          @attributes.freeze
-        end
-
+      class RenameParams < Base
         #
         # The document to format.
         #
         # @return [TextDocumentIdentifier]
-        def text_document
-          attributes.fetch(:textDocument)
-        end
+        define_attribute_method :text_document
 
         #
         # The position at which this request was sent.
         #
         # @return [Position]
-        def position
-          attributes.fetch(:position)
-        end
+        define_attribute_method :position
 
         #
         # The new name of the symbol. If the given name is not valid the
@@ -34,14 +20,10 @@ module LanguageServer
         # appropriate message set.
         #
         # @return [string]
-        def new_name
-          attributes.fetch(:newName)
-        end
+        define_attribute_method :new_name
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(text_document:, position:, new_name:)
+          super
         end
       end
     end

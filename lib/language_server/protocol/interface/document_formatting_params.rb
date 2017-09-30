@@ -1,36 +1,21 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DocumentFormattingParams
-        def initialize(text_document:, options:)
-          @attributes = {}
-
-          @attributes[:textDocument] = text_document
-          @attributes[:options] = options
-
-          @attributes.freeze
-        end
-
+      class DocumentFormattingParams < Base
         #
         # The document to format.
         #
         # @return [TextDocumentIdentifier]
-        def text_document
-          attributes.fetch(:textDocument)
-        end
+        define_attribute_method :text_document
 
         #
         # The format options.
         #
         # @return [FormattingOptions]
-        def options
-          attributes.fetch(:options)
-        end
+        define_attribute_method :options
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(text_document:, options:)
+          super
         end
       end
     end

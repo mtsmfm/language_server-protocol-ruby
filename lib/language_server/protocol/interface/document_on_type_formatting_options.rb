@@ -4,36 +4,21 @@ module LanguageServer
       #
       # Format document on type options
       #
-      class DocumentOnTypeFormattingOptions
-        def initialize(first_trigger_character:, more_trigger_character: nil)
-          @attributes = {}
-
-          @attributes[:firstTriggerCharacter] = first_trigger_character
-          @attributes[:moreTriggerCharacter] = more_trigger_character if more_trigger_character
-
-          @attributes.freeze
-        end
-
+      class DocumentOnTypeFormattingOptions < Base
         #
         # A character on which formatting should be triggered, like `}`.
         #
         # @return [string]
-        def first_trigger_character
-          attributes.fetch(:firstTriggerCharacter)
-        end
+        define_attribute_method :first_trigger_character
 
         #
         # More trigger characters.
         #
         # @return [string[]]
-        def more_trigger_character
-          attributes.fetch(:moreTriggerCharacter)
-        end
+        define_attribute_method :more_trigger_character
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(first_trigger_character:, more_trigger_character: nil)
+          super
         end
       end
     end

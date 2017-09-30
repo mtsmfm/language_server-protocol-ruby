@@ -1,27 +1,15 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ReferenceContext
-        def initialize(include_declaration:)
-          @attributes = {}
-
-          @attributes[:includeDeclaration] = include_declaration
-
-          @attributes.freeze
-        end
-
+      class ReferenceContext < Base
         #
         # Include the declaration of the current symbol.
         #
         # @return [boolean]
-        def include_declaration
-          attributes.fetch(:includeDeclaration)
-        end
+        define_attribute_method :include_declaration
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(include_declaration:)
+          super
         end
       end
     end

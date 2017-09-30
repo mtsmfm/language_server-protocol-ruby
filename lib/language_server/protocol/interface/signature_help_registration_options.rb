@@ -1,28 +1,16 @@
 module LanguageServer
   module Protocol
     module Interface
-      class SignatureHelpRegistrationOptions
-        def initialize(trigger_characters: nil)
-          @attributes = {}
-
-          @attributes[:triggerCharacters] = trigger_characters if trigger_characters
-
-          @attributes.freeze
-        end
-
+      class SignatureHelpRegistrationOptions < Base
         #
         # The characters that trigger signature help
         # automatically.
         #
         # @return [string[]]
-        def trigger_characters
-          attributes.fetch(:triggerCharacters)
-        end
+        define_attribute_method :trigger_characters
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(trigger_characters: nil)
+          super
         end
       end
     end

@@ -1,23 +1,12 @@
 module LanguageServer
   module Protocol
     module Interface
-      class WorkspaceEdit
-        def initialize(changes: nil, document_changes: nil)
-          @attributes = {}
-
-          @attributes[:changes] = changes if changes
-          @attributes[:documentChanges] = document_changes if document_changes
-
-          @attributes.freeze
-        end
-
+      class WorkspaceEdit < Base
         #
         # Holds changes to existing resources.
         #
         # @return [{ [uri: string]: TextEdit[]; }]
-        def changes
-          attributes.fetch(:changes)
-        end
+        define_attribute_method :changes
 
         #
         # An array of `TextDocumentEdit`s to express changes to specific a specific
@@ -25,14 +14,10 @@ module LanguageServer
         # edits is expressed via `WorkspaceClientCapabilites.versionedWorkspaceEdit`.
         #
         # @return [TextDocumentEdit[]]
-        def document_changes
-          attributes.fetch(:documentChanges)
-        end
+        define_attribute_method :document_changes
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(changes: nil, document_changes: nil)
+          super
         end
       end
     end

@@ -1,37 +1,22 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DidSaveTextDocumentParams
-        def initialize(text_document:, text: nil)
-          @attributes = {}
-
-          @attributes[:textDocument] = text_document
-          @attributes[:text] = text if text
-
-          @attributes.freeze
-        end
-
+      class DidSaveTextDocumentParams < Base
         #
         # The document that was saved.
         #
         # @return [TextDocumentIdentifier]
-        def text_document
-          attributes.fetch(:textDocument)
-        end
+        define_attribute_method :text_document
 
         #
         # Optional the content when saved. Depends on the includeText value
         # when the save notifcation was requested.
         #
         # @return [string]
-        def text
-          attributes.fetch(:text)
-        end
+        define_attribute_method :text
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(text_document:, text: nil)
+          super
         end
       end
     end

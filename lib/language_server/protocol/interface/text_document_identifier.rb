@@ -1,27 +1,15 @@
 module LanguageServer
   module Protocol
     module Interface
-      class TextDocumentIdentifier
-        def initialize(uri:)
-          @attributes = {}
-
-          @attributes[:uri] = uri
-
-          @attributes.freeze
-        end
-
+      class TextDocumentIdentifier < Base
         #
         # The text document's URI.
         #
         # @return [string]
-        def uri
-          attributes.fetch(:uri)
-        end
+        define_attribute_method :uri
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(uri:)
+          super
         end
       end
     end

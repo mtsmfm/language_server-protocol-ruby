@@ -1,36 +1,21 @@
 module LanguageServer
   module Protocol
     module Interface
-      class Range
-        def initialize(start:, end:)
-          @attributes = {}
-
-          @attributes[:start] = start
-          @attributes[:end] = binding.local_variable_get(:end)
-
-          @attributes.freeze
-        end
-
+      class Range < Base
         #
         # The range's start position.
         #
         # @return [Position]
-        def start
-          attributes.fetch(:start)
-        end
+        define_attribute_method :start
 
         #
         # The range's end position.
         #
         # @return [Position]
-        def end
-          attributes.fetch(:end)
-        end
+        define_attribute_method :end
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(start:, end:)
+          super
         end
       end
     end

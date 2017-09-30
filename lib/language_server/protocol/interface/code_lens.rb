@@ -8,46 +8,28 @@ module LanguageServer
       # A code lens is _unresolved_ when no command is associated to it. For performance
       # reasons the creation of a code lens and resolving should be done in two stages.
       #
-      class CodeLens
-        def initialize(range:, command: nil, data: nil)
-          @attributes = {}
-
-          @attributes[:range] = range
-          @attributes[:command] = command if command
-          @attributes[:data] = data if data
-
-          @attributes.freeze
-        end
-
+      class CodeLens < Base
         #
         # The range in which this code lens is valid. Should only span a single line.
         #
         # @return [Range]
-        def range
-          attributes.fetch(:range)
-        end
+        define_attribute_method :range
 
         #
         # The command this code lens represents.
         #
         # @return [Command]
-        def command
-          attributes.fetch(:command)
-        end
+        define_attribute_method :command
 
         #
         # A data entry field that is preserved on a code lens item between
         # a code lens and a code lens resolve request.
         #
         # @return [any]
-        def data
-          attributes.fetch(:data)
-        end
+        define_attribute_method :data
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(range:, command: nil, data: nil)
+          super
         end
       end
     end

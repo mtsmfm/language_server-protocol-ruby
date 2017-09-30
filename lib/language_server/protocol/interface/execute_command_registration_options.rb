@@ -4,27 +4,15 @@ module LanguageServer
       #
       # Execute command registration options.
       #
-      class ExecuteCommandRegistrationOptions
-        def initialize(commands:)
-          @attributes = {}
-
-          @attributes[:commands] = commands
-
-          @attributes.freeze
-        end
-
+      class ExecuteCommandRegistrationOptions < Base
         #
         # The commands to be executed on the server
         #
         # @return [string[]]
-        def commands
-          attributes.fetch(:commands)
-        end
+        define_attribute_method :commands
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(commands:)
+          super
         end
       end
     end

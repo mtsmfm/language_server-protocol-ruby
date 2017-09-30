@@ -1,27 +1,15 @@
 module LanguageServer
   module Protocol
     module Interface
-      class MessageActionItem
-        def initialize(title:)
-          @attributes = {}
-
-          @attributes[:title] = title
-
-          @attributes.freeze
-        end
-
+      class MessageActionItem < Base
         #
         # A short title like 'Retry', 'Open Log' etc.
         #
         # @return [string]
-        def title
-          attributes.fetch(:title)
-        end
+        define_attribute_method :title
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(title:)
+          super
         end
       end
     end

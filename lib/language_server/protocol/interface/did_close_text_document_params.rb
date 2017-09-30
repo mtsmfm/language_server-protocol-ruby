@@ -1,27 +1,15 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DidCloseTextDocumentParams
-        def initialize(text_document:)
-          @attributes = {}
-
-          @attributes[:textDocument] = text_document
-
-          @attributes.freeze
-        end
-
+      class DidCloseTextDocumentParams < Base
         #
         # The document that was closed.
         #
         # @return [TextDocumentIdentifier]
-        def text_document
-          attributes.fetch(:textDocument)
-        end
+        define_attribute_method :text_document
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(text_document:)
+          super
         end
       end
     end

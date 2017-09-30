@@ -1,27 +1,15 @@
 module LanguageServer
   module Protocol
     module Interface
-      class CancelParams
-        def initialize(id:)
-          @attributes = {}
-
-          @attributes[:id] = id
-
-          @attributes.freeze
-        end
-
+      class CancelParams < Base
         #
         # The request id to cancel.
         #
         # @return [string | number]
-        def id
-          attributes.fetch(:id)
-        end
+        define_attribute_method :id
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(id:)
+          super
         end
       end
     end

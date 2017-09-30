@@ -1,45 +1,27 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DocumentFilter
-        def initialize(language: nil, scheme: nil, pattern: nil)
-          @attributes = {}
-
-          @attributes[:language] = language if language
-          @attributes[:scheme] = scheme if scheme
-          @attributes[:pattern] = pattern if pattern
-
-          @attributes.freeze
-        end
-
+      class DocumentFilter < Base
         #
         # A language id, like `typescript`.
         #
         # @return [string]
-        def language
-          attributes.fetch(:language)
-        end
+        define_attribute_method :language
 
         #
         # A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
         #
         # @return [string]
-        def scheme
-          attributes.fetch(:scheme)
-        end
+        define_attribute_method :scheme
 
         #
         # A glob pattern, like `*.{ts,js}`.
         #
         # @return [string]
-        def pattern
-          attributes.fetch(:pattern)
-        end
+        define_attribute_method :pattern
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(language: nil, scheme: nil, pattern: nil)
+          super
         end
       end
     end

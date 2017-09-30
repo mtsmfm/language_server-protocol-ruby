@@ -4,36 +4,21 @@ module LanguageServer
       #
       # An event describing a file change.
       #
-      class FileEvent
-        def initialize(uri:, type:)
-          @attributes = {}
-
-          @attributes[:uri] = uri
-          @attributes[:type] = type
-
-          @attributes.freeze
-        end
-
+      class FileEvent < Base
         #
         # The file's URI.
         #
         # @return [string]
-        def uri
-          attributes.fetch(:uri)
-        end
+        define_attribute_method :uri
 
         #
         # The change type.
         #
         # @return [number]
-        def type
-          attributes.fetch(:type)
-        end
+        define_attribute_method :type
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(uri:, type:)
+          super
         end
       end
     end

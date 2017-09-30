@@ -4,36 +4,21 @@ module LanguageServer
       #
       # The parameters send in a will save text document notification.
       #
-      class WillSaveTextDocumentParams
-        def initialize(text_document:, reason:)
-          @attributes = {}
-
-          @attributes[:textDocument] = text_document
-          @attributes[:reason] = reason
-
-          @attributes.freeze
-        end
-
+      class WillSaveTextDocumentParams < Base
         #
         # The document that will be saved.
         #
         # @return [TextDocumentIdentifier]
-        def text_document
-          attributes.fetch(:textDocument)
-        end
+        define_attribute_method :text_document
 
         #
         # The 'TextDocumentSaveReason'.
         #
         # @return [number]
-        def reason
-          attributes.fetch(:reason)
-        end
+        define_attribute_method :reason
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(text_document:, reason:)
+          super
         end
       end
     end

@@ -1,46 +1,28 @@
 module LanguageServer
   module Protocol
     module Interface
-      class Command
-        def initialize(title:, command:, arguments: nil)
-          @attributes = {}
-
-          @attributes[:title] = title
-          @attributes[:command] = command
-          @attributes[:arguments] = arguments if arguments
-
-          @attributes.freeze
-        end
-
+      class Command < Base
         #
         # Title of the command, like `save`.
         #
         # @return [string]
-        def title
-          attributes.fetch(:title)
-        end
+        define_attribute_method :title
 
         #
         # The identifier of the actual command handler.
         #
         # @return [string]
-        def command
-          attributes.fetch(:command)
-        end
+        define_attribute_method :command
 
         #
         # Arguments that the command handler should be
         # invoked with.
         #
         # @return [any[]]
-        def arguments
-          attributes.fetch(:arguments)
-        end
+        define_attribute_method :arguments
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(title:, command:, arguments: nil)
+          super
         end
       end
     end

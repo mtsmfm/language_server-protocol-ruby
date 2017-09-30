@@ -5,36 +5,21 @@ module LanguageServer
       # A document link is a range in a text document that links to an internal or external resource, like another
       # text document or a web site.
       #
-      class DocumentLink
-        def initialize(range:, target: nil)
-          @attributes = {}
-
-          @attributes[:range] = range
-          @attributes[:target] = target if target
-
-          @attributes.freeze
-        end
-
+      class DocumentLink < Base
         #
         # The range this link applies to.
         #
         # @return [Range]
-        def range
-          attributes.fetch(:range)
-        end
+        define_attribute_method :range
 
         #
         # The uri this link points to. If missing a resolve request is sent later.
         #
         # @return [string]
-        def target
-          attributes.fetch(:target)
-        end
+        define_attribute_method :target
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(range:, target: nil)
+          super
         end
       end
     end

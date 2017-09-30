@@ -1,64 +1,40 @@
 module LanguageServer
   module Protocol
     module Interface
-      class TextDocumentSyncOptions
-        def initialize(open_close: nil, change: nil, will_save: nil, will_save_wait_until: nil, save: nil)
-          @attributes = {}
-
-          @attributes[:openClose] = open_close if open_close
-          @attributes[:change] = change if change
-          @attributes[:willSave] = will_save if will_save
-          @attributes[:willSaveWaitUntil] = will_save_wait_until if will_save_wait_until
-          @attributes[:save] = save if save
-
-          @attributes.freeze
-        end
-
+      class TextDocumentSyncOptions < Base
         #
         # Open and close notifications are sent to the server.
         #
         # @return [boolean]
-        def open_close
-          attributes.fetch(:openClose)
-        end
+        define_attribute_method :open_close
 
         #
         # Change notificatins are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
         # and TextDocumentSyncKindIncremental.
         #
         # @return [number]
-        def change
-          attributes.fetch(:change)
-        end
+        define_attribute_method :change
 
         #
         # Will save notifications are sent to the server.
         #
         # @return [boolean]
-        def will_save
-          attributes.fetch(:willSave)
-        end
+        define_attribute_method :will_save
 
         #
         # Will save wait until requests are sent to the server.
         #
         # @return [boolean]
-        def will_save_wait_until
-          attributes.fetch(:willSaveWaitUntil)
-        end
+        define_attribute_method :will_save_wait_until
 
         #
         # Save notifications are sent to the server.
         #
         # @return [SaveOptions]
-        def save
-          attributes.fetch(:save)
-        end
+        define_attribute_method :save
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(open_close: nil, change: nil, will_save: nil, will_save_wait_until: nil, save: nil)
+          super
         end
       end
     end

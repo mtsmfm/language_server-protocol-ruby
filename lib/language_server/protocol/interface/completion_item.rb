@@ -1,97 +1,62 @@
 module LanguageServer
   module Protocol
     module Interface
-      class CompletionItem
-        def initialize(label:, kind: nil, detail: nil, documentation: nil, sort_text: nil, filter_text: nil, insert_text: nil, insert_text_format: nil, text_edit: nil, additional_text_edits: nil, command: nil, data: nil)
-          @attributes = {}
-
-          @attributes[:label] = label
-          @attributes[:kind] = kind if kind
-          @attributes[:detail] = detail if detail
-          @attributes[:documentation] = documentation if documentation
-          @attributes[:sortText] = sort_text if sort_text
-          @attributes[:filterText] = filter_text if filter_text
-          @attributes[:insertText] = insert_text if insert_text
-          @attributes[:insertTextFormat] = insert_text_format if insert_text_format
-          @attributes[:textEdit] = text_edit if text_edit
-          @attributes[:additionalTextEdits] = additional_text_edits if additional_text_edits
-          @attributes[:command] = command if command
-          @attributes[:data] = data if data
-
-          @attributes.freeze
-        end
-
+      class CompletionItem < Base
         #
         # The label of this completion item. By default
         # also the text that is inserted when selecting
         # this completion.
         #
         # @return [string]
-        def label
-          attributes.fetch(:label)
-        end
+        define_attribute_method :label
 
         #
         # The kind of this completion item. Based of the kind
         # an icon is chosen by the editor.
         #
         # @return [number]
-        def kind
-          attributes.fetch(:kind)
-        end
+        define_attribute_method :kind
 
         #
         # A human-readable string with additional information
         # about this item, like type or symbol information.
         #
         # @return [string]
-        def detail
-          attributes.fetch(:detail)
-        end
+        define_attribute_method :detail
 
         #
         # A human-readable string that represents a doc-comment.
         #
         # @return [string]
-        def documentation
-          attributes.fetch(:documentation)
-        end
+        define_attribute_method :documentation
 
         #
         # A string that shoud be used when comparing this item
         # with other items. When `falsy` the label is used.
         #
         # @return [string]
-        def sort_text
-          attributes.fetch(:sortText)
-        end
+        define_attribute_method :sort_text
 
         #
         # A string that should be used when filtering a set of
         # completion items. When `falsy` the label is used.
         #
         # @return [string]
-        def filter_text
-          attributes.fetch(:filterText)
-        end
+        define_attribute_method :filter_text
 
         #
         # A string that should be inserted a document when selecting
         # this completion. When `falsy` the label is used.
         #
         # @return [string]
-        def insert_text
-          attributes.fetch(:insertText)
-        end
+        define_attribute_method :insert_text
 
         #
         # The format of the insert text. The format applies to both the `insertText` property
         # and the `newText` property of a provided `textEdit`.
         #
         # @return [InsertTextFormat]
-        def insert_text_format
-          attributes.fetch(:insertTextFormat)
-        end
+        define_attribute_method :insert_text_format
 
         #
         # An edit which is applied to a document when selecting this completion. When an edit is provided the value of
@@ -101,9 +66,7 @@ module LanguageServer
         # has been requested.
         #
         # @return [TextEdit]
-        def text_edit
-          attributes.fetch(:textEdit)
-        end
+        define_attribute_method :text_edit
 
         #
         # An optional array of additional text edits that are applied when
@@ -111,9 +74,7 @@ module LanguageServer
         # nor with themselves.
         #
         # @return [TextEdit[]]
-        def additional_text_edits
-          attributes.fetch(:additionalTextEdits)
-        end
+        define_attribute_method :additional_text_edits
 
         #
         # An optional command that is executed *after* inserting this completion. *Note* that
@@ -121,23 +82,17 @@ module LanguageServer
         # additionalTextEdits-property.
         #
         # @return [Command]
-        def command
-          attributes.fetch(:command)
-        end
+        define_attribute_method :command
 
         #
         # An data entry field that is preserved on a completion item between
         # a completion and a completion resolve request.
         #
         # @return [any]
-        def data
-          attributes.fetch(:data)
-        end
+        define_attribute_method :data
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(label:, kind: nil, detail: nil, documentation: nil, sort_text: nil, filter_text: nil, insert_text: nil, insert_text_format: nil, text_edit: nil, additional_text_edits: nil, command: nil, data: nil)
+          super
         end
       end
     end

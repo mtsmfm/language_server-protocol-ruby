@@ -1,45 +1,27 @@
 module LanguageServer
   module Protocol
     module Interface
-      class RequestMessage
-        def initialize(id:, method:, params: nil)
-          @attributes = {}
-
-          @attributes[:id] = id
-          @attributes[:method] = method
-          @attributes[:params] = params if params
-
-          @attributes.freeze
-        end
-
+      class RequestMessage < Base
         #
         # The request id.
         #
         # @return [string | number]
-        def id
-          attributes.fetch(:id)
-        end
+        define_attribute_method :id
 
         #
         # The method to be invoked.
         #
         # @return [string]
-        def method
-          attributes.fetch(:method)
-        end
+        define_attribute_method :method
 
         #
         # The method's params.
         #
         # @return [any]
-        def params
-          attributes.fetch(:params)
-        end
+        define_attribute_method :params
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(id:, method:, params: nil)
+          super
         end
       end
     end

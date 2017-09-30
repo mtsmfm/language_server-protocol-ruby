@@ -1,45 +1,27 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ClientCapabilities
-        def initialize(workspace: nil, text_document: nil, experimental: nil)
-          @attributes = {}
-
-          @attributes[:workspace] = workspace if workspace
-          @attributes[:textDocument] = text_document if text_document
-          @attributes[:experimental] = experimental if experimental
-
-          @attributes.freeze
-        end
-
+      class ClientCapabilities < Base
         #
         # Workspace specific client capabilities.
         #
         # @return [WorkspaceClientCapabilites]
-        def workspace
-          attributes.fetch(:workspace)
-        end
+        define_attribute_method :workspace
 
         #
         # Text document specific client capabilities.
         #
         # @return [TextDocumentClientCapabilities]
-        def text_document
-          attributes.fetch(:textDocument)
-        end
+        define_attribute_method :text_document
 
         #
         # Experimental client capabilities.
         #
         # @return [any]
-        def experimental
-          attributes.fetch(:experimental)
-        end
+        define_attribute_method :experimental
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(workspace: nil, text_document: nil, experimental: nil)
+          super
         end
       end
     end

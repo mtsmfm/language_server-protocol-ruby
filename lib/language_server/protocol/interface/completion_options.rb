@@ -4,37 +4,22 @@ module LanguageServer
       #
       # Completion options.
       #
-      class CompletionOptions
-        def initialize(resolve_provider: nil, trigger_characters: nil)
-          @attributes = {}
-
-          @attributes[:resolveProvider] = resolve_provider if resolve_provider
-          @attributes[:triggerCharacters] = trigger_characters if trigger_characters
-
-          @attributes.freeze
-        end
-
+      class CompletionOptions < Base
         #
         # The server provides support to resolve additional
         # information for a completion item.
         #
         # @return [boolean]
-        def resolve_provider
-          attributes.fetch(:resolveProvider)
-        end
+        define_attribute_method :resolve_provider
 
         #
         # The characters that trigger completion automatically.
         #
         # @return [string[]]
-        def trigger_characters
-          attributes.fetch(:triggerCharacters)
-        end
+        define_attribute_method :trigger_characters
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(resolve_provider: nil, trigger_characters: nil)
+          super
         end
       end
     end

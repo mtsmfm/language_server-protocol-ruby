@@ -1,36 +1,21 @@
 module LanguageServer
   module Protocol
     module Interface
-      class Position
-        def initialize(line:, character:)
-          @attributes = {}
-
-          @attributes[:line] = line
-          @attributes[:character] = character
-
-          @attributes.freeze
-        end
-
+      class Position < Base
         #
         # Line position in a document (zero-based).
         #
         # @return [number]
-        def line
-          attributes.fetch(:line)
-        end
+        define_attribute_method :line
 
         #
         # Character offset on a line in a document (zero-based).
         #
         # @return [number]
-        def character
-          attributes.fetch(:character)
-        end
+        define_attribute_method :character
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(line:, character:)
+          super
         end
       end
     end

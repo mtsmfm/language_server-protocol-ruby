@@ -1,65 +1,41 @@
 module LanguageServer
   module Protocol
     module Interface
-      class Diagnostic
-        def initialize(range:, severity: nil, code: nil, source: nil, message:)
-          @attributes = {}
-
-          @attributes[:range] = range
-          @attributes[:severity] = severity if severity
-          @attributes[:code] = code if code
-          @attributes[:source] = source if source
-          @attributes[:message] = message
-
-          @attributes.freeze
-        end
-
+      class Diagnostic < Base
         #
         # The range at which the message applies.
         #
         # @return [Range]
-        def range
-          attributes.fetch(:range)
-        end
+        define_attribute_method :range
 
         #
         # The diagnostic's severity. Can be omitted. If omitted it is up to the
         # client to interpret diagnostics as error, warning, info or hint.
         #
         # @return [number]
-        def severity
-          attributes.fetch(:severity)
-        end
+        define_attribute_method :severity
 
         #
         # The diagnostic's code. Can be omitted.
         #
         # @return [string | number]
-        def code
-          attributes.fetch(:code)
-        end
+        define_attribute_method :code
 
         #
         # A human-readable string describing the source of this
         # diagnostic, e.g. 'typescript' or 'super lint'.
         #
         # @return [string]
-        def source
-          attributes.fetch(:source)
-        end
+        define_attribute_method :source
 
         #
         # The diagnostic's message.
         #
         # @return [string]
-        def message
-          attributes.fetch(:message)
-        end
+        define_attribute_method :message
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(range:, severity: nil, code: nil, source: nil, message:)
+          super
         end
       end
     end

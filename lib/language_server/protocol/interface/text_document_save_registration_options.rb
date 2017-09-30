@@ -1,27 +1,15 @@
 module LanguageServer
   module Protocol
     module Interface
-      class TextDocumentSaveRegistrationOptions
-        def initialize(include_text: nil)
-          @attributes = {}
-
-          @attributes[:includeText] = include_text if include_text
-
-          @attributes.freeze
-        end
-
+      class TextDocumentSaveRegistrationOptions < Base
         #
         # The client is supposed to include the content on save.
         #
         # @return [boolean]
-        def include_text
-          attributes.fetch(:includeText)
-        end
+        define_attribute_method :include_text
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(include_text: nil)
+          super
         end
       end
     end

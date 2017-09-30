@@ -1,36 +1,21 @@
 module LanguageServer
   module Protocol
     module Interface
-      class NotificationMessage
-        def initialize(method:, params: nil)
-          @attributes = {}
-
-          @attributes[:method] = method
-          @attributes[:params] = params if params
-
-          @attributes.freeze
-        end
-
+      class NotificationMessage < Base
         #
         # The method to be invoked.
         #
         # @return [string]
-        def method
-          attributes.fetch(:method)
-        end
+        define_attribute_method :method
 
         #
         # The notification's params.
         #
         # @return [any]
-        def params
-          attributes.fetch(:params)
-        end
+        define_attribute_method :params
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(method:, params: nil)
+          super
         end
       end
     end

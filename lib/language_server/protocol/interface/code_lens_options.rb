@@ -4,27 +4,15 @@ module LanguageServer
       #
       # Code Lens options.
       #
-      class CodeLensOptions
-        def initialize(resolve_provider: nil)
-          @attributes = {}
-
-          @attributes[:resolveProvider] = resolve_provider if resolve_provider
-
-          @attributes.freeze
-        end
-
+      class CodeLensOptions < Base
         #
         # Code lens has a resolve provider as well.
         #
         # @return [boolean]
-        def resolve_provider
-          attributes.fetch(:resolveProvider)
-        end
+        define_attribute_method :resolve_provider
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(resolve_provider: nil)
+          super
         end
       end
     end

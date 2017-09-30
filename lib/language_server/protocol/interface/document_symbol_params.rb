@@ -1,27 +1,15 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DocumentSymbolParams
-        def initialize(text_document:)
-          @attributes = {}
-
-          @attributes[:textDocument] = text_document
-
-          @attributes.freeze
-        end
-
+      class DocumentSymbolParams < Base
         #
         # The text document.
         #
         # @return [TextDocumentIdentifier]
-        def text_document
-          attributes.fetch(:textDocument)
-        end
+        define_attribute_method :text_document
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(text_document:)
+          super
         end
       end
     end

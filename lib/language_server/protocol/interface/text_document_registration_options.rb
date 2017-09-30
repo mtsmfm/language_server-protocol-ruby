@@ -1,28 +1,16 @@
 module LanguageServer
   module Protocol
     module Interface
-      class TextDocumentRegistrationOptions
-        def initialize(document_selector:)
-          @attributes = {}
-
-          @attributes[:documentSelector] = document_selector
-
-          @attributes.freeze
-        end
-
+      class TextDocumentRegistrationOptions < Base
         #
         # A document selector to identify the scope of the registration. If set to null
         # the document selector provided on the client side will be used.
         #
         # @return [DocumentFilter[]]
-        def document_selector
-          attributes.fetch(:documentSelector)
-        end
+        define_attribute_method :document_selector
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(document_selector:)
+          super
         end
       end
     end

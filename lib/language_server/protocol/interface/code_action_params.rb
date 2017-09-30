@@ -4,45 +4,27 @@ module LanguageServer
       #
       # Params for the CodeActionRequest
       #
-      class CodeActionParams
-        def initialize(text_document:, range:, context:)
-          @attributes = {}
-
-          @attributes[:textDocument] = text_document
-          @attributes[:range] = range
-          @attributes[:context] = context
-
-          @attributes.freeze
-        end
-
+      class CodeActionParams < Base
         #
         # The document in which the command was invoked.
         #
         # @return [TextDocumentIdentifier]
-        def text_document
-          attributes.fetch(:textDocument)
-        end
+        define_attribute_method :text_document
 
         #
         # The range for which the command was invoked.
         #
         # @return [Range]
-        def range
-          attributes.fetch(:range)
-        end
+        define_attribute_method :range
 
         #
         # Context carrying additional information.
         #
         # @return [CodeActionContext]
-        def context
-          attributes.fetch(:context)
-        end
+        define_attribute_method :context
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(text_document:, range:, context:)
+          super
         end
       end
     end

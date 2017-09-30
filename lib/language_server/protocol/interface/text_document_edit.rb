@@ -1,36 +1,21 @@
 module LanguageServer
   module Protocol
     module Interface
-      class TextDocumentEdit
-        def initialize(text_document:, edits:)
-          @attributes = {}
-
-          @attributes[:textDocument] = text_document
-          @attributes[:edits] = edits
-
-          @attributes.freeze
-        end
-
+      class TextDocumentEdit < Base
         #
         # The text document to change.
         #
         # @return [VersionedTextDocumentIdentifier]
-        def text_document
-          attributes.fetch(:textDocument)
-        end
+        define_attribute_method :text_document
 
         #
         # The edits to be applied.
         #
         # @return [TextEdit[]]
-        def edits
-          attributes.fetch(:edits)
-        end
+        define_attribute_method :edits
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(text_document:, edits:)
+          super
         end
       end
     end

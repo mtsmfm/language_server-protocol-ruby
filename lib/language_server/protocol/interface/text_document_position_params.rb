@@ -1,36 +1,21 @@
 module LanguageServer
   module Protocol
     module Interface
-      class TextDocumentPositionParams
-        def initialize(text_document:, position:)
-          @attributes = {}
-
-          @attributes[:textDocument] = text_document
-          @attributes[:position] = position
-
-          @attributes.freeze
-        end
-
+      class TextDocumentPositionParams < Base
         #
         # The text document.
         #
         # @return [TextDocumentIdentifier]
-        def text_document
-          attributes.fetch(:textDocument)
-        end
+        define_attribute_method :text_document
 
         #
         # The position inside the text document.
         #
         # @return [Position]
-        def position
-          attributes.fetch(:position)
-        end
+        define_attribute_method :position
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(text_document:, position:)
+          super
         end
       end
     end

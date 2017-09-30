@@ -6,24 +6,12 @@ module LanguageServer
       # callable. There can be multiple signature but only one
       # active and only one active parameter.
       #
-      class SignatureHelp
-        def initialize(signatures:, active_signature: nil, active_parameter: nil)
-          @attributes = {}
-
-          @attributes[:signatures] = signatures
-          @attributes[:activeSignature] = active_signature if active_signature
-          @attributes[:activeParameter] = active_parameter if active_parameter
-
-          @attributes.freeze
-        end
-
+      class SignatureHelp < Base
         #
         # One or more signatures.
         #
         # @return [SignatureInformation[]]
-        def signatures
-          attributes.fetch(:signatures)
-        end
+        define_attribute_method :signatures
 
         #
         # The active signature. If omitted or the value lies outside the
@@ -35,9 +23,7 @@ module LanguageServer
         # mandantory to better express this.
         #
         # @return [number]
-        def active_signature
-          attributes.fetch(:activeSignature)
-        end
+        define_attribute_method :active_signature
 
         #
         # The active parameter of the active signature. If omitted or the value
@@ -49,14 +35,10 @@ module LanguageServer
         # active signature does have any.
         #
         # @return [number]
-        def active_parameter
-          attributes.fetch(:activeParameter)
-        end
+        define_attribute_method :active_parameter
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(signatures:, active_signature: nil, active_parameter: nil)
+          super
         end
       end
     end

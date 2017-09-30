@@ -1,27 +1,15 @@
 module LanguageServer
   module Protocol
     module Interface
-      class VersionedTextDocumentIdentifier
-        def initialize(version:)
-          @attributes = {}
-
-          @attributes[:version] = version
-
-          @attributes.freeze
-        end
-
+      class VersionedTextDocumentIdentifier < Base
         #
         # The version number of this document.
         #
         # @return [number]
-        def version
-          attributes.fetch(:version)
-        end
+        define_attribute_method :version
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(version:)
+          super
         end
       end
     end

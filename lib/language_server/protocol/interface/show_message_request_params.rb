@@ -1,45 +1,27 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ShowMessageRequestParams
-        def initialize(type:, message:, actions: nil)
-          @attributes = {}
-
-          @attributes[:type] = type
-          @attributes[:message] = message
-          @attributes[:actions] = actions if actions
-
-          @attributes.freeze
-        end
-
+      class ShowMessageRequestParams < Base
         #
         # The message type. See {@link MessageType}
         #
         # @return [number]
-        def type
-          attributes.fetch(:type)
-        end
+        define_attribute_method :type
 
         #
         # The actual message
         #
         # @return [string]
-        def message
-          attributes.fetch(:message)
-        end
+        define_attribute_method :message
 
         #
         # The message action items to present.
         #
         # @return [MessageActionItem[]]
-        def actions
-          attributes.fetch(:actions)
-        end
+        define_attribute_method :actions
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(type:, message:, actions: nil)
+          super
         end
       end
     end

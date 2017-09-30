@@ -1,24 +1,12 @@
 module LanguageServer
   module Protocol
     module Interface
-      class UnregistrationParams
-        def initialize(unregisterations:)
-          @attributes = {}
-
-          @attributes[:unregisterations] = unregisterations
-
-          @attributes.freeze
-        end
-
+      class UnregistrationParams < Base
         # @return [Unregistration[]]
-        def unregisterations
-          attributes.fetch(:unregisterations)
-        end
+        define_attribute_method :unregisterations
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(unregisterations:)
+          super
         end
       end
     end

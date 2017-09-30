@@ -1,27 +1,15 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ApplyWorkspaceEditParams
-        def initialize(edit:)
-          @attributes = {}
-
-          @attributes[:edit] = edit
-
-          @attributes.freeze
-        end
-
+      class ApplyWorkspaceEditParams < Base
         #
         # The edits to apply.
         #
         # @return [WorkspaceEdit]
-        def edit
-          attributes.fetch(:edit)
-        end
+        define_attribute_method :edit
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(edit:)
+          super
         end
       end
     end

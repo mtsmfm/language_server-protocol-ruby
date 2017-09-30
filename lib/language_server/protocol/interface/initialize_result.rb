@@ -1,27 +1,15 @@
 module LanguageServer
   module Protocol
     module Interface
-      class InitializeResult
-        def initialize(capabilities:)
-          @attributes = {}
-
-          @attributes[:capabilities] = capabilities
-
-          @attributes.freeze
-        end
-
+      class InitializeResult < Base
         #
         # The capabilities the language server provides.
         #
         # @return [ServerCapabilities]
-        def capabilities
-          attributes.fetch(:capabilities)
-        end
+        define_attribute_method :capabilities
 
-        attr_reader :attributes
-
-        def to_json(*args)
-          attributes.to_json(*args)
+        def initialize(capabilities:)
+          super
         end
       end
     end
