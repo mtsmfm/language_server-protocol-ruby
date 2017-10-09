@@ -1,8 +1,8 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ResponseMessage
-        def initialize(id:, result: nil, error: nil)
+      class ResponseMessage < Message
+        def initialize(jsonrpc:, id:, result: nil, error: nil)
           @attributes = {}
 
           @attributes[:id] = id

@@ -1,8 +1,8 @@
 module LanguageServer
   module Protocol
     module Interface
-      class CompletionRegistrationOptions
-        def initialize(trigger_characters: nil, resolve_provider: nil)
+      class CompletionRegistrationOptions < TextDocumentRegistrationOptions
+        def initialize(document_selector:, trigger_characters: nil, resolve_provider: nil)
           @attributes = {}
 
           @attributes[:triggerCharacters] = trigger_characters if trigger_characters

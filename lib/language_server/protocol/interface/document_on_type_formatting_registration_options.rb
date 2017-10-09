@@ -1,8 +1,8 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DocumentOnTypeFormattingRegistrationOptions
-        def initialize(first_trigger_character:, more_trigger_character: nil)
+      class DocumentOnTypeFormattingRegistrationOptions < TextDocumentRegistrationOptions
+        def initialize(document_selector:, first_trigger_character:, more_trigger_character: nil)
           @attributes = {}
 
           @attributes[:firstTriggerCharacter] = first_trigger_character

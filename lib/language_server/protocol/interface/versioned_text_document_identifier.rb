@@ -1,8 +1,8 @@
 module LanguageServer
   module Protocol
     module Interface
-      class VersionedTextDocumentIdentifier
-        def initialize(version:)
+      class VersionedTextDocumentIdentifier < TextDocumentIdentifier
+        def initialize(uri:, version:)
           @attributes = {}
 
           @attributes[:version] = version

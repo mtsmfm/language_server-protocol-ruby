@@ -59,10 +59,14 @@ const extractDefinitions = content => {
 
   const handleInterface = (node: ts.InterfaceDeclaration) => {
     const members = node.members.filter(member => member.name).map(member => serialize(member));
+    const parentName = node.heritageClauses && node.heritageClauses[0].getLastToken().getText();
+    const parent = output.find(i => i.interface && (i.interface.name === parentName));
 
     output.push(
     {
       interface: serialize(node),
+      parent: parent,
+      allMembers: ((parent && parent.allMembers) || []).concat(members),
       members
     }
     );
@@ -148,8 +152,8 @@ module LanguageServer
 {{comment definition.interface.documentation indent=6}}
       #
       {{/if}}
-      class {{definition.interface.name}}
-        def initialize({{params definition.members}})
+      class {{definition.interface.name}}{{#if definition.parent}} < {{definition.parent.interface.name}}{{/if}}
+        def initialize({{params definition.allMembers}})
           @attributes = {}
 
           {{#each definition.members}}

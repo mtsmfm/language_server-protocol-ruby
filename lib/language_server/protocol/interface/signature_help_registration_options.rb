@@ -1,8 +1,8 @@
 module LanguageServer
   module Protocol
     module Interface
-      class SignatureHelpRegistrationOptions
-        def initialize(trigger_characters: nil)
+      class SignatureHelpRegistrationOptions < TextDocumentRegistrationOptions
+        def initialize(document_selector:, trigger_characters: nil)
           @attributes = {}
 
           @attributes[:triggerCharacters] = trigger_characters if trigger_characters

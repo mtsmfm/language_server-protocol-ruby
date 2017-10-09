@@ -1,8 +1,8 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ReferenceParams
-        def initialize(context:)
+      class ReferenceParams < TextDocumentPositionParams
+        def initialize(text_document:, position:, context:)
           @attributes = {}
 
           @attributes[:context] = context
