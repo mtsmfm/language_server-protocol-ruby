@@ -1,8 +1,8 @@
 module LanguageServer
   module Protocol
     module Interface
-      class TextDocumentSaveRegistrationOptions
-        def initialize(include_text: nil)
+      class TextDocumentSaveRegistrationOptions < TextDocumentRegistrationOptions
+        def initialize(document_selector:, include_text: nil)
           @attributes = {}
 
           @attributes[:includeText] = include_text if include_text

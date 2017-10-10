@@ -1,8 +1,8 @@
 module LanguageServer
   module Protocol
     module Interface
-      class CodeLensRegistrationOptions
-        def initialize(resolve_provider: nil)
+      class CodeLensRegistrationOptions < TextDocumentRegistrationOptions
+        def initialize(document_selector:, resolve_provider: nil)
           @attributes = {}
 
           @attributes[:resolveProvider] = resolve_provider if resolve_provider

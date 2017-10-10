@@ -1,8 +1,8 @@
 module LanguageServer
   module Protocol
     module Interface
-      class NotificationMessage
-        def initialize(method:, params: nil)
+      class NotificationMessage < Message
+        def initialize(jsonrpc:, method:, params: nil)
           @attributes = {}
 
           @attributes[:method] = method

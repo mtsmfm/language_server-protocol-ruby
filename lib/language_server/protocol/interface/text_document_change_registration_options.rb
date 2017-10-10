@@ -4,8 +4,8 @@ module LanguageServer
       #
       # Descibe options to be used when registered for text document change events.
       #
-      class TextDocumentChangeRegistrationOptions
-        def initialize(sync_kind:)
+      class TextDocumentChangeRegistrationOptions < TextDocumentRegistrationOptions
+        def initialize(document_selector:, sync_kind:)
           @attributes = {}
 
           @attributes[:syncKind] = sync_kind

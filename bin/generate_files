@@ -2,4 +2,4 @@
 
 set -ex
 yarn install
-yarn run -s ts-node scripts/generateFiles.ts
+yarn run -s -- ts-node --compilerOptions '{"target":"es6"}' scripts/generateFiles.ts
