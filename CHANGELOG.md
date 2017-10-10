@@ -1,5 +1,5 @@
 # Change log
 
-## 0.3.1
+## 0.4.0
 
 - Fix handling `extends`
