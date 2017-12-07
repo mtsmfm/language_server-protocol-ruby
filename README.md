@@ -20,6 +20,8 @@ Or install it yourself as:
 
 ## Usage
 
+:note: Currently, this gem supports only stdio as transport layer.
+
 ```ruby
 require "language_server-protocol"
 
