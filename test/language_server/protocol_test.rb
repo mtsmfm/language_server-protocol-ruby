@@ -2,10 +2,6 @@ require "test_helper"
 require "open3"
 
 class LanguageServer::ProtocolTest < Minitest::Test
-  def test_that_it_has_a_version_number
-    refute_nil ::LanguageServer::Protocol::VERSION
-  end
-
   def test_initialize_call
     stdin, stdout, stderr, wait_thr = *Open3.popen3("bundle exec ruby test/example.rb")
 
