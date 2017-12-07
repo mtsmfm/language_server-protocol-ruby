@@ -15,7 +15,7 @@ class LanguageServer::ProtocolTest < Minitest::Test
       "jsonrpc"=>"2.0"
     }
 
-    assert{ stdout.read == to_jsonrpc(expected_body) }
+    assert { stdout.read == to_jsonrpc(expected_body) }
     assert { stderr.read == "" }
   end
 
