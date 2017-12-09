@@ -12,7 +12,7 @@ class LanguageServer::ProtocolTest < Minitest::Test
 
       stdin.print to_jsonrpc(jsonrpc: 2.0, id: 0, method: :initialize, params: {processId: 1234})
 
-      sleep 1 unless wait_thr.stop?
+      wait_thr.join(1)
 
       expected_body = {
         "id"=>0,
