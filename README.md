@@ -34,13 +34,13 @@ subscribers = {
     LSP::Interface::InitializeResult.new(
       capabilities: LSP::Interface::ServerCapabilities.new(
         text_document_sync: LSP::Interface::TextDocumentSyncOptions.new(
-        change: LSP::Constant::TextDocumentSyncKind::FULL
-      ),
-      completion_provider: LSP::Interface::CompletionOptions.new(
-        resolve_provider: true,
-        trigger_characters: %w(.)
-      ),
-      definition_provider: true
+          change: LSP::Constant::TextDocumentSyncKind::FULL
+        ),
+        completion_provider: LSP::Interface::CompletionOptions.new(
+          resolve_provider: true,
+          trigger_characters: %w(.)
+        ),
+        definition_provider: true
       )
     )
   }
