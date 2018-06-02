@@ -15,7 +15,7 @@ module LanguageServer
         #
         # Workspace specific client capabilities.
         #
-        # @return [WorkspaceClientCapabilites]
+        # @return [WorkspaceClientCapabilities]
         def workspace
           attributes.fetch(:workspace)
         end

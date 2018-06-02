@@ -23,6 +23,14 @@ module LanguageServer
         NUMBER = 16
         BOOLEAN = 17
         ARRAY = 18
+        OBJECT = 19
+        KEY = 20
+        NULL = 21
+        ENUM_MEMBER = 22
+        STRUCT = 23
+        EVENT = 24
+        OPERATOR = 25
+        TYPE_PARAMETER = 26
       end
     end
   end

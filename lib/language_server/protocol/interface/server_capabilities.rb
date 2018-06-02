@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       class ServerCapabilities
-        def initialize(text_document_sync: nil, hover_provider: nil, completion_provider: nil, signature_help_provider: nil, definition_provider: nil, references_provider: nil, document_highlight_provider: nil, document_symbol_provider: nil, workspace_symbol_provider: nil, code_action_provider: nil, code_lens_provider: nil, document_formatting_provider: nil, document_range_formatting_provider: nil, document_on_type_formatting_provider: nil, rename_provider: nil, document_link_provider: nil, execute_command_provider: nil, experimental: nil)
+        def initialize(text_document_sync: nil, hover_provider: nil, completion_provider: nil, signature_help_provider: nil, definition_provider: nil, type_definition_provider: nil, implementation_provider: nil, references_provider: nil, document_highlight_provider: nil, document_symbol_provider: nil, workspace_symbol_provider: nil, code_action_provider: nil, code_lens_provider: nil, document_formatting_provider: nil, document_range_formatting_provider: nil, document_on_type_formatting_provider: nil, rename_provider: nil, document_link_provider: nil, color_provider: nil, execute_command_provider: nil, workspace: nil, experimental: nil)
           @attributes = {}
 
           @attributes[:textDocumentSync] = text_document_sync if text_document_sync
@@ -10,6 +10,8 @@ module LanguageServer
           @attributes[:completionProvider] = completion_provider if completion_provider
           @attributes[:signatureHelpProvider] = signature_help_provider if signature_help_provider
           @attributes[:definitionProvider] = definition_provider if definition_provider
+          @attributes[:typeDefinitionProvider] = type_definition_provider if type_definition_provider
+          @attributes[:implementationProvider] = implementation_provider if implementation_provider
           @attributes[:referencesProvider] = references_provider if references_provider
           @attributes[:documentHighlightProvider] = document_highlight_provider if document_highlight_provider
           @attributes[:documentSymbolProvider] = document_symbol_provider if document_symbol_provider
@@ -21,7 +23,9 @@ module LanguageServer
           @attributes[:documentOnTypeFormattingProvider] = document_on_type_formatting_provider if document_on_type_formatting_provider
           @attributes[:renameProvider] = rename_provider if rename_provider
           @attributes[:documentLinkProvider] = document_link_provider if document_link_provider
+          @attributes[:colorProvider] = color_provider if color_provider
           @attributes[:executeCommandProvider] = execute_command_provider if execute_command_provider
+          @attributes[:workspace] = workspace if workspace
           @attributes[:experimental] = experimental if experimental
 
           @attributes.freeze
@@ -29,7 +33,7 @@ module LanguageServer
 
         #
         # Defines how text documents are synced. Is either a detailed structure defining each notification or
-        # for backwards compatibility the TextDocumentSyncKind number.
+        # for backwards compatibility the TextDocumentSyncKind number. If omitted it defaults to `TextDocumentSyncKind.None`.
         #
         # @return [number | TextDocumentSyncOptions]
         def text_document_sync
@@ -66,6 +70,26 @@ module LanguageServer
         # @return [boolean]
         def definition_provider
           attributes.fetch(:definitionProvider)
+        end
+
+        #
+        # The server provides Goto Type Definition support.
+        #
+        # Since 3.6.0
+        #
+        # @return [boolean | (TextDocumentRegistrationOptions & StaticRegistrationOptions)]
+        def type_definition_provider
+          attributes.fetch(:typeDefinitionProvider)
+        end
+
+        #
+        # The server provides Goto Implementation support.
+        #
+        # Since 3.6.0
+        #
+        # @return [boolean | (TextDocumentRegistrationOptions & StaticRegistrationOptions)]
+        def implementation_provider
+          attributes.fetch(:implementationProvider)
         end
 
         #
@@ -157,11 +181,29 @@ module LanguageServer
         end
 
         #
+        # The server provides color provider support.
+        #
+        # Since 3.6.0
+        #
+        # @return [boolean | ColorProviderOptions | (ColorProviderOptions & TextDocumentRegistrationOptions & Static...]
+        def color_provider
+          attributes.fetch(:colorProvider)
+        end
+
+        #
         # The server provides execute command support.
         #
         # @return [ExecuteCommandOptions]
         def execute_command_provider
           attributes.fetch(:executeCommandProvider)
+        end
+
+        #
+        # Workspace specific server capabilities
+        #
+        # @return [{ workspaceFolders?: { supported?: boolean; changeNotifications?: string | boolean; }; }]
+        def workspace
+          attributes.fetch(:workspace)
         end
 
         #

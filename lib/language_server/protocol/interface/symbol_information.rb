@@ -6,11 +6,12 @@ module LanguageServer
       # interfaces etc.
       #
       class SymbolInformation
-        def initialize(name:, kind:, location:, container_name: nil)
+        def initialize(name:, kind:, deprecated: nil, location:, container_name: nil)
           @attributes = {}
 
           @attributes[:name] = name
           @attributes[:kind] = kind
+          @attributes[:deprecated] = deprecated if deprecated
           @attributes[:location] = location
           @attributes[:containerName] = container_name if container_name
 
@@ -34,7 +35,23 @@ module LanguageServer
         end
 
         #
-        # The location of this symbol.
+        # Indicates if this symbol is deprecated.
+        #
+        # @return [boolean]
+        def deprecated
+          attributes.fetch(:deprecated)
+        end
+
+        #
+        # The location of this symbol. The location's range is used by a tool
+        # to reveal the location in the editor. If the symbol is selected in the
+        # tool the range's start information is used to position the cursor. So
+        # the range usually spans more then the actual symbol's name and does
+        # normally include things like visibility modifiers.
+        #
+        # The range doesn't have to denote a node range in the sense of a abstract
+        # syntax tree. It can therefore not be used to re-construct a hierarchy of
+        # the symbols.
         #
         # @return [Location]
         def location
@@ -42,7 +59,10 @@ module LanguageServer
         end
 
         #
-        # The name of the symbol containing this symbol.
+        # The name of the symbol containing this symbol. This information is for
+        # user interface purposes (e.g. to render a qualifier in the user interface
+        # if necessary). It can't be used to re-infer a hierarchy for the document
+        # symbols.
         #
         # @return [string]
         def container_name

@@ -31,7 +31,7 @@ module LanguageServer
         #
         # The method's params.
         #
-        # @return [any]
+        # @return [object | any[]]
         def params
           attributes.fetch(:params)
         end

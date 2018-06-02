@@ -18,8 +18,6 @@ module LanguageServer
         # the end of the snippet. Placeholders with equal identifiers are linked,
         # that is typing in one will update others too.
         #
-        # See also: https://github.com/Microsoft/vscode/blob/master/src/vs/editor/contrib/snippet/common/snippet.md
-        #
         SNIPPET = 2
       end
     end

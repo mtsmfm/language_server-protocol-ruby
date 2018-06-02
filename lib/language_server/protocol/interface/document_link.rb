@@ -6,11 +6,12 @@ module LanguageServer
       # text document or a web site.
       #
       class DocumentLink
-        def initialize(range:, target: nil)
+        def initialize(range:, target: nil, data: nil)
           @attributes = {}
 
           @attributes[:range] = range
           @attributes[:target] = target if target
+          @attributes[:data] = data if data
 
           @attributes.freeze
         end
@@ -29,6 +30,15 @@ module LanguageServer
         # @return [string]
         def target
           attributes.fetch(:target)
+        end
+
+        #
+        # A data entry field that is preserved on a document link between a
+        # DocumentLinkRequest and a DocumentLinkResolveRequest.
+        #
+        # @return [any]
+        def data
+          attributes.fetch(:data)
         end
 
         attr_reader :attributes

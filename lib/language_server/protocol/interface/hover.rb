@@ -17,7 +17,7 @@ module LanguageServer
         #
         # The hover's content
         #
-        # @return [string | { language: string; value: string; } | MarkedString[]]
+        # @return [string | MarkupContent | { language: string; value: string; } | MarkedString[]]
         def contents
           attributes.fetch(:contents)
         end

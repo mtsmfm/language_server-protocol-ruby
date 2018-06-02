@@ -4,22 +4,21 @@ module LanguageServer
       #
       # Describe options to be used when registering for text document change events.
       #
-      class TextDocumentChangeRegistrationOptions < TextDocumentRegistrationOptions
-        def initialize(document_selector:, sync_kind:)
+      class DidChangeWatchedFilesRegistrationOptions
+        def initialize(watchers:)
           @attributes = {}
 
-          @attributes[:syncKind] = sync_kind
+          @attributes[:watchers] = watchers
 
           @attributes.freeze
         end
 
         #
-        # How documents are synced to the server. See TextDocumentSyncKind.Full
-        # and TextDocumentSyncKind.Incremental.
+        # The watchers to register.
         #
-        # @return [number]
-        def sync_kind
-          attributes.fetch(:syncKind)
+        # @return [FileSystemWatcher[]]
+        def watchers
+          attributes.fetch(:watchers)
         end
 
         attr_reader :attributes

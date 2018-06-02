@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # General paramters to to regsiter for a capability.
+      # General parameters to register for a capability.
       #
       class Registration
         def initialize(id:, method:, register_options: nil)
