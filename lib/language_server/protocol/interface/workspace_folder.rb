@@ -1,30 +1,31 @@
 module LanguageServer
   module Protocol
     module Interface
-      class NotificationMessage < Message
-        def initialize(jsonrpc:, method:, params: nil)
+      class WorkspaceFolder
+        def initialize(uri:, name:)
           @attributes = {}
 
-          @attributes[:method] = method
-          @attributes[:params] = params if params
+          @attributes[:uri] = uri
+          @attributes[:name] = name
 
           @attributes.freeze
         end
 
         #
-        # The method to be invoked.
+        # The associated URI for this workspace folder.
         #
         # @return [string]
-        def method
-          attributes.fetch(:method)
+        def uri
+          attributes.fetch(:uri)
         end
 
         #
-        # The notification's params.
+        # The name of the workspace folder. Defaults to the
+        # uri's basename.
         #
-        # @return [object | any[]]
-        def params
-          attributes.fetch(:params)
+        # @return [string]
+        def name
+          attributes.fetch(:name)
         end
 
         attr_reader :attributes

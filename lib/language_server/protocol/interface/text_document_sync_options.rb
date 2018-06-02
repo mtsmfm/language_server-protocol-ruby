@@ -23,8 +23,8 @@ module LanguageServer
         end
 
         #
-        # Change notificatins are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
-        # and TextDocumentSyncKindIncremental.
+        # Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
+        # and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
         #
         # @return [number]
         def change

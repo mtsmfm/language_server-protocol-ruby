@@ -30,7 +30,7 @@ module LanguageServer
         end
 
         #
-        # The version number of this document (it will strictly increase after each
+        # The version number of this document (it will increase after each
         # change, including undo/redo).
         #
         # @return [number]

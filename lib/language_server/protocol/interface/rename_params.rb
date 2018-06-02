@@ -13,7 +13,7 @@ module LanguageServer
         end
 
         #
-        # The document to format.
+        # The document to rename.
         #
         # @return [TextDocumentIdentifier]
         def text_document

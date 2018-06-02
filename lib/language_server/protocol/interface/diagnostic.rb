@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       class Diagnostic
-        def initialize(range:, severity: nil, code: nil, source: nil, message:)
+        def initialize(range:, severity: nil, code: nil, source: nil, message:, related_information: nil)
           @attributes = {}
 
           @attributes[:range] = range
@@ -10,6 +10,7 @@ module LanguageServer
           @attributes[:code] = code if code
           @attributes[:source] = source if source
           @attributes[:message] = message
+          @attributes[:relatedInformation] = related_information if related_information
 
           @attributes.freeze
         end
@@ -32,7 +33,7 @@ module LanguageServer
         end
 
         #
-        # The diagnostic's code. Can be omitted.
+        # The diagnostic's code, which might appear in the user interface.
         #
         # @return [string | number]
         def code
@@ -54,6 +55,15 @@ module LanguageServer
         # @return [string]
         def message
           attributes.fetch(:message)
+        end
+
+        #
+        # An array of related diagnostic information, e.g. when symbol-names within
+        # a scope collide all definitions can be marked via this property.
+        #
+        # @return [DiagnosticRelatedInformation[]]
+        def related_information
+          attributes.fetch(:relatedInformation)
         end
 
         attr_reader :attributes

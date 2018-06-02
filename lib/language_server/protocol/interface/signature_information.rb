@@ -30,7 +30,7 @@ module LanguageServer
         # The human-readable doc-comment of this signature. Will be shown
         # in the UI but can be omitted.
         #
-        # @return [string]
+        # @return [string | MarkupContent]
         def documentation
           attributes.fetch(:documentation)
         end

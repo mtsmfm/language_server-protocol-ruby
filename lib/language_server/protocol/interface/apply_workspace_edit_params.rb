@@ -2,12 +2,23 @@ module LanguageServer
   module Protocol
     module Interface
       class ApplyWorkspaceEditParams
-        def initialize(edit:)
+        def initialize(label: nil, edit:)
           @attributes = {}
 
+          @attributes[:label] = label if label
           @attributes[:edit] = edit
 
           @attributes.freeze
+        end
+
+        #
+        # An optional label of the workspace edit. This label is
+        # presented in the user interface for example on an undo
+        # stack to undo the workspace edit.
+        #
+        # @return [string]
+        def label
+          attributes.fetch(:label)
         end
 
         #

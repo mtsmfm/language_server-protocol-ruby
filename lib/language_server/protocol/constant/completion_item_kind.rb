@@ -23,6 +23,13 @@ module LanguageServer
         COLOR = 16
         FILE = 17
         REFERENCE = 18
+        FOLDER = 19
+        ENUM_MEMBER = 20
+        CONSTANT = 21
+        STRUCT = 22
+        EVENT = 23
+        OPERATOR = 24
+        TYPE_PARAMETER = 25
       end
     end
   end

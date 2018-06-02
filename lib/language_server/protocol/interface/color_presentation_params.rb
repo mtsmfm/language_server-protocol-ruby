@@ -1,18 +1,19 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DidSaveTextDocumentParams
-        def initialize(text_document:, text: nil)
+      class ColorPresentationParams
+        def initialize(text_document:, color:, range:)
           @attributes = {}
 
           @attributes[:textDocument] = text_document
-          @attributes[:text] = text if text
+          @attributes[:color] = color
+          @attributes[:range] = range
 
           @attributes.freeze
         end
 
         #
-        # The document that was saved.
+        # The text document.
         #
         # @return [TextDocumentIdentifier]
         def text_document
@@ -20,12 +21,19 @@ module LanguageServer
         end
 
         #
-        # Optional the content when saved. Depends on the includeText value
-        # when the save notification was requested.
+        # The color information to request presentations for.
         #
-        # @return [string]
-        def text
-          attributes.fetch(:text)
+        # @return [Color]
+        def color
+          attributes.fetch(:color)
+        end
+
+        #
+        # The range where the color would be inserted. Serves as a context.
+        #
+        # @return [Range]
+        def range
+          attributes.fetch(:range)
         end
 
         attr_reader :attributes

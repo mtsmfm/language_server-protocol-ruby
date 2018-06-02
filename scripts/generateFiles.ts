@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as fetch from 'isomorphic-fetch';
 
-const lspVersion = 'a0d9d12fa6d4c313d3ed70bd842f0a2c8e66e29e';
+const lspVersion = '998fd38abbb73dda270b05aebea0a45b649f1cb4';
 const rootDir = path.normalize(path.join(__dirname, ".."));
 const tempDir = path.join(rootDir, "tmp");
 const protocolMdPath = path.join(tempDir, lspVersion, "protocol.md");
@@ -23,7 +23,7 @@ const createFile = (filePath, content) => {
 }
 
 const extractTypeScriptSource = content => {
-  const regEx = /^```typescript\n([^]*?)^```\n/mg;
+  const regEx = /^```typescript\r\n([^]*?)^```\r\n/mg;
   let match;
   let result = "";
 
@@ -131,7 +131,7 @@ Handlebars.registerHelper("const", s => {
 
 (async () => {
   if (!fs.existsSync(protocolMdPath)) {
-    const res = await fetch(`https://github.com/Microsoft/language-server-protocol/raw/${lspVersion}/protocol.md`);
+    const res = await fetch(`https://github.com/Microsoft/language-server-protocol/raw/${lspVersion}/specification.md`);
     createFile(protocolMdPath, await res.text());
   }
 

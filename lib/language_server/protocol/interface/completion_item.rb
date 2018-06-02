@@ -2,19 +2,21 @@ module LanguageServer
   module Protocol
     module Interface
       class CompletionItem
-        def initialize(label:, kind: nil, detail: nil, documentation: nil, sort_text: nil, filter_text: nil, insert_text: nil, insert_text_format: nil, text_edit: nil, additional_text_edits: nil, command: nil, data: nil)
+        def initialize(label:, kind: nil, detail: nil, documentation: nil, deprecated: nil, sort_text: nil, filter_text: nil, insert_text: nil, insert_text_format: nil, text_edit: nil, additional_text_edits: nil, commit_characters: nil, command: nil, data: nil)
           @attributes = {}
 
           @attributes[:label] = label
           @attributes[:kind] = kind if kind
           @attributes[:detail] = detail if detail
           @attributes[:documentation] = documentation if documentation
+          @attributes[:deprecated] = deprecated if deprecated
           @attributes[:sortText] = sort_text if sort_text
           @attributes[:filterText] = filter_text if filter_text
           @attributes[:insertText] = insert_text if insert_text
           @attributes[:insertTextFormat] = insert_text_format if insert_text_format
           @attributes[:textEdit] = text_edit if text_edit
           @attributes[:additionalTextEdits] = additional_text_edits if additional_text_edits
+          @attributes[:commitCharacters] = commit_characters if commit_characters
           @attributes[:command] = command if command
           @attributes[:data] = data if data
 
@@ -52,13 +54,21 @@ module LanguageServer
         #
         # A human-readable string that represents a doc-comment.
         #
-        # @return [string]
+        # @return [string | MarkupContent]
         def documentation
           attributes.fetch(:documentation)
         end
 
         #
-        # A string that shoud be used when comparing this item
+        # Indicates if this item is deprecated.
+        #
+        # @return [boolean]
+        def deprecated
+          attributes.fetch(:deprecated)
+        end
+
+        #
+        # A string that should be used when comparing this item
         # with other items. When `falsy` the label is used.
         #
         # @return [string]
@@ -76,8 +86,15 @@ module LanguageServer
         end
 
         #
-        # A string that should be inserted a document when selecting
+        # A string that should be inserted into a document when selecting
         # this completion. When `falsy` the label is used.
+        #
+        # The `insertText` is subject to interpretation by the client side.
+        # Some tools might not take the string literally. For example
+        # VS Code when code complete is requested in this example `con<cursor position>`
+        # and a completion item with an `insertText` of `console` is provided it
+        # will only insert `sole`. Therefore it is recommended to use `textEdit` instead
+        # since it avoids additional client side interpretation.
         #
         # @return [string]
         def insert_text
@@ -107,12 +124,26 @@ module LanguageServer
 
         #
         # An optional array of additional text edits that are applied when
-        # selecting this completion. Edits must not overlap with the main edit
-        # nor with themselves.
+        # selecting this completion. Edits must not overlap (including the same insert position)
+        # with the main edit nor with themselves.
+        #
+        # Additional text edits should be used to change text unrelated to the current cursor position
+        # (for example adding an import statement at the top of the file if the completion item will
+        # insert an unqualified type).
         #
         # @return [TextEdit[]]
         def additional_text_edits
           attributes.fetch(:additionalTextEdits)
+        end
+
+        #
+        # An optional set of characters that when pressed while this completion is active will accept it first and
+        # then type that character. *Note* that all commit characters should have `length=1` and that superfluous
+        # characters will be ignored.
+        #
+        # @return [string[]]
+        def commit_characters
+          attributes.fetch(:commitCharacters)
         end
 
         #
