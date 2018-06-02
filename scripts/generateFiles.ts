@@ -218,15 +218,35 @@ end
   });
 
   createFile(path.join(rootDir, "lib", "language_server", "protocol", "interface.rb"), Handlebars.compile(`
-{{#each interfaces}}
-require "language_server/protocol/interface/{{snake interface.name}}"
+module LanguageServer
+  module Protocol
+    module Interface
+{{#each names}}
+      autoload :{{this}}, "language_server/protocol/interface/{{snake this}}"
 {{/each}}
-`.slice(1), {noEscape: true})({interfaces}));
+
+{{#each names}}
+      require "language_server/protocol/interface/{{snake this}}"
+{{/each}}
+    end
+  end
+end
+`.slice(1), {noEscape: true})({names: interfaces.map(i => i.interface.name).sort()}));
 
   createFile(path.join(rootDir, "lib", "language_server", "protocol", "constant.rb"), Handlebars.compile(`
-{{#each modules}}
-require "language_server/protocol/constant/{{snake module.name}}"
+module LanguageServer
+  module Protocol
+    module Constant
+{{#each names}}
+      autoload :{{this}}, "language_server/protocol/constant/{{snake this}}"
 {{/each}}
-`.slice(1), {noEscape: true})({modules}));
+
+{{#each names}}
+      require "language_server/protocol/constant/{{snake this}}"
+{{/each}}
+    end
+  end
+end
+`.slice(1), {noEscape: true})({names: modules.map(i => i.module.name).sort()}));
 
 })();
