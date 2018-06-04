@@ -1,5 +1,9 @@
 # Change log
 
+## 3.7.0.0
+
+- Update Language Server Protocol version to 3.7.0
+
 ## 0.5.0
 
 - Add #to_hash to keep compatibility with Rails (#10)

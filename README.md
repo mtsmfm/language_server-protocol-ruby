@@ -53,6 +53,12 @@ reader.read do |request|
 end
 ```
 
+## Versioning
+
+language_server-protocol gem does NOT use semantic versioning.
+This gem versions are structured as `x.y.z.t`.
+`x.y.z` indicates the [Language server protocol](https://github.com/Microsoft/language-server-protocol/) version and `t` is a monotonically increasing number.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
