@@ -23,5 +23,6 @@ jobs:
           name: test
           command: |
             docker-compose run app bundle exec rake test
+            docker-compose run ruby-2-4 bundle exec rake test
             docker-compose run ruby-2-3 bundle exec rake test
             docker-compose run ruby-2-2 bundle exec rake test

@@ -1,4 +1,4 @@
-version: '3.0'
+version: "3.0"
 services:
   app: &app
     build: &app-build
@@ -7,18 +7,24 @@ services:
     volumes:
       - vendor:/vendor
       - home:/home/ruby
+  ruby-2-4:
+    <<: *app
+    build:
+      <<: *app-build
+      args:
+        RUBY_VERSION: 2.4.4
   ruby-2-3:
     <<: *app
     build:
       <<: *app-build
       args:
-        RUBY_VERSION: 2.3.5
+        RUBY_VERSION: 2.3.7
   ruby-2-2:
     <<: *app
     build:
       <<: *app-build
       args:
-        RUBY_VERSION: 2.2.8
+        RUBY_VERSION: 2.2.10
   node:
     build:
       context: .
@@ -27,5 +33,5 @@ services:
       - vendor:/vendor
       - home:/home/node
 volumes:
-  vendor:
-  home:
+  ? vendor
+  ? home
