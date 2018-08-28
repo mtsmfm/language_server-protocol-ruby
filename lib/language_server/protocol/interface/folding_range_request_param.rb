@@ -1,15 +1,21 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Color provider options.
-      #
-      class ColorProviderOptions
-        def initialize()
+      class FoldingRangeRequestParam
+        def initialize(text_document:)
           @attributes = {}
 
+          @attributes[:textDocument] = text_document
 
           @attributes.freeze
+        end
+
+        #
+        # The text document.
+        #
+        # @return [TextDocumentIdentifier]
+        def text_document
+          attributes.fetch(:textDocument)
         end
 
         attr_reader :attributes

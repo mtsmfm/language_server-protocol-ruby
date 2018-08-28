@@ -1,11 +1,8 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Color provider options.
-      #
-      class ColorProviderOptions
-        def initialize()
+      class CodeActionRegistrationOptions < CodeActionOptions
+        def initialize(code_action_kinds: nil)
           @attributes = {}
 
 

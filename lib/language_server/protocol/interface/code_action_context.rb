@@ -6,10 +6,11 @@ module LanguageServer
       # a code action is run.
       #
       class CodeActionContext
-        def initialize(diagnostics:)
+        def initialize(diagnostics:, only: nil)
           @attributes = {}
 
           @attributes[:diagnostics] = diagnostics
+          @attributes[:only] = only if only
 
           @attributes.freeze
         end
@@ -20,6 +21,17 @@ module LanguageServer
         # @return [Diagnostic[]]
         def diagnostics
           attributes.fetch(:diagnostics)
+        end
+
+        #
+        # Requested kind of actions to return.
+        #
+        # Actions not of this kind are filtered out by the client before being shown. So servers
+        # can omit computing them.
+        #
+        # @return [string[]]
+        def only
+          attributes.fetch(:only)
         end
 
         attr_reader :attributes

@@ -2,23 +2,23 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Document link options.
+      # Rename options
       #
-      class DocumentLinkOptions
-        def initialize(resolve_provider: nil)
+      class RenameOptions
+        def initialize(prepare_provider: nil)
           @attributes = {}
 
-          @attributes[:resolveProvider] = resolve_provider if resolve_provider
+          @attributes[:prepareProvider] = prepare_provider if prepare_provider
 
           @attributes.freeze
         end
 
         #
-        # Document links have a resolve provider as well.
+        # Renames should be checked and tested before being executed.
         #
         # @return [boolean]
-        def resolve_provider
-          attributes.fetch(:resolveProvider)
+        def prepare_provider
+          attributes.fetch(:prepareProvider)
         end
 
         attr_reader :attributes

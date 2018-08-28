@@ -2,9 +2,9 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Color provider options.
+      # Folding range provider options.
       #
-      class ColorProviderOptions
+      class FoldingRangeProviderOptions
         def initialize()
           @attributes = {}
 
