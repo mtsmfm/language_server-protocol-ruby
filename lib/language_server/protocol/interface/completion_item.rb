@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       class CompletionItem
-        def initialize(label:, kind: nil, detail: nil, documentation: nil, deprecated: nil, sort_text: nil, filter_text: nil, insert_text: nil, insert_text_format: nil, text_edit: nil, additional_text_edits: nil, commit_characters: nil, command: nil, data: nil)
+        def initialize(label:, kind: nil, detail: nil, documentation: nil, deprecated: nil, preselect: nil, sort_text: nil, filter_text: nil, insert_text: nil, insert_text_format: nil, text_edit: nil, additional_text_edits: nil, commit_characters: nil, command: nil, data: nil)
           @attributes = {}
 
           @attributes[:label] = label
@@ -10,6 +10,7 @@ module LanguageServer
           @attributes[:detail] = detail if detail
           @attributes[:documentation] = documentation if documentation
           @attributes[:deprecated] = deprecated if deprecated
+          @attributes[:preselect] = preselect if preselect
           @attributes[:sortText] = sort_text if sort_text
           @attributes[:filterText] = filter_text if filter_text
           @attributes[:insertText] = insert_text if insert_text
@@ -65,6 +66,18 @@ module LanguageServer
         # @return [boolean]
         def deprecated
           attributes.fetch(:deprecated)
+        end
+
+        #
+        # Select this item when showing.
+        #
+        # *Note* that only one completion item can be selected and that the
+        # tool / client decides which item that is. The rule is that the *first*
+        # item of those that match best is selected.
+        #
+        # @return [boolean]
+        def preselect
+          attributes.fetch(:preselect)
         end
 
         #

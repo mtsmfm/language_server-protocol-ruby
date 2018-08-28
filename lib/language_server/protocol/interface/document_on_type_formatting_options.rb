@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Format document on type options
+      # Format document on type options.
       #
       class DocumentOnTypeFormattingOptions
         def initialize(first_trigger_character:, more_trigger_character: nil)

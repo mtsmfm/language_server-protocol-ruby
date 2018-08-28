@@ -5,7 +5,7 @@ module LanguageServer
       # Text document specific client capabilities.
       #
       class TextDocumentClientCapabilities
-        def initialize(synchronization: nil, completion: nil, hover: nil, signature_help: nil, references: nil, document_highlight: nil, document_symbol: nil, formatting: nil, range_formatting: nil, on_type_formatting: nil, definition: nil, type_definition: nil, implementation: nil, code_action: nil, code_lens: nil, document_link: nil, color_provider: nil, rename: nil, publish_diagnostics: nil)
+        def initialize(synchronization: nil, completion: nil, hover: nil, signature_help: nil, references: nil, document_highlight: nil, document_symbol: nil, formatting: nil, range_formatting: nil, on_type_formatting: nil, definition: nil, type_definition: nil, implementation: nil, code_action: nil, code_lens: nil, document_link: nil, color_provider: nil, rename: nil, publish_diagnostics: nil, folding_range: nil)
           @attributes = {}
 
           @attributes[:synchronization] = synchronization if synchronization
@@ -27,6 +27,7 @@ module LanguageServer
           @attributes[:colorProvider] = color_provider if color_provider
           @attributes[:rename] = rename if rename
           @attributes[:publishDiagnostics] = publish_diagnostics if publish_diagnostics
+          @attributes[:foldingRange] = folding_range if folding_range
 
           @attributes.freeze
         end
@@ -79,7 +80,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/documentSymbol`
         #
-        # @return [{ dynamicRegistration?: boolean; symbolKind?: { valueSet?: any[]; }; }]
+        # @return [{ dynamicRegistration?: boolean; symbolKind?: { valueSet?: any[]; }; hierarchicalDocumentSymbolSu...]
         def document_symbol
           attributes.fetch(:documentSymbol)
         end
@@ -139,7 +140,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/codeAction`
         #
-        # @return [{ dynamicRegistration?: boolean; }]
+        # @return [{ dynamicRegistration?: boolean; codeActionLiteralSupport?: { codeActionKind: { valueSet: string[...]
         def code_action
           attributes.fetch(:codeAction)
         end
@@ -174,7 +175,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/rename`
         #
-        # @return [{ dynamicRegistration?: boolean; }]
+        # @return [{ dynamicRegistration?: boolean; prepareSupport?: boolean; }]
         def rename
           attributes.fetch(:rename)
         end
@@ -185,6 +186,16 @@ module LanguageServer
         # @return [{ relatedInformation?: boolean; }]
         def publish_diagnostics
           attributes.fetch(:publishDiagnostics)
+        end
+
+        #
+        # Capabilities specific to `textDocument/foldingRange` requests.
+        #
+        # Since 3.10.0
+        #
+        # @return [{ dynamicRegistration?: boolean; rangeLimit?: number; lineFoldingOnly?: boolean; }]
+        def folding_range
+          attributes.fetch(:foldingRange)
         end
 
         attr_reader :attributes

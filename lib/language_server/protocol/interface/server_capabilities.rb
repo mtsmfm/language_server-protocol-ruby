@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       class ServerCapabilities
-        def initialize(text_document_sync: nil, hover_provider: nil, completion_provider: nil, signature_help_provider: nil, definition_provider: nil, type_definition_provider: nil, implementation_provider: nil, references_provider: nil, document_highlight_provider: nil, document_symbol_provider: nil, workspace_symbol_provider: nil, code_action_provider: nil, code_lens_provider: nil, document_formatting_provider: nil, document_range_formatting_provider: nil, document_on_type_formatting_provider: nil, rename_provider: nil, document_link_provider: nil, color_provider: nil, execute_command_provider: nil, workspace: nil, experimental: nil)
+        def initialize(text_document_sync: nil, hover_provider: nil, completion_provider: nil, signature_help_provider: nil, definition_provider: nil, type_definition_provider: nil, implementation_provider: nil, references_provider: nil, document_highlight_provider: nil, document_symbol_provider: nil, workspace_symbol_provider: nil, code_action_provider: nil, code_lens_provider: nil, document_formatting_provider: nil, document_range_formatting_provider: nil, document_on_type_formatting_provider: nil, rename_provider: nil, document_link_provider: nil, color_provider: nil, folding_range_provider: nil, execute_command_provider: nil, workspace: nil, experimental: nil)
           @attributes = {}
 
           @attributes[:textDocumentSync] = text_document_sync if text_document_sync
@@ -24,6 +24,7 @@ module LanguageServer
           @attributes[:renameProvider] = rename_provider if rename_provider
           @attributes[:documentLinkProvider] = document_link_provider if document_link_provider
           @attributes[:colorProvider] = color_provider if color_provider
+          @attributes[:foldingRangeProvider] = folding_range_provider if folding_range_provider
           @attributes[:executeCommandProvider] = execute_command_provider if execute_command_provider
           @attributes[:workspace] = workspace if workspace
           @attributes[:experimental] = experimental if experimental
@@ -125,9 +126,11 @@ module LanguageServer
         end
 
         #
-        # The server provides code actions.
+        # The server provides code actions. The `CodeActionOptions` return type is only
+        # valid if the client signals code action literal support via the property
+        # `textDocument.codeAction.codeActionLiteralSupport`.
         #
-        # @return [boolean]
+        # @return [boolean | CodeActionOptions]
         def code_action_provider
           attributes.fetch(:codeActionProvider)
         end
@@ -165,9 +168,11 @@ module LanguageServer
         end
 
         #
-        # The server provides rename support.
+        # The server provides rename support. RenameOptions may only be
+        # specified if the client states that it supports
+        # `prepareSupport` in its initial `initialize` request.
         #
-        # @return [boolean]
+        # @return [boolean | RenameOptions]
         def rename_provider
           attributes.fetch(:renameProvider)
         end
@@ -188,6 +193,16 @@ module LanguageServer
         # @return [boolean | ColorProviderOptions | (ColorProviderOptions & TextDocumentRegistrationOptions & Static...]
         def color_provider
           attributes.fetch(:colorProvider)
+        end
+
+        #
+        # The server provides folding provider support.
+        #
+        # Since 3.10.0
+        #
+        # @return [boolean | FoldingRangeProviderOptions | (FoldingRangeProviderOptions & TextDocumentRegistrationOp...]
+        def folding_range_provider
+          attributes.fetch(:foldingRangeProvider)
         end
 
         #

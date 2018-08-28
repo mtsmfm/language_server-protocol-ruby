@@ -1,6 +1,7 @@
 module LanguageServer
   module Protocol
     module Constant
+      autoload :CodeActionKind, "language_server/protocol/constant/code_action_kind"
       autoload :CompletionItemKind, "language_server/protocol/constant/completion_item_kind"
       autoload :CompletionTriggerKind, "language_server/protocol/constant/completion_trigger_kind"
       autoload :DiagnosticSeverity, "language_server/protocol/constant/diagnostic_severity"
@@ -16,6 +17,7 @@ module LanguageServer
       autoload :TextDocumentSyncKind, "language_server/protocol/constant/text_document_sync_kind"
       autoload :WatchKind, "language_server/protocol/constant/watch_kind"
 
+      require "language_server/protocol/constant/code_action_kind"
       require "language_server/protocol/constant/completion_item_kind"
       require "language_server/protocol/constant/completion_trigger_kind"
       require "language_server/protocol/constant/diagnostic_severity"

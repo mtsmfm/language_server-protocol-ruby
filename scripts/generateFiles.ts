@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as fetch from "isomorphic-fetch";
 
-const lspVersion = "998fd38abbb73dda270b05aebea0a45b649f1cb4";
+const lspVersion = "e0ed81b9c0de995196c4ec7a54a7c9432bb7897f";
 const rootDir = path.normalize(path.join(__dirname, ".."));
 const tempDir = path.join(rootDir, "tmp");
 const protocolMdPath = path.join(tempDir, lspVersion, "protocol.md");
