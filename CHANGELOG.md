@@ -1,5 +1,9 @@
 # Change log
 
+## 3.12.0.0
+
+- Update Language Server Protocol version to 3.12.0
+
 ## 3.7.0.0
 
 - Update Language Server Protocol version to 3.7.0
