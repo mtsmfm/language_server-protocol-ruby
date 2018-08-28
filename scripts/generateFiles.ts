@@ -1,9 +1,9 @@
-import * as ts from 'typescript';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as fetch from 'isomorphic-fetch';
+import * as ts from "typescript";
+import * as fs from "fs";
+import * as path from "path";
+import * as fetch from "isomorphic-fetch";
 
-const lspVersion = '998fd38abbb73dda270b05aebea0a45b649f1cb4';
+const lspVersion = "998fd38abbb73dda270b05aebea0a45b649f1cb4";
 const rootDir = path.normalize(path.join(__dirname, ".."));
 const tempDir = path.join(rootDir, "tmp");
 const protocolMdPath = path.join(tempDir, lspVersion, "protocol.md");
@@ -20,19 +20,19 @@ const createFile = (filePath, content) => {
   });
 
   fs.writeFileSync(filePath, content);
-}
+};
 
 const extractTypeScriptSource = content => {
-  const regEx = /^```typescript\r\n([^]*?)^```\r\n/mg;
+  const regEx = /^```typescript\r\n([^]*?)^```\r\n/gm;
   let match;
   let result = "";
 
-  while((match = regEx.exec(content)) !== null) {
+  while ((match = regEx.exec(content)) !== null) {
     result = result.concat(match[1]);
   }
 
   return result;
-}
+};
 
 const extractDefinitions = content => {
   const fileName = path.join(tempDir, "protocol.ts");
@@ -44,79 +44,108 @@ const extractDefinitions = content => {
 
   const serialize = member => {
     const symbol = checker.getSymbolAtLocation(member.name);
-    const type = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration);
-    const types = member.kind == ts.SyntaxKind.UnionType ? (<ts.UnionTypeNode>(<ts.PropertySignature>member).type).types : [];
+    const type = checker.getTypeOfSymbolAtLocation(
+      symbol,
+      symbol.valueDeclaration
+    );
+    const types =
+      member.kind == ts.SyntaxKind.UnionType
+        ? (<ts.UnionTypeNode>(<ts.PropertySignature>member).type).types
+        : [];
 
     return {
       name: symbol.getName(),
       documentation: ts.displayPartsToString(symbol.getDocumentationComment()),
       type: checker.typeToString(type),
       optional: !!member.questionToken,
-      nullable: (<ts.NodeArray<ts.TypeNode>>types).some(t => t.kind == ts.SyntaxKind.NullKeyword),
-      value: symbol.valueDeclaration ? symbol.valueDeclaration.getChildAt(symbol.valueDeclaration.getChildCount() - 1).getText() : null
+      nullable: (<ts.NodeArray<ts.TypeNode>>types).some(
+        t => t.kind == ts.SyntaxKind.NullKeyword
+      ),
+      value: symbol.valueDeclaration
+        ? symbol.valueDeclaration
+            .getChildAt(symbol.valueDeclaration.getChildCount() - 1)
+            .getText()
+        : null
     };
-  }
+  };
 
   const handleInterface = (node: ts.InterfaceDeclaration) => {
-    const members = node.members.filter(member => member.name).map(member => serialize(member));
-    const parentName = node.heritageClauses && node.heritageClauses[0].getLastToken().getText();
-    const parent = output.find(i => i.interface && (i.interface.name === parentName));
+    const members = node.members
+      .filter(member => member.name)
+      .map(member => serialize(member));
+    const parentName =
+      node.heritageClauses && node.heritageClauses[0].getLastToken().getText();
+    const parent = output.find(
+      i => i.interface && i.interface.name === parentName
+    );
 
-    output.push(
-    {
+    output.push({
       interface: serialize(node),
       parent: parent,
       allMembers: ((parent && parent.allMembers) || []).concat(members),
       members
-    }
-    );
-  }
+    });
+  };
 
   const handleModule = (node: ts.ModuleDeclaration) => {
-    const members = []
+    const members = [];
 
     ts.forEachChild(node.body, node => {
-      members.push(serialize((<ts.VariableStatement>node).declarationList.declarations[0]));
+      members.push(
+        serialize((<ts.VariableStatement>node).declarationList.declarations[0])
+      );
     });
 
-    output.push(
-    {
+    output.push({
       module: serialize(node),
       members
-    }
-    );
-  }
+    });
+  };
 
   const visit = node => {
-    switch(node.kind) {
-      case(ts.SyntaxKind.InterfaceDeclaration):
-      handleInterface(node);
-      break;
+    switch (node.kind) {
+      case ts.SyntaxKind.InterfaceDeclaration:
+        handleInterface(node);
+        break;
 
-      case(ts.SyntaxKind.ModuleDeclaration):
-      handleModule(node);
-      break;
+      case ts.SyntaxKind.ModuleDeclaration:
+        handleModule(node);
+        break;
     }
   };
 
   ts.forEachChild(program.getSourceFile(fileName), visit);
 
   return output;
-}
+};
 
 import Handlebars from "handlebars";
-const snake = s => s.replace(/^[A-Z]/, s => s.toLowerCase()).replace(/[A-Z]/g, s => `_${s.toLowerCase()}`);
+const snake = s =>
+  s
+    .replace(/^[A-Z]/, s => s.toLowerCase())
+    .replace(/[A-Z]/g, s => `_${s.toLowerCase()}`);
 
 Handlebars.registerHelper("params", members => {
-  return members.map(member => `${snake(member.name)}:${(member.optional || member.nullable) ? " nil" : ""}`).join(", ");
+  return members
+    .map(
+      member =>
+        `${snake(member.name)}:${
+          member.optional || member.nullable ? " nil" : ""
+        }`
+    )
+    .join(", ");
 });
 Handlebars.registerHelper("snake", snake);
 Handlebars.registerHelper("comment", (s, options) => {
   const indent = Array(options.hash.indent + 1).join(" ");
-  return s.split("\n").map(s => s.trim()).map(s => `${indent}#${s.length == 0 ? "" : ` ${s}`}`).join("\n");
+  return s
+    .split("\n")
+    .map(s => s.trim())
+    .map(s => `${indent}#${s.length == 0 ? "" : ` ${s}`}`)
+    .join("\n");
 });
 Handlebars.registerHelper("local_var", s => {
-  const rubyKeywords = ["end", "retry"]
+  const rubyKeywords = ["end", "retry"];
   const snaked = snake(s);
 
   if (rubyKeywords.some(k => k == s)) {
@@ -131,7 +160,9 @@ Handlebars.registerHelper("const", s => {
 
 (async () => {
   if (!fs.existsSync(protocolMdPath)) {
-    const res = await fetch(`https://github.com/Microsoft/language-server-protocol/raw/${lspVersion}/specification.md`);
+    const res = await fetch(
+      `https://github.com/Microsoft/language-server-protocol/raw/${lspVersion}/specification.md`
+    );
     createFile(protocolMdPath, await res.text());
   }
 
@@ -143,7 +174,17 @@ Handlebars.registerHelper("const", s => {
   const modules = definitions.filter(d => d.module);
 
   interfaces.forEach(definition => {
-    createFile(path.join(rootDir, "lib", "language_server", "protocol", "interface", `${snake(definition.interface.name)}.rb`), Handlebars.compile(`
+    createFile(
+      path.join(
+        rootDir,
+        "lib",
+        "language_server",
+        "protocol",
+        "interface",
+        `${snake(definition.interface.name)}.rb`
+      ),
+      Handlebars.compile(
+        `
 module LanguageServer
   module Protocol
     module Interface
@@ -188,11 +229,24 @@ module LanguageServer
     end
   end
 end
-`.slice(1), {noEscape: true})({definition}));
+`.slice(1),
+        { noEscape: true }
+      )({ definition })
+    );
   });
 
   modules.forEach(definition => {
-    createFile(path.join(rootDir, "lib", "language_server", "protocol", "constant", `${snake(definition.module.name)}.rb`), Handlebars.compile(`
+    createFile(
+      path.join(
+        rootDir,
+        "lib",
+        "language_server",
+        "protocol",
+        "constant",
+        `${snake(definition.module.name)}.rb`
+      ),
+      Handlebars.compile(
+        `
 module LanguageServer
   module Protocol
     module Constant
@@ -214,10 +268,16 @@ module LanguageServer
     end
   end
 end
-`.slice(1), {noEscape: true})({definition}));
+`.slice(1),
+        { noEscape: true }
+      )({ definition })
+    );
   });
 
-  createFile(path.join(rootDir, "lib", "language_server", "protocol", "interface.rb"), Handlebars.compile(`
+  createFile(
+    path.join(rootDir, "lib", "language_server", "protocol", "interface.rb"),
+    Handlebars.compile(
+      `
 module LanguageServer
   module Protocol
     module Interface
@@ -231,9 +291,15 @@ module LanguageServer
     end
   end
 end
-`.slice(1), {noEscape: true})({names: interfaces.map(i => i.interface.name).sort()}));
+`.slice(1),
+      { noEscape: true }
+    )({ names: interfaces.map(i => i.interface.name).sort() })
+  );
 
-  createFile(path.join(rootDir, "lib", "language_server", "protocol", "constant.rb"), Handlebars.compile(`
+  createFile(
+    path.join(rootDir, "lib", "language_server", "protocol", "constant.rb"),
+    Handlebars.compile(
+      `
 module LanguageServer
   module Protocol
     module Constant
@@ -247,6 +313,8 @@ module LanguageServer
     end
   end
 end
-`.slice(1), {noEscape: true})({names: modules.map(i => i.module.name).sort()}));
-
+`.slice(1),
+      { noEscape: true }
+    )({ names: modules.map(i => i.module.name).sort() })
+  );
 })();
