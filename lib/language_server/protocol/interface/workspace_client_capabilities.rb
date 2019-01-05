@@ -32,7 +32,7 @@ module LanguageServer
         #
         # Capabilities specific to `WorkspaceEdit`s
         #
-        # @return [{ documentChanges?: boolean; }]
+        # @return [{ documentChanges?: boolean; resourceOperations?: ResourceOperationKind[]; failureHandling?: Fail...]
         def workspace_edit
           attributes.fetch(:workspaceEdit)
         end

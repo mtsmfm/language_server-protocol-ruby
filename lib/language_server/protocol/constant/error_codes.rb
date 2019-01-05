@@ -12,6 +12,7 @@ module LanguageServer
         SERVER_NOT_INITIALIZED = -32002
         UNKNOWN_ERROR_CODE = -32001
         REQUEST_CANCELLED = -32800
+        CONTENT_MODIFIED = -32801
       end
     end
   end

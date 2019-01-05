@@ -9,7 +9,7 @@ module LanguageServer
       # See https://help.github.com/articles/creating-and-highlighting-code-blocks/#syntax-highlighting
       #
       # Here is an example how such a string can be constructed using JavaScript / TypeScript:
-      # ```ts
+      # ```typescript
       # let markdown: MarkdownContent = {
       # kind: MarkupKind.Markdown,
       # value: [
