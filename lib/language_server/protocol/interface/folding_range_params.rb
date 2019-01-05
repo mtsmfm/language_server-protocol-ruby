@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class FoldingRangeRequestParam
+      class FoldingRangeParams
         def initialize(text_document:)
           @attributes = {}
 

@@ -5,7 +5,7 @@ module LanguageServer
       # Text document specific client capabilities.
       #
       class TextDocumentClientCapabilities
-        def initialize(synchronization: nil, completion: nil, hover: nil, signature_help: nil, references: nil, document_highlight: nil, document_symbol: nil, formatting: nil, range_formatting: nil, on_type_formatting: nil, definition: nil, type_definition: nil, implementation: nil, code_action: nil, code_lens: nil, document_link: nil, color_provider: nil, rename: nil, publish_diagnostics: nil, folding_range: nil)
+        def initialize(synchronization: nil, completion: nil, hover: nil, signature_help: nil, references: nil, document_highlight: nil, document_symbol: nil, formatting: nil, range_formatting: nil, on_type_formatting: nil, declaration: nil, definition: nil, type_definition: nil, implementation: nil, code_action: nil, code_lens: nil, document_link: nil, color_provider: nil, rename: nil, publish_diagnostics: nil, folding_range: nil)
           @attributes = {}
 
           @attributes[:synchronization] = synchronization if synchronization
@@ -18,6 +18,7 @@ module LanguageServer
           @attributes[:formatting] = formatting if formatting
           @attributes[:rangeFormatting] = range_formatting if range_formatting
           @attributes[:onTypeFormatting] = on_type_formatting if on_type_formatting
+          @attributes[:declaration] = declaration if declaration
           @attributes[:definition] = definition if definition
           @attributes[:typeDefinition] = type_definition if type_definition
           @attributes[:implementation] = implementation if implementation
@@ -56,7 +57,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/signatureHelp`
         #
-        # @return [{ dynamicRegistration?: boolean; signatureInformation?: { documentationFormat?: MarkupKind[]; }; }]
+        # @return [{ dynamicRegistration?: boolean; signatureInformation?: { documentationFormat?: MarkupKind[]; par...]
         def signature_help
           attributes.fetch(:signatureHelp)
         end
@@ -110,9 +111,19 @@ module LanguageServer
         end
 
         #
-        # Capabilities specific to the `textDocument/definition`
+        # Capabilities specific to the `textDocument/declaration`
         #
-        # @return [{ dynamicRegistration?: boolean; }]
+        # @return [{ dynamicRegistration?: boolean; linkSupport?: boolean; }]
+        def declaration
+          attributes.fetch(:declaration)
+        end
+
+        #
+        # Capabilities specific to the `textDocument/definition`.
+        #
+        # Since 3.14.0
+        #
+        # @return [{ dynamicRegistration?: boolean; linkSupport?: boolean; }]
         def definition
           attributes.fetch(:definition)
         end
@@ -122,7 +133,7 @@ module LanguageServer
         #
         # Since 3.6.0
         #
-        # @return [{ dynamicRegistration?: boolean; }]
+        # @return [{ dynamicRegistration?: boolean; linkSupport?: boolean; }]
         def type_definition
           attributes.fetch(:typeDefinition)
         end
@@ -132,7 +143,7 @@ module LanguageServer
         #
         # Since 3.6.0
         #
-        # @return [{ dynamicRegistration?: boolean; }]
+        # @return [{ dynamicRegistration?: boolean; linkSupport?: boolean; }]
         def implementation
           attributes.fetch(:implementation)
         end
