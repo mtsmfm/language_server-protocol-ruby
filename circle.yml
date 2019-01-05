@@ -1,14 +1,13 @@
-version: 2
-jobs:
-  build:
+version: 2.0
+references:
+  test: &test
     docker:
       - image: tmaier/docker-compose
         environment:
           COMPOSE_FILE: docker-compose.yml:docker-compose.ci.yml
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 17.05.0-ce
+      - setup_remote_docker
       - run:
           name: setup
           command: |
@@ -18,11 +17,30 @@ jobs:
             docker create -v project:/app --name project busybox chown -R 1000:1000 /app
             docker cp . project:/app
             docker start project
-            docker-compose build
+            docker-compose build $CIRCLE_JOB
       - run:
           name: test
           command: |
-            docker-compose run app bundle exec rake test
-            docker-compose run ruby-2-4 bundle exec rake test
-            docker-compose run ruby-2-3 bundle exec rake test
-            docker-compose run ruby-2-2 bundle exec rake test
+            docker-compose run $CIRCLE_JOB bundle exec rake test
+
+jobs:
+  ruby-2-6:
+    <<: *test
+  ruby-2-5:
+    <<: *test
+  ruby-2-4:
+    <<: *test
+  ruby-2-3:
+    <<: *test
+  ruby-2-2:
+    <<: *test
+
+workflows:
+  version: 2
+  test_and_buld:
+    jobs:
+      - ruby-2-6
+      - ruby-2-5
+      - ruby-2-4
+      - ruby-2-3
+      - ruby-2-2
