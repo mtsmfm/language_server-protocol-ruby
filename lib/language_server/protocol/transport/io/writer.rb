@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Transport
-      module IO
+      module Io
         class Writer
           attr_reader :io
 

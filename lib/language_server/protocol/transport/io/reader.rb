@@ -3,10 +3,8 @@ require "json"
 module LanguageServer
   module Protocol
     module Transport
-      module IO
+      module Io
         class Reader
-          attr_reader :io
-
           def initialize(io)
             @io = io
           end
@@ -38,6 +36,10 @@ module LanguageServer
               end
             end
           end
+
+          private
+
+          attr_reader :io
         end
       end
     end

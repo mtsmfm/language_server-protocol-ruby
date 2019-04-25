@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Transport
       module Stdio
-        class Reader < IO::Reader
+        class Reader < Io::Reader
           def initialize
             super STDIN
           end
