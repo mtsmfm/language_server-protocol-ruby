@@ -1,5 +1,9 @@
 # Change log
 
+## Not released
+
+- Drop Ruby < 2.4
+
 ## 3.14.0.0
 
 - Update Language Server Protocol version to 3.14.0

@@ -10,10 +10,6 @@ services:
     <<: *latest
   ruby-2-4:
     <<: *latest
-  ruby-2-3:
-    <<: *latest
-  ruby-2-2:
-    <<: *latest
   node:
     volumes:
       - .:/app:cached
