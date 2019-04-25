@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile.development
       args:
-        RUBY_VERSION: 2.6.0
+        RUBY_VERSION: 2.6.3
     volumes:
       - vendor:/vendor
       - home:/home/ruby
@@ -14,13 +14,13 @@ services:
     build:
       <<: *build
       args:
-        RUBY_VERSION: 2.5.3
+        RUBY_VERSION: 2.5.5
   ruby-2-4:
     <<: *latest
     build:
       <<: *build
       args:
-        RUBY_VERSION: 2.4.5
+        RUBY_VERSION: 2.4.6
   ruby-2-3:
     <<: *latest
     build:
