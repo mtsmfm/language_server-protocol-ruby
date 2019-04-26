@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-:memo: Currently, this gem supports only stdio as transport layer.
+Currently, this gem supports only stdio as transport layer out of box.
 
 ```ruby
 require "language_server-protocol"
@@ -51,6 +51,14 @@ reader.read do |request|
   writer.write(id: request[:id], result: result)
   exit
 end
+```
+
+You can use any IO object as transport layer:
+
+```ruby
+io = StringIO.new
+writer = LSP::Transport::Io::Writer.new(io)
+reader = LSP::Transport::Io::Reader.new(io)
 ```
 
 ## Versioning
