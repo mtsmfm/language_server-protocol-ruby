@@ -3,6 +3,7 @@
 ## Not released
 
 - Drop Ruby < 2.4
+- Add Transport::Io (Thanks to @soutaro)
 
 ## 3.14.0.0
 
