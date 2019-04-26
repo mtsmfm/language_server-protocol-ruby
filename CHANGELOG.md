@@ -1,6 +1,6 @@
 # Change log
 
-## Not released
+## 3.14.0.1
 
 - Drop Ruby < 2.4
 - Add Transport::Io (Thanks to @soutaro)

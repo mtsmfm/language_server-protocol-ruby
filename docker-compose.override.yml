@@ -6,6 +6,7 @@ services:
       - $HOME/.gitconfig:/home/ruby/.gitconfig:ro
       - $HOME/.ssh:/home/ruby/.ssh:ro
       - $HOME/.gem:/home/ruby/.gem
+      - $HOME/.netrc:/home/ruby/.netrc
   ruby-2-5:
     <<: *latest
   ruby-2-4:
