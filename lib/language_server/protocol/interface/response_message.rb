@@ -5,6 +5,7 @@ module LanguageServer
         def initialize(jsonrpc:, id:, result: nil, error: nil)
           @attributes = {}
 
+          @attributes[:jsonrpc] = jsonrpc
           @attributes[:id] = id
           @attributes[:result] = result if result
           @attributes[:error] = error if error

@@ -5,6 +5,7 @@ module LanguageServer
         def initialize(uri:, version:)
           @attributes = {}
 
+          @attributes[:uri] = uri
           @attributes[:version] = version
 
           @attributes.freeze

@@ -8,6 +8,7 @@ module LanguageServer
         def initialize(document_selector:, sync_kind:)
           @attributes = {}
 
+          @attributes[:documentSelector] = document_selector
           @attributes[:syncKind] = sync_kind
 
           @attributes.freeze

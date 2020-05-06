@@ -5,6 +5,7 @@ module LanguageServer
         def initialize(document_selector:, prepare_provider: nil)
           @attributes = {}
 
+          @attributes[:documentSelector] = document_selector
           @attributes[:prepareProvider] = prepare_provider if prepare_provider
 
           @attributes.freeze
