@@ -68,6 +68,15 @@ class LanguageServer::ProtocolTest < Minitest::Test
     assert { io.read == to_jsonrpc(expected_body) }
   end
 
+  def test_inheritance
+    identifier = LSP::Interface::VersionedTextDocumentIdentifier.new(
+      uri: "http://example.com",
+      version: 1
+    )
+
+    assert { identifier.attributes == {uri: "http://example.com", version: 1} }
+  end
+
   def to_jsonrpc(hash)
     hash_str = hash.to_json
 

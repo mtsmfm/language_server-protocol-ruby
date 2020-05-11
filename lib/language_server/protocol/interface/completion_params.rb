@@ -5,6 +5,8 @@ module LanguageServer
         def initialize(text_document:, position:, context: nil)
           @attributes = {}
 
+          @attributes[:textDocument] = text_document
+          @attributes[:position] = position
           @attributes[:context] = context if context
 
           @attributes.freeze
