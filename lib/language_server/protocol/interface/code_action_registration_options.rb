@@ -5,6 +5,7 @@ module LanguageServer
         def initialize(code_action_kinds: nil)
           @attributes = {}
 
+          @attributes[:codeActionKinds] = code_action_kinds if code_action_kinds
 
           @attributes.freeze
         end

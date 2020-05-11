@@ -197,7 +197,7 @@ module LanguageServer
         def initialize({{params definition.allMembers}})
           @attributes = {}
 
-          {{#each definition.members}}
+          {{#each definition.allMembers}}
           @attributes[:{{name}}] = {{local_var name}}{{#if optional}} if {{local_var name}}{{/if}}
           {{/each}}
 

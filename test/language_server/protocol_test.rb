@@ -73,4 +73,13 @@ class LanguageServer::ProtocolTest < Minitest::Test
 
     "Content-Length: #{hash_str.bytesize}\r\n" + "\r\n" + hash_str
   end
+
+  def test_sub_interface_set_super_attributes
+    identifier = LSP::Interface::VersionedTextDocumentIdentifier.new(
+      uri: "http://example.com",
+      version: 1
+    )
+
+    assert { identifier.attributes == { uri: "http://example.com", version: 1 } }
+  end
 end

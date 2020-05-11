@@ -5,6 +5,7 @@ module LanguageServer
         def initialize(document_selector:, include_text: nil)
           @attributes = {}
 
+          @attributes[:documentSelector] = document_selector
           @attributes[:includeText] = include_text if include_text
 
           @attributes.freeze
