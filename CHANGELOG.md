@@ -1,5 +1,10 @@
 # Change log
 
+## 3.14.0.2
+
+- Fix inheritance (#22)
+- Reduce package size (#21)
+
 ## 3.14.0.1
 
 - Drop Ruby < 2.4
