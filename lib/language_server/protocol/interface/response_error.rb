@@ -29,10 +29,10 @@ module LanguageServer
         end
 
         #
-        # A Primitive or Structured value that contains additional
+        # A primitive or structured value that contains additional
         # information about the error. Can be omitted.
         #
-        # @return [D]
+        # @return [any]
         def data
           attributes.fetch(:data)
         end

@@ -8,12 +8,13 @@ module LanguageServer
       # A CodeAction must set either `edit` and/or a `command`. If both are supplied, the `edit` is applied first, then the `command` is executed.
       #
       class CodeAction
-        def initialize(title:, kind: nil, diagnostics: nil, edit: nil, command: nil)
+        def initialize(title:, kind: nil, diagnostics: nil, is_preferred: nil, edit: nil, command: nil)
           @attributes = {}
 
           @attributes[:title] = title
           @attributes[:kind] = kind if kind
           @attributes[:diagnostics] = diagnostics if diagnostics
+          @attributes[:isPreferred] = is_preferred if is_preferred
           @attributes[:edit] = edit if edit
           @attributes[:command] = command if command
 
@@ -44,6 +45,18 @@ module LanguageServer
         # @return [Diagnostic[]]
         def diagnostics
           attributes.fetch(:diagnostics)
+        end
+
+        #
+        # Marks this as a preferred action. Preferred actions are used by the `auto fix` command and can be targeted
+        # by keybindings.
+        #
+        # A quick fix should be marked preferred if it properly addresses the underlying error.
+        # A refactoring should be marked preferred if it is the most reasonable choice of actions to take.
+        #
+        # @return [boolean]
+        def is_preferred
+          attributes.fetch(:isPreferred)
         end
 
         #

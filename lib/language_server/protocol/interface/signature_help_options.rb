@@ -1,14 +1,13 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Signature help options.
-      #
-      class SignatureHelpOptions
-        def initialize(trigger_characters: nil)
+      class SignatureHelpOptions < WorkDoneProgressOptions
+        def initialize(work_done_progress: nil, trigger_characters: nil, retrigger_characters: nil)
           @attributes = {}
 
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:triggerCharacters] = trigger_characters if trigger_characters
+          @attributes[:retriggerCharacters] = retrigger_characters if retrigger_characters
 
           @attributes.freeze
         end
@@ -20,6 +19,17 @@ module LanguageServer
         # @return [string[]]
         def trigger_characters
           attributes.fetch(:triggerCharacters)
+        end
+
+        #
+        # List of characters that re-trigger signature help.
+        #
+        # These trigger characters are only active when signature help is already showing. All trigger characters
+        # are also counted as re-trigger characters.
+        #
+        # @return [string[]]
+        def retrigger_characters
+          attributes.fetch(:retriggerCharacters)
         end
 
         attr_reader :attributes

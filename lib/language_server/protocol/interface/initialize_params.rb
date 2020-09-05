@@ -1,11 +1,13 @@
 module LanguageServer
   module Protocol
     module Interface
-      class InitializeParams
-        def initialize(process_id:, root_path: nil, root_uri:, initialization_options: nil, capabilities:, trace: nil, workspace_folders: nil)
+      class InitializeParams < WorkDoneProgressParams
+        def initialize(work_done_token: nil, process_id:, client_info: nil, root_path: nil, root_uri:, initialization_options: nil, capabilities:, trace: nil, workspace_folders: nil)
           @attributes = {}
 
+          @attributes[:workDoneToken] = work_done_token if work_done_token
           @attributes[:processId] = process_id
+          @attributes[:clientInfo] = client_info if client_info
           @attributes[:rootPath] = root_path if root_path
           @attributes[:rootUri] = root_uri
           @attributes[:initializationOptions] = initialization_options if initialization_options
@@ -24,6 +26,14 @@ module LanguageServer
         # @return [number]
         def process_id
           attributes.fetch(:processId)
+        end
+
+        #
+        # Information about the client
+        #
+        # @return [{ name: string; version?: string; }]
+        def client_info
+          attributes.fetch(:clientInfo)
         end
 
         #
@@ -74,8 +84,6 @@ module LanguageServer
         # This property is only available if the client supports workspace folders.
         # It can be `null` if the client supports workspace folders but none are
         # configured.
-        #
-        # Since 3.6.0
         #
         # @return [WorkspaceFolder[]]
         def workspace_folders

@@ -2,11 +2,12 @@ module LanguageServer
   module Protocol
     module Interface
       class CompletionItem
-        def initialize(label:, kind: nil, detail: nil, documentation: nil, deprecated: nil, preselect: nil, sort_text: nil, filter_text: nil, insert_text: nil, insert_text_format: nil, text_edit: nil, additional_text_edits: nil, commit_characters: nil, command: nil, data: nil)
+        def initialize(label:, kind: nil, tags: nil, detail: nil, documentation: nil, deprecated: nil, preselect: nil, sort_text: nil, filter_text: nil, insert_text: nil, insert_text_format: nil, text_edit: nil, additional_text_edits: nil, commit_characters: nil, command: nil, data: nil)
           @attributes = {}
 
           @attributes[:label] = label
           @attributes[:kind] = kind if kind
+          @attributes[:tags] = tags if tags
           @attributes[:detail] = detail if detail
           @attributes[:documentation] = documentation if documentation
           @attributes[:deprecated] = deprecated if deprecated
@@ -36,11 +37,20 @@ module LanguageServer
 
         #
         # The kind of this completion item. Based of the kind
-        # an icon is chosen by the editor.
+        # an icon is chosen by the editor. The standardized set
+        # of available values is defined in `CompletionItemKind`.
         #
         # @return [number]
         def kind
           attributes.fetch(:kind)
+        end
+
+        #
+        # Tags for this completion item.
+        #
+        # @return [1[]]
+        def tags
+          attributes.fetch(:tags)
         end
 
         #
@@ -116,9 +126,10 @@ module LanguageServer
 
         #
         # The format of the insert text. The format applies to both the `insertText` property
-        # and the `newText` property of a provided `textEdit`.
+        # and the `newText` property of a provided `textEdit`. If omitted defaults to
+        # `InsertTextFormat.PlainText`.
         #
-        # @return [InsertTextFormat]
+        # @return [DiagnosticTag]
         def insert_text_format
           attributes.fetch(:insertTextFormat)
         end
@@ -170,7 +181,7 @@ module LanguageServer
         end
 
         #
-        # An data entry field that is preserved on a completion item between
+        # A data entry field that is preserved on a completion item between
         # a completion and a completion resolve request.
         #
         # @return [any]

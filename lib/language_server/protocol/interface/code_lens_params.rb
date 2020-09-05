@@ -1,10 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
-      class CodeLensParams
-        def initialize(text_document:)
+      class CodeLensParams < PartialResultParams
+        def initialize(partial_result_token: nil, text_document:)
           @attributes = {}
 
+          @attributes[:partialResultToken] = partial_result_token if partial_result_token
           @attributes[:textDocument] = text_document
 
           @attributes.freeze

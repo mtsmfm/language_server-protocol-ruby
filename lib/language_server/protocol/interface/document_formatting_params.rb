@@ -1,10 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DocumentFormattingParams
-        def initialize(text_document:, options:)
+      class DocumentFormattingParams < WorkDoneProgressParams
+        def initialize(work_done_token: nil, text_document:, options:)
           @attributes = {}
 
+          @attributes[:workDoneToken] = work_done_token if work_done_token
           @attributes[:textDocument] = text_document
           @attributes[:options] = options
 

@@ -18,7 +18,7 @@ class LanguageServer::ProtocolTest < Minitest::Test
 
       expected_body = {
         "id"=>0,
-        "result"=>{"capabilities"=>{"textDocumentSync"=>{"change"=>1}, "completionProvider"=>{"resolveProvider"=>true, "triggerCharacters"=>["."]}, "definitionProvider"=>true}},
+        "result"=>{"capabilities"=>{"textDocumentSync"=>{"change"=>1}, "completionProvider"=>{"triggerCharacters"=>["."], "resolveProvider"=>true}, "definitionProvider"=>true}},
         "jsonrpc"=>"2.0"
       }
 

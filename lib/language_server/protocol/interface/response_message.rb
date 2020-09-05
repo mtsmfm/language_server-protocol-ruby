@@ -22,10 +22,10 @@ module LanguageServer
         end
 
         #
-        # The result of a request. This can be omitted in
-        # the case of an error.
+        # The result of a request. This member is REQUIRED on success.
+        # This member MUST NOT exist if there was an error invoking the method.
         #
-        # @return [any]
+        # @return [string | number | boolean | object]
         def result
           attributes.fetch(:result)
         end
@@ -33,7 +33,7 @@ module LanguageServer
         #
         # The error object in case a request fails.
         #
-        # @return [ResponseError<any>]
+        # @return [ResponseError]
         def error
           attributes.fetch(:error)
         end

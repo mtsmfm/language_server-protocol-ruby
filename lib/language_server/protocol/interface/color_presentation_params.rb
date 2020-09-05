@@ -1,10 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ColorPresentationParams
-        def initialize(text_document:, color:, range:)
+      class ColorPresentationParams < PartialResultParams
+        def initialize(partial_result_token: nil, text_document:, color:, range:)
           @attributes = {}
 
+          @attributes[:partialResultToken] = partial_result_token if partial_result_token
           @attributes[:textDocument] = text_document
           @attributes[:color] = color
           @attributes[:range] = range

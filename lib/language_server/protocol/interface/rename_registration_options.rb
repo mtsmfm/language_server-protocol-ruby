@@ -1,22 +1,14 @@
 module LanguageServer
   module Protocol
     module Interface
-      class RenameRegistrationOptions < TextDocumentRegistrationOptions
-        def initialize(document_selector:, prepare_provider: nil)
+      class RenameRegistrationOptions < RenameOptions
+        def initialize(work_done_progress: nil, prepare_provider: nil)
           @attributes = {}
 
-          @attributes[:documentSelector] = document_selector
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:prepareProvider] = prepare_provider if prepare_provider
 
           @attributes.freeze
-        end
-
-        #
-        # Renames should be checked and tested for validity before being executed.
-        #
-        # @return [boolean]
-        def prepare_provider
-          attributes.fetch(:prepareProvider)
         end
 
         attr_reader :attributes

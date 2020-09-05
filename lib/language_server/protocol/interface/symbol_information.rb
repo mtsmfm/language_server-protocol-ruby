@@ -29,7 +29,7 @@ module LanguageServer
         #
         # The kind of this symbol.
         #
-        # @return [number]
+        # @return [any]
         def kind
           attributes.fetch(:kind)
         end

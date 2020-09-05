@@ -1,22 +1,14 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DocumentLinkRegistrationOptions < TextDocumentRegistrationOptions
-        def initialize(document_selector:, resolve_provider: nil)
+      class DocumentLinkRegistrationOptions < DocumentLinkOptions
+        def initialize(work_done_progress: nil, resolve_provider: nil)
           @attributes = {}
 
-          @attributes[:documentSelector] = document_selector
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:resolveProvider] = resolve_provider if resolve_provider
 
           @attributes.freeze
-        end
-
-        #
-        # Document links have a resolve provider as well.
-        #
-        # @return [boolean]
-        def resolve_provider
-          attributes.fetch(:resolveProvider)
         end
 
         attr_reader :attributes

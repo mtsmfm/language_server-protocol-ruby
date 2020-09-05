@@ -4,10 +4,11 @@ module LanguageServer
       #
       # Params for the CodeActionRequest
       #
-      class CodeActionParams
-        def initialize(text_document:, range:, context:)
+      class CodeActionParams < PartialResultParams
+        def initialize(partial_result_token: nil, text_document:, range:, context:)
           @attributes = {}
 
+          @attributes[:partialResultToken] = partial_result_token if partial_result_token
           @attributes[:textDocument] = text_document
           @attributes[:range] = range
           @attributes[:context] = context

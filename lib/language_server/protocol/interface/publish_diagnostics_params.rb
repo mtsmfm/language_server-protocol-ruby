@@ -2,10 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class PublishDiagnosticsParams
-        def initialize(uri:, diagnostics:)
+        def initialize(uri:, version: nil, diagnostics:)
           @attributes = {}
 
           @attributes[:uri] = uri
+          @attributes[:version] = version if version
           @attributes[:diagnostics] = diagnostics
 
           @attributes.freeze
@@ -17,6 +18,14 @@ module LanguageServer
         # @return [string]
         def uri
           attributes.fetch(:uri)
+        end
+
+        #
+        # Optional the version number of the document the diagnostics are published for.
+        #
+        # @return [number]
+        def version
+          attributes.fetch(:version)
         end
 
         #

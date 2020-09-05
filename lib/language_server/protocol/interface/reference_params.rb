@@ -1,12 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ReferenceParams < TextDocumentPositionParams
-        def initialize(text_document:, position:, context:)
+      class ReferenceParams < PartialResultParams
+        def initialize(partial_result_token: nil, context:)
           @attributes = {}
 
-          @attributes[:textDocument] = text_document
-          @attributes[:position] = position
+          @attributes[:partialResultToken] = partial_result_token if partial_result_token
           @attributes[:context] = context
 
           @attributes.freeze
