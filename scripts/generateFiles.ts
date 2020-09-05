@@ -3,10 +3,11 @@ import * as fs from "fs";
 import * as path from "path";
 import * as fetch from "isomorphic-fetch";
 
-const lspVersion = "c0c516735fb9eea08ac0151333b5380d70525961";
+const lspVersion = "3.15.0";
+const lspRepoRevision = "66cf1d7908f6548c8262b82572c51c7d029dfbdf";
 const rootDir = path.normalize(path.join(__dirname, ".."));
 const tempDir = path.join(rootDir, "tmp");
-const protocolMdPath = path.join(tempDir, lspVersion, "protocol.md");
+const protocolMdPath = path.join(tempDir, lspRepoRevision, "protocol.md");
 
 const createFile = (filePath, content) => {
   const dir = path.dirname(path.normalize(filePath));
@@ -161,7 +162,7 @@ Handlebars.registerHelper("const", s => {
 (async () => {
   if (!fs.existsSync(protocolMdPath)) {
     const res = await fetch(
-      `https://github.com/Microsoft/language-server-protocol/raw/${lspVersion}/specification.md`
+      `https://github.com/Microsoft/language-server-protocol/raw/${lspRepoRevision}/_specifications/specification-${lspVersion.split(".").slice(0, 2).join("-")}.md`
     );
     createFile(protocolMdPath, await res.text());
   }
