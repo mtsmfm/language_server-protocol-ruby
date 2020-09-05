@@ -2,9 +2,10 @@ module LanguageServer
   module Protocol
     module Interface
       class CodeActionRegistrationOptions < CodeActionOptions
-        def initialize(code_action_kinds: nil)
+        def initialize(work_done_progress: nil, code_action_kinds: nil)
           @attributes = {}
 
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:codeActionKinds] = code_action_kinds if code_action_kinds
 
           @attributes.freeze

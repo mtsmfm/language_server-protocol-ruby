@@ -15,7 +15,10 @@ module LanguageServer
         end
 
         #
-        # Open and close notifications are sent to the server.
+        # Open and close notifications are sent to the server. If omitted open close notification should not
+        # be sent.
+        # Open and close notifications are sent to the server. If omitted open close notification should not
+        # be sent.
         #
         # @return [boolean]
         def open_close
@@ -25,14 +28,17 @@ module LanguageServer
         #
         # Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
         # and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
+        # Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
+        # and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
         #
-        # @return [number]
+        # @return [any]
         def change
           attributes.fetch(:change)
         end
 
         #
-        # Will save notifications are sent to the server.
+        # If present will save notifications are sent to the server. If omitted the notification should not be
+        # sent.
         #
         # @return [boolean]
         def will_save
@@ -40,7 +46,8 @@ module LanguageServer
         end
 
         #
-        # Will save wait until requests are sent to the server.
+        # If present will save wait until requests are sent to the server. If omitted the request should not be
+        # sent.
         #
         # @return [boolean]
         def will_save_wait_until
@@ -48,9 +55,10 @@ module LanguageServer
         end
 
         #
-        # Save notifications are sent to the server.
+        # If present save notifications are sent to the server. If omitted the notification should not be
+        # sent.
         #
-        # @return [SaveOptions]
+        # @return [boolean | SaveOptions]
         def save
           attributes.fetch(:save)
         end

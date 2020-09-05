@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # General text document registration options.
+      #
       class TextDocumentRegistrationOptions
         def initialize(document_selector:)
           @attributes = {}

@@ -14,7 +14,7 @@ module LanguageServer
         #
         # Holds changes to existing resources.
         #
-        # @return [{ [uri: string]: TextEdit[]; }]
+        # @return [{}]
         def changes
           attributes.fetch(:changes)
         end

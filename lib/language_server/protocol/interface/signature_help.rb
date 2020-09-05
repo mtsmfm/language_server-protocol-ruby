@@ -18,7 +18,8 @@ module LanguageServer
         end
 
         #
-        # One or more signatures.
+        # One or more signatures. If no signaures are availabe the signature help
+        # request should return `null`.
         #
         # @return [SignatureInformation[]]
         def signatures
@@ -27,10 +28,12 @@ module LanguageServer
 
         #
         # The active signature. If omitted or the value lies outside the
-        # range of `signatures` the value defaults to zero or is ignored if
-        # `signatures.length === 0`. Whenever possible implementors should
-        # make an active decision about the active signature and shouldn't
-        # rely on a default value.
+        # range of `signatures` the value defaults to zero or is ignore if
+        # the `SignatureHelp` as no signatures.
+        #
+        # Whenever possible implementors should make an active decision about
+        # the active signature and shouldn't rely on a default value.
+        #
         # In future version of the protocol this property might become
         # mandatory to better express this.
         #

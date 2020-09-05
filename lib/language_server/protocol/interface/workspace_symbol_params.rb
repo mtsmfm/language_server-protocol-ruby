@@ -4,17 +4,19 @@ module LanguageServer
       #
       # The parameters of a Workspace Symbol Request.
       #
-      class WorkspaceSymbolParams
-        def initialize(query:)
+      class WorkspaceSymbolParams < PartialResultParams
+        def initialize(partial_result_token: nil, query:)
           @attributes = {}
 
+          @attributes[:partialResultToken] = partial_result_token if partial_result_token
           @attributes[:query] = query
 
           @attributes.freeze
         end
 
         #
-        # A non-empty query string
+        # A query string to filter symbols by. Clients may send an empty
+        # string here to request all symbols.
         #
         # @return [string]
         def query

@@ -2,13 +2,13 @@ module LanguageServer
   module Protocol
     module Interface
       class LocationLink
-        def initialize(origin_selection_range: nil, target_uri:, target_range:, target_selection_range: nil)
+        def initialize(origin_selection_range: nil, target_uri:, target_range:, target_selection_range:)
           @attributes = {}
 
           @attributes[:originSelectionRange] = origin_selection_range if origin_selection_range
           @attributes[:targetUri] = target_uri
           @attributes[:targetRange] = target_range
-          @attributes[:targetSelectionRange] = target_selection_range if target_selection_range
+          @attributes[:targetSelectionRange] = target_selection_range
 
           @attributes.freeze
         end
@@ -33,7 +33,9 @@ module LanguageServer
         end
 
         #
-        # The full target range of this link.
+        # The full target range of this link. If the target for example is a symbol then target range is the
+        # range enclosing this symbol not including leading/trailing whitespace but everything else
+        # like comments. This information is typically used to highlight the range in the editor.
         #
         # @return [Range]
         def target_range
@@ -41,7 +43,8 @@ module LanguageServer
         end
 
         #
-        # The span of this link.
+        # The range that should be selected and revealed when this link is being followed, e.g the name of a function.
+        # Must be contained by the the `targetRange`. See also `DocumentSymbol#range`
         #
         # @return [Range]
         def target_selection_range

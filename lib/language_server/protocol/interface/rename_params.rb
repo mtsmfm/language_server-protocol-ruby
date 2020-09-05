@@ -1,31 +1,14 @@
 module LanguageServer
   module Protocol
     module Interface
-      class RenameParams
-        def initialize(text_document:, position:, new_name:)
+      class RenameParams < WorkDoneProgressParams
+        def initialize(work_done_token: nil, new_name:)
           @attributes = {}
 
-          @attributes[:textDocument] = text_document
-          @attributes[:position] = position
+          @attributes[:workDoneToken] = work_done_token if work_done_token
           @attributes[:newName] = new_name
 
           @attributes.freeze
-        end
-
-        #
-        # The document to rename.
-        #
-        # @return [TextDocumentIdentifier]
-        def text_document
-          attributes.fetch(:textDocument)
-        end
-
-        #
-        # The position at which this request was sent.
-        #
-        # @return [Position]
-        def position
-          attributes.fetch(:position)
         end
 
         #

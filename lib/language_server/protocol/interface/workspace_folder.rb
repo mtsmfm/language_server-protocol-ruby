@@ -20,8 +20,8 @@ module LanguageServer
         end
 
         #
-        # The name of the workspace folder. Defaults to the
-        # uri's basename.
+        # The name of the workspace folder. Used to refer to this
+        # workspace folder in the user interface.
         #
         # @return [string]
         def name

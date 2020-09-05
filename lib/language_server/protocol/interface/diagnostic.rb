@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       class Diagnostic
-        def initialize(range:, severity: nil, code: nil, source: nil, message:, related_information: nil)
+        def initialize(range:, severity: nil, code: nil, source: nil, message:, tags: nil, related_information: nil)
           @attributes = {}
 
           @attributes[:range] = range
@@ -10,6 +10,7 @@ module LanguageServer
           @attributes[:code] = code if code
           @attributes[:source] = source if source
           @attributes[:message] = message
+          @attributes[:tags] = tags if tags
           @attributes[:relatedInformation] = related_information if related_information
 
           @attributes.freeze
@@ -27,7 +28,7 @@ module LanguageServer
         # The diagnostic's severity. Can be omitted. If omitted it is up to the
         # client to interpret diagnostics as error, warning, info or hint.
         #
-        # @return [number]
+        # @return [DiagnosticSeverity]
         def severity
           attributes.fetch(:severity)
         end
@@ -55,6 +56,14 @@ module LanguageServer
         # @return [string]
         def message
           attributes.fetch(:message)
+        end
+
+        #
+        # Additional metadata about the diagnostic.
+        #
+        # @return [DiagnosticTag[]]
+        def tags
+          attributes.fetch(:tags)
         end
 
         #

@@ -1,13 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Code Lens options.
-      #
-      class CodeLensOptions
-        def initialize(resolve_provider: nil)
+      class CodeLensOptions < WorkDoneProgressOptions
+        def initialize(work_done_progress: nil, resolve_provider: nil)
           @attributes = {}
 
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:resolveProvider] = resolve_provider if resolve_provider
 
           @attributes.freeze

@@ -1,13 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Code Action options.
-      #
-      class CodeActionOptions
-        def initialize(code_action_kinds: nil)
+      class CodeActionOptions < WorkDoneProgressOptions
+        def initialize(work_done_progress: nil, code_action_kinds: nil)
           @attributes = {}
 
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:codeActionKinds] = code_action_kinds if code_action_kinds
 
           @attributes.freeze

@@ -1,10 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ExecuteCommandParams
-        def initialize(command:, arguments: nil)
+      class ExecuteCommandParams < WorkDoneProgressParams
+        def initialize(work_done_token: nil, command:, arguments: nil)
           @attributes = {}
 
+          @attributes[:workDoneToken] = work_done_token if work_done_token
           @attributes[:command] = command
           @attributes[:arguments] = arguments if arguments
 

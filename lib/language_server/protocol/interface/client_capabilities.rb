@@ -2,11 +2,12 @@ module LanguageServer
   module Protocol
     module Interface
       class ClientCapabilities
-        def initialize(workspace: nil, text_document: nil, experimental: nil)
+        def initialize(workspace: nil, text_document: nil, window: nil, experimental: nil)
           @attributes = {}
 
           @attributes[:workspace] = workspace if workspace
           @attributes[:textDocument] = text_document if text_document
+          @attributes[:window] = window if window
           @attributes[:experimental] = experimental if experimental
 
           @attributes.freeze
@@ -15,7 +16,7 @@ module LanguageServer
         #
         # Workspace specific client capabilities.
         #
-        # @return [WorkspaceClientCapabilities]
+        # @return [{ applyEdit?: boolean; workspaceEdit?: WorkspaceEditClientCapabilities; didChangeConfiguration?: ...]
         def workspace
           attributes.fetch(:workspace)
         end
@@ -26,6 +27,14 @@ module LanguageServer
         # @return [TextDocumentClientCapabilities]
         def text_document
           attributes.fetch(:textDocument)
+        end
+
+        #
+        # Window specific client capabilities.
+        #
+        # @return [{ workDoneProgress?: boolean; }]
+        def window
+          attributes.fetch(:window)
         end
 
         #

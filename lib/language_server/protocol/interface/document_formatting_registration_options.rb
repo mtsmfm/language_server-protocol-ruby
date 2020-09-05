@@ -1,13 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Folding range provider options.
-      #
-      class FoldingRangeProviderOptions
-        def initialize()
+      class DocumentFormattingRegistrationOptions < DocumentFormattingOptions
+        def initialize(work_done_progress: nil)
           @attributes = {}
 
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
 
           @attributes.freeze
         end

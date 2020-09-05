@@ -1,13 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Execute command options.
-      #
-      class ExecuteCommandOptions
-        def initialize(commands:)
+      class ExecuteCommandOptions < WorkDoneProgressOptions
+        def initialize(work_done_progress: nil, commands:)
           @attributes = {}
 
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:commands] = commands
 
           @attributes.freeze
