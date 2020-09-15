@@ -103,6 +103,53 @@ const extractDefinitions = content => {
     });
   };
 
+  const handleTypeAlias = (node: ts.TypeAliasDeclaration) => {
+    if (!ts.isUnionTypeNode(node.type)) {
+      console.log(`${node.name.text} is not UnionType`);
+      return
+    }
+
+    if (!node.type.types.every(ts.isTypeLiteralNode)) {
+      console.log(`${node.name.text} contains other than TypeLiteral`);
+      return
+    }
+
+    const membersList = (<ts.NodeArray<ts.TypeLiteralNode>>node.type.types).map(t => {
+      if (!t.members) {
+        console.dir(t.kind);
+        console.dir(node.name.text);
+      }
+      return t.members.map(m => serialize(m));
+    })
+
+    const allMembers = membersList
+      .reduce((ary, xs) => [...ary, ...xs])
+      .reduce((ary, x) => [...new Set([...ary, x.name])], [])
+      .map(name => {
+        const members = membersList.map(members => members.find(m => m.name === name));
+
+        const documentation = members.filter(m => m !== undefined).map(m => m.documentation).join("\n\n--- OR ---\n\n");
+        const type = [...new Set(members.filter(m => m !== undefined).map(m => m.type))].join("|");
+        const optional = members.some(m => m === undefined || m.optional);
+        const nullable = members.some(m => m === undefined || m.nullable);
+
+        return {
+          name,
+          documentation,
+          type,
+          optional,
+          nullable
+        }
+    });
+
+    output.push({
+      interface: serialize(node),
+      parent: undefined,
+      allMembers,
+      members: allMembers,
+    });
+  };
+
   const visit = node => {
     switch (node.kind) {
       case ts.SyntaxKind.InterfaceDeclaration:
@@ -111,6 +158,10 @@ const extractDefinitions = content => {
 
       case ts.SyntaxKind.ModuleDeclaration:
         handleModule(node);
+        break;
+
+      case ts.SyntaxKind.TypeAliasDeclaration:
+        handleTypeAlias(node);
         break;
     }
   };
