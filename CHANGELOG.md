@@ -1,5 +1,9 @@
 # Change log
 
+## 3.15.0.1
+
+- Consider TypeAliasDeclaration for TextDocumentContentChangeEvent
+
 ## 3.15.0.0
 
 - Update Language Server Protocol version to 3.15.0
