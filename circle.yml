@@ -22,6 +22,7 @@ references:
           name: test
           command: |
             docker-compose run $CIRCLE_JOB bundle exec rake test
+            docker-compose run $CIRCLE_JOB RUBYOPT="--enable-frozen-string-literal" bundle exec rake test
 
 jobs:
   ruby-2-6:
