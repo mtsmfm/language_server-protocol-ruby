@@ -18,6 +18,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
+      - run: gem update --system
       - run: bundle exec rake
       - run: bundle exec rake
         env:
