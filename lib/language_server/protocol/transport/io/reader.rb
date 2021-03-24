@@ -10,7 +10,7 @@ module LanguageServer
           end
 
           def read(&block)
-            buffer = ""
+            buffer = +""
             header_parsed = false
             content_length = nil
 
