@@ -1,5 +1,10 @@
 # Change log
 
+## 3.15.0.2
+
+- Consider frozen string
+- Drop Ruby < 2.5
+
 ## 3.15.0.1
 
 - Consider TypeAliasDeclaration for TextDocumentContentChangeEvent
