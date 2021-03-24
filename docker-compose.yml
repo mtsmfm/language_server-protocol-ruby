@@ -1,26 +1,5 @@
 version: "3.0"
 services:
-  ruby-2-6: &latest
-    build: &build
-      context: .
-      dockerfile: Dockerfile.development
-      args:
-        RUBY_VERSION: 2.6.3
-    volumes:
-      - vendor:/vendor
-      - home:/home/ruby
-  ruby-2-5:
-    <<: *latest
-    build:
-      <<: *build
-      args:
-        RUBY_VERSION: 2.5.5
-  ruby-2-4:
-    <<: *latest
-    build:
-      <<: *build
-      args:
-        RUBY_VERSION: 2.4.6
   node:
     build:
       context: .
