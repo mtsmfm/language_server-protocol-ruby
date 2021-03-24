@@ -3,4 +3,3 @@ require 'bundler'
 Bundler.require(:default, :development)
 
 require "minitest/autorun"
-require 'power_assert/colorize'
