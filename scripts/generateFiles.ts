@@ -1,7 +1,7 @@
-import * as ts from "typescript";
+import ts from "typescript";
 import * as fs from "fs";
 import * as path from "path";
-import * as fetch from "isomorphic-fetch";
+import fetch from "isomorphic-fetch";
 
 const lspVersion = "3.15.0";
 const lspRepoRevision = "66cf1d7908f6548c8262b82572c51c7d029dfbdf";
@@ -9,7 +9,7 @@ const rootDir = path.normalize(path.join(__dirname, ".."));
 const tempDir = path.join(rootDir, "tmp");
 const protocolMdPath = path.join(tempDir, lspRepoRevision, "protocol.md");
 
-const createFile = (filePath, content) => {
+const createFile = (filePath: string, content: string) => {
   const dir = path.dirname(path.normalize(filePath));
 
   dir.split(/(?!^)\//).forEach((_, index, all) => {
@@ -23,7 +23,7 @@ const createFile = (filePath, content) => {
   fs.writeFileSync(filePath, content);
 };
 
-const extractTypeScriptSource = content => {
+const extractTypeScriptSource = (content: string) => {
   const regEx = /^```typescript\r\n([^]*?)^```\r\n/gm;
   let match;
   let result = "";
@@ -35,16 +35,38 @@ const extractTypeScriptSource = content => {
   return result;
 };
 
-const extractDefinitions = content => {
+type SerializeResult = {
+  name: string;
+  documentation: string;
+  type: string;
+  optional: boolean;
+  nullable: boolean;
+  value: string | null;
+};
+interface InterfaceResult {
+  interface: SerializeResult;
+  module?: undefined;
+  members: SerializeResult[];
+  allMembers: SerializeResult[];
+  parent: InterfaceResult | ModuleResult | undefined;
+}
+
+interface ModuleResult {
+  interface?: undefined;
+  module: SerializeResult;
+  members: SerializeResult[];
+  allMembers?: undefined;
+  parent?: undefined;
+}
+
+const extractDefinitions = (content: string) => {
   const fileName = path.join(tempDir, "protocol.ts");
   createFile(fileName, content);
   const program = ts.createProgram([fileName], {});
   const checker = program.getTypeChecker();
 
-  const output = [];
-
-  const serialize = member => {
-    const symbol = checker.getSymbolAtLocation(member.name);
+  const serialize = (member: ts.NamedDeclaration) => {
+    const symbol = checker.getSymbolAtLocation(member.name!)!;
     const type = checker.getTypeOfSymbolAtLocation(
       symbol,
       symbol.valueDeclaration
@@ -56,91 +78,105 @@ const extractDefinitions = content => {
 
     return {
       name: symbol.getName(),
-      documentation: ts.displayPartsToString(symbol.getDocumentationComment()),
+      documentation: ts.displayPartsToString(
+        symbol.getDocumentationComment(undefined)
+      ),
       type: checker.typeToString(type),
-      optional: !!member.questionToken,
+      optional: ts.isTypeElement(member) && !!member.questionToken,
       nullable: (<ts.NodeArray<ts.TypeNode>>types).some(
-        t => t.kind == ts.SyntaxKind.NullKeyword
+        (t) => t.kind == ts.SyntaxKind.NullKeyword
       ),
       value: symbol.valueDeclaration
         ? symbol.valueDeclaration
             .getChildAt(symbol.valueDeclaration.getChildCount() - 1)
             .getText()
-        : null
+        : null,
     };
   };
 
+  const output: Array<InterfaceResult | ModuleResult> = [];
+
   const handleInterface = (node: ts.InterfaceDeclaration) => {
     const members = node.members
-      .filter(member => member.name)
-      .map(member => serialize(member));
+      .filter((member) => member.name)
+      .map((member) => serialize(member));
     const parentName =
-      node.heritageClauses && node.heritageClauses[0].getLastToken().getText();
+      node.heritageClauses && node.heritageClauses[0].getLastToken()?.getText();
     const parent = output.find(
-      i => i.interface && i.interface.name === parentName
+      (i) => i.interface && i.interface.name === parentName
     );
 
     output.push({
       interface: serialize(node),
       parent: parent,
       allMembers: ((parent && parent.allMembers) || []).concat(members),
-      members
+      members,
     });
   };
 
   const handleModule = (node: ts.ModuleDeclaration) => {
-    const members = [];
+    const members: SerializeResult[] = [];
 
-    ts.forEachChild(node.body, node => {
-      members.push(
-        serialize((<ts.VariableStatement>node).declarationList.declarations[0])
-      );
+    ts.forEachChild(node.body!, (node) => {
+      if (ts.isVariableStatement(node)) {
+        members.push(serialize(node.declarationList.declarations[0]));
+      }
     });
 
     output.push({
       module: serialize(node),
-      members
+      members,
     });
   };
 
   const handleTypeAlias = (node: ts.TypeAliasDeclaration) => {
     if (!ts.isUnionTypeNode(node.type)) {
       console.log(`${node.name.text} is not UnionType`);
-      return
+      return;
     }
 
     if (!node.type.types.every(ts.isTypeLiteralNode)) {
       console.log(`${node.name.text} contains other than TypeLiteral`);
-      return
+      return;
     }
 
-    const membersList = (<ts.NodeArray<ts.TypeLiteralNode>>node.type.types).map(t => {
-      if (!t.members) {
-        console.dir(t.kind);
-        console.dir(node.name.text);
+    const membersList = (<ts.NodeArray<ts.TypeLiteralNode>>node.type.types).map(
+      (t) => {
+        if (!t.members) {
+          console.dir(t.kind);
+          console.dir(node.name.text);
+        }
+        return t.members.map((m) => serialize(m));
       }
-      return t.members.map(m => serialize(m));
-    })
+    );
 
     const allMembers = membersList
       .reduce((ary, xs) => [...ary, ...xs])
-      .reduce((ary, x) => [...new Set([...ary, x.name])], [])
-      .map(name => {
-        const members = membersList.map(members => members.find(m => m.name === name));
+      .reduce((ary: string[], x) => [...new Set([...ary, x.name])], [])
+      .map((name) => {
+        const members = membersList.map(
+          (members) => members.find((m) => m.name === name)!
+        );
 
-        const documentation = members.filter(m => m !== undefined).map(m => m.documentation).join("\n\n--- OR ---\n\n");
-        const type = [...new Set(members.filter(m => m !== undefined).map(m => m.type))].join("|");
-        const optional = members.some(m => m === undefined || m.optional);
-        const nullable = members.some(m => m === undefined || m.nullable);
+        const documentation = members
+          .filter((m) => m !== undefined)
+          .map((m) => m.documentation)
+          .join("\n\n--- OR ---\n\n");
+        const type = [
+          ...new Set(members.filter((m) => m !== undefined).map((m) => m.type)),
+        ].join("|");
+        const optional = members.some((m) => m === undefined || m.optional);
+        const nullable = members.some((m) => m === undefined || m.nullable);
 
         return {
           name,
           documentation,
           type,
           optional,
-          nullable
-        }
-    });
+          nullable,
+          value: null,
+        };
+      });
 
     output.push({
       interface: serialize(node),
@@ -150,37 +186,33 @@ const extractDefinitions = content => {
     });
   };
 
-  const visit = node => {
-    switch (node.kind) {
-      case ts.SyntaxKind.InterfaceDeclaration:
-        handleInterface(node);
-        break;
+  ts.isInterfaceDeclaration;
 
-      case ts.SyntaxKind.ModuleDeclaration:
-        handleModule(node);
-        break;
-
-      case ts.SyntaxKind.TypeAliasDeclaration:
-        handleTypeAlias(node);
-        break;
+  const visit = (node: ts.Node) => {
+    if (ts.isInterfaceDeclaration(node)) {
+      handleInterface(node as ts.InterfaceDeclaration);
+    } else if (ts.isModuleDeclaration(node)) {
+      handleModule(node);
+    } else if (ts.isTypeAliasDeclaration(node)) {
+      handleTypeAlias(node);
     }
   };
 
-  ts.forEachChild(program.getSourceFile(fileName), visit);
+  ts.forEachChild(program.getSourceFile(fileName)!, visit);
 
   return output;
 };
 
 import Handlebars from "handlebars";
-const snake = s =>
+const snake = (s: string) =>
   s
-    .replace(/^[A-Z]/, s => s.toLowerCase())
-    .replace(/[A-Z]/g, s => `_${s.toLowerCase()}`);
+    .replace(/^[A-Z]/, (s) => s.toLowerCase())
+    .replace(/[A-Z]/g, (s) => `_${s.toLowerCase()}`);
 
-Handlebars.registerHelper("params", members => {
+Handlebars.registerHelper("params", (members: InterfaceResult["members"]) => {
   return members
     .map(
-      member =>
+      (member) =>
         `${snake(member.name)}:${
           member.optional || member.nullable ? " nil" : ""
         }`
@@ -188,32 +220,35 @@ Handlebars.registerHelper("params", members => {
     .join(", ");
 });
 Handlebars.registerHelper("snake", snake);
-Handlebars.registerHelper("comment", (s, options) => {
+Handlebars.registerHelper("comment", (s: string, options) => {
   const indent = Array(options.hash.indent + 1).join(" ");
   return s
     .split("\n")
-    .map(s => s.trim())
-    .map(s => `${indent}#${s.length == 0 ? "" : ` ${s}`}`)
+    .map((s) => s.trim())
+    .map((s) => `${indent}#${s.length == 0 ? "" : ` ${s}`}`)
     .join("\n");
 });
-Handlebars.registerHelper("local_var", s => {
+Handlebars.registerHelper("local_var", (s) => {
   const rubyKeywords = ["end", "retry"];
   const snaked = snake(s);
 
-  if (rubyKeywords.some(k => k == s)) {
+  if (rubyKeywords.some((k) => k == s)) {
     return `binding.local_variable_get(:${snaked})`;
   } else {
     return snake(s);
   }
 });
-Handlebars.registerHelper("const", s => {
+Handlebars.registerHelper("const", (s) => {
   return snake(s).toUpperCase();
 });
 
 (async () => {
   if (!fs.existsSync(protocolMdPath)) {
     const res = await fetch(
-      `https://github.com/Microsoft/language-server-protocol/raw/${lspRepoRevision}/_specifications/specification-${lspVersion.split(".").slice(0, 2).join("-")}.md`
+      `https://github.com/Microsoft/language-server-protocol/raw/${lspRepoRevision}/_specifications/specification-${lspVersion
+        .split(".")
+        .slice(0, 2)
+        .join("-")}.md`
     );
     createFile(protocolMdPath, await res.text());
   }
@@ -222,10 +257,23 @@ Handlebars.registerHelper("const", s => {
   const typeScriptSource = extractTypeScriptSource(md);
 
   const definitions = extractDefinitions(typeScriptSource);
-  const interfaces = definitions.filter(d => d.interface);
-  const modules = definitions.filter(d => d.module);
 
-  interfaces.forEach(definition => {
+  const isInterfaceResult = (
+    d: InterfaceResult | ModuleResult
+  ): d is InterfaceResult => {
+    return !!d.interface;
+  };
+
+  const isModuleResult = (
+    d: InterfaceResult | ModuleResult
+  ): d is ModuleResult => {
+    return !!d.module;
+  };
+
+  const interfaces = definitions.filter(isInterfaceResult);
+  const modules = definitions.filter(isModuleResult);
+
+  interfaces.forEach((definition) => {
     createFile(
       path.join(
         rootDir,
@@ -287,7 +335,7 @@ end
     );
   });
 
-  modules.forEach(definition => {
+  modules.forEach((definition) => {
     createFile(
       path.join(
         rootDir,
@@ -345,7 +393,7 @@ module LanguageServer
 end
 `.slice(1),
       { noEscape: true }
-    )({ names: interfaces.map(i => i.interface.name).sort() })
+    )({ names: interfaces.map((i) => i.interface.name).sort() })
   );
 
   createFile(
@@ -367,6 +415,6 @@ module LanguageServer
 end
 `.slice(1),
       { noEscape: true }
-    )({ names: modules.map(i => i.module.name).sort() })
+    )({ names: modules.map((i) => i.module.name).sort() })
   );
 })();
