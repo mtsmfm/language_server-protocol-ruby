@@ -2,8 +2,8 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Represents a collection of [completion items](#CompletionItem) to be presented
-      # in the editor.
+      # Represents a collection of [completion items](#CompletionItem) to be
+      # presented in the editor.
       #
       class CompletionList
         def initialize(is_incomplete:, items:)

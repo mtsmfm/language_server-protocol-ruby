@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       class CompletionItem
-        def initialize(label:, kind: nil, tags: nil, detail: nil, documentation: nil, deprecated: nil, preselect: nil, sort_text: nil, filter_text: nil, insert_text: nil, insert_text_format: nil, text_edit: nil, additional_text_edits: nil, commit_characters: nil, command: nil, data: nil)
+        def initialize(label:, kind: nil, tags: nil, detail: nil, documentation: nil, deprecated: nil, preselect: nil, sort_text: nil, filter_text: nil, insert_text: nil, insert_text_format: nil, insert_text_mode: nil, text_edit: nil, additional_text_edits: nil, commit_characters: nil, command: nil, data: nil)
           @attributes = {}
 
           @attributes[:label] = label
@@ -16,6 +16,7 @@ module LanguageServer
           @attributes[:filterText] = filter_text if filter_text
           @attributes[:insertText] = insert_text if insert_text
           @attributes[:insertTextFormat] = insert_text_format if insert_text_format
+          @attributes[:insertTextMode] = insert_text_mode if insert_text_mode
           @attributes[:textEdit] = text_edit if text_edit
           @attributes[:additionalTextEdits] = additional_text_edits if additional_text_edits
           @attributes[:commitCharacters] = commit_characters if commit_characters
@@ -40,7 +41,7 @@ module LanguageServer
         # an icon is chosen by the editor. The standardized set
         # of available values is defined in `CompletionItemKind`.
         #
-        # @return [number]
+        # @return [any]
         def kind
           attributes.fetch(:kind)
         end
@@ -92,7 +93,8 @@ module LanguageServer
 
         #
         # A string that should be used when comparing this item
-        # with other items. When `falsy` the label is used.
+        # with other items. When `falsy` the label is used
+        # as the sort text for this item.
         #
         # @return [string]
         def sort_text
@@ -101,7 +103,8 @@ module LanguageServer
 
         #
         # A string that should be used when filtering a set of
-        # completion items. When `falsy` the label is used.
+        # completion items. When `falsy` the label is used as the
+        # filter text for this item.
         #
         # @return [string]
         def filter_text
@@ -110,14 +113,16 @@ module LanguageServer
 
         #
         # A string that should be inserted into a document when selecting
-        # this completion. When `falsy` the label is used.
+        # this completion. When `falsy` the label is used as the insert text
+        # for this item.
         #
         # The `insertText` is subject to interpretation by the client side.
         # Some tools might not take the string literally. For example
-        # VS Code when code complete is requested in this example `con<cursor position>`
-        # and a completion item with an `insertText` of `console` is provided it
-        # will only insert `sole`. Therefore it is recommended to use `textEdit` instead
-        # since it avoids additional client side interpretation.
+        # VS Code when code complete is requested in this example
+        # `con<cursor position>` and a completion item with an `insertText` of
+        # `console` is provided it will only insert `sole`. Therefore it is
+        # recommended to use `textEdit` instead since it avoids additional client
+        # side interpretation.
         #
         # @return [string]
         def insert_text
@@ -125,9 +130,9 @@ module LanguageServer
         end
 
         #
-        # The format of the insert text. The format applies to both the `insertText` property
-        # and the `newText` property of a provided `textEdit`. If omitted defaults to
-        # `InsertTextFormat.PlainText`.
+        # The format of the insert text. The format applies to both the
+        # `insertText` property and the `newText` property of a provided
+        # `textEdit`. If omitted defaults to `InsertTextFormat.PlainText`.
         #
         # @return [InsertTextFormat]
         def insert_text_format
@@ -135,25 +140,50 @@ module LanguageServer
         end
 
         #
-        # An edit which is applied to a document when selecting this completion. When an edit is provided the value of
-        # `insertText` is ignored.
+        # How whitespace and indentation is handled during completion
+        # item insertion. If not provided the client's default value depends on
+        # the `textDocument.completion.insertTextMode` client capability.
         #
-        # *Note:* The range of the edit must be a single line range and it must contain the position at which completion
-        # has been requested.
+        # @return [InsertTextMode]
+        def insert_text_mode
+          attributes.fetch(:insertTextMode)
+        end
+
         #
-        # @return [TextEdit]
+        # An edit which is applied to a document when selecting this completion.
+        # When an edit is provided the value of `insertText` is ignored.
+        #
+        # *Note:* The range of the edit must be a single line range and it must
+        # contain the position at which completion has been requested.
+        #
+        # Most editors support two different operations when accepting a completion
+        # item. One is to insert a completion text and the other is to replace an
+        # existing text with a completion text. Since this can usually not be
+        # predetermined by a server it can report both ranges. Clients need to
+        # signal support for `InsertReplaceEdits` via the
+        # `textDocument.completion.insertReplaceSupport` client capability
+        # property.
+        #
+        # *Note 1:* The text edit's range as well as both ranges from an insert
+        # replace edit must be a [single line] and they must contain the position
+        # at which completion has been requested.
+        # *Note 2:* If an `InsertReplaceEdit` is returned the edit's insert range
+        # must be a prefix of the edit's replace range, that means it must be
+        # contained and starting at the same position.
+        #
+        # @return [TextEdit | InsertReplaceEdit]
         def text_edit
           attributes.fetch(:textEdit)
         end
 
         #
         # An optional array of additional text edits that are applied when
-        # selecting this completion. Edits must not overlap (including the same insert position)
-        # with the main edit nor with themselves.
+        # selecting this completion. Edits must not overlap (including the same
+        # insert position) with the main edit nor with themselves.
         #
-        # Additional text edits should be used to change text unrelated to the current cursor position
-        # (for example adding an import statement at the top of the file if the completion item will
-        # insert an unqualified type).
+        # Additional text edits should be used to change text unrelated to the
+        # current cursor position (for example adding an import statement at the
+        # top of the file if the completion item will insert an unqualified type).
         #
         # @return [TextEdit[]]
         def additional_text_edits
@@ -161,9 +191,10 @@ module LanguageServer
         end
 
         #
-        # An optional set of characters that when pressed while this completion is active will accept it first and
-        # then type that character. *Note* that all commit characters should have `length=1` and that superfluous
-        # characters will be ignored.
+        # An optional set of characters that when pressed while this completion is
+        # active will accept it first and then type that character. *Note* that all
+        # commit characters should have `length=1` and that superfluous characters
+        # will be ignored.
         #
         # @return [string[]]
         def commit_characters
@@ -171,9 +202,9 @@ module LanguageServer
         end
 
         #
-        # An optional command that is executed *after* inserting this completion. *Note* that
-        # additional modifications to the current document should be described with the
-        # additionalTextEdits-property.
+        # An optional command that is executed *after* inserting this completion.
+        # *Note* that additional modifications to the current document should be
+        # described with the additionalTextEdits-property.
         #
         # @return [Command]
         def command

@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       class ServerCapabilities
-        def initialize(text_document_sync: nil, completion_provider: nil, hover_provider: nil, signature_help_provider: nil, declaration_provider: nil, definition_provider: nil, type_definition_provider: nil, implementation_provider: nil, references_provider: nil, document_highlight_provider: nil, document_symbol_provider: nil, code_action_provider: nil, code_lens_provider: nil, document_link_provider: nil, color_provider: nil, document_formatting_provider: nil, document_range_formatting_provider: nil, document_on_type_formatting_provider: nil, rename_provider: nil, folding_range_provider: nil, execute_command_provider: nil, selection_range_provider: nil, workspace_symbol_provider: nil, workspace: nil, experimental: nil)
+        def initialize(text_document_sync: nil, completion_provider: nil, hover_provider: nil, signature_help_provider: nil, declaration_provider: nil, definition_provider: nil, type_definition_provider: nil, implementation_provider: nil, references_provider: nil, document_highlight_provider: nil, document_symbol_provider: nil, code_action_provider: nil, code_lens_provider: nil, document_link_provider: nil, color_provider: nil, document_formatting_provider: nil, document_range_formatting_provider: nil, document_on_type_formatting_provider: nil, rename_provider: nil, folding_range_provider: nil, execute_command_provider: nil, selection_range_provider: nil, linked_editing_range_provider: nil, call_hierarchy_provider: nil, semantic_tokens_provider: nil, moniker_provider: nil, workspace_symbol_provider: nil, workspace: nil, experimental: nil)
           @attributes = {}
 
           @attributes[:textDocumentSync] = text_document_sync if text_document_sync
@@ -27,6 +27,10 @@ module LanguageServer
           @attributes[:foldingRangeProvider] = folding_range_provider if folding_range_provider
           @attributes[:executeCommandProvider] = execute_command_provider if execute_command_provider
           @attributes[:selectionRangeProvider] = selection_range_provider if selection_range_provider
+          @attributes[:linkedEditingRangeProvider] = linked_editing_range_provider if linked_editing_range_provider
+          @attributes[:callHierarchyProvider] = call_hierarchy_provider if call_hierarchy_provider
+          @attributes[:semanticTokensProvider] = semantic_tokens_provider if semantic_tokens_provider
+          @attributes[:monikerProvider] = moniker_provider if moniker_provider
           @attributes[:workspaceSymbolProvider] = workspace_symbol_provider if workspace_symbol_provider
           @attributes[:workspace] = workspace if workspace
           @attributes[:experimental] = experimental if experimental
@@ -35,10 +39,12 @@ module LanguageServer
         end
 
         #
-        # Defines how text documents are synced. Is either a detailed structure defining each notification or
-        # for backwards compatibility the TextDocumentSyncKind number. If omitted it defaults to `TextDocumentSyncKind.None`.
+        # Defines how text documents are synced. Is either a detailed structure
+        # defining each notification or for backwards compatibility the
+        # TextDocumentSyncKind number. If omitted it defaults to
+        # `TextDocumentSyncKind.None`.
         #
-        # @return [number | TextDocumentSyncOptions]
+        # @return [TextDocumentSyncOptions | TextDocumentSyncKind]
         def text_document_sync
           attributes.fetch(:textDocumentSync)
         end
@@ -124,9 +130,9 @@ module LanguageServer
         end
 
         #
-        # The server provides code actions. The `CodeActionOptions` return type is only
-        # valid if the client signals code action literal support via the property
-        # `textDocument.codeAction.codeActionLiteralSupport`.
+        # The server provides code actions. The `CodeActionOptions` return type is
+        # only valid if the client signals code action literal support via the
+        # property `textDocument.codeAction.codeActionLiteralSupport`.
         #
         # @return [boolean | CodeActionOptions]
         def code_action_provider
@@ -216,9 +222,41 @@ module LanguageServer
         end
 
         #
+        # The server provides linked editing range support.
+        #
+        # @return [boolean | LinkedEditingRangeOptions | LinkedEditingRangeRegistrationOptions]
+        def linked_editing_range_provider
+          attributes.fetch(:linkedEditingRangeProvider)
+        end
+
+        #
+        # The server provides call hierarchy support.
+        #
+        # @return [boolean | CallHierarchyOptions | CallHierarchyRegistrationOptions]
+        def call_hierarchy_provider
+          attributes.fetch(:callHierarchyProvider)
+        end
+
+        #
+        # The server provides semantic tokens support.
+        #
+        # @return [SemanticTokensOptions | SemanticTokensRegistrationOptions]
+        def semantic_tokens_provider
+          attributes.fetch(:semanticTokensProvider)
+        end
+
+        #
+        # Whether server provides moniker support.
+        #
+        # @return [boolean | MonikerOptions | MonikerRegistrationOptions]
+        def moniker_provider
+          attributes.fetch(:monikerProvider)
+        end
+
+        #
         # The server provides workspace symbol support.
         #
-        # @return [boolean]
+        # @return [boolean | WorkspaceSymbolOptions]
         def workspace_symbol_provider
           attributes.fetch(:workspaceSymbolProvider)
         end
@@ -226,7 +264,7 @@ module LanguageServer
         #
         # Workspace specific server capabilities
         #
-        # @return [{ workspaceFolders?: WorkspaceFoldersServerCapabilities; }]
+        # @return [{ workspaceFolders?: WorkspaceFoldersServerCapabilities; fileOperations?: { didCreate?: FileOperationRegistrationOptions; ... 4 more ...; willDelete?: FileOperationRegistrationOptions; }; }]
         def workspace
           attributes.fetch(:workspace)
         end

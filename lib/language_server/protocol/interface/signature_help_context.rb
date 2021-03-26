@@ -2,7 +2,8 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Additional information about the context in which a signature help request was triggered.
+      # Additional information about the context in which a signature help request
+      # was triggered.
       #
       class SignatureHelpContext
         def initialize(trigger_kind:, trigger_character: nil, is_retrigger:, active_signature_help: nil)
@@ -27,7 +28,8 @@ module LanguageServer
         #
         # Character that caused signature help to be triggered.
         #
-        # This is undefined when `triggerKind !== SignatureHelpTriggerKind.TriggerCharacter`
+        # This is undefined when triggerKind !==
+        # SignatureHelpTriggerKind.TriggerCharacter
         #
         # @return [string]
         def trigger_character
@@ -37,8 +39,9 @@ module LanguageServer
         #
         # `true` if signature help was already showing when it was triggered.
         #
-        # Retriggers occur when the signature help is already active and can be caused by actions such as
-        # typing a trigger character, a cursor move, or document content changes.
+        # Retriggers occur when the signature help is already active and can be
+        # caused by actions such as typing a trigger character, a cursor move, or
+        # document content changes.
         #
         # @return [boolean]
         def is_retrigger
@@ -48,8 +51,8 @@ module LanguageServer
         #
         # The currently active `SignatureHelp`.
         #
-        # The `activeSignatureHelp` has its `SignatureHelp.activeSignature` field updated based on
-        # the user navigating through available signatures.
+        # The `activeSignatureHelp` has its `SignatureHelp.activeSignature` field
+        # updated based on the user navigating through available signatures.
         #
         # @return [SignatureHelp]
         def active_signature_help

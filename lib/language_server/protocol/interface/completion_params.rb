@@ -13,7 +13,8 @@ module LanguageServer
 
         #
         # The completion context. This is only available if the client specifies
-        # to send this using `ClientCapabilities.textDocument.completion.contextSupport === true`
+        # to send this using the client capability
+        # `completion.contextSupport === true`
         #
         # @return [CompletionContext]
         def context

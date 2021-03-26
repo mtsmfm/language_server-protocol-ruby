@@ -2,12 +2,22 @@ module LanguageServer
   module Protocol
     module Interface
       class DocumentSymbolOptions < WorkDoneProgressOptions
-        def initialize(work_done_progress: nil)
+        def initialize(work_done_progress: nil, label: nil)
           @attributes = {}
 
           @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:label] = label if label
 
           @attributes.freeze
+        end
+
+        #
+        # A human-readable string that is shown when multiple outlines trees
+        # are shown for the same document.
+        #
+        # @return [string]
+        def label
+          attributes.fetch(:label)
         end
 
         attr_reader :attributes

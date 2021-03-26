@@ -2,7 +2,8 @@ module LanguageServer
   module Protocol
     module Constant
       #
-      # Defines how the host (editor) should sync document changes to the language server.
+      # Defines how the host (editor) should sync document changes to the language
+      # server.
       #
       module TextDocumentSyncKind
         #

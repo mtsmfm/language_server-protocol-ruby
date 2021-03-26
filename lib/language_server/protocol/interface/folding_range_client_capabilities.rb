@@ -13,9 +13,10 @@ module LanguageServer
         end
 
         #
-        # Whether implementation supports dynamic registration for folding range providers. If this is set to `true`
-        # the client supports the new `FoldingRangeRegistrationOptions` return value for the corresponding server
-        # capability as well.
+        # Whether implementation supports dynamic registration for folding range
+        # providers. If this is set to `true` the client supports the new
+        # `FoldingRangeRegistrationOptions` return value for the corresponding
+        # server capability as well.
         #
         # @return [boolean]
         def dynamic_registration
@@ -23,8 +24,9 @@ module LanguageServer
         end
 
         #
-        # The maximum number of folding ranges that the client prefers to receive per document. The value serves as a
-        # hint, servers are free to follow the limit.
+        # The maximum number of folding ranges that the client prefers to receive
+        # per document. The value serves as a hint, servers are free to follow the
+        # limit.
         #
         # @return [number]
         def range_limit
@@ -32,8 +34,9 @@ module LanguageServer
         end
 
         #
-        # If set, the client signals that it only supports folding complete lines. If set, client will
-        # ignore specified `startCharacter` and `endCharacter` properties in a FoldingRange.
+        # If set, the client signals that it only supports folding complete lines.
+        # If set, client will ignore specified `startCharacter` and `endCharacter`
+        # properties in a FoldingRange.
         #
         # @return [boolean]
         def line_folding_only

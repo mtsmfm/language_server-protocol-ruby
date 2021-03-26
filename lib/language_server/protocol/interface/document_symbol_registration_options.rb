@@ -2,10 +2,11 @@ module LanguageServer
   module Protocol
     module Interface
       class DocumentSymbolRegistrationOptions < DocumentSymbolOptions
-        def initialize(work_done_progress: nil)
+        def initialize(work_done_progress: nil, label: nil)
           @attributes = {}
 
           @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:label] = label if label
 
           @attributes.freeze
         end

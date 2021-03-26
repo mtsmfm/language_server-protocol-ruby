@@ -14,7 +14,7 @@ module LanguageServer
         #
         # The text document to change.
         #
-        # @return [VersionedTextDocumentIdentifier]
+        # @return [OptionalVersionedTextDocumentIdentifier]
         def text_document
           attributes.fetch(:textDocument)
         end
@@ -22,7 +22,7 @@ module LanguageServer
         #
         # The edits to be applied.
         #
-        # @return [TextEdit[]]
+        # @return [(TextEdit | AnnotatedTextEdit)[]]
         def edits
           attributes.fetch(:edits)
         end

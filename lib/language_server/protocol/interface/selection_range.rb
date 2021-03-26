@@ -20,7 +20,8 @@ module LanguageServer
         end
 
         #
-        # The parent selection range containing this range. Therefore `parent.range` must contain `this.range`.
+        # The parent selection range containing this range. Therefore
+        # `parent.range` must contain `this.range`.
         #
         # @return [SelectionRange]
         def parent

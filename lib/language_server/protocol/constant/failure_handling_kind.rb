@@ -3,8 +3,9 @@ module LanguageServer
     module Constant
       module FailureHandlingKind
         #
-        # Applying the workspace change is simply aborted if one of the changes provided
-        # fails. All operations executed before the failing operation stay executed.
+        # Applying the workspace change is simply aborted if one of the changes
+        # provided fails. All operations executed before the failing operation
+        # stay executed.
         #
         ABORT = 'abort'
         #
@@ -13,9 +14,9 @@ module LanguageServer
         #
         TRANSACTIONAL = 'transactional'
         #
-        # If the workspace edit contains only textual file changes they are executed transactional.
-        # If resource changes (create, rename or delete file) are part of the change the failure
-        # handling strategy is abort.
+        # If the workspace edit contains only textual file changes they are
+        # executed transactional. If resource changes (create, rename or delete
+        # file) are part of the change the failure handling strategy is abort.
         #
         TEXT_ONLY_TRANSACTIONAL = 'textOnlyTransactional'
         #
