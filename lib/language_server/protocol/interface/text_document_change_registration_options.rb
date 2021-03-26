@@ -18,7 +18,7 @@ module LanguageServer
         # How documents are synced to the server. See TextDocumentSyncKind.Full
         # and TextDocumentSyncKind.Incremental.
         #
-        # @return [any]
+        # @return [TextDocumentSyncKind]
         def sync_kind
           attributes.fetch(:syncKind)
         end

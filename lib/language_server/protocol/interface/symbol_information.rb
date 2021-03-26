@@ -6,11 +6,12 @@ module LanguageServer
       # interfaces etc.
       #
       class SymbolInformation
-        def initialize(name:, kind:, deprecated: nil, location:, container_name: nil)
+        def initialize(name:, kind:, tags: nil, deprecated: nil, location:, container_name: nil)
           @attributes = {}
 
           @attributes[:name] = name
           @attributes[:kind] = kind
+          @attributes[:tags] = tags if tags
           @attributes[:deprecated] = deprecated if deprecated
           @attributes[:location] = location
           @attributes[:containerName] = container_name if container_name
@@ -32,6 +33,14 @@ module LanguageServer
         # @return [any]
         def kind
           attributes.fetch(:kind)
+        end
+
+        #
+        # Tags for this symbol.
+        #
+        # @return [1[]]
+        def tags
+          attributes.fetch(:tags)
         end
 
         #

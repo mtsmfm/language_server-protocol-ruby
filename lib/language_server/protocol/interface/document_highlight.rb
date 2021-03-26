@@ -27,7 +27,7 @@ module LanguageServer
         #
         # The highlight kind, default is DocumentHighlightKind.Text.
         #
-        # @return [number]
+        # @return [DocumentHighlightKind]
         def kind
           attributes.fetch(:kind)
         end

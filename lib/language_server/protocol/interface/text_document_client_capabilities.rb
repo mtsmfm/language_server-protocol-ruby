@@ -5,7 +5,7 @@ module LanguageServer
       # Text document specific client capabilities.
       #
       class TextDocumentClientCapabilities
-        def initialize(synchronization: nil, completion: nil, hover: nil, signature_help: nil, declaration: nil, definition: nil, type_definition: nil, implementation: nil, references: nil, document_highlight: nil, document_symbol: nil, code_action: nil, code_lens: nil, document_link: nil, color_provider: nil, formatting: nil, range_formatting: nil, on_type_formatting: nil, rename: nil, publish_diagnostics: nil, folding_range: nil, selection_range: nil)
+        def initialize(synchronization: nil, completion: nil, hover: nil, signature_help: nil, declaration: nil, definition: nil, type_definition: nil, implementation: nil, references: nil, document_highlight: nil, document_symbol: nil, code_action: nil, code_lens: nil, document_link: nil, color_provider: nil, formatting: nil, range_formatting: nil, on_type_formatting: nil, rename: nil, publish_diagnostics: nil, folding_range: nil, selection_range: nil, linked_editing_range: nil, call_hierarchy: nil, semantic_tokens: nil, moniker: nil)
           @attributes = {}
 
           @attributes[:synchronization] = synchronization if synchronization
@@ -30,6 +30,10 @@ module LanguageServer
           @attributes[:publishDiagnostics] = publish_diagnostics if publish_diagnostics
           @attributes[:foldingRange] = folding_range if folding_range
           @attributes[:selectionRange] = selection_range if selection_range
+          @attributes[:linkedEditingRange] = linked_editing_range if linked_editing_range
+          @attributes[:callHierarchy] = call_hierarchy if call_hierarchy
+          @attributes[:semanticTokens] = semantic_tokens if semantic_tokens
+          @attributes[:moniker] = moniker if moniker
 
           @attributes.freeze
         end
@@ -186,7 +190,8 @@ module LanguageServer
         end
 
         #
-        # Capabilities specific to the `textDocument/publishDiagnostics` notification.
+        # Capabilities specific to the `textDocument/publishDiagnostics`
+        # notification.
         #
         # @return [PublishDiagnosticsClientCapabilities]
         def publish_diagnostics
@@ -207,6 +212,38 @@ module LanguageServer
         # @return [SelectionRangeClientCapabilities]
         def selection_range
           attributes.fetch(:selectionRange)
+        end
+
+        #
+        # Capabilities specific to the `textDocument/linkedEditingRange` request.
+        #
+        # @return [LinkedEditingRangeClientCapabilities]
+        def linked_editing_range
+          attributes.fetch(:linkedEditingRange)
+        end
+
+        #
+        # Capabilities specific to the various call hierarchy requests.
+        #
+        # @return [CallHierarchyClientCapabilities]
+        def call_hierarchy
+          attributes.fetch(:callHierarchy)
+        end
+
+        #
+        # Capabilities specific to the various semantic token requests.
+        #
+        # @return [SemanticTokensClientCapabilities]
+        def semantic_tokens
+          attributes.fetch(:semanticTokens)
+        end
+
+        #
+        # Capabilities specific to the `textDocument/moniker` request.
+        #
+        # @return [MonikerClientCapabilities]
+        def moniker
+          attributes.fetch(:moniker)
         end
 
         attr_reader :attributes

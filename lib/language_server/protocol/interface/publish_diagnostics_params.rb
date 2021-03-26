@@ -21,7 +21,8 @@ module LanguageServer
         end
 
         #
-        # Optional the version number of the document the diagnostics are published for.
+        # Optional the version number of the document the diagnostics are published
+        # for.
         #
         # @return [number]
         def version

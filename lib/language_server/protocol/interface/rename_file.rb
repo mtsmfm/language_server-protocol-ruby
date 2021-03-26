@@ -5,13 +5,14 @@ module LanguageServer
       # Rename file operation
       #
       class RenameFile
-        def initialize(kind:, old_uri:, new_uri:, options: nil)
+        def initialize(kind:, old_uri:, new_uri:, options: nil, annotation_id: nil)
           @attributes = {}
 
           @attributes[:kind] = kind
           @attributes[:oldUri] = old_uri
           @attributes[:newUri] = new_uri
           @attributes[:options] = options if options
+          @attributes[:annotationId] = annotation_id if annotation_id
 
           @attributes.freeze
         end
@@ -46,6 +47,14 @@ module LanguageServer
         # @return [RenameFileOptions]
         def options
           attributes.fetch(:options)
+        end
+
+        #
+        # An optional annotation identifer describing the operation.
+        #
+        # @return [string]
+        def annotation_id
+          attributes.fetch(:annotationId)
         end
 
         attr_reader :attributes

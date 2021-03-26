@@ -12,9 +12,9 @@ module LanguageServer
         end
 
         #
-        # Whether implementation supports dynamic registration. If this is set to `true`
-        # the client supports the new `ImplementationRegistrationOptions` return value
-        # for the corresponding server capability as well.
+        # Whether implementation supports dynamic registration. If this is set to
+        # `true` the client supports the new `ImplementationRegistrationOptions`
+        # return value for the corresponding server capability as well.
         #
         # @return [boolean]
         def dynamic_registration

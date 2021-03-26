@@ -2,11 +2,12 @@ module LanguageServer
   module Protocol
     module Interface
       class ApplyWorkspaceEditResponse
-        def initialize(applied:, failure_reason: nil)
+        def initialize(applied:, failure_reason: nil, failed_change: nil)
           @attributes = {}
 
           @attributes[:applied] = applied
           @attributes[:failureReason] = failure_reason if failure_reason
+          @attributes[:failedChange] = failed_change if failed_change
 
           @attributes.freeze
         end
@@ -21,13 +22,23 @@ module LanguageServer
 
         #
         # An optional textual description for why the edit was not applied.
-        # This may be used may be used by the server for diagnostic
-        # logging or to provide a suitable error for a request that
-        # triggered the edit.
+        # This may be used by the server for diagnostic logging or to provide
+        # a suitable error for a request that triggered the edit.
         #
         # @return [string]
         def failure_reason
           attributes.fetch(:failureReason)
+        end
+
+        #
+        # Depending on the client's failure handling strategy `failedChange`
+        # might contain the index of the change that failed. This property is
+        # only available if the client signals a `failureHandlingStrategy`
+        # in its client capabilities.
+        #
+        # @return [number]
+        def failed_change
+          attributes.fetch(:failedChange)
         end
 
         attr_reader :attributes

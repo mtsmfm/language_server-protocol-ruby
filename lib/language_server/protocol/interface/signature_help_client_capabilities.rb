@@ -24,7 +24,7 @@ module LanguageServer
         # The client supports the following `SignatureInformation`
         # specific properties.
         #
-        # @return [{ documentationFormat?: MarkupKind[]; parameterInformation?: { labelOffsetSupport?: boolean; }; }]
+        # @return [{ documentationFormat?: MarkupKind[]; parameterInformation?: { labelOffsetSupport?: boolean; }; activeParameterSupport?: boolean; }]
         def signature_information
           attributes.fetch(:signatureInformation)
         end

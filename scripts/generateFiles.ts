@@ -3,8 +3,8 @@ import * as fs from "fs";
 import * as path from "path";
 import fetch from "isomorphic-fetch";
 
-const lspVersion = "3.15.0";
-const lspRepoRevision = "66cf1d7908f6548c8262b82572c51c7d029dfbdf";
+const lspVersion = "3.16.0";
+const lspRepoRevision = "b8e6fead8c011ee4ca6547cc421dd41e3a4c3028";
 const rootDir = path.normalize(path.join(__dirname, ".."));
 const tempDir = path.join(rootDir, "tmp");
 const protocolMdPath = path.join(tempDir, lspRepoRevision, "protocol.md");
@@ -24,7 +24,7 @@ const createFile = (filePath: string, content: string) => {
 };
 
 const extractTypeScriptSource = (content: string) => {
-  const regEx = /^```typescript\r\n([^]*?)^```\r\n/gm;
+  const regEx = /^```typescript\r?\n([^]*?)^```\r?\n/gm;
   let match;
   let result = "";
 
@@ -241,6 +241,9 @@ Handlebars.registerHelper("local_var", (s) => {
 Handlebars.registerHelper("const", (s) => {
   return snake(s).toUpperCase();
 });
+Handlebars.registerHelper("isliteral", (s: string) => {
+  return s.match(/'.*'/) || s.match(/".*"/) || s.match(/\d+/);
+});
 
 (async () => {
   if (!fs.existsSync(protocolMdPath)) {
@@ -362,7 +365,11 @@ module LanguageServer
 {{comment documentation indent=8}}
         #
         {{/if}}
+        {{#if (isliteral value)}}
         {{const name}} = {{value}}
+        {{else}}
+        {{const name}} = {{const value}}
+        {{/if}}
         {{/each}}
       end
     end

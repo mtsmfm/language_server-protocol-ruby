@@ -2,12 +2,14 @@ module LanguageServer
   module Protocol
     module Interface
       class PublishDiagnosticsClientCapabilities
-        def initialize(related_information: nil, tag_support: nil, version_support: nil)
+        def initialize(related_information: nil, tag_support: nil, version_support: nil, code_description_support: nil, data_support: nil)
           @attributes = {}
 
           @attributes[:relatedInformation] = related_information if related_information
           @attributes[:tagSupport] = tag_support if tag_support
           @attributes[:versionSupport] = version_support if version_support
+          @attributes[:codeDescriptionSupport] = code_description_support if code_description_support
+          @attributes[:dataSupport] = data_support if data_support
 
           @attributes.freeze
         end
@@ -36,6 +38,24 @@ module LanguageServer
         # @return [boolean]
         def version_support
           attributes.fetch(:versionSupport)
+        end
+
+        #
+        # Client supports a codeDescription property
+        #
+        # @return [boolean]
+        def code_description_support
+          attributes.fetch(:codeDescriptionSupport)
+        end
+
+        #
+        # Whether code action supports the `data` property which is
+        # preserved between a `textDocument/publishDiagnostics` and
+        # `textDocument/codeAction` request.
+        #
+        # @return [boolean]
+        def data_support
+          attributes.fetch(:dataSupport)
         end
 
         attr_reader :attributes

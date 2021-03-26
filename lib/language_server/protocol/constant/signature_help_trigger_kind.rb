@@ -14,7 +14,8 @@ module LanguageServer
         #
         TRIGGER_CHARACTER = 2
         #
-        # Signature help was triggered by the cursor moving or by the document content changing.
+        # Signature help was triggered by the cursor moving or by the document
+        # content changing.
         #
         CONTENT_CHANGE = 3
       end

@@ -15,7 +15,7 @@ module LanguageServer
         #
         # The message type. See {@link MessageType}
         #
-        # @return [number]
+        # @return [MessageType]
         def type
           attributes.fetch(:type)
         end

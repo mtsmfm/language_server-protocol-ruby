@@ -25,7 +25,7 @@ module LanguageServer
         #
         # The 'TextDocumentSaveReason'.
         #
-        # @return [number]
+        # @return [TextDocumentSaveReason]
         def reason
           attributes.fetch(:reason)
         end

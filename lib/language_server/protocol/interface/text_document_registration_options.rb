@@ -14,8 +14,8 @@ module LanguageServer
         end
 
         #
-        # A document selector to identify the scope of the registration. If set to null
-        # the document selector provided on the client side will be used.
+        # A document selector to identify the scope of the registration. If set to
+        # null the document selector provided on the client side will be used.
         #
         # @return [DocumentSelector]
         def document_selector

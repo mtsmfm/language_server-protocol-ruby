@@ -2,8 +2,8 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # An event describing a change to a text document. If range and rangeLength are omitted
-      # the new text is considered to be the full content of the document.
+      # An event describing a change to a text document. If range and rangeLength are
+      # omitted the new text is considered to be the full content of the document.
       #
       class TextDocumentContentChangeEvent
         def initialize(range: nil, range_length: nil, text:)

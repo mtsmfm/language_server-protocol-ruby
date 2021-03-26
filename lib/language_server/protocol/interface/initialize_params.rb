@@ -2,12 +2,13 @@ module LanguageServer
   module Protocol
     module Interface
       class InitializeParams < WorkDoneProgressParams
-        def initialize(work_done_token: nil, process_id:, client_info: nil, root_path: nil, root_uri:, initialization_options: nil, capabilities:, trace: nil, workspace_folders: nil)
+        def initialize(work_done_token: nil, process_id:, client_info: nil, locale: nil, root_path: nil, root_uri:, initialization_options: nil, capabilities:, trace: nil, workspace_folders: nil)
           @attributes = {}
 
           @attributes[:workDoneToken] = work_done_token if work_done_token
           @attributes[:processId] = process_id
           @attributes[:clientInfo] = client_info if client_info
+          @attributes[:locale] = locale if locale
           @attributes[:rootPath] = root_path if root_path
           @attributes[:rootUri] = root_uri
           @attributes[:initializationOptions] = initialization_options if initialization_options
@@ -19,9 +20,10 @@ module LanguageServer
         end
 
         #
-        # The process Id of the parent process that started
-        # the server. Is null if the process has not been started by another process.
-        # If the parent process is not alive then the server should exit (see exit notification) its process.
+        # The process Id of the parent process that started the server. Is null if
+        # the process has not been started by another process. If the parent
+        # process is not alive then the server should exit (see exit notification)
+        # its process.
         #
         # @return [number]
         def process_id
@@ -34,6 +36,19 @@ module LanguageServer
         # @return [{ name: string; version?: string; }]
         def client_info
           attributes.fetch(:clientInfo)
+        end
+
+        #
+        # The locale the client is currently showing the user interface
+        # in. This must not necessarily be the locale of the operating
+        # system.
+        #
+        # Uses IETF language tags as the value's syntax
+        # (See https://en.wikipedia.org/wiki/IETF_language_tag)
+        #
+        # @return [string]
+        def locale
+          attributes.fetch(:locale)
         end
 
         #
@@ -74,7 +89,7 @@ module LanguageServer
         #
         # The initial trace setting. If omitted trace is disabled ('off').
         #
-        # @return ["off" | "messages" | "verbose"]
+        # @return [TraceValue]
         def trace
           attributes.fetch(:trace)
         end

@@ -2,16 +2,18 @@ module LanguageServer
   module Protocol
     module Interface
       class Diagnostic
-        def initialize(range:, severity: nil, code: nil, source: nil, message:, tags: nil, related_information: nil)
+        def initialize(range:, severity: nil, code: nil, code_description: nil, source: nil, message:, tags: nil, related_information: nil, data: nil)
           @attributes = {}
 
           @attributes[:range] = range
           @attributes[:severity] = severity if severity
           @attributes[:code] = code if code
+          @attributes[:codeDescription] = code_description if code_description
           @attributes[:source] = source if source
           @attributes[:message] = message
           @attributes[:tags] = tags if tags
           @attributes[:relatedInformation] = related_information if related_information
+          @attributes[:data] = data if data
 
           @attributes.freeze
         end
@@ -39,6 +41,14 @@ module LanguageServer
         # @return [string | number]
         def code
           attributes.fetch(:code)
+        end
+
+        #
+        # An optional property to describe the error code.
+        #
+        # @return [CodeDescription]
+        def code_description
+          attributes.fetch(:codeDescription)
         end
 
         #
@@ -73,6 +83,16 @@ module LanguageServer
         # @return [DiagnosticRelatedInformation[]]
         def related_information
           attributes.fetch(:relatedInformation)
+        end
+
+        #
+        # A data entry field that is preserved between a
+        # `textDocument/publishDiagnostics` notification and
+        # `textDocument/codeAction` request.
+        #
+        # @return [unknown]
+        def data
+          attributes.fetch(:data)
         end
 
         attr_reader :attributes

@@ -7,12 +7,13 @@ module LanguageServer
       # a set of parameters.
       #
       class SignatureInformation
-        def initialize(label:, documentation: nil, parameters: nil)
+        def initialize(label:, documentation: nil, parameters: nil, active_parameter: nil)
           @attributes = {}
 
           @attributes[:label] = label
           @attributes[:documentation] = documentation if documentation
           @attributes[:parameters] = parameters if parameters
+          @attributes[:activeParameter] = active_parameter if active_parameter
 
           @attributes.freeze
         end
@@ -41,6 +42,16 @@ module LanguageServer
         # @return [ParameterInformation[]]
         def parameters
           attributes.fetch(:parameters)
+        end
+
+        #
+        # The index of the active parameter.
+        #
+        # If provided, this is used in place of `SignatureHelp.activeParameter`.
+        #
+        # @return [number]
+        def active_parameter
+          attributes.fetch(:activeParameter)
         end
 
         attr_reader :attributes

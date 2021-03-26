@@ -12,7 +12,8 @@ module LanguageServer
         INVOKED = 1
         #
         # Completion was triggered by a trigger character specified by
-        # the `triggerCharacters` properties of the `CompletionRegistrationOptions`.
+        # the `triggerCharacters` properties of the
+        # `CompletionRegistrationOptions`.
         #
         TRIGGER_CHARACTER = 2
         #

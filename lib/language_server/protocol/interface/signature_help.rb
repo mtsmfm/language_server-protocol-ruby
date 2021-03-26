@@ -18,7 +18,7 @@ module LanguageServer
         end
 
         #
-        # One or more signatures. If no signaures are availabe the signature help
+        # One or more signatures. If no signatures are available the signature help
         # request should return `null`.
         #
         # @return [SignatureInformation[]]
@@ -28,8 +28,8 @@ module LanguageServer
 
         #
         # The active signature. If omitted or the value lies outside the
-        # range of `signatures` the value defaults to zero or is ignore if
-        # the `SignatureHelp` as no signatures.
+        # range of `signatures` the value defaults to zero or is ignored if
+        # the `SignatureHelp` has no signatures.
         #
         # Whenever possible implementors should make an active decision about
         # the active signature and shouldn't rely on a default value.
