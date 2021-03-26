@@ -129,7 +129,7 @@ module LanguageServer
         # and the `newText` property of a provided `textEdit`. If omitted defaults to
         # `InsertTextFormat.PlainText`.
         #
-        # @return [DiagnosticTag]
+        # @return [InsertTextFormat]
         def insert_text_format
           attributes.fetch(:insertTextFormat)
         end

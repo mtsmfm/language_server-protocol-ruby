@@ -14,7 +14,7 @@ module LanguageServer
         # An optional token that a server can use to report partial results (e.g. streaming) to
         # the client.
         #
-        # @return [string | number]
+        # @return [ProgressToken]
         def partial_result_token
           attributes.fetch(:partialResultToken)
         end

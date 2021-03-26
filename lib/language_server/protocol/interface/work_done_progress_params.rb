@@ -13,7 +13,7 @@ module LanguageServer
         #
         # An optional token that a server can use to report work done progress.
         #
-        # @return [string | number]
+        # @return [ProgressToken]
         def work_done_token
           attributes.fetch(:workDoneToken)
         end

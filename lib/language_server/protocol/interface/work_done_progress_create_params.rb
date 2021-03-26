@@ -13,7 +13,7 @@ module LanguageServer
         #
         # The token to be used to report progress.
         #
-        # @return [string | number]
+        # @return [ProgressToken]
         def token
           attributes.fetch(:token)
         end

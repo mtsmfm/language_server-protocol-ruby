@@ -16,7 +16,7 @@ module LanguageServer
         #
         # Workspace specific client capabilities.
         #
-        # @return [{ applyEdit?: boolean; workspaceEdit?: WorkspaceEditClientCapabilities; didChangeConfiguration?: ...]
+        # @return [{ applyEdit?: boolean; workspaceEdit?: WorkspaceEditClientCapabilities; didChangeConfiguration?: DidChangeConfigurationClientCapabilities; ... 4 more ...; configuration?: boolean; }]
         def workspace
           attributes.fetch(:workspace)
         end

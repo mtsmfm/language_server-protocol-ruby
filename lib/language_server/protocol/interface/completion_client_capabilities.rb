@@ -25,7 +25,7 @@ module LanguageServer
         # The client supports the following `CompletionItem` specific
         # capabilities.
         #
-        # @return [{ snippetSupport?: boolean; commitCharactersSupport?: boolean; documentationFormat?: MarkupKind[]...]
+        # @return [{ snippetSupport?: boolean; commitCharactersSupport?: boolean; documentationFormat?: MarkupKind[]; deprecatedSupport?: boolean; preselectSupport?: boolean; tagSupport?: { valueSet: 1[]; }; }]
         def completion_item
           attributes.fetch(:completionItem)
         end

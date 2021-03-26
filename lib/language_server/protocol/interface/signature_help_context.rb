@@ -19,7 +19,7 @@ module LanguageServer
         #
         # Action that caused signature help to be triggered.
         #
-        # @return [CompletionTriggerKind]
+        # @return [SignatureHelpTriggerKind]
         def trigger_kind
           attributes.fetch(:triggerKind)
         end

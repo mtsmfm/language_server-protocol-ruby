@@ -17,8 +17,6 @@ module LanguageServer
         #
         # Open and close notifications are sent to the server. If omitted open close notification should not
         # be sent.
-        # Open and close notifications are sent to the server. If omitted open close notification should not
-        # be sent.
         #
         # @return [boolean]
         def open_close
@@ -26,8 +24,6 @@ module LanguageServer
         end
 
         #
-        # Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
-        # and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
         # Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
         # and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
         #

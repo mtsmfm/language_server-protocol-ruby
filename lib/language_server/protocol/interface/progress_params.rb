@@ -14,7 +14,7 @@ module LanguageServer
         #
         # The progress token provided by the client or server.
         #
-        # @return [string | number]
+        # @return [ProgressToken]
         def token
           attributes.fetch(:token)
         end
