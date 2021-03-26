@@ -2,6 +2,8 @@
 
 A Language Server Protocol SDK for Ruby.
 
+[![Gem Version](https://badge.fury.io/rb/language_server-protocol.svg)](https://badge.fury.io/rb/language_server-protocol)
+
 ## Installation
 
 Add this line to your application's Gemfile:
