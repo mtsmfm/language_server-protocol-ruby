@@ -1,5 +1,9 @@
 # Change log
 
+## 3.16.0.0
+
+- Update Language Server Protocol version to 3.16.0
+
 ## 3.15.0.2
 
 - Consider frozen string
