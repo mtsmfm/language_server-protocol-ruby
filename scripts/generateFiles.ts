@@ -48,7 +48,6 @@ interface InterfaceResult {
   module?: undefined;
   members: SerializeResult[];
   allMembers: SerializeResult[];
-  parent: InterfaceResult | ModuleResult | undefined;
 }
 
 interface ModuleResult {
@@ -56,7 +55,6 @@ interface ModuleResult {
   module: SerializeResult;
   members: SerializeResult[];
   allMembers?: undefined;
-  parent?: undefined;
 }
 
 const extractDefinitions = (content: string) => {
@@ -100,16 +98,21 @@ const extractDefinitions = (content: string) => {
     const members = node.members
       .filter((member) => member.name)
       .map((member) => serialize(member));
-    const parentName =
-      node.heritageClauses && node.heritageClauses[0].getLastToken()?.getText();
-    const parent = output.find(
-      (i) => i.interface && i.interface.name === parentName
+    const parentNames = node.heritageClauses?.flatMap((c) =>
+      c.types.map((t) => t.expression.getText())
     );
+    const parents = parentNames?.map((n) => {
+      const p = output.find((i) => i.interface?.name === n);
+      if (p) {
+        return p as InterfaceResult;
+      } else {
+        throw `Interface ${n} is not found`;
+      }
+    });
 
     output.push({
       interface: serialize(node),
-      parent: parent,
-      allMembers: ((parent && parent.allMembers) || []).concat(members),
+      allMembers: (parents || []).flatMap((p) => p.allMembers!).concat(members),
       members,
     });
   };
@@ -180,7 +183,6 @@ const extractDefinitions = (content: string) => {
 
     output.push({
       interface: serialize(node),
-      parent: undefined,
       allMembers,
       members: allMembers,
     });
@@ -296,7 +298,7 @@ module LanguageServer
 {{comment definition.interface.documentation indent=6}}
       #
       {{/if}}
-      class {{definition.interface.name}}{{#if definition.parent}} < {{definition.parent.interface.name}}{{/if}}
+      class {{definition.interface.name}}
         def initialize({{params definition.allMembers}})
           @attributes = {}
 
@@ -306,7 +308,7 @@ module LanguageServer
 
           @attributes.freeze
         end
-        {{#each definition.members}}
+        {{#each definition.allMembers}}
 
         {{#if documentation}}
         #
