@@ -1,5 +1,11 @@
 # Change log
 
+## 3.16.0.1
+
+### Breaking change
+
+- Now interfaces don't inherit parent classes to consider multiple parents (#29)
+
 ## 3.16.0.0
 
 - Update Language Server Protocol version to 3.16.0
