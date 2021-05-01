@@ -82,4 +82,19 @@ class LanguageServer::ProtocolTest < Minitest::Test
 
     assert { identifier.attributes == { uri: "http://example.com", version: 1 } }
   end
+
+  # https://github.com/mtsmfm/language_server-protocol-ruby/issues/28
+  def test_multiple_extends
+    parent_1 = LSP::Interface::WorkDoneProgressParams.new(work_done_token: 'foo')
+
+    assert { parent_1.attributes == { workDoneToken: 'foo' } }
+
+    parent_2 = LSP::Interface::PartialResultParams.new(partial_result_token: 'bar')
+
+    assert { parent_2.attributes == { partialResultToken: 'bar' } }
+
+    child = LSP::Interface::WorkspaceSymbolParams.new(query: 'a', work_done_token: 'foo', partial_result_token: 'bar')
+
+    assert { child.attributes == { query: 'a', workDoneToken: 'foo', partialResultToken: 'bar' } }
+  end
 end

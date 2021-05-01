@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class PrepareRenameParams < TextDocumentPositionParams
+      class PrepareRenameParams
         def initialize(text_document:, position:)
           @attributes = {}
 
@@ -9,6 +9,22 @@ module LanguageServer
           @attributes[:position] = position
 
           @attributes.freeze
+        end
+
+        #
+        # The text document.
+        #
+        # @return [TextDocumentIdentifier]
+        def text_document
+          attributes.fetch(:textDocument)
+        end
+
+        #
+        # The position inside the text document.
+        #
+        # @return [Position]
+        def position
+          attributes.fetch(:position)
         end
 
         attr_reader :attributes

@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class InitializeParams < WorkDoneProgressParams
+      class InitializeParams
         def initialize(work_done_token: nil, process_id:, client_info: nil, locale: nil, root_path: nil, root_uri:, initialization_options: nil, capabilities:, trace: nil, workspace_folders: nil)
           @attributes = {}
 
@@ -17,6 +17,14 @@ module LanguageServer
           @attributes[:workspaceFolders] = workspace_folders if workspace_folders
 
           @attributes.freeze
+        end
+
+        #
+        # An optional token that a server can use to report work done progress.
+        #
+        # @return [ProgressToken]
+        def work_done_token
+          attributes.fetch(:workDoneToken)
         end
 
         #

@@ -4,7 +4,7 @@ module LanguageServer
       #
       # Completion options.
       #
-      class CompletionOptions < WorkDoneProgressOptions
+      class CompletionOptions
         def initialize(work_done_progress: nil, trigger_characters: nil, all_commit_characters: nil, resolve_provider: nil)
           @attributes = {}
 
@@ -14,6 +14,11 @@ module LanguageServer
           @attributes[:resolveProvider] = resolve_provider if resolve_provider
 
           @attributes.freeze
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         #

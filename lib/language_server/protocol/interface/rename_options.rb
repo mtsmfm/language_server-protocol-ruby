@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class RenameOptions < WorkDoneProgressOptions
+      class RenameOptions
         def initialize(work_done_progress: nil, prepare_provider: nil)
           @attributes = {}
 
@@ -9,6 +9,11 @@ module LanguageServer
           @attributes[:prepareProvider] = prepare_provider if prepare_provider
 
           @attributes.freeze
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         #

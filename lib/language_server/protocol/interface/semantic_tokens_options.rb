@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class SemanticTokensOptions < WorkDoneProgressOptions
+      class SemanticTokensOptions
         def initialize(work_done_progress: nil, legend:, range: nil, full: nil)
           @attributes = {}
 
@@ -11,6 +11,11 @@ module LanguageServer
           @attributes[:full] = full if full
 
           @attributes.freeze
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         #

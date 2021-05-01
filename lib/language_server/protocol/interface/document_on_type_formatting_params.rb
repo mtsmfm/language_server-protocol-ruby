@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DocumentOnTypeFormattingParams < TextDocumentPositionParams
+      class DocumentOnTypeFormattingParams
         def initialize(text_document:, position:, ch:, options:)
           @attributes = {}
 
@@ -11,6 +11,22 @@ module LanguageServer
           @attributes[:options] = options
 
           @attributes.freeze
+        end
+
+        #
+        # The text document.
+        #
+        # @return [TextDocumentIdentifier]
+        def text_document
+          attributes.fetch(:textDocument)
+        end
+
+        #
+        # The position inside the text document.
+        #
+        # @return [Position]
+        def position
+          attributes.fetch(:position)
         end
 
         #

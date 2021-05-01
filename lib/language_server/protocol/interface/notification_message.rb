@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class NotificationMessage < Message
+      class NotificationMessage
         def initialize(jsonrpc:, method:, params: nil)
           @attributes = {}
 
@@ -10,6 +10,11 @@ module LanguageServer
           @attributes[:params] = params if params
 
           @attributes.freeze
+        end
+
+        # @return [string]
+        def jsonrpc
+          attributes.fetch(:jsonrpc)
         end
 
         #

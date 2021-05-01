@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ExecuteCommandOptions < WorkDoneProgressOptions
+      class ExecuteCommandOptions
         def initialize(work_done_progress: nil, commands:)
           @attributes = {}
 
@@ -9,6 +9,11 @@ module LanguageServer
           @attributes[:commands] = commands
 
           @attributes.freeze
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         #

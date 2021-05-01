@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DocumentFormattingParams < WorkDoneProgressParams
+      class DocumentFormattingParams
         def initialize(work_done_token: nil, text_document:, options:)
           @attributes = {}
 
@@ -10,6 +10,14 @@ module LanguageServer
           @attributes[:options] = options
 
           @attributes.freeze
+        end
+
+        #
+        # An optional token that a server can use to report work done progress.
+        #
+        # @return [ProgressToken]
+        def work_done_token
+          attributes.fetch(:workDoneToken)
         end
 
         #
