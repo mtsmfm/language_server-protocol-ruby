@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ExecuteCommandParams < WorkDoneProgressParams
+      class ExecuteCommandParams
         def initialize(work_done_token: nil, command:, arguments: nil)
           @attributes = {}
 
@@ -10,6 +10,14 @@ module LanguageServer
           @attributes[:arguments] = arguments if arguments
 
           @attributes.freeze
+        end
+
+        #
+        # An optional token that a server can use to report work done progress.
+        #
+        # @return [ProgressToken]
+        def work_done_token
+          attributes.fetch(:workDoneToken)
         end
 
         #

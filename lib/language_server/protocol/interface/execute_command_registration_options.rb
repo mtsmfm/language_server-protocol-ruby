@@ -4,7 +4,7 @@ module LanguageServer
       #
       # Execute command registration options.
       #
-      class ExecuteCommandRegistrationOptions < ExecuteCommandOptions
+      class ExecuteCommandRegistrationOptions
         def initialize(work_done_progress: nil, commands:)
           @attributes = {}
 
@@ -12,6 +12,19 @@ module LanguageServer
           @attributes[:commands] = commands
 
           @attributes.freeze
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
+        end
+
+        #
+        # The commands to be executed on the server
+        #
+        # @return [string[]]
+        def commands
+          attributes.fetch(:commands)
         end
 
         attr_reader :attributes

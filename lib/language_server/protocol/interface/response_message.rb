@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ResponseMessage < Message
+      class ResponseMessage
         def initialize(jsonrpc:, id:, result: nil, error: nil)
           @attributes = {}
 
@@ -11,6 +11,11 @@ module LanguageServer
           @attributes[:error] = error if error
 
           @attributes.freeze
+        end
+
+        # @return [string]
+        def jsonrpc
+          attributes.fetch(:jsonrpc)
         end
 
         #

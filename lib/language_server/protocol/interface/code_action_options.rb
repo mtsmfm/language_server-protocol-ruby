@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class CodeActionOptions < WorkDoneProgressOptions
+      class CodeActionOptions
         def initialize(work_done_progress: nil, code_action_kinds: nil, resolve_provider: nil)
           @attributes = {}
 
@@ -10,6 +10,11 @@ module LanguageServer
           @attributes[:resolveProvider] = resolve_provider if resolve_provider
 
           @attributes.freeze
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         #

@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DocumentSymbolOptions < WorkDoneProgressOptions
+      class DocumentSymbolOptions
         def initialize(work_done_progress: nil, label: nil)
           @attributes = {}
 
@@ -9,6 +9,11 @@ module LanguageServer
           @attributes[:label] = label if label
 
           @attributes.freeze
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         #

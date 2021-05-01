@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class VersionedTextDocumentIdentifier < TextDocumentIdentifier
+      class VersionedTextDocumentIdentifier
         def initialize(uri:, version:)
           @attributes = {}
 
@@ -9,6 +9,14 @@ module LanguageServer
           @attributes[:version] = version
 
           @attributes.freeze
+        end
+
+        #
+        # The text document's URI.
+        #
+        # @return [string]
+        def uri
+          attributes.fetch(:uri)
         end
 
         #

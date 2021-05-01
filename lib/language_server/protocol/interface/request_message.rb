@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class RequestMessage < Message
+      class RequestMessage
         def initialize(jsonrpc:, id:, method:, params: nil)
           @attributes = {}
 
@@ -11,6 +11,11 @@ module LanguageServer
           @attributes[:params] = params if params
 
           @attributes.freeze
+        end
+
+        # @return [string]
+        def jsonrpc
+          attributes.fetch(:jsonrpc)
         end
 
         #

@@ -1,7 +1,7 @@
 module LanguageServer
   module Protocol
     module Interface
-      class SignatureHelpOptions < WorkDoneProgressOptions
+      class SignatureHelpOptions
         def initialize(work_done_progress: nil, trigger_characters: nil, retrigger_characters: nil)
           @attributes = {}
 
@@ -10,6 +10,11 @@ module LanguageServer
           @attributes[:retriggerCharacters] = retrigger_characters if retrigger_characters
 
           @attributes.freeze
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         #

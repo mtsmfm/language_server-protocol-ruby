@@ -4,7 +4,7 @@ module LanguageServer
       #
       # Describe options to be used when registering for text document change events.
       #
-      class TextDocumentChangeRegistrationOptions < TextDocumentRegistrationOptions
+      class TextDocumentChangeRegistrationOptions
         def initialize(document_selector:, sync_kind:)
           @attributes = {}
 
@@ -12,6 +12,15 @@ module LanguageServer
           @attributes[:syncKind] = sync_kind
 
           @attributes.freeze
+        end
+
+        #
+        # A document selector to identify the scope of the registration. If set to
+        # null the document selector provided on the client side will be used.
+        #
+        # @return [DocumentSelector]
+        def document_selector
+          attributes.fetch(:documentSelector)
         end
 
         #

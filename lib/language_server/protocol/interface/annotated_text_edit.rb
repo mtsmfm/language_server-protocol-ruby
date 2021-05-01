@@ -4,7 +4,7 @@ module LanguageServer
       #
       # A special text edit with an additional change annotation.
       #
-      class AnnotatedTextEdit < TextEdit
+      class AnnotatedTextEdit
         def initialize(range:, new_text:, annotation_id:)
           @attributes = {}
 
@@ -13,6 +13,24 @@ module LanguageServer
           @attributes[:annotationId] = annotation_id
 
           @attributes.freeze
+        end
+
+        #
+        # The range of the text document to be manipulated. To insert
+        # text into a document create a range where start === end.
+        #
+        # @return [Range]
+        def range
+          attributes.fetch(:range)
+        end
+
+        #
+        # The string to be inserted. For delete operations use an
+        # empty string.
+        #
+        # @return [string]
+        def new_text
+          attributes.fetch(:newText)
         end
 
         #
