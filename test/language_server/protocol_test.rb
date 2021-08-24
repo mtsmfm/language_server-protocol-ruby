@@ -11,6 +11,7 @@ class LanguageServer::ProtocolTest < Minitest::Test
   ].each do |command|
     define_method "test_initialize_with_`#{command}`" do
       stdin, stdout, stderr, wait_thr = Open3.popen3(command)
+      stdout.binmode
 
       stdin.print to_jsonrpc(jsonrpc: 2.0, id: 0, method: :initialize, params: {processId: 1234})
 

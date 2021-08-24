@@ -7,6 +7,7 @@ module LanguageServer
 
           def initialize(io)
             @io = io
+            io.binmode
           end
 
           def write(response)
