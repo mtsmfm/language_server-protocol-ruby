@@ -1,0 +1,16 @@
+apiVersion: 1.0.0
+metadata:
+  generateName: language_server-protocol-ruby-
+projects:
+  - name: language_server-protocol-ruby
+    source:
+      type: git
+      location: https://github.com/mtsmfm/language_server-protocol-ruby
+components:
+  - mountSources: true
+    memoryLimit: 4Gi
+    type: dockerimage
+    alias: ruby
+    image: 'ghcr.io/mtsmfm/devfiles:ruby-3-0--main'
+  - id: redhat/vscode-yaml/latest
+    type: chePlugin
