@@ -1,5 +1,9 @@
 # Change log
 
+## 3.16.0.2
+
+- Support for windows (#30)
+
 ## 3.16.0.1
 
 ### Breaking change
