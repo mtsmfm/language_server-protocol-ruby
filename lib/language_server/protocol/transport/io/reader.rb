@@ -7,6 +7,7 @@ module LanguageServer
         class Reader
           def initialize(io)
             @io = io
+            io.binmode
           end
 
           def read(&block)
