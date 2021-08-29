@@ -1,0 +1,43 @@
+#! /usr/bin/env ruby
+
+require "bundler"
+Bundler.require
+
+LSP = LanguageServer::Protocol
+
+r, w = IO.pipe
+
+reader = LSP::Transport::Io::Reader.new(r)
+writer = LSP::Transport::Io::Writer.new(w)
+
+result = LSP::Interface::InitializeResult.new(
+  capabilities: LSP::Interface::ServerCapabilities.new(
+    text_document_sync: LSP::Interface::TextDocumentSyncOptions.new(
+      change: LSP::Constant::TextDocumentSyncKind::FULL
+    ),
+    completion_provider: LSP::Interface::CompletionOptions.new(
+      resolve_provider: true,
+      trigger_characters: %w(.)
+    ),
+    definition_provider: true
+  )
+)
+
+N = 100
+
+Benchmark.ips do |x|
+  x.report do
+    N.times do |i|
+      writer.write(id: i, result: result)
+    end
+
+    begin
+      reader.read do |request|
+        if request[:id] == N - 1
+          raise
+        end
+      end
+    rescue
+    end
+  end
+end
