@@ -1,5 +1,9 @@
 # Change log
 
+## 3.16.0.3
+
+- Improve reader performance (#33)
+
 ## 3.16.0.2
 
 - Support for windows (#30)
