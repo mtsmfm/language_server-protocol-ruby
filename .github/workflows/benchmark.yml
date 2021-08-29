@@ -1,0 +1,36 @@
+on:
+  pull_request:
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ref: ${{ github.base_ref }}
+            name: base
+          - ref: ${{ github.head_ref }}
+            name: head
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ matrix.ref }}
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+      - uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { execSync } = require("child_process");
+            const result = execSync("bin/benchmark");
+            const body = `
+              ${{ matrix.name }} (${{ matrix.ref }})
+              \`\`\`
+              ${result}
+              \`\`\`
+            `;
+            const { issue: { number: issue_number }, repo: { owner, repo }  } = context;
+            github.issues.createComment({ issue_number, owner, repo, body });
