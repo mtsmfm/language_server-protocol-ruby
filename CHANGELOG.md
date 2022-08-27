@@ -2,7 +2,7 @@
 
 ## 3.17.0.0
 
-- Update Language Server Protocol version to 3.17.0
+- Update Language Server Protocol version to 3.17.0 (#37)
 
 ## 3.16.0.3
 
