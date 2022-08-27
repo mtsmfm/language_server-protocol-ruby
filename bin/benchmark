@@ -26,6 +26,8 @@ result = LSP::Interface::InitializeResult.new(
 N = 100
 
 Benchmark.ips do |x|
+  x.time = 30
+
   x.report do
     N.times do |i|
       writer.write(id: i, result: result)
