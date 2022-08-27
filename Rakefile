@@ -8,3 +8,7 @@ Rake::TestTask.new(:test) do |t|
 end
 
 task :default => :test
+
+task :generate do
+  ruby "scripts/generate_file.rb"
+end

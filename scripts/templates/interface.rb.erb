@@ -1,0 +1,44 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      <%- if comment -%>
+      #
+<%= comment.indent(6) %>
+      #
+      <%- end -%>
+      class <%= name %>
+        def initialize(<%= params %>)
+          @attributes = {}
+
+        <%- properties.each do |prop| -%>
+          @attributes[:<%= prop.name %>] = <%= prop.local_name %><% if prop.optional %> if <%= prop.local_name %><% end %>
+        <%- end -%>
+
+          @attributes.freeze
+        end
+      <%- properties.each do |prop| -%>
+
+        <%- if prop.comment -%>
+        #
+<%= prop.comment.indent(8) %>
+        #
+        <%- end -%>
+        # @return [<%= prop.type %>]
+        def <%= prop.method_name %>
+          attributes.fetch(:<%= prop.name %>)
+        end
+      <%- end -%>
+
+        attr_reader :attributes
+
+        def to_hash
+          attributes
+        end
+
+        def to_json(*args)
+          to_hash.to_json(*args)
+        end
+      end
+    end
+  end
+end
