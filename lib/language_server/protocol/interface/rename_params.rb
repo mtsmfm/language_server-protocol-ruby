@@ -1,20 +1,23 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The parameters of a [RenameRequest](#RenameRequest).
+      #
       class RenameParams
-        def initialize(text_document:, position:, work_done_token: nil, new_name:)
+        def initialize(text_document:, position:, new_name:, work_done_token: nil)
           @attributes = {}
 
           @attributes[:textDocument] = text_document
           @attributes[:position] = position
-          @attributes[:workDoneToken] = work_done_token if work_done_token
           @attributes[:newName] = new_name
+          @attributes[:workDoneToken] = work_done_token if work_done_token
 
           @attributes.freeze
         end
 
         #
-        # The text document.
+        # The document to rename.
         #
         # @return [TextDocumentIdentifier]
         def text_document
@@ -22,19 +25,11 @@ module LanguageServer
         end
 
         #
-        # The position inside the text document.
+        # The position at which this request was sent.
         #
         # @return [Position]
         def position
           attributes.fetch(:position)
-        end
-
-        #
-        # An optional token that a server can use to report work done progress.
-        #
-        # @return [ProgressToken]
-        def work_done_token
-          attributes.fetch(:workDoneToken)
         end
 
         #
@@ -45,6 +40,14 @@ module LanguageServer
         # @return [string]
         def new_name
           attributes.fetch(:newName)
+        end
+
+        #
+        # An optional token that a server can use to report work done progress.
+        #
+        # @return [ProgressToken | nil]
+        def work_done_token
+          attributes.fetch(:workDoneToken)
         end
 
         attr_reader :attributes

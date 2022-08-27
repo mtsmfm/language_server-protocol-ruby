@@ -1,12 +1,16 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Defines the capabilities provided by the client.
+      #
       class ClientCapabilities
-        def initialize(workspace: nil, text_document: nil, window: nil, general: nil, experimental: nil)
+        def initialize(workspace: nil, text_document: nil, notebook_document: nil, window: nil, general: nil, experimental: nil)
           @attributes = {}
 
           @attributes[:workspace] = workspace if workspace
           @attributes[:textDocument] = text_document if text_document
+          @attributes[:notebookDocument] = notebook_document if notebook_document
           @attributes[:window] = window if window
           @attributes[:general] = general if general
           @attributes[:experimental] = experimental if experimental
@@ -17,7 +21,7 @@ module LanguageServer
         #
         # Workspace specific client capabilities.
         #
-        # @return [{ applyEdit?: boolean; workspaceEdit?: WorkspaceEditClientCapabilities; didChangeConfiguration?: DidChangeConfigurationClientCapabilities; ... 7 more ...; fileOperations?: { ...; }; }]
+        # @return [WorkspaceClientCapabilities | nil]
         def workspace
           attributes.fetch(:workspace)
         end
@@ -25,15 +29,25 @@ module LanguageServer
         #
         # Text document specific client capabilities.
         #
-        # @return [TextDocumentClientCapabilities]
+        # @return [TextDocumentClientCapabilities | nil]
         def text_document
           attributes.fetch(:textDocument)
         end
 
         #
+        # Capabilities specific to the notebook document support.
+        #
+        # @since 3.17.0
+        #
+        # @return [NotebookDocumentClientCapabilities | nil]
+        def notebook_document
+          attributes.fetch(:notebookDocument)
+        end
+
+        #
         # Window specific client capabilities.
         #
-        # @return [{ workDoneProgress?: boolean; showMessage?: ShowMessageRequestClientCapabilities; showDocument?: ShowDocumentClientCapabilities; }]
+        # @return [WindowClientCapabilities | nil]
         def window
           attributes.fetch(:window)
         end
@@ -41,7 +55,9 @@ module LanguageServer
         #
         # General client capabilities.
         #
-        # @return [{ regularExpressions?: RegularExpressionsClientCapabilities; markdown?: MarkdownClientCapabilities; }]
+        # @since 3.16.0
+        #
+        # @return [GeneralClientCapabilities | nil]
         def general
           attributes.fetch(:general)
         end
@@ -49,7 +65,7 @@ module LanguageServer
         #
         # Experimental client capabilities.
         #
-        # @return [any]
+        # @return [LSPAny | nil]
         def experimental
           attributes.fetch(:experimental)
         end

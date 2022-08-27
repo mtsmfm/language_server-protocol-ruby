@@ -1,6 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The parameter of a `textDocument/prepareCallHierarchy` request.
+      #
+      # @since 3.16.0
+      #
       class CallHierarchyPrepareParams
         def initialize(text_document:, position:, work_done_token: nil)
           @attributes = {}
@@ -31,7 +36,7 @@ module LanguageServer
         #
         # An optional token that a server can use to report work done progress.
         #
-        # @return [ProgressToken]
+        # @return [ProgressToken | nil]
         def work_done_token
           attributes.fetch(:workDoneToken)
         end

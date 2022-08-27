@@ -4,15 +4,25 @@ module LanguageServer
       #
       # A special text edit with an additional change annotation.
       #
+      # @since 3.16.0.
+      #
       class AnnotatedTextEdit
-        def initialize(range:, new_text:, annotation_id:)
+        def initialize(annotation_id:, range:, new_text:)
           @attributes = {}
 
+          @attributes[:annotationId] = annotation_id
           @attributes[:range] = range
           @attributes[:newText] = new_text
-          @attributes[:annotationId] = annotation_id
 
           @attributes.freeze
+        end
+
+        #
+        # The actual identifier of the change annotation
+        #
+        # @return [ChangeAnnotationIdentifier]
+        def annotation_id
+          attributes.fetch(:annotationId)
         end
 
         #
@@ -31,14 +41,6 @@ module LanguageServer
         # @return [string]
         def new_text
           attributes.fetch(:newText)
-        end
-
-        #
-        # The actual annotation identifier.
-        #
-        # @return [string]
-        def annotation_id
-          attributes.fetch(:annotationId)
         end
 
         attr_reader :attributes

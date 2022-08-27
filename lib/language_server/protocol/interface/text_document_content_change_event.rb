@@ -2,14 +2,14 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # An event describing a change to a text document. If range and rangeLength are
-      # omitted the new text is considered to be the full content of the document.
+      # An event describing a change to a text document. If only a text is provided
+      # it is considered to be the full content of the document.
       #
       class TextDocumentContentChangeEvent
-        def initialize(range: nil, range_length: nil, text:)
+        def initialize(range:, range_length: nil, text:)
           @attributes = {}
 
-          @attributes[:range] = range if range
+          @attributes[:range] = range
           @attributes[:rangeLength] = range_length if range_length
           @attributes[:text] = text
 
@@ -19,7 +19,7 @@ module LanguageServer
         #
         # The range of the document that changed.
         #
-        # @return [Range, nil]
+        # @return [Range]
         def range
           attributes.fetch(:range)
         end
@@ -27,17 +27,15 @@ module LanguageServer
         #
         # The optional length of the range that got replaced.
         #
-        # @return [number, nil]
+        # @deprecated use range instead.
+        #
+        # @return [uinteger | nil]
         def range_length
           attributes.fetch(:rangeLength)
         end
 
         #
         # The new text for the provided range.
-        #
-        # --- OR ---
-        #
-        # The new text of the whole document.
         #
         # @return [string]
         def text

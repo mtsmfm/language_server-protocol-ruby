@@ -16,7 +16,7 @@ module LanguageServer
         #
         # Whether rename supports dynamic registration.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
@@ -25,31 +25,36 @@ module LanguageServer
         # Client supports testing for validity of rename operations
         # before execution.
         #
-        # @return [boolean]
+        # @since 3.12.0
+        #
+        # @return [boolean | nil]
         def prepare_support
           attributes.fetch(:prepareSupport)
         end
 
         #
-        # Client supports the default behavior result
-        # (`{ defaultBehavior: boolean }`).
+        # Client supports the default behavior result.
         #
         # The value indicates the default behavior used by the
         # client.
         #
-        # @return [any]
+        # @since 3.16.0
+        #
+        # @return [PrepareSupportDefaultBehavior | nil]
         def prepare_support_default_behavior
           attributes.fetch(:prepareSupportDefaultBehavior)
         end
 
         #
-        # Whether th client honors the change annotations in
+        # Whether the client honors the change annotations in
         # text edits and resource operations returned via the
         # rename request's workspace edit by for example presenting
         # the workspace edit in the user interface and asking
         # for confirmation.
         #
-        # @return [boolean]
+        # @since 3.16.0
+        #
+        # @return [boolean | nil]
         def honors_change_annotations
           attributes.fetch(:honorsChangeAnnotations)
         end

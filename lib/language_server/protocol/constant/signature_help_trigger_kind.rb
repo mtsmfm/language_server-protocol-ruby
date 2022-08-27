@@ -4,6 +4,8 @@ module LanguageServer
       #
       # How a signature help was triggered.
       #
+      # @since 3.15.0
+      #
       module SignatureHelpTriggerKind
         #
         # Signature help was invoked manually by the user or by a command.
@@ -14,8 +16,7 @@ module LanguageServer
         #
         TRIGGER_CHARACTER = 2
         #
-        # Signature help was triggered by the cursor moving or by the document
-        # content changing.
+        # Signature help was triggered by the cursor moving or by the document content changing.
         #
         CONTENT_CHANGE = 3
       end

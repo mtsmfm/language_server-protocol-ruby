@@ -10,10 +10,7 @@ module LanguageServer
           @attributes.freeze
         end
 
-        #
-        # The new value that should be assigned to the trace setting.
-        #
-        # @return [TraceValue]
+        # @return [TraceValues]
         def value
           attributes.fetch(:value)
         end

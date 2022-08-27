@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Save options.
+      #
       class SaveOptions
         def initialize(include_text: nil)
           @attributes = {}
@@ -13,7 +16,7 @@ module LanguageServer
         #
         # The client is supposed to include the content on save.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def include_text
           attributes.fetch(:includeText)
         end

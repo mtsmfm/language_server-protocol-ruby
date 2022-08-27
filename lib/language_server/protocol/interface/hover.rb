@@ -23,10 +23,10 @@ module LanguageServer
         end
 
         #
-        # An optional range is a range inside a text document
-        # that is used to visualize a hover, e.g. by changing the background color.
+        # An optional range inside the text document that is used to
+        # visualize the hover, e.g. by changing the background color.
         #
-        # @return [Range]
+        # @return [Range | nil]
         def range
           attributes.fetch(:range)
         end

@@ -2,12 +2,14 @@ module LanguageServer
   module Protocol
     module Interface
       class FoldingRangeClientCapabilities
-        def initialize(dynamic_registration: nil, range_limit: nil, line_folding_only: nil)
+        def initialize(dynamic_registration: nil, range_limit: nil, line_folding_only: nil, folding_range_kind: nil, folding_range: nil)
           @attributes = {}
 
           @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
           @attributes[:rangeLimit] = range_limit if range_limit
           @attributes[:lineFoldingOnly] = line_folding_only if line_folding_only
+          @attributes[:foldingRangeKind] = folding_range_kind if folding_range_kind
+          @attributes[:foldingRange] = folding_range if folding_range
 
           @attributes.freeze
         end
@@ -18,7 +20,7 @@ module LanguageServer
         # `FoldingRangeRegistrationOptions` return value for the corresponding
         # server capability as well.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
@@ -28,7 +30,7 @@ module LanguageServer
         # per document. The value serves as a hint, servers are free to follow the
         # limit.
         #
-        # @return [number]
+        # @return [uinteger | nil]
         def range_limit
           attributes.fetch(:rangeLimit)
         end
@@ -38,9 +40,29 @@ module LanguageServer
         # If set, client will ignore specified `startCharacter` and `endCharacter`
         # properties in a FoldingRange.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def line_folding_only
           attributes.fetch(:lineFoldingOnly)
+        end
+
+        #
+        # Specific options for the folding range kind.
+        #
+        # @since 3.17.0
+        #
+        # @return [{ valueSet:FoldingRangeKind[] } | nil]
+        def folding_range_kind
+          attributes.fetch(:foldingRangeKind)
+        end
+
+        #
+        # Specific options for the folding range.
+        #
+        # @since 3.17.0
+        #
+        # @return [{ collapsedText:boolean } | nil]
+        def folding_range
+          attributes.fetch(:foldingRange)
         end
 
         attr_reader :attributes

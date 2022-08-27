@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Constant
+      #
+      # The message type
+      #
       module MessageType
         #
         # An error message.

@@ -2,11 +2,12 @@ module LanguageServer
   module Protocol
     module Interface
       class PrepareRenameParams
-        def initialize(text_document:, position:)
+        def initialize(text_document:, position:, work_done_token: nil)
           @attributes = {}
 
           @attributes[:textDocument] = text_document
           @attributes[:position] = position
+          @attributes[:workDoneToken] = work_done_token if work_done_token
 
           @attributes.freeze
         end
@@ -25,6 +26,14 @@ module LanguageServer
         # @return [Position]
         def position
           attributes.fetch(:position)
+        end
+
+        #
+        # An optional token that a server can use to report work done progress.
+        #
+        # @return [ProgressToken | nil]
+        def work_done_token
+          attributes.fetch(:workDoneToken)
         end
 
         attr_reader :attributes

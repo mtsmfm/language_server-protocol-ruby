@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # @since 3.6.0
+      #
       class ImplementationClientCapabilities
         def initialize(dynamic_registration: nil, link_support: nil)
           @attributes = {}
@@ -12,11 +15,11 @@ module LanguageServer
         end
 
         #
-        # Whether implementation supports dynamic registration. If this is set to
-        # `true` the client supports the new `ImplementationRegistrationOptions`
-        # return value for the corresponding server capability as well.
+        # Whether implementation supports dynamic registration. If this is set to `true`
+        # the client supports the new `ImplementationRegistrationOptions` return value
+        # for the corresponding server capability as well.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
@@ -24,7 +27,9 @@ module LanguageServer
         #
         # The client supports additional metadata in the form of definition links.
         #
-        # @return [boolean]
+        # @since 3.14.0
+        #
+        # @return [boolean | nil]
         def link_support
           attributes.fetch(:linkSupport)
         end

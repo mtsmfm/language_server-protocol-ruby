@@ -3,7 +3,9 @@ module LanguageServer
     module Interface
       #
       # A filter to describe in which file operation requests or notifications
-      # the server is interested in.
+      # the server is interested in receiving.
+      #
+      # @since 3.16.0
       #
       class FileOperationFilter
         def initialize(scheme: nil, pattern:)
@@ -16,9 +18,9 @@ module LanguageServer
         end
 
         #
-        # A Uri like `file` or `untitled`.
+        # A Uri scheme like `file` or `untitled`.
         #
-        # @return [string]
+        # @return [string | nil]
         def scheme
           attributes.fetch(:scheme)
         end

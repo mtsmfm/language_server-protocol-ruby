@@ -1,6 +1,10 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Represents a diagnostic, such as a compiler error or warning. Diagnostic objects
+      # are only valid in the scope of a resource.
+      #
       class Diagnostic
         def initialize(range:, severity: nil, code: nil, code_description: nil, source: nil, message:, tags: nil, related_information: nil, data: nil)
           @attributes = {}
@@ -19,7 +23,7 @@ module LanguageServer
         end
 
         #
-        # The range at which the message applies.
+        # The range at which the message applies
         #
         # @return [Range]
         def range
@@ -30,38 +34,42 @@ module LanguageServer
         # The diagnostic's severity. Can be omitted. If omitted it is up to the
         # client to interpret diagnostics as error, warning, info or hint.
         #
-        # @return [DiagnosticSeverity]
+        # @return [DiagnosticSeverity | nil]
         def severity
           attributes.fetch(:severity)
         end
 
         #
-        # The diagnostic's code, which might appear in the user interface.
+        # The diagnostic's code, which usually appear in the user interface.
         #
-        # @return [string | number]
+        # @return [integer | string | nil]
         def code
           attributes.fetch(:code)
         end
 
         #
         # An optional property to describe the error code.
+        # Requires the code field (above) to be present/not null.
         #
-        # @return [CodeDescription]
+        # @since 3.16.0
+        #
+        # @return [CodeDescription | nil]
         def code_description
           attributes.fetch(:codeDescription)
         end
 
         #
         # A human-readable string describing the source of this
-        # diagnostic, e.g. 'typescript' or 'super lint'.
+        # diagnostic, e.g. 'typescript' or 'super lint'. It usually
+        # appears in the user interface.
         #
-        # @return [string]
+        # @return [string | nil]
         def source
           attributes.fetch(:source)
         end
 
         #
-        # The diagnostic's message.
+        # The diagnostic's message. It usually appears in the user interface
         #
         # @return [string]
         def message
@@ -71,7 +79,9 @@ module LanguageServer
         #
         # Additional metadata about the diagnostic.
         #
-        # @return [DiagnosticTag[]]
+        # @since 3.15.0
+        #
+        # @return [DiagnosticTag[] | nil]
         def tags
           attributes.fetch(:tags)
         end
@@ -80,17 +90,18 @@ module LanguageServer
         # An array of related diagnostic information, e.g. when symbol-names within
         # a scope collide all definitions can be marked via this property.
         #
-        # @return [DiagnosticRelatedInformation[]]
+        # @return [DiagnosticRelatedInformation[] | nil]
         def related_information
           attributes.fetch(:relatedInformation)
         end
 
         #
-        # A data entry field that is preserved between a
-        # `textDocument/publishDiagnostics` notification and
-        # `textDocument/codeAction` request.
+        # A data entry field that is preserved between a `textDocument/publishDiagnostics`
+        # notification and `textDocument/codeAction` request.
         #
-        # @return [unknown]
+        # @since 3.16.0
+        #
+        # @return [LSPAny | nil]
         def data
           attributes.fetch(:data)
         end

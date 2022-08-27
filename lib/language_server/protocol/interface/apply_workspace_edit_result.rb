@@ -1,7 +1,12 @@
 module LanguageServer
   module Protocol
     module Interface
-      class ApplyWorkspaceEditResponse
+      #
+      # The result returned from the apply workspace edit request.
+      #
+      # @since 3.17 renamed from ApplyWorkspaceEditResponse
+      #
+      class ApplyWorkspaceEditResult
         def initialize(applied:, failure_reason: nil, failed_change: nil)
           @attributes = {}
 
@@ -25,18 +30,17 @@ module LanguageServer
         # This may be used by the server for diagnostic logging or to provide
         # a suitable error for a request that triggered the edit.
         #
-        # @return [string]
+        # @return [string | nil]
         def failure_reason
           attributes.fetch(:failureReason)
         end
 
         #
-        # Depending on the client's failure handling strategy `failedChange`
-        # might contain the index of the change that failed. This property is
-        # only available if the client signals a `failureHandlingStrategy`
-        # in its client capabilities.
+        # Depending on the client's failure handling strategy `failedChange` might
+        # contain the index of the change that failed. This property is only available
+        # if the client signals a `failureHandlingStrategy` in its client capabilities.
         #
-        # @return [number]
+        # @return [uinteger | nil]
         def failed_change
           attributes.fetch(:failedChange)
         end

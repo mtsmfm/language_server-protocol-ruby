@@ -20,7 +20,7 @@ module LanguageServer
         # Optional, a final message indicating to for example indicate the outcome
         # of the operation.
         #
-        # @return [string]
+        # @return [string | nil]
         def message
           attributes.fetch(:message)
         end

@@ -27,7 +27,7 @@ module LanguageServer
         #
         # The file to delete.
         #
-        # @return [string]
+        # @return [DocumentUri]
         def uri
           attributes.fetch(:uri)
         end
@@ -35,15 +35,17 @@ module LanguageServer
         #
         # Delete options.
         #
-        # @return [DeleteFileOptions]
+        # @return [DeleteFileOptions | nil]
         def options
           attributes.fetch(:options)
         end
 
         #
-        # An optional annotation identifer describing the operation.
+        # An optional annotation identifier describing the operation.
         #
-        # @return [string]
+        # @since 3.16.0
+        #
+        # @return [ChangeAnnotationIdentifier | nil]
         def annotation_id
           attributes.fetch(:annotationId)
         end

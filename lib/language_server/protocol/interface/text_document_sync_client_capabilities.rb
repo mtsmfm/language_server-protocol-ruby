@@ -16,7 +16,7 @@ module LanguageServer
         #
         # Whether text document synchronization supports dynamic registration.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
@@ -24,7 +24,7 @@ module LanguageServer
         #
         # The client supports sending will save notifications.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def will_save
           attributes.fetch(:willSave)
         end
@@ -34,7 +34,7 @@ module LanguageServer
         # waits for a response providing text edits which will
         # be applied to the document before it is saved.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def will_save_wait_until
           attributes.fetch(:willSaveWaitUntil)
         end
@@ -42,7 +42,7 @@ module LanguageServer
         #
         # The client supports did save notifications.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def did_save
           attributes.fetch(:didSave)
         end

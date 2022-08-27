@@ -1,18 +1,23 @@
 module LanguageServer
   module Protocol
     module Interface
-      class Message
-        def initialize(jsonrpc:)
+      #
+      # A workspace diagnostic report.
+      #
+      # @since 3.17.0
+      #
+      class WorkspaceDiagnosticReport
+        def initialize(items:)
           @attributes = {}
 
-          @attributes[:jsonrpc] = jsonrpc
+          @attributes[:items] = items
 
           @attributes.freeze
         end
 
-        # @return [string]
-        def jsonrpc
-          attributes.fetch(:jsonrpc)
+        # @return [WorkspaceDocumentDiagnosticReport[]]
+        def items
+          attributes.fetch(:items)
         end
 
         attr_reader :attributes

@@ -20,7 +20,7 @@ module LanguageServer
         #
         # Size of a tab in spaces.
         #
-        # @return [number]
+        # @return [uinteger]
         def tab_size
           attributes.fetch(:tabSize)
         end
@@ -36,7 +36,9 @@ module LanguageServer
         #
         # Trim trailing whitespace on a line.
         #
-        # @return [boolean]
+        # @since 3.15.0
+        #
+        # @return [boolean | nil]
         def trim_trailing_whitespace
           attributes.fetch(:trimTrailingWhitespace)
         end
@@ -44,7 +46,9 @@ module LanguageServer
         #
         # Insert a newline character at the end of the file if one does not exist.
         #
-        # @return [boolean]
+        # @since 3.15.0
+        #
+        # @return [boolean | nil]
         def insert_final_newline
           attributes.fetch(:insertFinalNewline)
         end
@@ -52,7 +56,9 @@ module LanguageServer
         #
         # Trim all newlines after the final newline at the end of the file.
         #
-        # @return [boolean]
+        # @since 3.15.0
+        #
+        # @return [boolean | nil]
         def trim_final_newlines
           attributes.fetch(:trimFinalNewlines)
         end

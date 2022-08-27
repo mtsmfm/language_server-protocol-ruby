@@ -16,7 +16,7 @@ module LanguageServer
         #
         # Capabilities specific to the `MessageActionItem` type.
         #
-        # @return [{ additionalPropertiesSupport?: boolean; }]
+        # @return [{ additionalPropertiesSupport:boolean } | nil]
         def message_action_item
           attributes.fetch(:messageActionItem)
         end

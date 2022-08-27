@@ -17,7 +17,7 @@ module LanguageServer
         #
         # Overwrite target if existing. Overwrite wins over `ignoreIfExists`
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def overwrite
           attributes.fetch(:overwrite)
         end
@@ -25,7 +25,7 @@ module LanguageServer
         #
         # Ignores if target exists.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def ignore_if_exists
           attributes.fetch(:ignoreIfExists)
         end

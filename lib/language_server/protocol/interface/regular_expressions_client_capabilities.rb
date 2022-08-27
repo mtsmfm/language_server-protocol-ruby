@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Client capabilities specific to regular expressions.
       #
+      # @since 3.16.0
+      #
       class RegularExpressionsClientCapabilities
         def initialize(engine:, version: nil)
           @attributes = {}
@@ -25,7 +27,7 @@ module LanguageServer
         #
         # The engine's version.
         #
-        # @return [string]
+        # @return [string | nil]
         def version
           attributes.fetch(:version)
         end

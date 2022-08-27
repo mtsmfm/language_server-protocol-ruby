@@ -14,7 +14,7 @@ module LanguageServer
         #
         # The scope to get the configuration section for.
         #
-        # @return [string]
+        # @return [string | nil]
         def scope_uri
           attributes.fetch(:scopeUri)
         end
@@ -22,7 +22,7 @@ module LanguageServer
         #
         # The configuration section asked for.
         #
-        # @return [string]
+        # @return [string | nil]
         def section
           attributes.fetch(:section)
         end

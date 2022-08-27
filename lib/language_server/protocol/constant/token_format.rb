@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Constant
       module TokenFormat
-        RELATIVE = 'relative'
+        RELATIVE = "relative"
       end
     end
   end

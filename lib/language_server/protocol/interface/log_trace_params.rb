@@ -11,19 +11,12 @@ module LanguageServer
           @attributes.freeze
         end
 
-        #
-        # The message to be logged.
-        #
         # @return [string]
         def message
           attributes.fetch(:message)
         end
 
-        #
-        # Additional information that can be computed if the `trace` configuration
-        # is set to `'verbose'`
-        #
-        # @return [string]
+        # @return [string | nil]
         def verbose
           attributes.fetch(:verbose)
         end

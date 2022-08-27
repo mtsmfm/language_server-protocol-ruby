@@ -5,7 +5,7 @@ module LanguageServer
       # Text document specific client capabilities.
       #
       class TextDocumentClientCapabilities
-        def initialize(synchronization: nil, completion: nil, hover: nil, signature_help: nil, declaration: nil, definition: nil, type_definition: nil, implementation: nil, references: nil, document_highlight: nil, document_symbol: nil, code_action: nil, code_lens: nil, document_link: nil, color_provider: nil, formatting: nil, range_formatting: nil, on_type_formatting: nil, rename: nil, publish_diagnostics: nil, folding_range: nil, selection_range: nil, linked_editing_range: nil, call_hierarchy: nil, semantic_tokens: nil, moniker: nil)
+        def initialize(synchronization: nil, completion: nil, hover: nil, signature_help: nil, declaration: nil, definition: nil, type_definition: nil, implementation: nil, references: nil, document_highlight: nil, document_symbol: nil, code_action: nil, code_lens: nil, document_link: nil, color_provider: nil, formatting: nil, range_formatting: nil, on_type_formatting: nil, rename: nil, folding_range: nil, selection_range: nil, publish_diagnostics: nil, call_hierarchy: nil, semantic_tokens: nil, linked_editing_range: nil, moniker: nil, type_hierarchy: nil, inline_value: nil, inlay_hint: nil, diagnostic: nil)
           @attributes = {}
 
           @attributes[:synchronization] = synchronization if synchronization
@@ -27,18 +27,25 @@ module LanguageServer
           @attributes[:rangeFormatting] = range_formatting if range_formatting
           @attributes[:onTypeFormatting] = on_type_formatting if on_type_formatting
           @attributes[:rename] = rename if rename
-          @attributes[:publishDiagnostics] = publish_diagnostics if publish_diagnostics
           @attributes[:foldingRange] = folding_range if folding_range
           @attributes[:selectionRange] = selection_range if selection_range
-          @attributes[:linkedEditingRange] = linked_editing_range if linked_editing_range
+          @attributes[:publishDiagnostics] = publish_diagnostics if publish_diagnostics
           @attributes[:callHierarchy] = call_hierarchy if call_hierarchy
           @attributes[:semanticTokens] = semantic_tokens if semantic_tokens
+          @attributes[:linkedEditingRange] = linked_editing_range if linked_editing_range
           @attributes[:moniker] = moniker if moniker
+          @attributes[:typeHierarchy] = type_hierarchy if type_hierarchy
+          @attributes[:inlineValue] = inline_value if inline_value
+          @attributes[:inlayHint] = inlay_hint if inlay_hint
+          @attributes[:diagnostic] = diagnostic if diagnostic
 
           @attributes.freeze
         end
 
-        # @return [TextDocumentSyncClientCapabilities]
+        #
+        # Defines which synchronization capabilities the client supports.
+        #
+        # @return [TextDocumentSyncClientCapabilities | nil]
         def synchronization
           attributes.fetch(:synchronization)
         end
@@ -46,7 +53,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/completion` request.
         #
-        # @return [CompletionClientCapabilities]
+        # @return [CompletionClientCapabilities | nil]
         def completion
           attributes.fetch(:completion)
         end
@@ -54,7 +61,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/hover` request.
         #
-        # @return [HoverClientCapabilities]
+        # @return [HoverClientCapabilities | nil]
         def hover
           attributes.fetch(:hover)
         end
@@ -62,7 +69,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/signatureHelp` request.
         #
-        # @return [SignatureHelpClientCapabilities]
+        # @return [SignatureHelpClientCapabilities | nil]
         def signature_help
           attributes.fetch(:signatureHelp)
         end
@@ -70,7 +77,9 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/declaration` request.
         #
-        # @return [DeclarationClientCapabilities]
+        # @since 3.14.0
+        #
+        # @return [DeclarationClientCapabilities | nil]
         def declaration
           attributes.fetch(:declaration)
         end
@@ -78,7 +87,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/definition` request.
         #
-        # @return [DefinitionClientCapabilities]
+        # @return [DefinitionClientCapabilities | nil]
         def definition
           attributes.fetch(:definition)
         end
@@ -86,7 +95,9 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/typeDefinition` request.
         #
-        # @return [TypeDefinitionClientCapabilities]
+        # @since 3.6.0
+        #
+        # @return [TypeDefinitionClientCapabilities | nil]
         def type_definition
           attributes.fetch(:typeDefinition)
         end
@@ -94,7 +105,9 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/implementation` request.
         #
-        # @return [ImplementationClientCapabilities]
+        # @since 3.6.0
+        #
+        # @return [ImplementationClientCapabilities | nil]
         def implementation
           attributes.fetch(:implementation)
         end
@@ -102,7 +115,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/references` request.
         #
-        # @return [ReferenceClientCapabilities]
+        # @return [ReferenceClientCapabilities | nil]
         def references
           attributes.fetch(:references)
         end
@@ -110,7 +123,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/documentHighlight` request.
         #
-        # @return [DocumentHighlightClientCapabilities]
+        # @return [DocumentHighlightClientCapabilities | nil]
         def document_highlight
           attributes.fetch(:documentHighlight)
         end
@@ -118,7 +131,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/documentSymbol` request.
         #
-        # @return [DocumentSymbolClientCapabilities]
+        # @return [DocumentSymbolClientCapabilities | nil]
         def document_symbol
           attributes.fetch(:documentSymbol)
         end
@@ -126,7 +139,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/codeAction` request.
         #
-        # @return [CodeActionClientCapabilities]
+        # @return [CodeActionClientCapabilities | nil]
         def code_action
           attributes.fetch(:codeAction)
         end
@@ -134,7 +147,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/codeLens` request.
         #
-        # @return [CodeLensClientCapabilities]
+        # @return [CodeLensClientCapabilities | nil]
         def code_lens
           attributes.fetch(:codeLens)
         end
@@ -142,7 +155,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/documentLink` request.
         #
-        # @return [DocumentLinkClientCapabilities]
+        # @return [DocumentLinkClientCapabilities | nil]
         def document_link
           attributes.fetch(:documentLink)
         end
@@ -151,7 +164,9 @@ module LanguageServer
         # Capabilities specific to the `textDocument/documentColor` and the
         # `textDocument/colorPresentation` request.
         #
-        # @return [DocumentColorClientCapabilities]
+        # @since 3.6.0
+        #
+        # @return [DocumentColorClientCapabilities | nil]
         def color_provider
           attributes.fetch(:colorProvider)
         end
@@ -159,7 +174,7 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/formatting` request.
         #
-        # @return [DocumentFormattingClientCapabilities]
+        # @return [DocumentFormattingClientCapabilities | nil]
         def formatting
           attributes.fetch(:formatting)
         end
@@ -167,16 +182,15 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/rangeFormatting` request.
         #
-        # @return [DocumentRangeFormattingClientCapabilities]
+        # @return [DocumentRangeFormattingClientCapabilities | nil]
         def range_formatting
           attributes.fetch(:rangeFormatting)
         end
 
         #
-        # request.
         # Capabilities specific to the `textDocument/onTypeFormatting` request.
         #
-        # @return [DocumentOnTypeFormattingClientCapabilities]
+        # @return [DocumentOnTypeFormattingClientCapabilities | nil]
         def on_type_formatting
           attributes.fetch(:onTypeFormatting)
         end
@@ -184,24 +198,17 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/rename` request.
         #
-        # @return [RenameClientCapabilities]
+        # @return [RenameClientCapabilities | nil]
         def rename
           attributes.fetch(:rename)
         end
 
         #
-        # Capabilities specific to the `textDocument/publishDiagnostics`
-        # notification.
-        #
-        # @return [PublishDiagnosticsClientCapabilities]
-        def publish_diagnostics
-          attributes.fetch(:publishDiagnostics)
-        end
-
-        #
         # Capabilities specific to the `textDocument/foldingRange` request.
         #
-        # @return [FoldingRangeClientCapabilities]
+        # @since 3.10.0
+        #
+        # @return [FoldingRangeClientCapabilities | nil]
         def folding_range
           attributes.fetch(:foldingRange)
         end
@@ -209,41 +216,99 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/selectionRange` request.
         #
-        # @return [SelectionRangeClientCapabilities]
+        # @since 3.15.0
+        #
+        # @return [SelectionRangeClientCapabilities | nil]
         def selection_range
           attributes.fetch(:selectionRange)
         end
 
         #
-        # Capabilities specific to the `textDocument/linkedEditingRange` request.
+        # Capabilities specific to the `textDocument/publishDiagnostics` notification.
         #
-        # @return [LinkedEditingRangeClientCapabilities]
-        def linked_editing_range
-          attributes.fetch(:linkedEditingRange)
+        # @return [PublishDiagnosticsClientCapabilities | nil]
+        def publish_diagnostics
+          attributes.fetch(:publishDiagnostics)
         end
 
         #
         # Capabilities specific to the various call hierarchy requests.
         #
-        # @return [CallHierarchyClientCapabilities]
+        # @since 3.16.0
+        #
+        # @return [CallHierarchyClientCapabilities | nil]
         def call_hierarchy
           attributes.fetch(:callHierarchy)
         end
 
         #
-        # Capabilities specific to the various semantic token requests.
+        # Capabilities specific to the various semantic token request.
         #
-        # @return [SemanticTokensClientCapabilities]
+        # @since 3.16.0
+        #
+        # @return [SemanticTokensClientCapabilities | nil]
         def semantic_tokens
           attributes.fetch(:semanticTokens)
         end
 
         #
-        # Capabilities specific to the `textDocument/moniker` request.
+        # Capabilities specific to the `textDocument/linkedEditingRange` request.
         #
-        # @return [MonikerClientCapabilities]
+        # @since 3.16.0
+        #
+        # @return [LinkedEditingRangeClientCapabilities | nil]
+        def linked_editing_range
+          attributes.fetch(:linkedEditingRange)
+        end
+
+        #
+        # Client capabilities specific to the `textDocument/moniker` request.
+        #
+        # @since 3.16.0
+        #
+        # @return [MonikerClientCapabilities | nil]
         def moniker
           attributes.fetch(:moniker)
+        end
+
+        #
+        # Capabilities specific to the various type hierarchy requests.
+        #
+        # @since 3.17.0
+        #
+        # @return [TypeHierarchyClientCapabilities | nil]
+        def type_hierarchy
+          attributes.fetch(:typeHierarchy)
+        end
+
+        #
+        # Capabilities specific to the `textDocument/inlineValue` request.
+        #
+        # @since 3.17.0
+        #
+        # @return [InlineValueClientCapabilities | nil]
+        def inline_value
+          attributes.fetch(:inlineValue)
+        end
+
+        #
+        # Capabilities specific to the `textDocument/inlayHint` request.
+        #
+        # @since 3.17.0
+        #
+        # @return [InlayHintClientCapabilities | nil]
+        def inlay_hint
+          attributes.fetch(:inlayHint)
+        end
+
+        #
+        # Capabilities specific to the diagnostic pull model.
+        #
+        # @since 3.17.0
+        #
+        # @return [DiagnosticClientCapabilities | nil]
+        def diagnostic
+          attributes.fetch(:diagnostic)
         end
 
         attr_reader :attributes

@@ -1,37 +1,42 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Registration options for a [RenameRequest](#RenameRequest).
+      #
       class RenameRegistrationOptions
-        def initialize(document_selector:, work_done_progress: nil, prepare_provider: nil)
+        def initialize(document_selector:, prepare_provider: nil, work_done_progress: nil)
           @attributes = {}
 
           @attributes[:documentSelector] = document_selector
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:prepareProvider] = prepare_provider if prepare_provider
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
 
           @attributes.freeze
         end
 
         #
-        # A document selector to identify the scope of the registration. If set to
-        # null the document selector provided on the client side will be used.
+        # A document selector to identify the scope of the registration. If set to null
+        # the document selector provided on the client side will be used.
         #
-        # @return [DocumentSelector]
+        # @return [DocumentSelector | null]
         def document_selector
           attributes.fetch(:documentSelector)
-        end
-
-        # @return [boolean]
-        def work_done_progress
-          attributes.fetch(:workDoneProgress)
         end
 
         #
         # Renames should be checked and tested before being executed.
         #
-        # @return [boolean]
+        # @since version 3.12.0
+        #
+        # @return [boolean | nil]
         def prepare_provider
           attributes.fetch(:prepareProvider)
+        end
+
+        # @return [boolean | nil]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         attr_reader :attributes

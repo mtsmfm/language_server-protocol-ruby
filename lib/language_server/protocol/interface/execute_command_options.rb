@@ -1,19 +1,17 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The server capabilities of a [ExecuteCommandRequest](#ExecuteCommandRequest).
+      #
       class ExecuteCommandOptions
-        def initialize(work_done_progress: nil, commands:)
+        def initialize(commands:, work_done_progress: nil)
           @attributes = {}
 
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:commands] = commands
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
 
           @attributes.freeze
-        end
-
-        # @return [boolean]
-        def work_done_progress
-          attributes.fetch(:workDoneProgress)
         end
 
         #
@@ -22,6 +20,11 @@ module LanguageServer
         # @return [string[]]
         def commands
           attributes.fetch(:commands)
+        end
+
+        # @return [boolean | nil]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         attr_reader :attributes

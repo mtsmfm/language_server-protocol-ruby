@@ -4,12 +4,15 @@ module LanguageServer
       #
       # Client capabilities specific to the used markdown parser.
       #
+      # @since 3.16.0
+      #
       class MarkdownClientCapabilities
-        def initialize(parser:, version: nil)
+        def initialize(parser:, version: nil, allowed_tags: nil)
           @attributes = {}
 
           @attributes[:parser] = parser
           @attributes[:version] = version if version
+          @attributes[:allowedTags] = allowed_tags if allowed_tags
 
           @attributes.freeze
         end
@@ -25,9 +28,20 @@ module LanguageServer
         #
         # The version of the parser.
         #
-        # @return [string]
+        # @return [string | nil]
         def version
           attributes.fetch(:version)
+        end
+
+        #
+        # A list of HTML tags that the client allows / supports in
+        # Markdown.
+        #
+        # @since 3.17.0
+        #
+        # @return [string[] | nil]
+        def allowed_tags
+          attributes.fetch(:allowedTags)
         end
 
         attr_reader :attributes
