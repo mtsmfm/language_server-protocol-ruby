@@ -1,0 +1,21 @@
+module LanguageServer
+  module Protocol
+    module Constant
+      <%- if comment -%>
+      #
+<%= comment.indent(6) %>
+      #
+      <%- end -%>
+      module <%= name %>
+        <%- values.each do |value| -%>
+        <%- if value.comment -%>
+        #
+<%= value.comment.indent(8) %>
+        #
+        <%- end -%>
+        <%= value.name.underscore.upcase %> = <%= value.serialized %>
+        <%- end -%>
+      end
+    end
+  end
+end

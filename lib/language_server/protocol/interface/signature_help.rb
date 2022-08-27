@@ -18,8 +18,7 @@ module LanguageServer
         end
 
         #
-        # One or more signatures. If no signatures are available the signature help
-        # request should return `null`.
+        # One or more signatures.
         #
         # @return [SignatureInformation[]]
         def signatures
@@ -37,7 +36,7 @@ module LanguageServer
         # In future version of the protocol this property might become
         # mandatory to better express this.
         #
-        # @return [number]
+        # @return [uinteger | nil]
         def active_signature
           attributes.fetch(:activeSignature)
         end
@@ -51,7 +50,7 @@ module LanguageServer
         # mandatory to better express the active parameter if the
         # active signature does have any.
         #
-        # @return [number]
+        # @return [uinteger | nil]
         def active_parameter
           attributes.fetch(:activeParameter)
         end

@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Registration options for a [DocumentOnTypeFormattingRequest](#DocumentOnTypeFormattingRequest).
+      #
       class DocumentOnTypeFormattingRegistrationOptions
         def initialize(document_selector:, first_trigger_character:, more_trigger_character: nil)
           @attributes = {}
@@ -13,16 +16,16 @@ module LanguageServer
         end
 
         #
-        # A document selector to identify the scope of the registration. If set to
-        # null the document selector provided on the client side will be used.
+        # A document selector to identify the scope of the registration. If set to null
+        # the document selector provided on the client side will be used.
         #
-        # @return [DocumentSelector]
+        # @return [DocumentSelector | null]
         def document_selector
           attributes.fetch(:documentSelector)
         end
 
         #
-        # A character on which formatting should be triggered, like `}`.
+        # A character on which formatting should be triggered, like `{`.
         #
         # @return [string]
         def first_trigger_character
@@ -32,7 +35,7 @@ module LanguageServer
         #
         # More trigger characters.
         #
-        # @return [string[]]
+        # @return [string[] | nil]
         def more_trigger_character
           attributes.fetch(:moreTriggerCharacter)
         end

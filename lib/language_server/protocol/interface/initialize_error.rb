@@ -2,7 +2,8 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Known error codes for an `InitializeError`;
+      # The data type of the ResponseError if the
+      # initialize request fails.
       #
       class InitializeError
         def initialize(retry:)

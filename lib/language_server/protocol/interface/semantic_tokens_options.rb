@@ -1,21 +1,19 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # @since 3.16.0
+      #
       class SemanticTokensOptions
-        def initialize(work_done_progress: nil, legend:, range: nil, full: nil)
+        def initialize(legend:, range: nil, full: nil, work_done_progress: nil)
           @attributes = {}
 
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:legend] = legend
           @attributes[:range] = range if range
           @attributes[:full] = full if full
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
 
           @attributes.freeze
-        end
-
-        # @return [boolean]
-        def work_done_progress
-          attributes.fetch(:workDoneProgress)
         end
 
         #
@@ -30,7 +28,7 @@ module LanguageServer
         # Server supports providing semantic tokens for a specific range
         # of a document.
         #
-        # @return [boolean | {}]
+        # @return [boolean | {  } | nil]
         def range
           attributes.fetch(:range)
         end
@@ -38,9 +36,14 @@ module LanguageServer
         #
         # Server supports providing semantic tokens for a full document.
         #
-        # @return [boolean | { delta?: boolean; }]
+        # @return [boolean | { delta:boolean } | nil]
         def full
           attributes.fetch(:full)
+        end
+
+        # @return [boolean | nil]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         attr_reader :attributes

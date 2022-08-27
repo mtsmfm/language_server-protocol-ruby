@@ -15,48 +15,46 @@ module LanguageServer
         end
 
         #
-        # Open and close notifications are sent to the server. If omitted open
-        # close notification should not be sent.
+        # Open and close notifications are sent to the server. If omitted open close notifications should not
+        # be sent.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def open_close
           attributes.fetch(:openClose)
         end
 
         #
-        # Change notifications are sent to the server. See
-        # TextDocumentSyncKind.None, TextDocumentSyncKind.Full and
-        # TextDocumentSyncKind.Incremental. If omitted it defaults to
-        # TextDocumentSyncKind.None.
+        # Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
+        # and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
         #
-        # @return [TextDocumentSyncKind]
+        # @return [TextDocumentSyncKind | nil]
         def change
           attributes.fetch(:change)
         end
 
         #
-        # If present will save notifications are sent to the server. If omitted
-        # the notification should not be sent.
+        # If present will save notifications are sent to the server. If omitted the notification should not be
+        # sent.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def will_save
           attributes.fetch(:willSave)
         end
 
         #
-        # If present will save wait until requests are sent to the server. If
-        # omitted the request should not be sent.
+        # If present will save wait until requests are sent to the server. If omitted the request should not be
+        # sent.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def will_save_wait_until
           attributes.fetch(:willSaveWaitUntil)
         end
 
         #
-        # If present save notifications are sent to the server. If omitted the
-        # notification should not be sent.
+        # If present save notifications are sent to the server. If omitted the notification should not be
+        # sent.
         #
-        # @return [boolean | SaveOptions]
+        # @return [boolean | SaveOptions | nil]
         def save
           attributes.fetch(:save)
         end

@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Params to show a document.
       #
+      # @since 3.16.0
+      #
       class ShowDocumentParams
         def initialize(uri:, external: nil, take_focus: nil, selection: nil)
           @attributes = {}
@@ -19,7 +21,7 @@ module LanguageServer
         #
         # The document uri to show.
         #
-        # @return [string]
+        # @return [URI]
         def uri
           attributes.fetch(:uri)
         end
@@ -29,7 +31,7 @@ module LanguageServer
         # To show for example `https://code.visualstudio.com/`
         # in the default WEB browser set `external` to `true`.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def external
           attributes.fetch(:external)
         end
@@ -40,7 +42,7 @@ module LanguageServer
         # Clients might ignore this property if an external
         # program is started.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def take_focus
           attributes.fetch(:takeFocus)
         end
@@ -51,7 +53,7 @@ module LanguageServer
         # external program is started or the file is not a text
         # file.
         #
-        # @return [Range]
+        # @return [Range | nil]
         def selection
           attributes.fetch(:selection)
         end

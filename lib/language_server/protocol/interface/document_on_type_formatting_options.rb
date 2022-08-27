@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Provider options for a [DocumentOnTypeFormattingRequest](#DocumentOnTypeFormattingRequest).
+      #
       class DocumentOnTypeFormattingOptions
         def initialize(first_trigger_character:, more_trigger_character: nil)
           @attributes = {}
@@ -12,7 +15,7 @@ module LanguageServer
         end
 
         #
-        # A character on which formatting should be triggered, like `}`.
+        # A character on which formatting should be triggered, like `{`.
         #
         # @return [string]
         def first_trigger_character
@@ -22,7 +25,7 @@ module LanguageServer
         #
         # More trigger characters.
         #
-        # @return [string[]]
+        # @return [string[] | nil]
         def more_trigger_character
           attributes.fetch(:moreTriggerCharacter)
         end

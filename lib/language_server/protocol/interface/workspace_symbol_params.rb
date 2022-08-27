@@ -2,34 +2,17 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # The parameters of a Workspace Symbol Request.
+      # The parameters of a [WorkspaceSymbolRequest](#WorkspaceSymbolRequest).
       #
       class WorkspaceSymbolParams
-        def initialize(work_done_token: nil, partial_result_token: nil, query:)
+        def initialize(query:, work_done_token: nil, partial_result_token: nil)
           @attributes = {}
 
+          @attributes[:query] = query
           @attributes[:workDoneToken] = work_done_token if work_done_token
           @attributes[:partialResultToken] = partial_result_token if partial_result_token
-          @attributes[:query] = query
 
           @attributes.freeze
-        end
-
-        #
-        # An optional token that a server can use to report work done progress.
-        #
-        # @return [ProgressToken]
-        def work_done_token
-          attributes.fetch(:workDoneToken)
-        end
-
-        #
-        # An optional token that a server can use to report partial results (e.g.
-        # streaming) to the client.
-        #
-        # @return [ProgressToken]
-        def partial_result_token
-          attributes.fetch(:partialResultToken)
         end
 
         #
@@ -39,6 +22,23 @@ module LanguageServer
         # @return [string]
         def query
           attributes.fetch(:query)
+        end
+
+        #
+        # An optional token that a server can use to report work done progress.
+        #
+        # @return [ProgressToken | nil]
+        def work_done_token
+          attributes.fetch(:workDoneToken)
+        end
+
+        #
+        # An optional token that a server can use to report partial results (e.g. streaming) to
+        # the client.
+        #
+        # @return [ProgressToken | nil]
+        def partial_result_token
+          attributes.fetch(:partialResultToken)
         end
 
         attr_reader :attributes

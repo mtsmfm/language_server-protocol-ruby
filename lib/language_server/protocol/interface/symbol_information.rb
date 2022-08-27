@@ -6,17 +6,43 @@ module LanguageServer
       # interfaces etc.
       #
       class SymbolInformation
-        def initialize(name:, kind:, tags: nil, deprecated: nil, location:, container_name: nil)
+        def initialize(deprecated: nil, location:, name:, kind:, tags: nil, container_name: nil)
           @attributes = {}
 
+          @attributes[:deprecated] = deprecated if deprecated
+          @attributes[:location] = location
           @attributes[:name] = name
           @attributes[:kind] = kind
           @attributes[:tags] = tags if tags
-          @attributes[:deprecated] = deprecated if deprecated
-          @attributes[:location] = location
           @attributes[:containerName] = container_name if container_name
 
           @attributes.freeze
+        end
+
+        #
+        # Indicates if this symbol is deprecated.
+        #
+        # @deprecated Use tags instead
+        #
+        # @return [boolean | nil]
+        def deprecated
+          attributes.fetch(:deprecated)
+        end
+
+        #
+        # The location of this symbol. The location's range is used by a tool
+        # to reveal the location in the editor. If the symbol is selected in the
+        # tool the range's start information is used to position the cursor. So
+        # the range usually spans more than the actual symbol's name and does
+        # normally include things like visibility modifiers.
+        #
+        # The range doesn't have to denote a node range in the sense of an abstract
+        # syntax tree. It can therefore not be used to re-construct a hierarchy of
+        # the symbols.
+        #
+        # @return [Location]
+        def location
+          attributes.fetch(:location)
         end
 
         #
@@ -30,7 +56,7 @@ module LanguageServer
         #
         # The kind of this symbol.
         #
-        # @return [any]
+        # @return [SymbolKind]
         def kind
           attributes.fetch(:kind)
         end
@@ -38,33 +64,11 @@ module LanguageServer
         #
         # Tags for this symbol.
         #
-        # @return [1[]]
+        # @since 3.16.0
+        #
+        # @return [SymbolTag[] | nil]
         def tags
           attributes.fetch(:tags)
-        end
-
-        #
-        # Indicates if this symbol is deprecated.
-        #
-        # @return [boolean]
-        def deprecated
-          attributes.fetch(:deprecated)
-        end
-
-        #
-        # The location of this symbol. The location's range is used by a tool
-        # to reveal the location in the editor. If the symbol is selected in the
-        # tool the range's start information is used to position the cursor. So
-        # the range usually spans more then the actual symbol's name and does
-        # normally include things like visibility modifiers.
-        #
-        # The range doesn't have to denote a node range in the sense of a abstract
-        # syntax tree. It can therefore not be used to re-construct a hierarchy of
-        # the symbols.
-        #
-        # @return [Location]
-        def location
-          attributes.fetch(:location)
         end
 
         #
@@ -73,7 +77,7 @@ module LanguageServer
         # if necessary). It can't be used to re-infer a hierarchy for the document
         # symbols.
         #
-        # @return [string]
+        # @return [string | nil]
         def container_name
           attributes.fetch(:containerName)
         end

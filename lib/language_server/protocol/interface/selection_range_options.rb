@@ -10,7 +10,7 @@ module LanguageServer
           @attributes.freeze
         end
 
-        # @return [boolean]
+        # @return [boolean | nil]
         def work_done_progress
           attributes.fetch(:workDoneProgress)
         end

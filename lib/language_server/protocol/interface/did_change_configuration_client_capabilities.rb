@@ -13,7 +13,7 @@ module LanguageServer
         #
         # Did change configuration notification supports dynamic registration.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end

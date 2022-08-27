@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # @since 3.16.0
+      #
       class CallHierarchyClientCapabilities
         def initialize(dynamic_registration: nil)
           @attributes = {}
@@ -11,12 +14,11 @@ module LanguageServer
         end
 
         #
-        # Whether implementation supports dynamic registration. If this is set to
-        # `true` the client supports the new `(TextDocumentRegistrationOptions &
-        # StaticRegistrationOptions)` return value for the corresponding server
-        # capability as well.
+        # Whether implementation supports dynamic registration. If this is set to `true`
+        # the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+        # return value for the corresponding server capability as well.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end

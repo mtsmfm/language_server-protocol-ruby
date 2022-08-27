@@ -4,8 +4,8 @@ module LanguageServer
       #
       # Represents programming constructs like variables, classes, interfaces etc.
       # that appear in a document. Document symbols can be hierarchical and they
-      # have two ranges: one that encloses its definition and one that points to its
-      # most interesting range, e.g. the range of an identifier.
+      # have two ranges: one that encloses its definition and one that points to
+      # its most interesting range, e.g. the range of an identifier.
       #
       class DocumentSymbol
         def initialize(name:, detail: nil, kind:, tags: nil, deprecated: nil, range:, selection_range:, children: nil)
@@ -24,9 +24,8 @@ module LanguageServer
         end
 
         #
-        # The name of this symbol. Will be displayed in the user interface and
-        # therefore must not be an empty string or a string only consisting of
-        # white spaces.
+        # The name of this symbol. Will be displayed in the user interface and therefore must not be
+        # an empty string or a string only consisting of white spaces.
         #
         # @return [string]
         def name
@@ -36,7 +35,7 @@ module LanguageServer
         #
         # More detail for this symbol, e.g the signature of a function.
         #
-        # @return [string]
+        # @return [string | nil]
         def detail
           attributes.fetch(:detail)
         end
@@ -44,7 +43,7 @@ module LanguageServer
         #
         # The kind of this symbol.
         #
-        # @return [any]
+        # @return [SymbolKind]
         def kind
           attributes.fetch(:kind)
         end
@@ -52,7 +51,9 @@ module LanguageServer
         #
         # Tags for this document symbol.
         #
-        # @return [1[]]
+        # @since 3.16.0
+        #
+        # @return [SymbolTag[] | nil]
         def tags
           attributes.fetch(:tags)
         end
@@ -60,16 +61,17 @@ module LanguageServer
         #
         # Indicates if this symbol is deprecated.
         #
-        # @return [boolean]
+        # @deprecated Use tags instead
+        #
+        # @return [boolean | nil]
         def deprecated
           attributes.fetch(:deprecated)
         end
 
         #
-        # The range enclosing this symbol not including leading/trailing whitespace
-        # but everything else like comments. This information is typically used to
-        # determine if the clients cursor is inside the symbol to reveal in the
-        # symbol in the UI.
+        # The range enclosing this symbol not including leading/trailing whitespace but everything else
+        # like comments. This information is typically used to determine if the clients cursor is
+        # inside the symbol to reveal in the symbol in the UI.
         #
         # @return [Range]
         def range
@@ -77,8 +79,8 @@ module LanguageServer
         end
 
         #
-        # The range that should be selected and revealed when this symbol is being
-        # picked, e.g. the name of a function. Must be contained by the `range`.
+        # The range that should be selected and revealed when this symbol is being picked, e.g the name of a function.
+        # Must be contained by the `range`.
         #
         # @return [Range]
         def selection_range
@@ -88,7 +90,7 @@ module LanguageServer
         #
         # Children of this symbol, e.g. properties of a class.
         #
-        # @return [DocumentSymbol[]]
+        # @return [DocumentSymbol[] | nil]
         def children
           attributes.fetch(:children)
         end

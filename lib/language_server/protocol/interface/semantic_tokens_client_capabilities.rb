@@ -1,8 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # @since 3.16.0
+      #
       class SemanticTokensClientCapabilities
-        def initialize(dynamic_registration: nil, requests:, token_types:, token_modifiers:, formats:, overlapping_token_support: nil, multiline_token_support: nil)
+        def initialize(dynamic_registration: nil, requests:, token_types:, token_modifiers:, formats:, overlapping_token_support: nil, multiline_token_support: nil, server_cancel_support: nil, augments_syntax_tokens: nil)
           @attributes = {}
 
           @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
@@ -12,17 +15,18 @@ module LanguageServer
           @attributes[:formats] = formats
           @attributes[:overlappingTokenSupport] = overlapping_token_support if overlapping_token_support
           @attributes[:multilineTokenSupport] = multiline_token_support if multiline_token_support
+          @attributes[:serverCancelSupport] = server_cancel_support if server_cancel_support
+          @attributes[:augmentsSyntaxTokens] = augments_syntax_tokens if augments_syntax_tokens
 
           @attributes.freeze
         end
 
         #
-        # Whether implementation supports dynamic registration. If this is set to
-        # `true` the client supports the new `(TextDocumentRegistrationOptions &
-        # StaticRegistrationOptions)` return value for the corresponding server
-        # capability as well.
+        # Whether implementation supports dynamic registration. If this is set to `true`
+        # the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+        # return value for the corresponding server capability as well.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
@@ -37,7 +41,7 @@ module LanguageServer
         # range provider the client might not render a minimap correctly or might
         # even decide to not show any semantic tokens at all.
         #
-        # @return [{ range?: boolean | {}; full?: boolean | { delta?: boolean; }; }]
+        # @return [{ range:boolean | {  }, full:boolean | { delta:boolean } }]
         def requests
           attributes.fetch(:requests)
         end
@@ -59,9 +63,9 @@ module LanguageServer
         end
 
         #
-        # The formats the clients supports.
+        # The token formats the clients supports.
         #
-        # @return ["relative"[]]
+        # @return [TokenFormat[]]
         def formats
           attributes.fetch(:formats)
         end
@@ -69,7 +73,7 @@ module LanguageServer
         #
         # Whether the client supports tokens that can overlap each other.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def overlapping_token_support
           attributes.fetch(:overlappingTokenSupport)
         end
@@ -77,9 +81,39 @@ module LanguageServer
         #
         # Whether the client supports tokens that can span multiple lines.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def multiline_token_support
           attributes.fetch(:multilineTokenSupport)
+        end
+
+        #
+        # Whether the client allows the server to actively cancel a
+        # semantic token request, e.g. supports returning
+        # LSPErrorCodes.ServerCancelled. If a server does the client
+        # needs to retrigger the request.
+        #
+        # @since 3.17.0
+        #
+        # @return [boolean | nil]
+        def server_cancel_support
+          attributes.fetch(:serverCancelSupport)
+        end
+
+        #
+        # Whether the client uses semantic tokens to augment existing
+        # syntax tokens. If set to `true` client side created syntax
+        # tokens and semantic tokens are both used for colorization. If
+        # set to `false` the client only uses the returned semantic tokens
+        # for colorization.
+        #
+        # If the value is `undefined` then the client behavior is not
+        # specified.
+        #
+        # @since 3.17.0
+        #
+        # @return [boolean | nil]
+        def augments_syntax_tokens
+          attributes.fetch(:augmentsSyntaxTokens)
         end
 
         attr_reader :attributes

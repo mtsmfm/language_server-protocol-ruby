@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The parameters of a [DocumentOnTypeFormattingRequest](#DocumentOnTypeFormattingRequest).
+      #
       class DocumentOnTypeFormattingParams
         def initialize(text_document:, position:, ch:, options:)
           @attributes = {}
@@ -14,7 +17,7 @@ module LanguageServer
         end
 
         #
-        # The text document.
+        # The document to format.
         #
         # @return [TextDocumentIdentifier]
         def text_document
@@ -22,7 +25,9 @@ module LanguageServer
         end
 
         #
-        # The position inside the text document.
+        # The position around which the on type formatting should happen.
+        # This is not necessarily the exact position where the character denoted
+        # by the property `ch` got typed.
         #
         # @return [Position]
         def position
@@ -30,7 +35,10 @@ module LanguageServer
         end
 
         #
-        # The character that has been typed.
+        # The character that has been typed that triggered the formatting
+        # on type request. That is not necessarily the last character that
+        # got inserted into the document since the client could auto insert
+        # characters as well (e.g. like automatic brace completion).
         #
         # @return [string]
         def ch
@@ -38,7 +46,7 @@ module LanguageServer
         end
 
         #
-        # The format options.
+        # The formatting options.
         #
         # @return [FormattingOptions]
         def options

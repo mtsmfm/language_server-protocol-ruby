@@ -6,8 +6,8 @@ module LanguageServer
       #
       module TextDocumentSaveReason
         #
-        # Manually triggered, e.g. by the user pressing save, by starting
-        # debugging, or by an API call.
+        # Manually triggered, e.g. by the user pressing save, by starting debugging,
+        # or by an API call.
         #
         MANUAL = 1
         #

@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # @since 3.16.0
+      #
       class SemanticTokensDelta
         def initialize(result_id: nil, edits:)
           @attributes = {}
@@ -11,14 +14,13 @@ module LanguageServer
           @attributes.freeze
         end
 
-        # @return [string]
+        # @return [string | nil]
         def result_id
           attributes.fetch(:resultId)
         end
 
         #
-        # The semantic token edits to transform a previous result into a new
-        # result.
+        # The semantic token edits to transform a previous result into a new result.
         #
         # @return [SemanticTokensEdit[]]
         def edits

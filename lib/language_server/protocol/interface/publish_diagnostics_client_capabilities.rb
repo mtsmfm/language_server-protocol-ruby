@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The publish diagnostic client capabilities.
+      #
       class PublishDiagnosticsClientCapabilities
         def initialize(related_information: nil, tag_support: nil, version_support: nil, code_description_support: nil, data_support: nil)
           @attributes = {}
@@ -17,7 +20,7 @@ module LanguageServer
         #
         # Whether the clients accepts diagnostics with related information.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def related_information
           attributes.fetch(:relatedInformation)
         end
@@ -26,7 +29,9 @@ module LanguageServer
         # Client supports the tag property to provide meta data about a diagnostic.
         # Clients supporting tags have to handle unknown tags gracefully.
         #
-        # @return [{ valueSet: DiagnosticTag[]; }]
+        # @since 3.15.0
+        #
+        # @return [{ valueSet:DiagnosticTag[] } | nil]
         def tag_support
           attributes.fetch(:tagSupport)
         end
@@ -35,7 +40,9 @@ module LanguageServer
         # Whether the client interprets the version property of the
         # `textDocument/publishDiagnostics` notification's parameter.
         #
-        # @return [boolean]
+        # @since 3.15.0
+        #
+        # @return [boolean | nil]
         def version_support
           attributes.fetch(:versionSupport)
         end
@@ -43,7 +50,9 @@ module LanguageServer
         #
         # Client supports a codeDescription property
         #
-        # @return [boolean]
+        # @since 3.16.0
+        #
+        # @return [boolean | nil]
         def code_description_support
           attributes.fetch(:codeDescriptionSupport)
         end
@@ -53,7 +62,9 @@ module LanguageServer
         # preserved between a `textDocument/publishDiagnostics` and
         # `textDocument/codeAction` request.
         #
-        # @return [boolean]
+        # @since 3.16.0
+        #
+        # @return [boolean | nil]
         def data_support
           attributes.fetch(:dataSupport)
         end

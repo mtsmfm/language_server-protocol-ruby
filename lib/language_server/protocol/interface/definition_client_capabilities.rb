@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Client Capabilities for a [DefinitionRequest](#DefinitionRequest).
+      #
       class DefinitionClientCapabilities
         def initialize(dynamic_registration: nil, link_support: nil)
           @attributes = {}
@@ -14,7 +17,7 @@ module LanguageServer
         #
         # Whether definition supports dynamic registration.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
@@ -22,7 +25,9 @@ module LanguageServer
         #
         # The client supports additional metadata in the form of definition links.
         #
-        # @return [boolean]
+        # @since 3.14.0
+        #
+        # @return [boolean | nil]
         def link_support
           attributes.fetch(:linkSupport)
         end

@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Represents information on a file/folder rename.
       #
+      # @since 3.16.0
+      #
       class FileRename
         def initialize(old_uri:, new_uri:)
           @attributes = {}

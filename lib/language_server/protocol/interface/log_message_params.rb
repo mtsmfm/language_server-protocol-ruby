@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The log message parameters.
+      #
       class LogMessageParams
         def initialize(type:, message:)
           @attributes = {}
@@ -20,7 +23,7 @@ module LanguageServer
         end
 
         #
-        # The actual message
+        # The actual message.
         #
         # @return [string]
         def message

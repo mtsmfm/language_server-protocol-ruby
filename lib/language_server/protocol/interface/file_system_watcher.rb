@@ -12,21 +12,11 @@ module LanguageServer
         end
 
         #
-        # The  glob pattern to watch.
+        # The glob pattern to watch. See {@link GlobPattern glob pattern} for more detail.
         #
-        # Glob patterns can have the following syntax:
-        # - `*` to match one or more characters in a path segment
-        # - `?` to match on one character in a path segment
-        # - `**` to match any number of path segments, including none
-        # - `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}`
-        # matches all TypeScript and JavaScript files)
-        # - `[]` to declare a range of characters to match in a path segment
-        # (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)
-        # - `[!...]` to negate a range of characters to match in a path segment
-        # (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not
-        # `example.0`)
+        # @since 3.17.0 support for relative patterns.
         #
-        # @return [string]
+        # @return [GlobPattern]
         def glob_pattern
           attributes.fetch(:globPattern)
         end
@@ -36,7 +26,7 @@ module LanguageServer
         # to WatchKind.Create | WatchKind.Change | WatchKind.Delete
         # which is 7.
         #
-        # @return [number]
+        # @return [WatchKind | nil]
         def kind
           attributes.fetch(:kind)
         end

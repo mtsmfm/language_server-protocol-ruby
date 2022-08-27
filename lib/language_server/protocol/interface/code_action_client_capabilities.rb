@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The Client Capabilities of a [CodeActionRequest](#CodeActionRequest).
+      #
       class CodeActionClientCapabilities
         def initialize(dynamic_registration: nil, code_action_literal_support: nil, is_preferred_support: nil, disabled_support: nil, data_support: nil, resolve_support: nil, honors_change_annotations: nil)
           @attributes = {}
@@ -19,16 +22,19 @@ module LanguageServer
         #
         # Whether code action supports dynamic registration.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
 
         #
-        # The client supports code action literals as a valid
-        # response of the `textDocument/codeAction` request.
+        # The client support code action literals of type `CodeAction` as a valid
+        # response of the `textDocument/codeAction` request. If the property is not
+        # set the request can only return `Command` literals.
         #
-        # @return [{ codeActionKind: { valueSet: string[]; }; }]
+        # @since 3.8.0
+        #
+        # @return [{ codeActionKind:{ valueSet:CodeActionKind[] } } | nil]
         def code_action_literal_support
           attributes.fetch(:codeActionLiteralSupport)
         end
@@ -36,7 +42,9 @@ module LanguageServer
         #
         # Whether code action supports the `isPreferred` property.
         #
-        # @return [boolean]
+        # @since 3.15.0
+        #
+        # @return [boolean | nil]
         def is_preferred_support
           attributes.fetch(:isPreferredSupport)
         end
@@ -44,7 +52,9 @@ module LanguageServer
         #
         # Whether code action supports the `disabled` property.
         #
-        # @return [boolean]
+        # @since 3.16.0
+        #
+        # @return [boolean | nil]
         def disabled_support
           attributes.fetch(:disabledSupport)
         end
@@ -54,7 +64,9 @@ module LanguageServer
         # preserved between a `textDocument/codeAction` and a
         # `codeAction/resolve` request.
         #
-        # @return [boolean]
+        # @since 3.16.0
+        #
+        # @return [boolean | nil]
         def data_support
           attributes.fetch(:dataSupport)
         end
@@ -63,7 +75,9 @@ module LanguageServer
         # Whether the client supports resolving additional code action
         # properties via a separate `codeAction/resolve` request.
         #
-        # @return [{ properties: string[]; }]
+        # @since 3.16.0
+        #
+        # @return [{ properties:string[] } | nil]
         def resolve_support
           attributes.fetch(:resolveSupport)
         end
@@ -75,7 +89,9 @@ module LanguageServer
         # the workspace edit in the user interface and asking
         # for confirmation.
         #
-        # @return [boolean]
+        # @since 3.16.0
+        #
+        # @return [boolean | nil]
         def honors_change_annotations
           attributes.fetch(:honorsChangeAnnotations)
         end

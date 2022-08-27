@@ -5,6 +5,8 @@ module LanguageServer
       # How whitespace and indentation is handled during completion
       # item insertion.
       #
+      # @since 3.16.0
+      #
       module InsertTextMode
         #
         # The insertion or replace strings is taken as it is. If the

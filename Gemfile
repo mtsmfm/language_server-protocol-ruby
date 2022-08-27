@@ -7,3 +7,4 @@ gemspec
 
 gem "benchmark-ips"
 gem "pry-byebug"
+gem "activesupport"

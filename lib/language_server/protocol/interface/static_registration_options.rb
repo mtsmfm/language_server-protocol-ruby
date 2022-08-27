@@ -2,7 +2,8 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Static registration options to be returned in the initialize request.
+      # Static registration options to be returned in the initialize
+      # request.
       #
       class StaticRegistrationOptions
         def initialize(id: nil)
@@ -17,7 +18,7 @@ module LanguageServer
         # The id used to register the request. The id can be used to deregister
         # the request again. See also Registration#id.
         #
-        # @return [string]
+        # @return [string | nil]
         def id
           attributes.fetch(:id)
         end

@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Client Capabilities for a [SignatureHelpRequest](#SignatureHelpRequest).
+      #
       class SignatureHelpClientCapabilities
         def initialize(dynamic_registration: nil, signature_information: nil, context_support: nil)
           @attributes = {}
@@ -15,7 +18,7 @@ module LanguageServer
         #
         # Whether signature help supports dynamic registration.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
@@ -24,7 +27,7 @@ module LanguageServer
         # The client supports the following `SignatureInformation`
         # specific properties.
         #
-        # @return [{ documentationFormat?: MarkupKind[]; parameterInformation?: { labelOffsetSupport?: boolean; }; activeParameterSupport?: boolean; }]
+        # @return [{ documentationFormat:MarkupKind[], parameterInformation:{ labelOffsetSupport:boolean }, activeParameterSupport:boolean } | nil]
         def signature_information
           attributes.fetch(:signatureInformation)
         end
@@ -35,7 +38,9 @@ module LanguageServer
         # contextSupport will also support the `retriggerCharacters` on
         # `SignatureHelpOptions`.
         #
-        # @return [boolean]
+        # @since 3.15.0
+        #
+        # @return [boolean | nil]
         def context_support
           attributes.fetch(:contextSupport)
         end

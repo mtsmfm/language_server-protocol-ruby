@@ -1,13 +1,17 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Client capabilities for a [WorkspaceSymbolRequest](#WorkspaceSymbolRequest).
+      #
       class WorkspaceSymbolClientCapabilities
-        def initialize(dynamic_registration: nil, symbol_kind: nil, tag_support: nil)
+        def initialize(dynamic_registration: nil, symbol_kind: nil, tag_support: nil, resolve_support: nil)
           @attributes = {}
 
           @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
           @attributes[:symbolKind] = symbol_kind if symbol_kind
           @attributes[:tagSupport] = tag_support if tag_support
+          @attributes[:resolveSupport] = resolve_support if resolve_support
 
           @attributes.freeze
         end
@@ -15,16 +19,15 @@ module LanguageServer
         #
         # Symbol request supports dynamic registration.
         #
-        # @return [boolean]
+        # @return [boolean | nil]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
 
         #
-        # Specific capabilities for the `SymbolKind` in the `workspace/symbol`
-        # request.
+        # Specific capabilities for the `SymbolKind` in the `workspace/symbol` request.
         #
-        # @return [{ valueSet?: any[]; }]
+        # @return [{ valueSet:SymbolKind[] } | nil]
         def symbol_kind
           attributes.fetch(:symbolKind)
         end
@@ -33,9 +36,23 @@ module LanguageServer
         # The client supports tags on `SymbolInformation`.
         # Clients supporting tags have to handle unknown tags gracefully.
         #
-        # @return [{ valueSet: 1[]; }]
+        # @since 3.16.0
+        #
+        # @return [{ valueSet:SymbolTag[] } | nil]
         def tag_support
           attributes.fetch(:tagSupport)
+        end
+
+        #
+        # The client support partial workspace symbols. The client will send the
+        # request `workspaceSymbol/resolve` to the server to resolve additional
+        # properties.
+        #
+        # @since 3.17.0
+        #
+        # @return [{ properties:string[] } | nil]
+        def resolve_support
+          attributes.fetch(:resolveSupport)
         end
 
         attr_reader :attributes

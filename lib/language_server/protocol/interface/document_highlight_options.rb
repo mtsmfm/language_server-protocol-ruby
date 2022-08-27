@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Provider options for a [DocumentHighlightRequest](#DocumentHighlightRequest).
+      #
       class DocumentHighlightOptions
         def initialize(work_done_progress: nil)
           @attributes = {}
@@ -10,7 +13,7 @@ module LanguageServer
           @attributes.freeze
         end
 
-        # @return [boolean]
+        # @return [boolean | nil]
         def work_done_progress
           attributes.fetch(:workDoneProgress)
         end
