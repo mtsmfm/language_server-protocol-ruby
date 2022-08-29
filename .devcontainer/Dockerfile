@@ -1,4 +1,4 @@
-FROM ruby:3.0.0
+FROM ruby:3.1.2
 
 ARG USERNAME=app
 ARG USER_UID=1000
