@@ -5,7 +5,7 @@ require "open-uri"
 require "active_support/core_ext/string"
 
 LSP_VERSION = "3.17"
-LSP_REPO_REVISION = "98dfd44d349411c557127b7379c67b837bf1660c"
+LSP_REPO_REVISION = "daaa7b3ac5e22137fa253c332b5913e47a45192c"
 ROOT_DIR = Pathname(__dir__) + ".."
 PROTOCOL_DIR = ROOT_DIR / "lib" / "language_server" / "protocol"
 META_MODEL_URL = "https://raw.githubusercontent.com/Microsoft/language-server-protocol/#{LSP_REPO_REVISION}/_specifications/lsp/#{LSP_VERSION}/metaModel/metaModel.json"
@@ -290,4 +290,3 @@ parser = Parser.new(schema)
 puts "Rendering files..."
 Renderer.new(parser).render
 puts "Done."
-
