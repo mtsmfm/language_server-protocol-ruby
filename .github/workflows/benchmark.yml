@@ -15,7 +15,7 @@ jobs:
           - ref: ${{ github.head_ref }}
             name: head
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ matrix.ref }}
       - uses: ruby/setup-ruby@v1
