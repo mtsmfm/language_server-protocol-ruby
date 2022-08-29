@@ -1,0 +1,14 @@
+{
+  "allowedPostUpgradeCommands": ["bundle", "exec", "rake", "generate"],
+  "regexManagers": [
+    {
+      "fileMatch": ["^scripts/generate_file.rb$"],
+      "matchStrings": ["LSP_REPO_REVISION = \"(?<currentDigest>.*)\""],
+      "datasourceTemplate": "git-refs",
+      "depNameTemplate": "lsp",
+      "lookupNameTemplate": "https://github.com/microsoft/language-server-protocol.git",
+      "currentValueTemplate": "gh-pages"
+    }
+  ],
+  "recreateClosed": true
+}
