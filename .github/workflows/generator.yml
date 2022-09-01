@@ -9,10 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: true
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.1"
           bundler-cache: true
-      - run: gem update --system
-      - run: bundle exec rake generate
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: bin/generate_files
       - run: git diff --exit-code
