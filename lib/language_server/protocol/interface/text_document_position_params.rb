@@ -1,10 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # A parameter literal used in requests to pass a text document and a position inside that
-      # document.
-      #
       class TextDocumentPositionParams
         def initialize(text_document:, position:)
           @attributes = {}

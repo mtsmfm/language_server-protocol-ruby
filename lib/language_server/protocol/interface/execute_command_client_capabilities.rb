@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # The client capabilities of a [ExecuteCommandRequest](#ExecuteCommandRequest).
-      #
       class ExecuteCommandClientCapabilities
         def initialize(dynamic_registration: nil)
           @attributes = {}
@@ -16,7 +13,7 @@ module LanguageServer
         #
         # Execute command supports dynamic registration.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end

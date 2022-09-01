@@ -11,11 +11,9 @@ module LanguageServer
         end
 
         #
-        # Whether implementation supports dynamic registration. If this is set to `true`
-        # the client supports the new `DocumentColorRegistrationOptions` return value
-        # for the corresponding server capability as well.
+        # Whether document color supports dynamic registration.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end

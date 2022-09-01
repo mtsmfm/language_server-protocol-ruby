@@ -3,20 +3,21 @@ module LanguageServer
     module Constant
       #
       # A set of predefined range kinds.
+      # The type is a string since the value set is extensible
       #
       module FoldingRangeKind
         #
         # Folding range for a comment
         #
-        COMMENT = "comment"
+        COMMENT = 'comment'
         #
-        # Folding range for an import or include
+        # Folding range for a imports or includes
         #
-        IMPORTS = "imports"
+        IMPORTS = 'imports'
         #
         # Folding range for a region (e.g. `#region`)
         #
-        REGION = "region"
+        REGION = 'region'
       end
     end
   end

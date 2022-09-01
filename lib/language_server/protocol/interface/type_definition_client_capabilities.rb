@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Since 3.6.0
-      #
       class TypeDefinitionClientCapabilities
         def initialize(dynamic_registration: nil, link_support: nil)
           @attributes = {}
@@ -15,11 +12,11 @@ module LanguageServer
         end
 
         #
-        # Whether implementation supports dynamic registration. If this is set to `true`
-        # the client supports the new `TypeDefinitionRegistrationOptions` return value
-        # for the corresponding server capability as well.
+        # Whether implementation supports dynamic registration. If this is set to
+        # `true` the client supports the new `TypeDefinitionRegistrationOptions`
+        # return value for the corresponding server capability as well.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
@@ -27,9 +24,7 @@ module LanguageServer
         #
         # The client supports additional metadata in the form of definition links.
         #
-        # Since 3.14.0
-        #
-        # @return [boolean | nil]
+        # @return [boolean]
         def link_support
           attributes.fetch(:linkSupport)
         end

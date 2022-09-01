@@ -1,10 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Value-object that contains additional information when
-      # requesting references.
-      #
       class ReferenceContext
         def initialize(include_declaration:)
           @attributes = {}

@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # @since 3.16.0
-      #
       class CodeLensWorkspaceClientCapabilities
         def initialize(refresh_support: nil)
           @attributes = {}
@@ -22,7 +19,7 @@ module LanguageServer
         # useful for situation where a server for example detect a project wide
         # change that requires such a calculation.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def refresh_support
           attributes.fetch(:refreshSupport)
         end

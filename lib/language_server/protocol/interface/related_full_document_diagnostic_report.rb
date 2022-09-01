@@ -4,38 +4,22 @@ module LanguageServer
       #
       # A full diagnostic report with a set of related documents.
       #
-      # @since 3.17.0
-      #
       class RelatedFullDocumentDiagnosticReport
-        def initialize(related_documents: nil, kind:, result_id: nil, items:)
+        def initialize(kind:, result_id: nil, items:, related_documents: nil)
           @attributes = {}
 
-          @attributes[:relatedDocuments] = related_documents if related_documents
           @attributes[:kind] = kind
           @attributes[:resultId] = result_id if result_id
           @attributes[:items] = items
+          @attributes[:relatedDocuments] = related_documents if related_documents
 
           @attributes.freeze
         end
 
         #
-        # Diagnostics of related documents. This information is useful
-        # in programming languages where code in a file A can generate
-        # diagnostics in a file B which A depends on. An example of
-        # such a language is C/C++ where marco definitions in a file
-        # a.cpp and result in errors in a header file b.hpp.
-        #
-        # @since 3.17.0
-        #
-        # @return [DocumentUri => FullDocumentDiagnosticReport | UnchangedDocumentDiagnosticReport | nil]
-        def related_documents
-          attributes.fetch(:relatedDocuments)
-        end
-
-        #
         # A full document diagnostic report.
         #
-        # @return ["full"]
+        # @return [any]
         def kind
           attributes.fetch(:kind)
         end
@@ -45,7 +29,7 @@ module LanguageServer
         # be sent on the next diagnostic request for the
         # same document.
         #
-        # @return [string | nil]
+        # @return [string]
         def result_id
           attributes.fetch(:resultId)
         end
@@ -56,6 +40,18 @@ module LanguageServer
         # @return [Diagnostic[]]
         def items
           attributes.fetch(:items)
+        end
+
+        #
+        # Diagnostics of related documents. This information is useful
+        # in programming languages where code in a file A can generate
+        # diagnostics in a file B which A depends on. An example of
+        # such a language is C/C++ where marco definitions in a file
+        # a.cpp and result in errors in a header file b.hpp.
+        #
+        # @return [{ [uri: string]: FullDocumentDiagnosticReport | UnchangedDocumentDiagnosticReport; }]
+        def related_documents
+          attributes.fetch(:relatedDocuments)
         end
 
         attr_reader :attributes

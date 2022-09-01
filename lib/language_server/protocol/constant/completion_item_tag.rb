@@ -2,10 +2,8 @@ module LanguageServer
   module Protocol
     module Constant
       #
-      # Completion item tags are extra annotations that tweak the rendering of a completion
-      # item.
-      #
-      # @since 3.15.0
+      # Completion item tags are extra annotations that tweak the rendering of a
+      # completion item.
       #
       module CompletionItemTag
         #

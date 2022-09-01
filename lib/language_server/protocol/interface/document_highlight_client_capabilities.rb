@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Client Capabilities for a [DocumentHighlightRequest](#DocumentHighlightRequest).
-      #
       class DocumentHighlightClientCapabilities
         def initialize(dynamic_registration: nil)
           @attributes = {}
@@ -16,7 +13,7 @@ module LanguageServer
         #
         # Whether document highlight supports dynamic registration.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end

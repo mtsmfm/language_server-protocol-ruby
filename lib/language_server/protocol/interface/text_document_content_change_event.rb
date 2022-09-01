@@ -6,10 +6,10 @@ module LanguageServer
       # it is considered to be the full content of the document.
       #
       class TextDocumentContentChangeEvent
-        def initialize(range:, range_length: nil, text:)
+        def initialize(range: nil, range_length: nil, text:)
           @attributes = {}
 
-          @attributes[:range] = range
+          @attributes[:range] = range if range
           @attributes[:rangeLength] = range_length if range_length
           @attributes[:text] = text
 
@@ -19,7 +19,7 @@ module LanguageServer
         #
         # The range of the document that changed.
         #
-        # @return [Range]
+        # @return [Range, nil]
         def range
           attributes.fetch(:range)
         end
@@ -27,15 +27,17 @@ module LanguageServer
         #
         # The optional length of the range that got replaced.
         #
-        # @deprecated use range instead.
-        #
-        # @return [uinteger | nil]
+        # @return [number, nil]
         def range_length
           attributes.fetch(:rangeLength)
         end
 
         #
         # The new text for the provided range.
+        #
+        # --- OR ---
+        #
+        # The new text of the whole document.
         #
         # @return [string]
         def text

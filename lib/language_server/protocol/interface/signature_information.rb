@@ -31,7 +31,7 @@ module LanguageServer
         # The human-readable doc-comment of this signature. Will be shown
         # in the UI but can be omitted.
         #
-        # @return [string | MarkupContent | nil]
+        # @return [string | MarkupContent]
         def documentation
           attributes.fetch(:documentation)
         end
@@ -39,7 +39,7 @@ module LanguageServer
         #
         # The parameters of this signature.
         #
-        # @return [ParameterInformation[] | nil]
+        # @return [ParameterInformation[]]
         def parameters
           attributes.fetch(:parameters)
         end
@@ -49,9 +49,7 @@ module LanguageServer
         #
         # If provided, this is used in place of `SignatureHelp.activeParameter`.
         #
-        # @since 3.16.0
-        #
-        # @return [uinteger | nil]
+        # @return [number]
         def active_parameter
           attributes.fetch(:activeParameter)
         end

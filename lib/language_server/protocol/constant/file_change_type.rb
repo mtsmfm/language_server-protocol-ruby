@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Constant
       #
-      # The file event type
+      # The file event type.
       #
       module FileChangeType
         #

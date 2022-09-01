@@ -11,11 +11,12 @@ module LanguageServer
         end
 
         #
-        # Whether implementation supports dynamic registration for selection range providers. If this is set to `true`
-        # the client supports the new `SelectionRangeRegistrationOptions` return value for the corresponding server
-        # capability as well.
+        # Whether implementation supports dynamic registration for selection range
+        # providers. If this is set to `true` the client supports the new
+        # `SelectionRangeRegistrationOptions` return value for the corresponding
+        # server capability as well.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end

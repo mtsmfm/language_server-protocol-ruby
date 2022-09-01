@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # @since 3.16.0
-      #
       class SemanticTokens
         def initialize(result_id: nil, data:)
           @attributes = {}
@@ -20,7 +17,7 @@ module LanguageServer
         # A server can then instead of computing all semantic tokens again simply
         # send a delta.
         #
-        # @return [string | nil]
+        # @return [string]
         def result_id
           attributes.fetch(:resultId)
         end
@@ -28,7 +25,7 @@ module LanguageServer
         #
         # The actual tokens.
         #
-        # @return [uinteger[]]
+        # @return [number[]]
         def data
           attributes.fetch(:data)
         end

@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Create file operation.
+      # Create file operation
       #
       class CreateFile
         def initialize(kind:, uri:, options: nil, annotation_id: nil)
@@ -27,7 +27,7 @@ module LanguageServer
         #
         # The resource to create.
         #
-        # @return [DocumentUri]
+        # @return [string]
         def uri
           attributes.fetch(:uri)
         end
@@ -35,7 +35,7 @@ module LanguageServer
         #
         # Additional options
         #
-        # @return [CreateFileOptions | nil]
+        # @return [CreateFileOptions]
         def options
           attributes.fetch(:options)
         end
@@ -43,9 +43,7 @@ module LanguageServer
         #
         # An optional annotation identifier describing the operation.
         #
-        # @since 3.16.0
-        #
-        # @return [ChangeAnnotationIdentifier | nil]
+        # @return [string]
         def annotation_id
           attributes.fetch(:annotationId)
         end

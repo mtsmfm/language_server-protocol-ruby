@@ -2,8 +2,9 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Represents a folding range. To be valid, start and end line must be bigger than zero and smaller
-      # than the number of lines in the document. Clients are free to ignore invalid ranges.
+      # Represents a folding range. To be valid, start and end line must be bigger
+      # than zero and smaller than the number of lines in the document. Clients
+      # are free to ignore invalid ranges.
       #
       class FoldingRange
         def initialize(start_line:, start_character: nil, end_line:, end_character: nil, kind: nil, collapsed_text: nil)
@@ -20,45 +21,50 @@ module LanguageServer
         end
 
         #
-        # The zero-based start line of the range to fold. The folded area starts after the line's last character.
-        # To be valid, the end must be zero or larger and smaller than the number of lines in the document.
+        # The zero-based start line of the range to fold. The folded area starts
+        # after the line's last character. To be valid, the end must be zero or
+        # larger and smaller than the number of lines in the document.
         #
-        # @return [uinteger]
+        # @return [number]
         def start_line
           attributes.fetch(:startLine)
         end
 
         #
-        # The zero-based character offset from where the folded range starts. If not defined, defaults to the length of the start line.
+        # The zero-based character offset from where the folded range starts. If
+        # not defined, defaults to the length of the start line.
         #
-        # @return [uinteger | nil]
+        # @return [number]
         def start_character
           attributes.fetch(:startCharacter)
         end
 
         #
-        # The zero-based end line of the range to fold. The folded area ends with the line's last character.
-        # To be valid, the end must be zero or larger and smaller than the number of lines in the document.
+        # The zero-based end line of the range to fold. The folded area ends with
+        # the line's last character. To be valid, the end must be zero or larger
+        # and smaller than the number of lines in the document.
         #
-        # @return [uinteger]
+        # @return [number]
         def end_line
           attributes.fetch(:endLine)
         end
 
         #
-        # The zero-based character offset before the folded range ends. If not defined, defaults to the length of the end line.
+        # The zero-based character offset before the folded range ends. If not
+        # defined, defaults to the length of the end line.
         #
-        # @return [uinteger | nil]
+        # @return [number]
         def end_character
           attributes.fetch(:endCharacter)
         end
 
         #
-        # Describes the kind of the folding range such as `comment' or 'region'. The kind
-        # is used to categorize folding ranges and used by commands like 'Fold all comments'.
-        # See [FoldingRangeKind](#FoldingRangeKind) for an enumeration of standardized kinds.
+        # Describes the kind of the folding range such as `comment` or `region`.
+        # The kind is used to categorize folding ranges and used by commands like
+        # 'Fold all comments'. See [FoldingRangeKind](#FoldingRangeKind) for an
+        # enumeration of standardized kinds.
         #
-        # @return [FoldingRangeKind | nil]
+        # @return [string]
         def kind
           attributes.fetch(:kind)
         end
@@ -68,9 +74,7 @@ module LanguageServer
         # collapsed. If not defined or not supported by the client, a default
         # will be chosen by the client.
         #
-        # @since 3.17.0
-        #
-        # @return [string | nil]
+        # @return [string]
         def collapsed_text
           attributes.fetch(:collapsedText)
         end

@@ -5,8 +5,6 @@ module LanguageServer
       # A notebook cell text document filter denotes a cell text
       # document by different properties.
       #
-      # @since 3.17.0
-      #
       class NotebookCellTextDocumentFilter
         def initialize(notebook:, language: nil)
           @attributes = {}
@@ -34,7 +32,7 @@ module LanguageServer
         # Will be matched against the language id of the
         # notebook cell document. '*' matches every language.
         #
-        # @return [string | nil]
+        # @return [string]
         def language
           attributes.fetch(:language)
         end

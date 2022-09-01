@@ -19,12 +19,13 @@ module LanguageServer
         end
 
         #
-        # Controls enablement state of a cancel button.
+        # Controls enablement state of a cancel button. This property is only valid
+        # if a cancel button got requested in the `WorkDoneProgressBegin` payload.
         #
-        # Clients that don't support cancellation or don't support controlling the button's
-        # enablement state are allowed to ignore the property.
+        # Clients that don't support cancellation or don't support control the
+        # button's enablement state are allowed to ignore the setting.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def cancellable
           attributes.fetch(:cancellable)
         end
@@ -36,7 +37,7 @@ module LanguageServer
         # Examples: "3/25 files", "project/src/module2", "node_modules/some_dep".
         # If unset, the previous progress message (if any) is still valid.
         #
-        # @return [string | nil]
+        # @return [string]
         def message
           attributes.fetch(:message)
         end
@@ -49,7 +50,7 @@ module LanguageServer
         # The value should be steadily rising. Clients are free to ignore values
         # that are not following this rule. The value range is [0, 100]
         #
-        # @return [uinteger | nil]
+        # @return [number]
         def percentage
           attributes.fetch(:percentage)
         end

@@ -1,42 +1,37 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # The parameter of a `callHierarchy/outgoingCalls` request.
-      #
-      # @since 3.16.0
-      #
       class CallHierarchyOutgoingCallsParams
-        def initialize(item:, work_done_token: nil, partial_result_token: nil)
+        def initialize(work_done_token: nil, partial_result_token: nil, item:)
           @attributes = {}
 
-          @attributes[:item] = item
           @attributes[:workDoneToken] = work_done_token if work_done_token
           @attributes[:partialResultToken] = partial_result_token if partial_result_token
+          @attributes[:item] = item
 
           @attributes.freeze
-        end
-
-        # @return [CallHierarchyItem]
-        def item
-          attributes.fetch(:item)
         end
 
         #
         # An optional token that a server can use to report work done progress.
         #
-        # @return [ProgressToken | nil]
+        # @return [ProgressToken]
         def work_done_token
           attributes.fetch(:workDoneToken)
         end
 
         #
-        # An optional token that a server can use to report partial results (e.g. streaming) to
-        # the client.
+        # An optional token that a server can use to report partial results (e.g.
+        # streaming) to the client.
         #
-        # @return [ProgressToken | nil]
+        # @return [ProgressToken]
         def partial_result_token
           attributes.fetch(:partialResultToken)
+        end
+
+        # @return [CallHierarchyItem]
+        def item
+          attributes.fetch(:item)
         end
 
         attr_reader :attributes

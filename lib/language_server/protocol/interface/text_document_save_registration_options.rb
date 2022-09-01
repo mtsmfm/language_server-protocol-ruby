@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Save registration options.
-      #
       class TextDocumentSaveRegistrationOptions
         def initialize(document_selector:, include_text: nil)
           @attributes = {}
@@ -15,10 +12,10 @@ module LanguageServer
         end
 
         #
-        # A document selector to identify the scope of the registration. If set to null
-        # the document selector provided on the client side will be used.
+        # A document selector to identify the scope of the registration. If set to
+        # null the document selector provided on the client side will be used.
         #
-        # @return [DocumentSelector | null]
+        # @return [DocumentSelector]
         def document_selector
           attributes.fetch(:documentSelector)
         end
@@ -26,7 +23,7 @@ module LanguageServer
         #
         # The client is supposed to include the content on save.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def include_text
           attributes.fetch(:includeText)
         end

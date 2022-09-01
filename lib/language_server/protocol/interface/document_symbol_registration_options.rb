@@ -1,43 +1,38 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Registration options for a [DocumentSymbolRequest](#DocumentSymbolRequest).
-      #
       class DocumentSymbolRegistrationOptions
-        def initialize(document_selector:, label: nil, work_done_progress: nil)
+        def initialize(document_selector:, work_done_progress: nil, label: nil)
           @attributes = {}
 
           @attributes[:documentSelector] = document_selector
-          @attributes[:label] = label if label
           @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:label] = label if label
 
           @attributes.freeze
         end
 
         #
-        # A document selector to identify the scope of the registration. If set to null
-        # the document selector provided on the client side will be used.
+        # A document selector to identify the scope of the registration. If set to
+        # null the document selector provided on the client side will be used.
         #
-        # @return [DocumentSelector | null]
+        # @return [DocumentSelector]
         def document_selector
           attributes.fetch(:documentSelector)
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         #
         # A human-readable string that is shown when multiple outlines trees
         # are shown for the same document.
         #
-        # @since 3.16.0
-        #
-        # @return [string | nil]
+        # @return [string]
         def label
           attributes.fetch(:label)
-        end
-
-        # @return [boolean | nil]
-        def work_done_progress
-          attributes.fetch(:workDoneProgress)
         end
 
         attr_reader :attributes

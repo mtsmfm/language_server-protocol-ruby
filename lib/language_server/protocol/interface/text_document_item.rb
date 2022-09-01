@@ -1,10 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # An item to transfer a text document from the client to the
-      # server.
-      #
       class TextDocumentItem
         def initialize(uri:, language_id:, version:, text:)
           @attributes = {}
@@ -18,9 +14,9 @@ module LanguageServer
         end
 
         #
-        # The text document's uri.
+        # The text document's URI.
         #
-        # @return [DocumentUri]
+        # @return [string]
         def uri
           attributes.fetch(:uri)
         end
@@ -37,7 +33,7 @@ module LanguageServer
         # The version number of this document (it will increase after each
         # change, including undo/redo).
         #
-        # @return [integer]
+        # @return [number]
         def version
           attributes.fetch(:version)
         end

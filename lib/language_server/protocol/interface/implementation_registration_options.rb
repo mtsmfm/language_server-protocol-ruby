@@ -13,15 +13,15 @@ module LanguageServer
         end
 
         #
-        # A document selector to identify the scope of the registration. If set to null
-        # the document selector provided on the client side will be used.
+        # A document selector to identify the scope of the registration. If set to
+        # null the document selector provided on the client side will be used.
         #
-        # @return [DocumentSelector | null]
+        # @return [DocumentSelector]
         def document_selector
           attributes.fetch(:documentSelector)
         end
 
-        # @return [boolean | nil]
+        # @return [boolean]
         def work_done_progress
           attributes.fetch(:workDoneProgress)
         end
@@ -30,7 +30,7 @@ module LanguageServer
         # The id used to register the request. The id can be used to deregister
         # the request again. See also Registration#id.
         #
-        # @return [string | nil]
+        # @return [string]
         def id
           attributes.fetch(:id)
         end

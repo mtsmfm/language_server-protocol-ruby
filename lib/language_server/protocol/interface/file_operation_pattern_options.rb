@@ -4,8 +4,6 @@ module LanguageServer
       #
       # Matching options for the file operation pattern.
       #
-      # @since 3.16.0
-      #
       class FileOperationPatternOptions
         def initialize(ignore_case: nil)
           @attributes = {}
@@ -18,7 +16,7 @@ module LanguageServer
         #
         # The pattern should be matched ignoring casing.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def ignore_case
           attributes.fetch(:ignoreCase)
         end

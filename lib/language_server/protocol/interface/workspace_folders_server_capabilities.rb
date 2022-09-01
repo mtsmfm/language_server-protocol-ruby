@@ -14,7 +14,7 @@ module LanguageServer
         #
         # The server has support for workspace folders
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def supported
           attributes.fetch(:supported)
         end
@@ -23,12 +23,12 @@ module LanguageServer
         # Whether the server wants to receive workspace folder
         # change notifications.
         #
-        # If a string is provided the string is treated as an ID
+        # If a string is provided, the string is treated as an ID
         # under which the notification is registered on the client
         # side. The ID can be used to unregister for these events
         # using the `client/unregisterCapability` request.
         #
-        # @return [string | boolean | nil]
+        # @return [string | boolean]
         def change_notifications
           attributes.fetch(:changeNotifications)
         end

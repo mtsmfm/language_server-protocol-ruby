@@ -4,8 +4,6 @@ module LanguageServer
       #
       # Moniker definition to match LSIF 0.5 moniker definition.
       #
-      # @since 3.16.0
-      #
       class Moniker
         def initialize(scheme:, identifier:, unique:, kind: nil)
           @attributes = {}
@@ -46,7 +44,7 @@ module LanguageServer
         #
         # The moniker kind if known.
         #
-        # @return [MonikerKind | nil]
+        # @return [MonikerKind]
         def kind
           attributes.fetch(:kind)
         end

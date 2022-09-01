@@ -8,8 +8,6 @@ module LanguageServer
       # cells and can therefore be used to uniquely identify a
       # notebook cell or the cell's text document.
       #
-      # @since 3.17.0
-      #
       class NotebookCell
         def initialize(kind:, document:, metadata: nil, execution_summary: nil)
           @attributes = {}
@@ -25,7 +23,7 @@ module LanguageServer
         #
         # The cell's kind
         #
-        # @return [NotebookCellKind]
+        # @return [any]
         def kind
           attributes.fetch(:kind)
         end
@@ -34,7 +32,7 @@ module LanguageServer
         # The URI of the cell's text document
         # content.
         #
-        # @return [DocumentUri]
+        # @return [string]
         def document
           attributes.fetch(:document)
         end
@@ -42,9 +40,7 @@ module LanguageServer
         #
         # Additional metadata stored with the cell.
         #
-        # Note: should always be an object literal (e.g. LSPObject)
-        #
-        # @return [LSPObject | nil]
+        # @return [LSPObject]
         def metadata
           attributes.fetch(:metadata)
         end
@@ -53,7 +49,7 @@ module LanguageServer
         # Additional execution summary information
         # if supported by the client.
         #
-        # @return [ExecutionSummary | nil]
+        # @return [ExecutionSummary]
         def execution_summary
           attributes.fetch(:executionSummary)
         end

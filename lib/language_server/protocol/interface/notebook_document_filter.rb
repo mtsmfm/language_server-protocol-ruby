@@ -3,16 +3,13 @@ module LanguageServer
     module Interface
       #
       # A notebook document filter denotes a notebook document by
-      # different properties. The properties will be match
-      # against the notebook's URI (same as with documents)
-      #
-      # @since 3.17.0
+      # different properties.
       #
       class NotebookDocumentFilter
-        def initialize(notebook_type:, scheme: nil, pattern: nil)
+        def initialize(notebook_type: nil, scheme: nil, pattern: nil)
           @attributes = {}
 
-          @attributes[:notebookType] = notebook_type
+          @attributes[:notebookType] = notebook_type if notebook_type
           @attributes[:scheme] = scheme if scheme
           @attributes[:pattern] = pattern if pattern
 
@@ -20,7 +17,15 @@ module LanguageServer
         end
 
         #
-        # The type of the enclosing notebook. */
+        # The type of the enclosing notebook.
+        #
+        # --- OR ---
+        #
+        # The type of the enclosing notebook.
+        #
+        # --- OR ---
+        #
+        # The type of the enclosing notebook.
         #
         # @return [string]
         def notebook_type
@@ -28,17 +33,33 @@ module LanguageServer
         end
 
         #
-        # A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */
+        # A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
         #
-        # @return [string | nil]
+        # --- OR ---
+        #
+        # A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
+        #
+        # --- OR ---
+        #
+        # A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
+        #
+        # @return [string]
         def scheme
           attributes.fetch(:scheme)
         end
 
         #
-        # A glob pattern. */
+        # A glob pattern.
         #
-        # @return [string | nil]
+        # --- OR ---
+        #
+        # A glob pattern.
+        #
+        # --- OR ---
+        #
+        # A glob pattern.
+        #
+        # @return [string]
         def pattern
           attributes.fetch(:pattern)
         end

@@ -2,9 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Client capabilities for the showDocument request.
-      #
-      # @since 3.16.0
+      # Client capabilities for the show document request.
       #
       class ShowDocumentClientCapabilities
         def initialize(support:)
@@ -16,7 +14,7 @@ module LanguageServer
         end
 
         #
-        # The client has support for the showDocument
+        # The client has support for the show document
         # request.
         #
         # @return [boolean]

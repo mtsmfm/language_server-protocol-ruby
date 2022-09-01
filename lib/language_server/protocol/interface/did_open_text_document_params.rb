@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # The parameters sent in an open text document notification
-      #
       class DidOpenTextDocumentParams
         def initialize(text_document:)
           @attributes = {}

@@ -20,7 +20,7 @@ module LanguageServer
         # `FoldingRangeRegistrationOptions` return value for the corresponding
         # server capability as well.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
@@ -30,7 +30,7 @@ module LanguageServer
         # per document. The value serves as a hint, servers are free to follow the
         # limit.
         #
-        # @return [uinteger | nil]
+        # @return [number]
         def range_limit
           attributes.fetch(:rangeLimit)
         end
@@ -40,7 +40,7 @@ module LanguageServer
         # If set, client will ignore specified `startCharacter` and `endCharacter`
         # properties in a FoldingRange.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def line_folding_only
           attributes.fetch(:lineFoldingOnly)
         end
@@ -48,9 +48,7 @@ module LanguageServer
         #
         # Specific options for the folding range kind.
         #
-        # @since 3.17.0
-        #
-        # @return [{ valueSet:FoldingRangeKind[] } | nil]
+        # @return [{ valueSet?: string[]; }]
         def folding_range_kind
           attributes.fetch(:foldingRangeKind)
         end
@@ -58,9 +56,7 @@ module LanguageServer
         #
         # Specific options for the folding range.
         #
-        # @since 3.17.0
-        #
-        # @return [{ collapsedText:boolean } | nil]
+        # @return [{ collapsedText?: boolean; }]
         def folding_range
           attributes.fetch(:foldingRange)
         end

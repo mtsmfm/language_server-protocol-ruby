@@ -3,10 +3,11 @@ module LanguageServer
     module Interface
       #
       # Provide inline value through a variable lookup.
-      # If only a range is specified, the variable name will be extracted from the underlying document.
-      # An optional variable name can be used to override the extracted name.
       #
-      # @since 3.17.0
+      # If only a range is specified, the variable name will be extracted from
+      # the underlying document.
+      #
+      # An optional variable name can be used to override the extracted name.
       #
       class InlineValueVariableLookup
         def initialize(range:, variable_name: nil, case_sensitive_lookup:)
@@ -21,7 +22,8 @@ module LanguageServer
 
         #
         # The document range for which the inline value applies.
-        # The range is used to extract the variable name from the underlying document.
+        # The range is used to extract the variable name from the underlying
+        # document.
         #
         # @return [Range]
         def range
@@ -31,7 +33,7 @@ module LanguageServer
         #
         # If specified the name of the variable to look up.
         #
-        # @return [string | nil]
+        # @return [string]
         def variable_name
           attributes.fetch(:variableName)
         end

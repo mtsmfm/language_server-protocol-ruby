@@ -4,8 +4,6 @@ module LanguageServer
       #
       # The params sent in a save notebook document notification.
       #
-      # @since 3.17.0
-      #
       class DidSaveNotebookDocumentParams
         def initialize(notebook_document:)
           @attributes = {}

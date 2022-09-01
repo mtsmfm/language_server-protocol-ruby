@@ -4,8 +4,6 @@ module LanguageServer
       #
       # Inlay hint kinds.
       #
-      # @since 3.17.0
-      #
       module InlayHintKind
         #
         # An inlay hint that for a type annotation.

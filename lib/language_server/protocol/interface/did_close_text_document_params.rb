@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # The parameters sent in a close text document notification
-      #
       class DidCloseTextDocumentParams
         def initialize(text_document:)
           @attributes = {}

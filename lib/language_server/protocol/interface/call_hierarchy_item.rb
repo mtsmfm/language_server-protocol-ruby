@@ -1,12 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Represents programming constructs like functions or constructors in the context
-      # of call hierarchy.
-      #
-      # @since 3.16.0
-      #
       class CallHierarchyItem
         def initialize(name:, kind:, tags: nil, detail: nil, uri:, range:, selection_range:, data: nil)
           @attributes = {}
@@ -42,7 +36,7 @@ module LanguageServer
         #
         # Tags for this item.
         #
-        # @return [SymbolTag[] | nil]
+        # @return [1[]]
         def tags
           attributes.fetch(:tags)
         end
@@ -50,7 +44,7 @@ module LanguageServer
         #
         # More detail for this item, e.g. the signature of a function.
         #
-        # @return [string | nil]
+        # @return [string]
         def detail
           attributes.fetch(:detail)
         end
@@ -58,13 +52,14 @@ module LanguageServer
         #
         # The resource identifier of this item.
         #
-        # @return [DocumentUri]
+        # @return [string]
         def uri
           attributes.fetch(:uri)
         end
 
         #
-        # The range enclosing this symbol not including leading/trailing whitespace but everything else, e.g. comments and code.
+        # The range enclosing this symbol not including leading/trailing whitespace
+        # but everything else, e.g. comments and code.
         #
         # @return [Range]
         def range
@@ -72,8 +67,9 @@ module LanguageServer
         end
 
         #
-        # The range that should be selected and revealed when this symbol is being picked, e.g. the name of a function.
-        # Must be contained by the [`range`](#CallHierarchyItem.range).
+        # The range that should be selected and revealed when this symbol is being
+        # picked, e.g. the name of a function. Must be contained by the
+        # [`range`](#CallHierarchyItem.range).
         #
         # @return [Range]
         def selection_range
@@ -84,7 +80,7 @@ module LanguageServer
         # A data entry field that is preserved between a call hierarchy prepare and
         # incoming calls or outgoing calls requests.
         #
-        # @return [LSPAny | nil]
+        # @return [unknown]
         def data
           attributes.fetch(:data)
         end

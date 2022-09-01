@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # The parameters passed via a apply workspace edit request.
-      #
       class ApplyWorkspaceEditParams
         def initialize(label: nil, edit:)
           @attributes = {}
@@ -19,7 +16,7 @@ module LanguageServer
         # presented in the user interface for example on an undo
         # stack to undo the workspace edit.
         #
-        # @return [string | nil]
+        # @return [string]
         def label
           attributes.fetch(:label)
         end

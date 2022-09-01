@@ -15,9 +15,9 @@ module LanguageServer
         end
 
         #
-        # The file's uri.
+        # The file's URI.
         #
-        # @return [DocumentUri]
+        # @return [string]
         def uri
           attributes.fetch(:uri)
         end
@@ -25,7 +25,7 @@ module LanguageServer
         #
         # The change type.
         #
-        # @return [FileChangeType]
+        # @return [number]
         def type
           attributes.fetch(:type)
         end

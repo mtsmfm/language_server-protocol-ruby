@@ -17,7 +17,7 @@ module LanguageServer
         #
         # Delete the content recursively if a folder is denoted.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def recursive
           attributes.fetch(:recursive)
         end
@@ -25,7 +25,7 @@ module LanguageServer
         #
         # Ignore the operation if the file doesn't exist.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def ignore_if_not_exists
           attributes.fetch(:ignoreIfNotExists)
         end

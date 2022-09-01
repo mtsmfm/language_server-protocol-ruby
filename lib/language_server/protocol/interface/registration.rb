@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # General parameters to to register for an notification or to register a provider.
+      # General parameters to register for a capability.
       #
       class Registration
         def initialize(id:, method:, register_options: nil)
@@ -35,7 +35,7 @@ module LanguageServer
         #
         # Options necessary for the registration.
         #
-        # @return [LSPAny | nil]
+        # @return [LSPAny]
         def register_options
           attributes.fetch(:registerOptions)
         end

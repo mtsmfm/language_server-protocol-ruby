@@ -12,9 +12,8 @@ module LanguageServer
         end
 
         #
-        # The glob pattern to watch. See {@link GlobPattern glob pattern} for more detail.
-        #
-        # @since 3.17.0 support for relative patterns.
+        # The glob pattern to watch. See {@link GlobPattern glob pattern}
+        # for more detail.
         #
         # @return [GlobPattern]
         def glob_pattern
@@ -26,7 +25,7 @@ module LanguageServer
         # to WatchKind.Create | WatchKind.Change | WatchKind.Delete
         # which is 7.
         #
-        # @return [WatchKind | nil]
+        # @return [number]
         def kind
           attributes.fetch(:kind)
         end

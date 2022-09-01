@@ -4,8 +4,6 @@ module LanguageServer
       #
       # Notebook specific client capabilities.
       #
-      # @since 3.17.0
-      #
       class NotebookDocumentSyncClientCapabilities
         def initialize(dynamic_registration: nil, execution_summary_support: nil)
           @attributes = {}
@@ -22,7 +20,7 @@ module LanguageServer
         # `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
         # return value for the corresponding server capability as well.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
@@ -30,7 +28,7 @@ module LanguageServer
         #
         # The client supports sending execution summary data per cell.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def execution_summary_support
           attributes.fetch(:executionSummarySupport)
         end

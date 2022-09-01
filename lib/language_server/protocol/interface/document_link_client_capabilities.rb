@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # The client capabilities of a [DocumentLinkRequest](#DocumentLinkRequest).
-      #
       class DocumentLinkClientCapabilities
         def initialize(dynamic_registration: nil, tooltip_support: nil)
           @attributes = {}
@@ -17,7 +14,7 @@ module LanguageServer
         #
         # Whether document link supports dynamic registration.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
@@ -25,9 +22,7 @@ module LanguageServer
         #
         # Whether the client supports the `tooltip` property on `DocumentLink`.
         #
-        # @since 3.15.0
-        #
-        # @return [boolean | nil]
+        # @return [boolean]
         def tooltip_support
           attributes.fetch(:tooltipSupport)
         end

@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # The watched files change notification's parameters.
-      #
       class DidChangeWatchedFilesParams
         def initialize(changes:)
           @attributes = {}
