@@ -1,5 +1,9 @@
 # Change log
 
+## 3.17.0.1
+
+- Fix union (#49)
+
 ## 3.17.0.0
 
 - Update Language Server Protocol version to 3.17.0 (#37)
