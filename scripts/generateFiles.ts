@@ -188,6 +188,15 @@ const extractDefinitions = (content: string) => {
     });
   };
 
+  const handleEnum = (node: ts.EnumDeclaration) => {
+    const members: SerializeResult[] = node.members.map((m) => serialize(m));
+
+    output.push({
+      module: serialize(node),
+      members,
+    });
+  };
+
   ts.isInterfaceDeclaration;
 
   const pendingInterfaces: ts.InterfaceDeclaration[] = [];
@@ -204,6 +213,8 @@ const extractDefinitions = (content: string) => {
       handleModule(node);
     } else if (ts.isTypeAliasDeclaration(node)) {
       handleTypeAlias(node);
+    } else if (ts.isEnumDeclaration(node)) {
+      handleEnum(node);
     }
   };
 
