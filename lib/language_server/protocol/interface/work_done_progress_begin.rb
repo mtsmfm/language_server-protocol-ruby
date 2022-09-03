@@ -32,10 +32,10 @@ module LanguageServer
 
         #
         # Controls if a cancel button should show to allow the user to cancel the
-        # long running operation. Clients that don't support cancellation are allowed
-        # to ignore the setting.
+        # long running operation. Clients that don't support cancellation are
+        # allowed to ignore the setting.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def cancellable
           attributes.fetch(:cancellable)
         end
@@ -47,7 +47,7 @@ module LanguageServer
         # Examples: "3/25 files", "project/src/module2", "node_modules/some_dep".
         # If unset, the previous progress message (if any) is still valid.
         #
-        # @return [string | nil]
+        # @return [string]
         def message
           attributes.fetch(:message)
         end
@@ -58,9 +58,9 @@ module LanguageServer
         # to ignore the `percentage` value in subsequent in report notifications.
         #
         # The value should be steadily rising. Clients are free to ignore values
-        # that are not following this rule. The value range is [0, 100].
+        # that are not following this rule. The value range is [0, 100]
         #
-        # @return [uinteger | nil]
+        # @return [number]
         def percentage
           attributes.fetch(:percentage)
         end

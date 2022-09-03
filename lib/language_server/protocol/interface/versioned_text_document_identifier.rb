@@ -1,33 +1,33 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # A text document identifier to denote a specific version of a text document.
-      #
       class VersionedTextDocumentIdentifier
-        def initialize(version:, uri:)
+        def initialize(uri:, version:)
           @attributes = {}
 
-          @attributes[:version] = version
           @attributes[:uri] = uri
+          @attributes[:version] = version
 
           @attributes.freeze
         end
 
         #
-        # The version number of this document.
+        # The text document's URI.
         #
-        # @return [integer]
-        def version
-          attributes.fetch(:version)
+        # @return [string]
+        def uri
+          attributes.fetch(:uri)
         end
 
         #
-        # The text document's uri.
+        # The version number of this document.
         #
-        # @return [DocumentUri]
-        def uri
-          attributes.fetch(:uri)
+        # The version number of a document will increase after each change,
+        # including undo/redo. The number doesn't need to be consecutive.
+        #
+        # @return [number]
+        def version
+          attributes.fetch(:version)
         end
 
         attr_reader :attributes

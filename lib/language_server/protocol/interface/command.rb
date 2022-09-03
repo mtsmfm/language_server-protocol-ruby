@@ -1,12 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Represents a reference to a command. Provides a title which
-      # will be used to represent a command in the UI and, optionally,
-      # an array of arguments which will be passed to the command handler
-      # function when invoked.
-      #
       class Command
         def initialize(title:, command:, arguments: nil)
           @attributes = {}
@@ -38,7 +32,7 @@ module LanguageServer
         # Arguments that the command handler should be
         # invoked with.
         #
-        # @return [LSPAny[] | nil]
+        # @return [LSPAny[]]
         def arguments
           attributes.fetch(:arguments)
         end

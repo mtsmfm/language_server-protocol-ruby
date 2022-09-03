@@ -4,8 +4,6 @@ module LanguageServer
       #
       # Registration options specific to a notebook.
       #
-      # @since 3.17.0
-      #
       class NotebookDocumentSyncRegistrationOptions
         def initialize(notebook_selector:, save: nil, id: nil)
           @attributes = {}
@@ -20,7 +18,7 @@ module LanguageServer
         #
         # The notebooks to be synced
         #
-        # @return [{ notebook:string | NotebookDocumentFilter, cells:{ language:string }[] } | { notebook:string | NotebookDocumentFilter, cells:{ language:string }[] }[]]
+        # @return [({ notebook: string | NotebookDocumentFilter; cells?: { language: string; }[]; } | { notebook?: string | NotebookDocumentFilter; cells: { ...; }[]; })[]]
         def notebook_selector
           attributes.fetch(:notebookSelector)
         end
@@ -29,7 +27,7 @@ module LanguageServer
         # Whether save notification should be forwarded to
         # the server. Will only be honored if mode === `notebook`.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def save
           attributes.fetch(:save)
         end
@@ -38,7 +36,7 @@ module LanguageServer
         # The id used to register the request. The id can be used to deregister
         # the request again. See also Registration#id.
         #
-        # @return [string | nil]
+        # @return [string]
         def id
           attributes.fetch(:id)
         end

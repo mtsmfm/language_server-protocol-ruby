@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # A text edit applicable to a text document.
-      #
       class TextEdit
         def initialize(range:, new_text:)
           @attributes = {}

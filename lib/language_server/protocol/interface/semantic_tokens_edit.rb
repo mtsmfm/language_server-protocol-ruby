@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # @since 3.16.0
-      #
       class SemanticTokensEdit
         def initialize(start:, delete_count:, data: nil)
           @attributes = {}
@@ -18,7 +15,7 @@ module LanguageServer
         #
         # The start offset of the edit.
         #
-        # @return [uinteger]
+        # @return [number]
         def start
           attributes.fetch(:start)
         end
@@ -26,7 +23,7 @@ module LanguageServer
         #
         # The count of elements to remove.
         #
-        # @return [uinteger]
+        # @return [number]
         def delete_count
           attributes.fetch(:deleteCount)
         end
@@ -34,7 +31,7 @@ module LanguageServer
         #
         # The elements to insert.
         #
-        # @return [uinteger[] | nil]
+        # @return [number[]]
         def data
           attributes.fetch(:data)
         end

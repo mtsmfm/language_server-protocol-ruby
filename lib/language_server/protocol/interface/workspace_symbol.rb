@@ -2,45 +2,20 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # A special workspace symbol that supports locations without a range.
-      #
-      # See also SymbolInformation.
-      #
-      # @since 3.17.0
+      # A special workspace symbol that supports locations without a range
       #
       class WorkspaceSymbol
-        def initialize(location:, data: nil, name:, kind:, tags: nil, container_name: nil)
+        def initialize(name:, kind:, tags: nil, container_name: nil, location:, data: nil)
           @attributes = {}
 
-          @attributes[:location] = location
-          @attributes[:data] = data if data
           @attributes[:name] = name
           @attributes[:kind] = kind
           @attributes[:tags] = tags if tags
           @attributes[:containerName] = container_name if container_name
+          @attributes[:location] = location
+          @attributes[:data] = data if data
 
           @attributes.freeze
-        end
-
-        #
-        # The location of the symbol. Whether a server is allowed to
-        # return a location without a range depends on the client
-        # capability `workspace.symbol.resolveSupport`.
-        #
-        # See SymbolInformation#location for more details.
-        #
-        # @return [Location | { uri:DocumentUri }]
-        def location
-          attributes.fetch(:location)
-        end
-
-        #
-        # A data entry field that is preserved on a workspace symbol between a
-        # workspace symbol request and a workspace symbol resolve request.
-        #
-        # @return [LSPAny | nil]
-        def data
-          attributes.fetch(:data)
         end
 
         #
@@ -60,11 +35,9 @@ module LanguageServer
         end
 
         #
-        # Tags for this symbol.
+        # Tags for this completion item.
         #
-        # @since 3.16.0
-        #
-        # @return [SymbolTag[] | nil]
+        # @return [1[]]
         def tags
           attributes.fetch(:tags)
         end
@@ -75,9 +48,30 @@ module LanguageServer
         # if necessary). It can't be used to re-infer a hierarchy for the document
         # symbols.
         #
-        # @return [string | nil]
+        # @return [string]
         def container_name
           attributes.fetch(:containerName)
+        end
+
+        #
+        # The location of this symbol. Whether a server is allowed to
+        # return a location without a range depends on the client
+        # capability `workspace.symbol.resolveSupport`.
+        #
+        # See also `SymbolInformation.location`.
+        #
+        # @return [Location | { uri: string; }]
+        def location
+          attributes.fetch(:location)
+        end
+
+        #
+        # A data entry field that is preserved on a workspace symbol between a
+        # workspace symbol request and a workspace symbol resolve request.
+        #
+        # @return [LSPAny]
+        def data
+          attributes.fetch(:data)
         end
 
         attr_reader :attributes

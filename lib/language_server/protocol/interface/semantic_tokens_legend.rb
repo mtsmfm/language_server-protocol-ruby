@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # @since 3.16.0
-      #
       class SemanticTokensLegend
         def initialize(token_types:, token_modifiers:)
           @attributes = {}

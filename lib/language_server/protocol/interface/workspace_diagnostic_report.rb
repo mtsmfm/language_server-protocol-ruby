@@ -4,8 +4,6 @@ module LanguageServer
       #
       # A workspace diagnostic report.
       #
-      # @since 3.17.0
-      #
       class WorkspaceDiagnosticReport
         def initialize(items:)
           @attributes = {}

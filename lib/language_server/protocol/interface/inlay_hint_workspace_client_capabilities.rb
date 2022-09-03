@@ -4,8 +4,6 @@ module LanguageServer
       #
       # Client workspace capabilities specific to inlay hints.
       #
-      # @since 3.17.0
-      #
       class InlayHintWorkspaceClientCapabilities
         def initialize(refresh_support: nil)
           @attributes = {}
@@ -24,7 +22,7 @@ module LanguageServer
         # is useful for situation where a server for example detects a project wide
         # change that requires such a calculation.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def refresh_support
           attributes.fetch(:refreshSupport)
         end

@@ -2,8 +2,8 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Represents a collection of [completion items](#CompletionItem) to be presented
-      # in the editor.
+      # Represents a collection of [completion items](#CompletionItem) to be
+      # presented in the editor.
       #
       class CompletionList
         def initialize(is_incomplete:, item_defaults: nil, items:)
@@ -17,7 +17,8 @@ module LanguageServer
         end
 
         #
-        # This list it not complete. Further typing results in recomputing this list.
+        # This list is not complete. Further typing should result in recomputing
+        # this list.
         #
         # Recomputed lists have all their items replaced (not appended) in the
         # incomplete completion sessions.
@@ -40,9 +41,7 @@ module LanguageServer
         # signals support for this via the `completionList.itemDefaults`
         # capability.
         #
-        # @since 3.17.0
-        #
-        # @return [{ commitCharacters:string[], editRange:Range | { insert:Range, replace:Range }, insertTextFormat:InsertTextFormat, insertTextMode:InsertTextMode, data:LSPAny } | nil]
+        # @return [{ commitCharacters?: string[]; editRange?: Range | { insert: Range; replace: Range; }; insertTextFormat?: InsertTextFormat; insertTextMode?: InsertTextMode; data?: LSPAny; }]
         def item_defaults
           attributes.fetch(:itemDefaults)
         end

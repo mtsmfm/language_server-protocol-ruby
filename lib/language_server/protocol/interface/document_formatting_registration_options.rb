@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Registration options for a [DocumentFormattingRequest](#DocumentFormattingRequest).
-      #
       class DocumentFormattingRegistrationOptions
         def initialize(document_selector:, work_done_progress: nil)
           @attributes = {}
@@ -15,15 +12,15 @@ module LanguageServer
         end
 
         #
-        # A document selector to identify the scope of the registration. If set to null
-        # the document selector provided on the client side will be used.
+        # A document selector to identify the scope of the registration. If set to
+        # null the document selector provided on the client side will be used.
         #
-        # @return [DocumentSelector | null]
+        # @return [DocumentSelector]
         def document_selector
           attributes.fetch(:documentSelector)
         end
 
-        # @return [boolean | nil]
+        # @return [boolean]
         def work_done_progress
           attributes.fetch(:workDoneProgress)
         end

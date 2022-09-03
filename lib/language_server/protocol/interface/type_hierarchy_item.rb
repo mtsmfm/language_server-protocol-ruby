@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # @since 3.17.0
-      #
       class TypeHierarchyItem
         def initialize(name:, kind:, tags: nil, detail: nil, uri:, range:, selection_range:, data: nil)
           @attributes = {}
@@ -39,7 +36,7 @@ module LanguageServer
         #
         # Tags for this item.
         #
-        # @return [SymbolTag[] | nil]
+        # @return [1[]]
         def tags
           attributes.fetch(:tags)
         end
@@ -47,7 +44,7 @@ module LanguageServer
         #
         # More detail for this item, e.g. the signature of a function.
         #
-        # @return [string | nil]
+        # @return [string]
         def detail
           attributes.fetch(:detail)
         end
@@ -55,7 +52,7 @@ module LanguageServer
         #
         # The resource identifier of this item.
         #
-        # @return [DocumentUri]
+        # @return [string]
         def uri
           attributes.fetch(:uri)
         end
@@ -85,7 +82,7 @@ module LanguageServer
         # type hierarchy in the server, helping improve the performance on
         # resolving supertypes and subtypes.
         #
-        # @return [LSPAny | nil]
+        # @return [LSPAny]
         def data
           attributes.fetch(:data)
         end

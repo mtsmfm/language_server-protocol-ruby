@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # The publish diagnostic notification's parameters.
-      #
       class PublishDiagnosticsParams
         def initialize(uri:, version: nil, diagnostics:)
           @attributes = {}
@@ -18,17 +15,16 @@ module LanguageServer
         #
         # The URI for which diagnostic information is reported.
         #
-        # @return [DocumentUri]
+        # @return [string]
         def uri
           attributes.fetch(:uri)
         end
 
         #
-        # Optional the version number of the document the diagnostics are published for.
+        # Optional the version number of the document the diagnostics are published
+        # for.
         #
-        # @since 3.15.0
-        #
-        # @return [integer | nil]
+        # @return [number]
         def version
           attributes.fetch(:version)
         end

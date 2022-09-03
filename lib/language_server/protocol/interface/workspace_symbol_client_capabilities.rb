@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Client capabilities for a [WorkspaceSymbolRequest](#WorkspaceSymbolRequest).
-      #
       class WorkspaceSymbolClientCapabilities
         def initialize(dynamic_registration: nil, symbol_kind: nil, tag_support: nil, resolve_support: nil)
           @attributes = {}
@@ -19,26 +16,25 @@ module LanguageServer
         #
         # Symbol request supports dynamic registration.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
 
         #
-        # Specific capabilities for the `SymbolKind` in the `workspace/symbol` request.
+        # Specific capabilities for the `SymbolKind` in the `workspace/symbol`
+        # request.
         #
-        # @return [{ valueSet:SymbolKind[] } | nil]
+        # @return [{ valueSet?: SymbolKind[]; }]
         def symbol_kind
           attributes.fetch(:symbolKind)
         end
 
         #
-        # The client supports tags on `SymbolInformation`.
+        # The client supports tags on `SymbolInformation` and `WorkspaceSymbol`.
         # Clients supporting tags have to handle unknown tags gracefully.
         #
-        # @since 3.16.0
-        #
-        # @return [{ valueSet:SymbolTag[] } | nil]
+        # @return [{ valueSet: 1[]; }]
         def tag_support
           attributes.fetch(:tagSupport)
         end
@@ -48,9 +44,7 @@ module LanguageServer
         # request `workspaceSymbol/resolve` to the server to resolve additional
         # properties.
         #
-        # @since 3.17.0
-        #
-        # @return [{ properties:string[] } | nil]
+        # @return [{ properties: string[]; }]
         def resolve_support
           attributes.fetch(:resolveSupport)
         end

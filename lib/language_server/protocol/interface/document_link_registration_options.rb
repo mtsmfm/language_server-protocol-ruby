@@ -1,40 +1,37 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Registration options for a [DocumentLinkRequest](#DocumentLinkRequest).
-      #
       class DocumentLinkRegistrationOptions
-        def initialize(document_selector:, resolve_provider: nil, work_done_progress: nil)
+        def initialize(document_selector:, work_done_progress: nil, resolve_provider: nil)
           @attributes = {}
 
           @attributes[:documentSelector] = document_selector
-          @attributes[:resolveProvider] = resolve_provider if resolve_provider
           @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:resolveProvider] = resolve_provider if resolve_provider
 
           @attributes.freeze
         end
 
         #
-        # A document selector to identify the scope of the registration. If set to null
-        # the document selector provided on the client side will be used.
+        # A document selector to identify the scope of the registration. If set to
+        # null the document selector provided on the client side will be used.
         #
-        # @return [DocumentSelector | null]
+        # @return [DocumentSelector]
         def document_selector
           attributes.fetch(:documentSelector)
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         #
         # Document links have a resolve provider as well.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def resolve_provider
           attributes.fetch(:resolveProvider)
-        end
-
-        # @return [boolean | nil]
-        def work_done_progress
-          attributes.fetch(:workDoneProgress)
         end
 
         attr_reader :attributes

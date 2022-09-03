@@ -4,8 +4,6 @@ module LanguageServer
       #
       # Inlay hint information.
       #
-      # @since 3.17.0
-      #
       class InlayHint
         def initialize(position:, label:, kind: nil, text_edits: nil, tooltip: nil, padding_left: nil, padding_right: nil, data: nil)
           @attributes = {}
@@ -45,7 +43,7 @@ module LanguageServer
         # The kind of this hint. Can be omitted in which case the client
         # should fall back to a reasonable default.
         #
-        # @return [InlayHintKind | nil]
+        # @return [InlayHintKind]
         def kind
           attributes.fetch(:kind)
         end
@@ -57,7 +55,10 @@ module LanguageServer
         # hint (or its nearest variant) is now part of the document and the inlay
         # hint itself is now obsolete.
         #
-        # @return [TextEdit[] | nil]
+        # Depending on the client capability `inlayHint.resolveSupport` clients
+        # might resolve this property late using the resolve request.
+        #
+        # @return [TextEdit[]]
         def text_edits
           attributes.fetch(:textEdits)
         end
@@ -65,7 +66,10 @@ module LanguageServer
         #
         # The tooltip text when you hover over this item.
         #
-        # @return [string | MarkupContent | nil]
+        # Depending on the client capability `inlayHint.resolveSupport` clients
+        # might resolve this property late using the resolve request.
+        #
+        # @return [string | MarkupContent]
         def tooltip
           attributes.fetch(:tooltip)
         end
@@ -77,7 +81,7 @@ module LanguageServer
         # background color of the hint itself. That means padding can be used
         # to visually align/separate an inlay hint.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def padding_left
           attributes.fetch(:paddingLeft)
         end
@@ -89,16 +93,16 @@ module LanguageServer
         # background color of the hint itself. That means padding can be used
         # to visually align/separate an inlay hint.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def padding_right
           attributes.fetch(:paddingRight)
         end
 
         #
-        # A data entry field that is preserved on an inlay hint between
+        # A data entry field that is preserved on a inlay hint between
         # a `textDocument/inlayHint` and a `inlayHint/resolve` request.
         #
-        # @return [LSPAny | nil]
+        # @return [LSPAny]
         def data
           attributes.fetch(:data)
         end

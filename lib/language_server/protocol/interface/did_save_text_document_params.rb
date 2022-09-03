@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # The parameters sent in a save text document notification
-      #
       class DidSaveTextDocumentParams
         def initialize(text_document:, text: nil)
           @attributes = {}
@@ -26,7 +23,7 @@ module LanguageServer
         # Optional the content when saved. Depends on the includeText value
         # when the save notification was requested.
         #
-        # @return [string | nil]
+        # @return [string]
         def text
           attributes.fetch(:text)
         end

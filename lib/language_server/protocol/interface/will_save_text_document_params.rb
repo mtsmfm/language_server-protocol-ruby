@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # The parameters sent in a will save text document notification.
+      # The parameters send in a will save text document notification.
       #
       class WillSaveTextDocumentParams
         def initialize(text_document:, reason:)

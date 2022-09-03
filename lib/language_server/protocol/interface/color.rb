@@ -19,7 +19,7 @@ module LanguageServer
         #
         # The red component of this color in the range [0-1].
         #
-        # @return [decimal]
+        # @return [number]
         def red
           attributes.fetch(:red)
         end
@@ -27,7 +27,7 @@ module LanguageServer
         #
         # The green component of this color in the range [0-1].
         #
-        # @return [decimal]
+        # @return [number]
         def green
           attributes.fetch(:green)
         end
@@ -35,7 +35,7 @@ module LanguageServer
         #
         # The blue component of this color in the range [0-1].
         #
-        # @return [decimal]
+        # @return [number]
         def blue
           attributes.fetch(:blue)
         end
@@ -43,7 +43,7 @@ module LanguageServer
         #
         # The alpha component of this color in the range [0-1].
         #
-        # @return [decimal]
+        # @return [number]
         def alpha
           attributes.fetch(:alpha)
         end

@@ -3,10 +3,11 @@ module LanguageServer
     module Interface
       #
       # Provide an inline value through an expression evaluation.
-      # If only a range is specified, the expression will be extracted from the underlying document.
-      # An optional expression can be used to override the extracted expression.
       #
-      # @since 3.17.0
+      # If only a range is specified, the expression will be extracted from the
+      # underlying document.
+      #
+      # An optional expression can be used to override the extracted expression.
       #
       class InlineValueEvaluatableExpression
         def initialize(range:, expression: nil)
@@ -20,7 +21,8 @@ module LanguageServer
 
         #
         # The document range for which the inline value applies.
-        # The range is used to extract the evaluatable expression from the underlying document.
+        # The range is used to extract the evaluatable expression from the
+        # underlying document.
         #
         # @return [Range]
         def range
@@ -30,7 +32,7 @@ module LanguageServer
         #
         # If specified the expression overrides the extracted expression.
         #
-        # @return [string | nil]
+        # @return [string]
         def expression
           attributes.fetch(:expression)
         end

@@ -1,26 +1,19 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # A document filter describes a top level text document or
-      # a notebook cell document.
-      #
-      # @since 3.17.0 - proposed support for NotebookCellTextDocumentFilter.
-      #
       class DocumentFilter
-        def initialize(language:, scheme: nil, pattern: nil, notebook:)
+        def initialize(language: nil, scheme: nil, pattern: nil)
           @attributes = {}
 
-          @attributes[:language] = language
+          @attributes[:language] = language if language
           @attributes[:scheme] = scheme if scheme
           @attributes[:pattern] = pattern if pattern
-          @attributes[:notebook] = notebook
 
           @attributes.freeze
         end
 
         #
-        # A language id, like `typescript`. */
+        # A language id, like `typescript`.
         #
         # @return [string]
         def language
@@ -28,30 +21,31 @@ module LanguageServer
         end
 
         #
-        # A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */
+        # A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
         #
-        # @return [string | nil]
+        # @return [string]
         def scheme
           attributes.fetch(:scheme)
         end
 
         #
-        # A glob pattern, like `*.{ts,js}`. */
+        # A glob pattern, like `*.{ts,js}`.
         #
-        # @return [string | nil]
+        # Glob patterns can have the following syntax:
+        # - `*` to match one or more characters in a path segment
+        # - `?` to match on one character in a path segment
+        # - `**` to match any number of path segments, including none
+        # - `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}`
+        # matches all TypeScript and JavaScript files)
+        # - `[]` to declare a range of characters to match in a path segment
+        # (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)
+        # - `[!...]` to negate a range of characters to match in a path segment
+        # (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but
+        # not `example.0`)
+        #
+        # @return [string]
         def pattern
           attributes.fetch(:pattern)
-        end
-
-        #
-        # A filter that matches against the notebook
-        # containing the notebook cell. If a string
-        # value is provided it matches against the
-        # notebook type. '*' matches every notebook.
-        #
-        # @return [string | NotebookDocumentFilter]
-        def notebook
-          attributes.fetch(:notebook)
         end
 
         attr_reader :attributes

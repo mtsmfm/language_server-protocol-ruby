@@ -13,7 +13,7 @@ module LanguageServer
         #
         # The request id to cancel.
         #
-        # @return [integer | string]
+        # @return [string | number]
         def id
           attributes.fetch(:id)
         end

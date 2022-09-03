@@ -16,7 +16,7 @@ module LanguageServer
         # indicating the execution order of a cell
         # inside a notebook.
         #
-        # @return [uinteger]
+        # @return [number]
         def execution_order
           attributes.fetch(:executionOrder)
         end
@@ -25,7 +25,7 @@ module LanguageServer
         # Whether the execution was successful or
         # not if known by the client.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def success
           attributes.fetch(:success)
         end

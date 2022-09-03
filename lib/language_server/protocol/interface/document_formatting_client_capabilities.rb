@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Client capabilities of a [DocumentFormattingRequest](#DocumentFormattingRequest).
-      #
       class DocumentFormattingClientCapabilities
         def initialize(dynamic_registration: nil)
           @attributes = {}
@@ -16,7 +13,7 @@ module LanguageServer
         #
         # Whether formatting supports dynamic registration.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end

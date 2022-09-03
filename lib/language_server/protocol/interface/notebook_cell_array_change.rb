@@ -5,8 +5,6 @@ module LanguageServer
       # A change describing how to move a `NotebookCell`
       # array from state S to S'.
       #
-      # @since 3.17.0
-      #
       class NotebookCellArrayChange
         def initialize(start:, delete_count:, cells: nil)
           @attributes = {}
@@ -19,9 +17,9 @@ module LanguageServer
         end
 
         #
-        # The start oftest of the cell that changed.
+        # The start offset of the cell that changed.
         #
-        # @return [uinteger]
+        # @return [number]
         def start
           attributes.fetch(:start)
         end
@@ -29,7 +27,7 @@ module LanguageServer
         #
         # The deleted cells
         #
-        # @return [uinteger]
+        # @return [number]
         def delete_count
           attributes.fetch(:deleteCount)
         end
@@ -37,7 +35,7 @@ module LanguageServer
         #
         # The new cells, if any
         #
-        # @return [NotebookCell[] | nil]
+        # @return [NotebookCell[]]
         def cells
           attributes.fetch(:cells)
         end

@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Provider options for a [DocumentRangeFormattingRequest](#DocumentRangeFormattingRequest).
-      #
       class DocumentRangeFormattingOptions
         def initialize(work_done_progress: nil)
           @attributes = {}
@@ -13,7 +10,7 @@ module LanguageServer
           @attributes.freeze
         end
 
-        # @return [boolean | nil]
+        # @return [boolean]
         def work_done_progress
           attributes.fetch(:workDoneProgress)
         end

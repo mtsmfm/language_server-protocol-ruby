@@ -4,8 +4,6 @@ module LanguageServer
       #
       # The params sent in a close notebook document notification.
       #
-      # @since 3.17.0
-      #
       class DidCloseNotebookDocumentParams
         def initialize(notebook_document:, cell_text_documents:)
           @attributes = {}

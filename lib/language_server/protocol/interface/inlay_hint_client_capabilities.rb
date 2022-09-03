@@ -4,8 +4,6 @@ module LanguageServer
       #
       # Inlay hint client capabilities.
       #
-      # @since 3.17.0
-      #
       class InlayHintClientCapabilities
         def initialize(dynamic_registration: nil, resolve_support: nil)
           @attributes = {}
@@ -19,16 +17,16 @@ module LanguageServer
         #
         # Whether inlay hints support dynamic registration.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
 
         #
-        # Indicates which properties a client can resolve lazily on an inlay
+        # Indicates which properties a client can resolve lazily on a inlay
         # hint.
         #
-        # @return [{ properties:string[] } | nil]
+        # @return [{ properties: string[]; }]
         def resolve_support
           attributes.fetch(:resolveSupport)
         end

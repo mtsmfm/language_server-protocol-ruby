@@ -21,7 +21,7 @@ module LanguageServer
         end
 
         #
-        # The actual message.
+        # The actual message
         #
         # @return [string]
         def message
@@ -31,7 +31,7 @@ module LanguageServer
         #
         # The message action items to present.
         #
-        # @return [MessageActionItem[] | nil]
+        # @return [MessageActionItem[]]
         def actions
           attributes.fetch(:actions)
         end

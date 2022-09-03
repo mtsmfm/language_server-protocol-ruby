@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Client Capabilities for a [DocumentSymbolRequest](#DocumentSymbolRequest).
-      #
       class DocumentSymbolClientCapabilities
         def initialize(dynamic_registration: nil, symbol_kind: nil, hierarchical_document_symbol_support: nil, tag_support: nil, label_support: nil)
           @attributes = {}
@@ -20,7 +17,7 @@ module LanguageServer
         #
         # Whether document symbol supports dynamic registration.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
@@ -29,7 +26,7 @@ module LanguageServer
         # Specific capabilities for the `SymbolKind` in the
         # `textDocument/documentSymbol` request.
         #
-        # @return [{ valueSet:SymbolKind[] } | nil]
+        # @return [{ valueSet?: SymbolKind[]; }]
         def symbol_kind
           attributes.fetch(:symbolKind)
         end
@@ -37,7 +34,7 @@ module LanguageServer
         #
         # The client supports hierarchical document symbols.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def hierarchical_document_symbol_support
           attributes.fetch(:hierarchicalDocumentSymbolSupport)
         end
@@ -47,9 +44,7 @@ module LanguageServer
         # `DocumentSymbol` if `hierarchicalDocumentSymbolSupport` is set to true.
         # Clients supporting tags have to handle unknown tags gracefully.
         #
-        # @since 3.16.0
-        #
-        # @return [{ valueSet:SymbolTag[] } | nil]
+        # @return [{ valueSet: 1[]; }]
         def tag_support
           attributes.fetch(:tagSupport)
         end
@@ -58,9 +53,7 @@ module LanguageServer
         # The client supports an additional label presented in the UI when
         # registering a document symbol provider.
         #
-        # @since 3.16.0
-        #
-        # @return [boolean | nil]
+        # @return [boolean]
         def label_support
           attributes.fetch(:labelSupport)
         end

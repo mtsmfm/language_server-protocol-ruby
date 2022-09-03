@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # General parameters to unregister a request or notification.
+      # General parameters to unregister a capability.
       #
       class Unregistration
         def initialize(id:, method:)
@@ -24,7 +24,7 @@ module LanguageServer
         end
 
         #
-        # The method to unregister for.
+        # The method / capability to unregister for.
         #
         # @return [string]
         def method

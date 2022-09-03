@@ -4,8 +4,6 @@ module LanguageServer
       #
       # Provide inline value as text.
       #
-      # @since 3.17.0
-      #
       class InlineValueText
         def initialize(range:, text:)
           @attributes = {}

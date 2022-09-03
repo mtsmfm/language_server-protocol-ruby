@@ -4,8 +4,6 @@ module LanguageServer
       #
       # A special text edit to provide an insert and a replace operation.
       #
-      # @since 3.16.0
-      #
       class InsertReplaceEdit
         def initialize(new_text:, insert:, replace:)
           @attributes = {}

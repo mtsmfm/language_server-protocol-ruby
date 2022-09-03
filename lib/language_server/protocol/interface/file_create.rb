@@ -4,8 +4,6 @@ module LanguageServer
       #
       # Represents information on a file/folder create.
       #
-      # @since 3.16.0
-      #
       class FileCreate
         def initialize(uri:)
           @attributes = {}

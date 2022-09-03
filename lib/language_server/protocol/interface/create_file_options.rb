@@ -17,7 +17,7 @@ module LanguageServer
         #
         # Overwrite existing file. Overwrite wins over `ignoreIfExists`
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def overwrite
           attributes.fetch(:overwrite)
         end
@@ -25,7 +25,7 @@ module LanguageServer
         #
         # Ignore if exists.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def ignore_if_exists
           attributes.fetch(:ignoreIfExists)
         end

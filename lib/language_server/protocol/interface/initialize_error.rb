@@ -1,10 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # The data type of the ResponseError if the
-      # initialize request fails.
-      #
       class InitializeError
         def initialize(retry:)
           @attributes = {}

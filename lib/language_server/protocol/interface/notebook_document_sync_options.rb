@@ -11,10 +11,8 @@ module LanguageServer
       #
       # If a selector provides no notebook document
       # filter but only a cell selector all notebook
-      # document that contain at least one matching
+      # documents that contain at least one matching
       # cell will be synced.
-      #
-      # @since 3.17.0
       #
       class NotebookDocumentSyncOptions
         def initialize(notebook_selector:, save: nil)
@@ -29,7 +27,7 @@ module LanguageServer
         #
         # The notebooks to be synced
         #
-        # @return [{ notebook:string | NotebookDocumentFilter, cells:{ language:string }[] } | { notebook:string | NotebookDocumentFilter, cells:{ language:string }[] }[]]
+        # @return [({ notebook: string | NotebookDocumentFilter; cells?: { language: string; }[]; } | { notebook?: string | NotebookDocumentFilter; cells: { ...; }[]; })[]]
         def notebook_selector
           attributes.fetch(:notebookSelector)
         end
@@ -38,7 +36,7 @@ module LanguageServer
         # Whether save notification should be forwarded to
         # the server. Will only be honored if mode === `notebook`.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def save
           attributes.fetch(:save)
         end

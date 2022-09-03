@@ -17,7 +17,7 @@ module LanguageServer
         #
         # The client supports versioned document changes in `WorkspaceEdit`s
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def document_changes
           attributes.fetch(:documentChanges)
         end
@@ -26,9 +26,7 @@ module LanguageServer
         # The resource operations the client supports. Clients should at least
         # support 'create', 'rename' and 'delete' files and folders.
         #
-        # @since 3.13.0
-        #
-        # @return [ResourceOperationKind[] | nil]
+        # @return [ResourceOperationKind[]]
         def resource_operations
           attributes.fetch(:resourceOperations)
         end
@@ -37,9 +35,7 @@ module LanguageServer
         # The failure handling strategy of a client if applying the workspace edit
         # fails.
         #
-        # @since 3.13.0
-        #
-        # @return [FailureHandlingKind | nil]
+        # @return [FailureHandlingKind]
         def failure_handling
           attributes.fetch(:failureHandling)
         end
@@ -48,12 +44,9 @@ module LanguageServer
         # Whether the client normalizes line endings to the client specific
         # setting.
         # If set to `true` the client will normalize line ending characters
-        # in a workspace edit to the client-specified new line
-        # character.
+        # in a workspace edit to the client specific new line character(s).
         #
-        # @since 3.16.0
-        #
-        # @return [boolean | nil]
+        # @return [boolean]
         def normalizes_line_endings
           attributes.fetch(:normalizesLineEndings)
         end
@@ -62,9 +55,7 @@ module LanguageServer
         # Whether the client in general supports change annotations on text edits,
         # create file, rename file and delete file changes.
         #
-        # @since 3.16.0
-        #
-        # @return [{ groupsOnLabel:boolean } | nil]
+        # @return [{ groupsOnLabel?: boolean; }]
         def change_annotation_support
           attributes.fetch(:changeAnnotationSupport)
         end

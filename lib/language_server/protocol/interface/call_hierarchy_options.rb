@@ -1,11 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Call hierarchy options used during static registration.
-      #
-      # @since 3.16.0
-      #
       class CallHierarchyOptions
         def initialize(work_done_progress: nil)
           @attributes = {}
@@ -15,7 +10,7 @@ module LanguageServer
           @attributes.freeze
         end
 
-        # @return [boolean | nil]
+        # @return [boolean]
         def work_done_progress
           attributes.fetch(:workDoneProgress)
         end

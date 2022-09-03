@@ -28,7 +28,7 @@ module LanguageServer
         #
         # The old (existing) location.
         #
-        # @return [DocumentUri]
+        # @return [string]
         def old_uri
           attributes.fetch(:oldUri)
         end
@@ -36,7 +36,7 @@ module LanguageServer
         #
         # The new location.
         #
-        # @return [DocumentUri]
+        # @return [string]
         def new_uri
           attributes.fetch(:newUri)
         end
@@ -44,7 +44,7 @@ module LanguageServer
         #
         # Rename options.
         #
-        # @return [RenameFileOptions | nil]
+        # @return [RenameFileOptions]
         def options
           attributes.fetch(:options)
         end
@@ -52,9 +52,7 @@ module LanguageServer
         #
         # An optional annotation identifier describing the operation.
         #
-        # @since 3.16.0
-        #
-        # @return [ChangeAnnotationIdentifier | nil]
+        # @return [string]
         def annotation_id
           attributes.fetch(:annotationId)
         end

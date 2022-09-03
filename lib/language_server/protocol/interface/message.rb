@@ -1,18 +1,18 @@
 module LanguageServer
   module Protocol
     module Interface
-      class DidChangeConfigurationRegistrationOptions
-        def initialize(section: nil)
+      class Message
+        def initialize(jsonrpc:)
           @attributes = {}
 
-          @attributes[:section] = section if section
+          @attributes[:jsonrpc] = jsonrpc
 
           @attributes.freeze
         end
 
-        # @return [string | string[] | nil]
-        def section
-          attributes.fetch(:section)
+        # @return [string]
+        def jsonrpc
+          attributes.fetch(:jsonrpc)
         end
 
         attr_reader :attributes

@@ -1,30 +1,32 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # @since 3.16.0
-      #
       class SemanticTokensRegistrationOptions
-        def initialize(document_selector:, legend:, range: nil, full: nil, work_done_progress: nil, id: nil)
+        def initialize(document_selector:, work_done_progress: nil, legend:, range: nil, full: nil, id: nil)
           @attributes = {}
 
           @attributes[:documentSelector] = document_selector
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:legend] = legend
           @attributes[:range] = range if range
           @attributes[:full] = full if full
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:id] = id if id
 
           @attributes.freeze
         end
 
         #
-        # A document selector to identify the scope of the registration. If set to null
-        # the document selector provided on the client side will be used.
+        # A document selector to identify the scope of the registration. If set to
+        # null the document selector provided on the client side will be used.
         #
-        # @return [DocumentSelector | null]
+        # @return [DocumentSelector]
         def document_selector
           attributes.fetch(:documentSelector)
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         #
@@ -39,7 +41,7 @@ module LanguageServer
         # Server supports providing semantic tokens for a specific range
         # of a document.
         #
-        # @return [boolean | {  } | nil]
+        # @return [boolean | {}]
         def range
           attributes.fetch(:range)
         end
@@ -47,21 +49,16 @@ module LanguageServer
         #
         # Server supports providing semantic tokens for a full document.
         #
-        # @return [boolean | { delta:boolean } | nil]
+        # @return [boolean | { delta?: boolean; }]
         def full
           attributes.fetch(:full)
-        end
-
-        # @return [boolean | nil]
-        def work_done_progress
-          attributes.fetch(:workDoneProgress)
         end
 
         #
         # The id used to register the request. The id can be used to deregister
         # the request again. See also Registration#id.
         #
-        # @return [string | nil]
+        # @return [string]
         def id
           attributes.fetch(:id)
         end

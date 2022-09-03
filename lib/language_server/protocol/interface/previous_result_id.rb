@@ -4,8 +4,6 @@ module LanguageServer
       #
       # A previous result id in a workspace pull request.
       #
-      # @since 3.17.0
-      #
       class PreviousResultId
         def initialize(uri:, value:)
           @attributes = {}
@@ -20,7 +18,7 @@ module LanguageServer
         # The URI for which the client knows a
         # result id.
         #
-        # @return [DocumentUri]
+        # @return [string]
         def uri
           attributes.fetch(:uri)
         end

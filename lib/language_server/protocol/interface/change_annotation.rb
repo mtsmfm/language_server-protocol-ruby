@@ -4,8 +4,6 @@ module LanguageServer
       #
       # Additional information that describes document changes.
       #
-      # @since 3.16.0
-      #
       class ChangeAnnotation
         def initialize(label:, needs_confirmation: nil, description: nil)
           @attributes = {}
@@ -30,7 +28,7 @@ module LanguageServer
         # A flag which indicates that user confirmation is needed
         # before applying the change.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def needs_confirmation
           attributes.fetch(:needsConfirmation)
         end
@@ -39,7 +37,7 @@ module LanguageServer
         # A human-readable string which is rendered less prominent in
         # the user interface.
         #
-        # @return [string | nil]
+        # @return [string]
         def description
           attributes.fetch(:description)
         end

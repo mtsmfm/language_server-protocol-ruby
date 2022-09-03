@@ -32,16 +32,16 @@ module LanguageServer
         #
         # An optional token that a server can use to report work done progress.
         #
-        # @return [ProgressToken | nil]
+        # @return [ProgressToken]
         def work_done_token
           attributes.fetch(:workDoneToken)
         end
 
         #
-        # An optional token that a server can use to report partial results (e.g. streaming) to
-        # the client.
+        # An optional token that a server can use to report partial results (e.g.
+        # streaming) to the client.
         #
-        # @return [ProgressToken | nil]
+        # @return [ProgressToken]
         def partial_result_token
           attributes.fetch(:partialResultToken)
         end

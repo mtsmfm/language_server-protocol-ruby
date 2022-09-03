@@ -4,8 +4,6 @@ module LanguageServer
       #
       # A versioned notebook document identifier.
       #
-      # @since 3.17.0
-      #
       class VersionedNotebookDocumentIdentifier
         def initialize(version:, uri:)
           @attributes = {}
@@ -19,15 +17,15 @@ module LanguageServer
         #
         # The version number of this notebook document.
         #
-        # @return [integer]
+        # @return [number]
         def version
           attributes.fetch(:version)
         end
 
         #
-        # The notebook document's uri.
+        # The notebook document's URI.
         #
-        # @return [URI]
+        # @return [string]
         def uri
           attributes.fetch(:uri)
         end

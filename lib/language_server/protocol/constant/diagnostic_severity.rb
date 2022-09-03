@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Constant
-      #
-      # The diagnostic's severity.
-      #
       module DiagnosticSeverity
         #
         # Reports an error.

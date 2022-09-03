@@ -4,8 +4,6 @@ module LanguageServer
       #
       # Inline value options used during static registration.
       #
-      # @since 3.17.0
-      #
       class InlineValueOptions
         def initialize(work_done_progress: nil)
           @attributes = {}
@@ -15,7 +13,7 @@ module LanguageServer
           @attributes.freeze
         end
 
-        # @return [boolean | nil]
+        # @return [boolean]
         def work_done_progress
           attributes.fetch(:workDoneProgress)
         end

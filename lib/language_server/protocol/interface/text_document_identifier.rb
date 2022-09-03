@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # A literal to identify a text document in the client.
-      #
       class TextDocumentIdentifier
         def initialize(uri:)
           @attributes = {}
@@ -14,9 +11,9 @@ module LanguageServer
         end
 
         #
-        # The text document's uri.
+        # The text document's URI.
         #
-        # @return [DocumentUri]
+        # @return [string]
         def uri
           attributes.fetch(:uri)
         end

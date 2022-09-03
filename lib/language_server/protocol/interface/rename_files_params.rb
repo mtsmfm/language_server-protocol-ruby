@@ -2,10 +2,8 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # The parameters sent in notifications/requests for user-initiated renames of
-      # files.
-      #
-      # @since 3.16.0
+      # The parameters sent in notifications/requests for user-initiated renames
+      # of files.
       #
       class RenameFilesParams
         def initialize(files:)
@@ -17,8 +15,8 @@ module LanguageServer
         end
 
         #
-        # An array of all files/folders renamed in this operation. When a folder is renamed, only
-        # the folder will be included, and not its children.
+        # An array of all files/folders renamed in this operation. When a folder
+        # is renamed, only the folder will be included, and not its children.
         #
         # @return [FileRename[]]
         def files

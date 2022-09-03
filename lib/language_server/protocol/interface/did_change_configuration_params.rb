@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # The parameters of a change configuration notification.
-      #
       class DidChangeConfigurationParams
         def initialize(settings:)
           @attributes = {}

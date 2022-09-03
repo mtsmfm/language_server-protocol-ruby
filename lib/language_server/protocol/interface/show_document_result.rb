@@ -2,9 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # The result of a showDocument request.
-      #
-      # @since 3.16.0
+      # The result of an show document request.
       #
       class ShowDocumentResult
         def initialize(success:)

@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # The parameters of a [DocumentOnTypeFormattingRequest](#DocumentOnTypeFormattingRequest).
-      #
       class DocumentOnTypeFormattingParams
         def initialize(text_document:, position:, ch:, options:)
           @attributes = {}

@@ -1,16 +1,18 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # LSP object definition.
-      # @since 3.17.0
-      #
-      class LSPObject
-        def initialize()
+      class HoverResult
+        def initialize(value:)
           @attributes = {}
 
+          @attributes[:value] = value
 
           @attributes.freeze
+        end
+
+        # @return [string]
+        def value
+          attributes.fetch(:value)
         end
 
         attr_reader :attributes

@@ -4,8 +4,6 @@ module LanguageServer
       #
       # A partial result for a document diagnostic report.
       #
-      # @since 3.17.0
-      #
       class DocumentDiagnosticReportPartialResult
         def initialize(related_documents:)
           @attributes = {}
@@ -15,7 +13,7 @@ module LanguageServer
           @attributes.freeze
         end
 
-        # @return [DocumentUri => FullDocumentDiagnosticReport | UnchangedDocumentDiagnosticReport]
+        # @return [{ [uri: string]: FullDocumentDiagnosticReport | UnchangedDocumentDiagnosticReport; }]
         def related_documents
           attributes.fetch(:relatedDocuments)
         end

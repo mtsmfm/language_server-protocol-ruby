@@ -14,16 +14,17 @@ module LanguageServer
         #
         # Whether hover supports dynamic registration.
         #
-        # @return [boolean | nil]
+        # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
         end
 
         #
-        # Client supports the following content formats for the content
-        # property. The order describes the preferred format of the client.
+        # Client supports the follow content formats if the content
+        # property refers to a `literal of type MarkupContent`.
+        # The order describes the preferred format of the client.
         #
-        # @return [MarkupKind[] | nil]
+        # @return [MarkupKind[]]
         def content_format
           attributes.fetch(:contentFormat)
         end

@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Interface
-      #
-      # Defines the capabilities provided by the client.
-      #
       class ClientCapabilities
         def initialize(workspace: nil, text_document: nil, notebook_document: nil, window: nil, general: nil, experimental: nil)
           @attributes = {}
@@ -21,7 +18,7 @@ module LanguageServer
         #
         # Workspace specific client capabilities.
         #
-        # @return [WorkspaceClientCapabilities | nil]
+        # @return [{ applyEdit?: boolean; workspaceEdit?: WorkspaceEditClientCapabilities; didChangeConfiguration?: DidChangeConfigurationClientCapabilities; ... 10 more ...; diagnostics?: DiagnosticWorkspaceClientCapabilities; }]
         def workspace
           attributes.fetch(:workspace)
         end
@@ -29,7 +26,7 @@ module LanguageServer
         #
         # Text document specific client capabilities.
         #
-        # @return [TextDocumentClientCapabilities | nil]
+        # @return [TextDocumentClientCapabilities]
         def text_document
           attributes.fetch(:textDocument)
         end
@@ -37,9 +34,7 @@ module LanguageServer
         #
         # Capabilities specific to the notebook document support.
         #
-        # @since 3.17.0
-        #
-        # @return [NotebookDocumentClientCapabilities | nil]
+        # @return [NotebookDocumentClientCapabilities]
         def notebook_document
           attributes.fetch(:notebookDocument)
         end
@@ -47,7 +42,7 @@ module LanguageServer
         #
         # Window specific client capabilities.
         #
-        # @return [WindowClientCapabilities | nil]
+        # @return [{ workDoneProgress?: boolean; showMessage?: ShowMessageRequestClientCapabilities; showDocument?: ShowDocumentClientCapabilities; }]
         def window
           attributes.fetch(:window)
         end
@@ -55,9 +50,7 @@ module LanguageServer
         #
         # General client capabilities.
         #
-        # @since 3.16.0
-        #
-        # @return [GeneralClientCapabilities | nil]
+        # @return [{ staleRequestSupport?: { cancel: boolean; retryOnContentModified: string[]; }; regularExpressions?: RegularExpressionsClientCapabilities; markdown?: any; positionEncodings?: string[]; }]
         def general
           attributes.fetch(:general)
         end
@@ -65,7 +58,7 @@ module LanguageServer
         #
         # Experimental client capabilities.
         #
-        # @return [LSPAny | nil]
+        # @return [LSPAny]
         def experimental
           attributes.fetch(:experimental)
         end

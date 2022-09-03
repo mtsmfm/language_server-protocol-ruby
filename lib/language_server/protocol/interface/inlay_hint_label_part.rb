@@ -5,8 +5,6 @@ module LanguageServer
       # An inlay hint label part allows for interactive and composite labels
       # of inlay hints.
       #
-      # @since 3.17.0
-      #
       class InlayHintLabelPart
         def initialize(value:, tooltip: nil, location: nil, command: nil)
           @attributes = {}
@@ -32,7 +30,7 @@ module LanguageServer
         # the client capability `inlayHint.resolveSupport` clients might resolve
         # this property late using the resolve request.
         #
-        # @return [string | MarkupContent | nil]
+        # @return [string | MarkupContent]
         def tooltip
           attributes.fetch(:tooltip)
         end
@@ -50,7 +48,7 @@ module LanguageServer
         # Depending on the client capability `inlayHint.resolveSupport` clients
         # might resolve this property late using the resolve request.
         #
-        # @return [Location | nil]
+        # @return [Location]
         def location
           attributes.fetch(:location)
         end
@@ -61,7 +59,7 @@ module LanguageServer
         # Depending on the client capability `inlayHint.resolveSupport` clients
         # might resolve this property late using the resolve request.
         #
-        # @return [Command | nil]
+        # @return [Command]
         def command
           attributes.fetch(:command)
         end
