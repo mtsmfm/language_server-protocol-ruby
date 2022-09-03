@@ -228,6 +228,7 @@ const extractDefinitions = (content: string) => {
 import Handlebars from "handlebars";
 const snake = (s: string) =>
   s
+    .replace(/UTF/, (s) => s.toLowerCase()) // special case
     .replace(/^[A-Z]/, (s) => s.toLowerCase())
     .replace(/[A-Z]/g, (s) => `_${s.toLowerCase()}`);
 
