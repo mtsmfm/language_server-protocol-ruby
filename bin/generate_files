@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 
 set -ex
-yarn install
-yarn run -s ts-node scripts/generateFiles.ts
+npm install
+npx ts-node scripts/generateFiles.ts
