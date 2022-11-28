@@ -7,6 +7,7 @@
   },
   "postUpgradeTasks": {
     "commands": ["bin/generate_files"],
+    "fileFilters": ["lib/**"],
     "executionMode": "update"
   }
 }
