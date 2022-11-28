@@ -4,10 +4,9 @@ import * as path from "path";
 import glob from "glob";
 
 const lspVersion = "3.17";
-const lspRepoRevision = "98dfd44d349411c557127b7379c67b837bf1660c";
 const rootDir = path.normalize(path.join(__dirname, ".."));
 const tempDir = path.join(rootDir, "tmp");
-const protocolMdPath = path.join(tempDir, lspRepoRevision, "protocol.md");
+const protocolMdPath = path.join(tempDir, "protocol.md");
 
 const createFile = (filePath: string, content: string) => {
   const dir = path.dirname(path.normalize(filePath));
@@ -269,25 +268,24 @@ Handlebars.registerHelper("isliteral", (s: string) => {
 });
 
 (async () => {
-  if (!fs.existsSync(protocolMdPath)) {
-    const data = glob
-      .sync(
-        path.join(
-          __dirname,
-          "..",
-          "language-server-protocol",
-          "_specifications",
-          "lsp",
-          lspVersion,
-          "**",
-          "*.md"
-        )
+  const data = glob
+    .sync(
+      path.join(
+        __dirname,
+        "..",
+        "language-server-protocol",
+        "_specifications",
+        "lsp",
+        lspVersion,
+        "**",
+        "*.md"
       )
-      .map((f) => fs.readFileSync(f).toString())
-      .join("\n");
+    )
+    .map((f) => fs.readFileSync(f).toString())
+    .join("\n");
 
-    createFile(protocolMdPath, data);
-  }
+  // For debug
+  createFile(protocolMdPath, data);
 
   const md = fs.readFileSync(protocolMdPath).toString();
   const typeScriptSource = extractTypeScriptSource(md);
