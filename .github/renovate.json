@@ -1,5 +1,5 @@
 {
-  "allowedPostUpgradeCommands": ["bundle", "exec", "rake", "generate"],
+  "allowedPostUpgradeCommands": ["bin/generate_files"],
   "recreateClosed": true,
   "git-submodules": {
     "enabled": true
