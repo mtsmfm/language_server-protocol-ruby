@@ -1,5 +1,10 @@
 # Change log
 
+## 3.17.0.2
+
+- Update language-server-protocol digest (#55)
+  - Only comment changes
+
 ## 3.17.0.1
 
 - Fix union (#49)
