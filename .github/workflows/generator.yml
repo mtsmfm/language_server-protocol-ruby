@@ -1,7 +1,4 @@
 on:
-  push:
-    branches:
-      - main
   pull_request:
 
 concurrency:
@@ -9,12 +6,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  get_latest_commit_author:
+    runs-on: ubuntu-latest
+    outputs:
+      latest-commit-author: ${{ steps.commit_author.outputs.author }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      - id: commit_author
+        run: echo "::set-output name=author::$(git show -s --format=%an)"
+
   generator:
+    needs: get_latest_commit_author
+    if: needs.get_latest_commit_author.outputs.latest-commit-author != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.PAT }}
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.1"
@@ -24,3 +36,10 @@ jobs:
           node-version: 16
       - run: bin/generate_files
       - run: git diff --exit-code
+      - if: failure()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lib
+          git commit -m "$ bin/generate_files"
+          git push origin HEAD:${{ github.head_ref }}
