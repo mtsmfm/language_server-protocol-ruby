@@ -1,7 +1,12 @@
 on:
   pull_request:
+
 permissions:
   pull-requests: write
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   benchmark:
