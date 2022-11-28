@@ -1,7 +1,12 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "allowedPostUpgradeCommands": ["bin/generate_files"],
   "recreateClosed": true,
   "git-submodules": {
     "enabled": true
+  },
+  "postUpgradeTasks": {
+    "commands": ["bin/generate_files"],
+    "executionMode": "update"
   }
 }
