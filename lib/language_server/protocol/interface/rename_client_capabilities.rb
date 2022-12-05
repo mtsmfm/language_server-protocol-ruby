@@ -43,7 +43,7 @@ module LanguageServer
         end
 
         #
-        # Whether th client honors the change annotations in
+        # Whether the client honors the change annotations in
         # text edits and resource operations returned via the
         # rename request's workspace edit by for example presenting
         # the workspace edit in the user interface and asking
