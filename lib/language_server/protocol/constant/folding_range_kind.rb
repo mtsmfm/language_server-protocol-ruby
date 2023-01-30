@@ -11,7 +11,7 @@ module LanguageServer
         #
         COMMENT = 'comment'
         #
-        # Folding range for a imports or includes
+        # Folding range for imports or includes
         #
         IMPORTS = 'imports'
         #
