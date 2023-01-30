@@ -8,7 +8,7 @@ module LanguageServer
       #
       module PositionEncodingKind
         #
-        # Character offsets count UTF-8 code units.
+        # Character offsets count UTF-8 code units (e.g bytes).
         #
         UTF8 = 'utf-8'
         #

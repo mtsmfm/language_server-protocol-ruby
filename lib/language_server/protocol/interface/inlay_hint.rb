@@ -99,7 +99,7 @@ module LanguageServer
         end
 
         #
-        # A data entry field that is preserved on a inlay hint between
+        # A data entry field that is preserved on an inlay hint between
         # a `textDocument/inlayHint` and a `inlayHint/resolve` request.
         #
         # @return [LSPAny]

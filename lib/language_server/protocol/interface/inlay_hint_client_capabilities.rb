@@ -23,7 +23,7 @@ module LanguageServer
         end
 
         #
-        # Indicates which properties a client can resolve lazily on a inlay
+        # Indicates which properties a client can resolve lazily on an inlay
         # hint.
         #
         # @return [{ properties: string[]; }]

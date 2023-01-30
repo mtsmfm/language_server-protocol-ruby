@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Params to show a document.
+      # Params to show a resource.
       #
       class ShowDocumentParams
         def initialize(uri:, external: nil, take_focus: nil, selection: nil)
@@ -17,7 +17,7 @@ module LanguageServer
         end
 
         #
-        # The document uri to show.
+        # The uri to show.
         #
         # @return [string]
         def uri
@@ -26,7 +26,7 @@ module LanguageServer
 
         #
         # Indicates to show the resource in an external program.
-        # To show for example `https://code.visualstudio.com/`
+        # To show, for example, `https://code.visualstudio.com/`
         # in the default WEB browser set `external` to `true`.
         #
         # @return [boolean]
