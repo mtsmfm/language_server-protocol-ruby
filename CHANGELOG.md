@@ -1,5 +1,11 @@
 # Change log
 
+## 3.17.0.3
+
+- Update language-server-protocol digest (#59)
+  - Mostly comment changes
+  - Removed duplicated autoload and require
+
 ## 3.17.0.2
 
 - Update language-server-protocol digest (#55)

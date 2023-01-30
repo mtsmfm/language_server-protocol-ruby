@@ -1,5 +1,5 @@
 module LanguageServer
   module Protocol
-    VERSION = "3.17.0.2"
+    VERSION = "3.17.0.3"
   end
 end
