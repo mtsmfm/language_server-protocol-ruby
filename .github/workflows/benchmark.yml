@@ -31,13 +31,21 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const { issue: { number: issue_number }, repo: { owner, repo }  } = context;
+            const { data: comments } = await github.rest.issues.listComments({ owner, repo, issue_number });
+            const existingComment = comments.find(comment => comment.user.login === "github-actions[bot]" && comment.body.includes("Benchmark result: ${{ matrix.name }}"))
+
             const { execSync } = require("child_process");
             const result = execSync("bin/benchmark");
             const body = `
-              ${{ matrix.name }} (${{ matrix.ref }})
+              Benchmark result: ${{ matrix.name }} (${{ matrix.ref }})
               \`\`\`
               ${result}
               \`\`\`
             `;
-            const { issue: { number: issue_number }, repo: { owner, repo }  } = context;
-            github.rest.issues.createComment({ issue_number, owner, repo, body });
+
+            if (existingComment) {
+              github.rest.issues.updateComment({ owner, repo, body, comment_id: existingComment.id });
+            } else {
+              github.rest.issues.createComment({ owner, repo, body, issue_number });
+            }

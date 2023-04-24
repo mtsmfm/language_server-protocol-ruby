@@ -6,7 +6,7 @@ ARG USER_GID=$USER_UID
 
 RUN groupadd --gid $USER_GID $USERNAME \
   && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-  && curl -fsSL https://deb.nodesource.com/setup_14.x | bash - \
+  && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
   && apt-get update \
   && apt-get install -y sudo nodejs \
   && npm install -g yarn \
