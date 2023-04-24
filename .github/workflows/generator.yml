@@ -15,7 +15,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
       - id: commit_author
-        run: echo "::set-output name=author::$(git show -s --format=%an)"
+        run: echo "name=author::$(git show -s --format=%an)" >> $GITHUB_OUTPUT
 
   generator:
     needs: get_latest_commit_author
