@@ -4,10 +4,6 @@ module LanguageServer
 <% each do |name| -%>
       autoload :<%= name %>, "language_server/protocol/constant/<%= name.underscore %>"
 <% end -%>
-
-<% each do |name| -%>
-      require "language_server/protocol/constant/<%= name.underscore %>"
-<% end -%>
     end
   end
 end

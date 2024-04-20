@@ -422,10 +422,6 @@ module LanguageServer
 {{#each names}}
       autoload :{{this}}, "language_server/protocol/interface/{{snake this}}"
 {{/each}}
-
-{{#each names}}
-      require "language_server/protocol/interface/{{snake this}}"
-{{/each}}
     end
   end
 end
@@ -443,10 +439,6 @@ module LanguageServer
     module Constant
 {{#each names}}
       autoload :{{this}}, "language_server/protocol/constant/{{snake this}}"
-{{/each}}
-
-{{#each names}}
-      require "language_server/protocol/constant/{{snake this}}"
 {{/each}}
     end
   end
