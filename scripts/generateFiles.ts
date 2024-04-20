@@ -424,7 +424,7 @@ module LanguageServer
 {{/each}}
 
 {{#each names}}
-      require "language_server/protocol/interface/{{snake this}}"
+      require_relative "interface/{{snake this}}"
 {{/each}}
     end
   end
@@ -446,7 +446,7 @@ module LanguageServer
 {{/each}}
 
 {{#each names}}
-      require "language_server/protocol/constant/{{snake this}}"
+      require_relative "constant/{{snake this}}"
 {{/each}}
     end
   end

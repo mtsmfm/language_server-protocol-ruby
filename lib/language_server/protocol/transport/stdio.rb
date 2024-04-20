@@ -1,2 +1,2 @@
-require "language_server/protocol/transport/stdio/reader"
-require "language_server/protocol/transport/stdio/writer"
+require_relative "stdio/reader"
+require_relative "stdio/writer"

@@ -1,2 +1,2 @@
-require "language_server/protocol/transport/io"
-require "language_server/protocol/transport/stdio"
+require_relative "transport/io"
+require_relative "transport/stdio"

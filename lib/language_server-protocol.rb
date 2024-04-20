@@ -1,1 +1,1 @@
-require "language_server/protocol"
+require_relative "language_server/protocol"

@@ -1,4 +1,4 @@
-require "language_server/protocol/version"
-require "language_server/protocol/constant"
-require "language_server/protocol/interface"
-require "language_server/protocol/transport"
+require_relative "protocol/version"
+require_relative "protocol/constant"
+require_relative "protocol/interface"
+require_relative "protocol/transport"
