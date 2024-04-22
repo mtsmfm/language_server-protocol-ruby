@@ -8,7 +8,6 @@
     "typescript": "^4.2.3"
   },
   "devDependencies": {
-    "@types/glob": "^8.0.0",
     "@types/underscore": "^1.11.4",
     "glob": "^10.0.0",
     "underscore": "^1.13.4"
