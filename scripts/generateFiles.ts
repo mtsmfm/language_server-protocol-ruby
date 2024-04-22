@@ -1,7 +1,7 @@
 import ts from "typescript";
 import * as fs from "fs";
 import * as path from "path";
-import glob from "glob";
+import { globSync } from "glob";
 
 const lspVersion = "3.17";
 const rootDir = path.normalize(path.join(__dirname, ".."));
@@ -268,19 +268,19 @@ Handlebars.registerHelper("isliteral", (s: string) => {
 });
 
 (async () => {
-  const data = glob
-    .sync(
-      path.join(
-        __dirname,
-        "..",
-        "language-server-protocol",
-        "_specifications",
-        "lsp",
-        lspVersion,
-        "**",
-        "*.md"
-      )
+  const data = globSync(
+    path.join(
+      __dirname,
+      "..",
+      "language-server-protocol",
+      "_specifications",
+      "lsp",
+      lspVersion,
+      "**",
+      "*.md"
     )
+  )
+    .sort()
     .map((f) => fs.readFileSync(f).toString())
     .join("\n");
 
