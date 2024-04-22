@@ -23,7 +23,7 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
       - run: gem update --system
-        if: matrix.ruby != '2.5'
+        if: matrix.ruby != '2.5' && matrix.ruby != '2.6' && matrix.ruby != '2.7'
       - run: bundle exec rake
       - run: bundle exec rake
         env:
