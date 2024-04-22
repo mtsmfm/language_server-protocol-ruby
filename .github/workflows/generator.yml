@@ -11,7 +11,7 @@ jobs:
     outputs:
       latest-commit-author: ${{ steps.commit_author.outputs.author }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
       - id: commit_author
@@ -22,7 +22,7 @@ jobs:
     if: needs.get_latest_commit_author.outputs.latest-commit-author != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
           ref: ${{ github.head_ref }}
