@@ -1,2 +1,2 @@
-require "language_server/protocol/transport/io/reader"
-require "language_server/protocol/transport/io/writer"
+require_relative "io/reader"
+require_relative "io/writer"

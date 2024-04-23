@@ -6,7 +6,7 @@ module LanguageServer
 <% end -%>
 
 <% each do |name| -%>
-      require "language_server/protocol/interface/<%= name.underscore %>"
+      require_relative "interface/<%= name.underscore %>"
 <% end -%>
     end
   end
