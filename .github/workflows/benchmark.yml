@@ -1,5 +1,6 @@
 on:
-  pull_request:
+  pull_request_target:
+    types: [labeled]
 
 permissions:
   pull-requests: write
@@ -10,6 +11,7 @@ concurrency:
 
 jobs:
   benchmark:
+    if: contains(github.event.pull_request.labels.*.name, 'benchmark')
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
