@@ -1,0 +1,20 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # A notebook cell text document filter denotes a cell text
+      # document by different properties.
+      #
+      class NotebookCellTextDocumentFilter
+        def initialize: (notebook: untyped, ?language: String) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

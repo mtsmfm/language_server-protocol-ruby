@@ -1,0 +1,19 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # Value-object describing what options formatting should use.
+      #
+      class FormattingOptions
+        def initialize: (tab_size: Integer, insert_spaces: bool, ?trim_trailing_whitespace: bool, ?insert_final_newline: bool, ?trim_final_newlines: bool) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

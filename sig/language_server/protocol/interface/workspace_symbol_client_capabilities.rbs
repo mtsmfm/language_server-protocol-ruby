@@ -1,0 +1,16 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      class WorkspaceSymbolClientCapabilities
+        def initialize: (?dynamic_registration: bool, ?symbol_kind: untyped, ?tag_support: untyped, ?resolve_support: untyped) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

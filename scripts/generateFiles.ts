@@ -267,6 +267,40 @@ Handlebars.registerHelper("isliteral", (s: string) => {
   return s.match(/'.*'/) || s.match(/".*"/) || s.match(/\d+/);
 });
 
+
+
+const typeMapping = new Map<string, string>([
+  ["string", "String"],
+  ["number", "Integer"],
+  ["boolean", "bool"],
+  ["null", "nil"],
+  ["undefined", "nil"],
+  ["any", "untyped"],
+  ["LSPAny", "untyped"],
+]);
+
+const convertTypeToRbs: ((type: string) => string) = (type) => {
+  if (type.endsWith("[]")) {
+    return `Array[${convertTypeToRbs(type.slice(0, -2))}]`;
+  }
+  let rbsType = typeMapping.get(type);
+  if (rbsType != null) {
+    return rbsType;
+  }
+
+  return "untyped";
+};
+
+Handlebars.registerHelper("method_signature", (members: InterfaceResult["members"]) => {
+  return members
+    .map(
+      (member) =>
+        `${member.optional ? "?" : ""}${snake(member.name)}: ${convertTypeToRbs(member.type)}${member.nullable ? "?" : ""}`
+    )
+    .join(", ");
+});
+Handlebars.registerHelper("convertTypeToRbs", convertTypeToRbs);
+
 (async () => {
   const data = globSync(
     path.join(
@@ -369,6 +403,45 @@ end
     );
   });
 
+  interfaces.forEach((definition) => {
+    createFile(
+      path.join(
+        rootDir,
+        "sig",
+        "language_server",
+        "protocol",
+        "interface",
+        `${snake(definition.interface.name)}.rbs`
+      ),
+      Handlebars.compile(
+        `
+module LanguageServer
+  module Protocol
+    module Interface
+      {{#if definition.interface.documentation}}
+      #
+{{comment definition.interface.documentation indent=6}}
+      #
+      {{/if}}
+      class {{definition.interface.name}}
+        def initialize: ({{method_signature definition.allMembers}}) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end
+`.slice(1),
+        { noEscape: true }
+      )({ definition })
+    );
+  });
+
   modules.forEach((definition) => {
     createFile(
       path.join(
@@ -400,6 +473,49 @@ module LanguageServer
         {{const name}} = {{value}}
         {{else}}
         {{const name}} = {{const value}}
+        {{/if}}
+        {{/each}}
+      end
+    end
+  end
+end
+`.slice(1),
+        { noEscape: true }
+      )({ definition })
+    );
+  });
+
+  modules.forEach((definition) => {
+    createFile(
+      path.join(
+        rootDir,
+        "sig",
+        "language_server",
+        "protocol",
+        "constant",
+        `${snake(definition.module.name)}.rbs`
+      ),
+      Handlebars.compile(
+        `
+module LanguageServer
+  module Protocol
+    module Constant
+      {{#if definition.module.documentation}}
+      #
+{{comment definition.module.documentation indent=6}}
+      #
+      {{/if}}
+      module {{definition.module.name}}
+        {{#each definition.members}}
+        {{#if documentation}}
+        #
+{{comment documentation indent=8}}
+        #
+        {{/if}}
+        {{#if (isliteral value)}}
+        {{const name}}: {{value}}
+        {{else}}
+        {{const name}}: {{convertTypeToRbs type}}
         {{/if}}
         {{/each}}
       end

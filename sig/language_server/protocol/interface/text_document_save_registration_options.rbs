@@ -1,0 +1,16 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      class TextDocumentSaveRegistrationOptions
+        def initialize: (document_selector: untyped, ?include_text: bool) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

@@ -1,0 +1,16 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      class DocumentSymbolClientCapabilities
+        def initialize: (?dynamic_registration: bool, ?symbol_kind: untyped, ?hierarchical_document_symbol_support: bool, ?tag_support: untyped, ?label_support: bool) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

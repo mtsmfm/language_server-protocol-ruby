@@ -1,0 +1,21 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # Represents a folding range. To be valid, start and end line must be bigger
+      # than zero and smaller than the number of lines in the document. Clients
+      # are free to ignore invalid ranges.
+      #
+      class FoldingRange
+        def initialize: (start_line: Integer, ?start_character: Integer, end_line: Integer, ?end_character: Integer, ?kind: String, ?collapsed_text: String) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

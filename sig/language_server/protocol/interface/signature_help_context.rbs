@@ -1,0 +1,20 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # Additional information about the context in which a signature help request
+      # was triggered.
+      #
+      class SignatureHelpContext
+        def initialize: (trigger_kind: untyped, ?trigger_character: String, is_retrigger: bool, ?active_signature_help: untyped) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end
