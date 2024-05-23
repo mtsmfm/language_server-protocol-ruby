@@ -28,7 +28,7 @@ jobs:
           submodules: true
           ref: ${{ github.head_ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.PAT || github.token }}
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
