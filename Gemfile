@@ -8,4 +8,4 @@ gemspec
 gem "benchmark-ips"
 gem "pry-byebug"
 gem "activesupport"
-gem "steep"
+gem "steep", require: false
