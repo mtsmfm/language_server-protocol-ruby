@@ -1,0 +1,20 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # Represents information about programming constructs like variables, classes,
+      # interfaces etc.
+      #
+      class SymbolInformation
+        def initialize: (name: String, kind: untyped, ?tags: Array[untyped], ?deprecated: bool, location: untyped, ?container_name: String) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

@@ -1,0 +1,16 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      class SemanticTokensClientCapabilities
+        def initialize: (?dynamic_registration: bool, requests: untyped, token_types: Array[String], token_modifiers: Array[String], formats: Array[untyped], ?overlapping_token_support: bool, ?multiline_token_support: bool, ?server_cancel_support: bool, ?augments_syntax_tokens: bool) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

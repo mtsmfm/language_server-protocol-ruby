@@ -1,0 +1,20 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # An inlay hint label part allows for interactive and composite labels
+      # of inlay hints.
+      #
+      class InlayHintLabelPart
+        def initialize: (value: String, ?tooltip: untyped, ?location: untyped, ?command: untyped) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

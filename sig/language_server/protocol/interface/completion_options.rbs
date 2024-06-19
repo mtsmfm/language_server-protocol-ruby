@@ -1,0 +1,19 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # Completion options.
+      #
+      class CompletionOptions
+        def initialize: (?work_done_progress: bool, ?trigger_characters: Array[String], ?all_commit_characters: Array[String], ?resolve_provider: bool, ?completion_item: untyped) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

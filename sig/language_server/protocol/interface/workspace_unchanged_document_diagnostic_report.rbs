@@ -1,0 +1,19 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # An unchanged document diagnostic report for a workspace diagnostic result.
+      #
+      class WorkspaceUnchangedDocumentDiagnosticReport
+        def initialize: (kind: untyped, result_id: String, uri: String, version: Integer) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

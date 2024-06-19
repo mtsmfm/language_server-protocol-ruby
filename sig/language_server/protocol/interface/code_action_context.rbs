@@ -1,0 +1,20 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # Contains additional diagnostic information about the context in which
+      # a code action is run.
+      #
+      class CodeActionContext
+        def initialize: (diagnostics: Array[untyped], ?only: Array[String], ?trigger_kind: untyped) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end
