@@ -28,6 +28,10 @@ module LanguageServer
             io.print response_str
             io.flush
           end
+
+          def close
+            io.close
+          end
         end
       end
     end

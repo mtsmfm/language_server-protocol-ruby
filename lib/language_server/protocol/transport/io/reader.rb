@@ -21,6 +21,10 @@ module LanguageServer
             end
           end
 
+          def close
+            io.close
+          end
+
           private
 
           attr_reader :io
