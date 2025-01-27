@@ -1,5 +1,9 @@
 # Change log
 
+## 3.17.0.4
+
+- Add #close to Reader and Writer (#112)
+
 ## 3.17.0.3
 
 - Update language-server-protocol digest (#59)
