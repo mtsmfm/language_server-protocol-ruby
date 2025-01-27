@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/mtsmfm/language_server-protocol-ruby"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z lib sig LICENSE.txt README.md`.split("\x0")
+  spec.files         = `git ls-files -z lib LICENSE.txt README.md`.split("\x0")
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
