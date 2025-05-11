@@ -291,13 +291,22 @@ const convertTypeToRbs: ((type: string) => string) = (type) => {
   return "untyped";
 };
 
-Handlebars.registerHelper("method_signature", (members: InterfaceResult["members"]) => {
+Handlebars.registerHelper("constructor_signature", (members: InterfaceResult["members"]) => {
   return members
     .map(
       (member) =>
         `${member.optional ? "?" : ""}${snake(member.name)}: ${convertTypeToRbs(member.type)}${member.nullable ? "?" : ""}`
     )
     .join(", ");
+});
+Handlebars.registerHelper("attribute_signature", (member: SerializeResult) => {
+  const rbsType = convertTypeToRbs(member.type);
+  let suffix = "";
+  if (rbsType !== "untyped" && rbsType !== "nil") {
+    suffix = member.optional || member.nullable ? "?" : "";
+  }
+
+  return `${rbsType}${suffix}`;
 });
 Handlebars.registerHelper("convertTypeToRbs", convertTypeToRbs);
 
@@ -424,10 +433,15 @@ module LanguageServer
       #
       {{/if}}
       class {{definition.interface.name}}
-        def initialize: ({{method_signature definition.allMembers}}) -> void
+        def initialize: ({{constructor_signature definition.allMembers}}) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
+        {{#each definition.allMembers}}
+
+        %a{pure}
+        def {{snake name}}: () -> {{attribute_signature this}}
+        {{/each}}
 
         def to_hash: () -> Hash[Symbol, untyped]
 

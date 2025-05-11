@@ -10,6 +10,21 @@ module LanguageServer
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
 
+        %a{pure}
+        def tab_size: () -> Integer
+
+        %a{pure}
+        def insert_spaces: () -> bool
+
+        %a{pure}
+        def trim_trailing_whitespace: () -> bool?
+
+        %a{pure}
+        def insert_final_newline: () -> bool?
+
+        %a{pure}
+        def trim_final_newlines: () -> bool?
+
         def to_hash: () -> Hash[Symbol, untyped]
 
         def to_json: (*untyped) -> String
