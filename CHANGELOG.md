@@ -1,5 +1,9 @@
 # Change log
 
+## 3.17.0.5
+
+- Use JSON.generate() instead to improve performance (#115)
+
 ## 3.17.0.4
 
 - Add #close to Reader and Writer (#112)
