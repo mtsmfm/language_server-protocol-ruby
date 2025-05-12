@@ -11,9 +11,9 @@ module LanguageServer
           end
 
           def write(response)
-            response_str = response.merge(
+            response_str = JSON.generate(response.merge(
               jsonrpc: "2.0"
-            ).to_json
+            ))
 
             headers = {
               "Content-Length" => response_str.bytesize
