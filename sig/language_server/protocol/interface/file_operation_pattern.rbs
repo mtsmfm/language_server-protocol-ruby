@@ -11,6 +11,15 @@ module LanguageServer
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
 
+        %a{pure}
+        def glob: () -> String
+
+        %a{pure}
+        def matches: () -> untyped
+
+        %a{pure}
+        def options: () -> untyped
+
         def to_hash: () -> Hash[Symbol, untyped]
 
         def to_json: (*untyped) -> String
