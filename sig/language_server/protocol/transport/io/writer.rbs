@@ -9,6 +9,8 @@ module LanguageServer
           def initialize: (IO) -> void
 
           def write: (untyped) -> void
+
+          def close: () -> void
         end
       end
     end
