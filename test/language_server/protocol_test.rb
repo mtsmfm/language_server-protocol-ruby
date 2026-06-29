@@ -1,5 +1,14 @@
 require "test_helper"
 require "open3"
+
+ACTIVE_SUPPORT_NEEDS_LOGGER = Gem.loaded_specs.fetch("activesupport").version < Gem::Version.new("7.1.0")
+ACTIVE_SUPPORT_EXAMPLE_COMMAND = [
+  "ruby -r bundler/setup",
+  ("-r logger" if ACTIVE_SUPPORT_NEEDS_LOGGER),
+  "-r active_support/all",
+  "test/example.rb"
+].compact.join(" ")
+
 require 'active_support/all'
 
 LSP = LanguageServer::Protocol
@@ -7,7 +16,7 @@ LSP = LanguageServer::Protocol
 class LanguageServer::ProtocolTest < Minitest::Test
   [
     "ruby -r bundler/setup test/example.rb",
-    "ruby -r bundler/setup -r active_support/all test/example.rb"
+    ACTIVE_SUPPORT_EXAMPLE_COMMAND
   ].each do |command|
     define_method "test_initialize_with_`#{command}`" do
       stdin, stdout, stderr, wait_thr = Open3.popen3(command)
