@@ -26,7 +26,7 @@ if current_ruby_version < Gem::Version.new("2.7.0")
 elsif current_ruby_version < Gem::Version.new("3.1.0")
   gem "activesupport", "< 7.3"
 elsif current_ruby_version < Gem::Version.new("3.2.0")
-  gem "activesupport", "< 8.0"
+  gem "activesupport", "< 8.1.4"
 else
   gem "activesupport"
 end
