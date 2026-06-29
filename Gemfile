@@ -7,5 +7,23 @@ gemspec
 
 gem "benchmark-ips"
 gem "pry-byebug"
-gem "activesupport"
+current_ruby_version = Gem::Version.new(RUBY_VERSION)
+
+if current_ruby_version < Gem::Version.new("2.7.0")
+  gem "concurrent-ruby", "1.3.4"
+end
+
+if current_ruby_version < Gem::Version.new("3.1.0")
+  gem "power_assert", "< 3.0"
+end
+
+if current_ruby_version < Gem::Version.new("2.7.0")
+  gem "activesupport", "< 7.0"
+elsif current_ruby_version < Gem::Version.new("3.1.0")
+  gem "activesupport", "< 7.2"
+elsif current_ruby_version < Gem::Version.new("3.2.0")
+  gem "activesupport", "< 8.0"
+else
+  gem "activesupport"
+end
 gem "steep", require: false
