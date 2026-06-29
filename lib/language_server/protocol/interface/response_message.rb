@@ -30,7 +30,7 @@ module LanguageServer
         # The result of a request. This member is REQUIRED on success.
         # This member MUST NOT exist if there was an error invoking the method.
         #
-        # @return [string | number | boolean | object]
+        # @return [any]
         def result
           attributes.fetch(:result)
         end
