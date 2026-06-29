@@ -1,7 +1,8 @@
 D = Steep::Diagnostic
 
 target :lib do
-  signature "sig"
+  signature "sig", "sig-private"
+  library "json"
 
   check "lib"                       # Directory name
 
