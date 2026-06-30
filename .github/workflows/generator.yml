@@ -18,8 +18,5 @@ jobs:
         with:
           ruby-version: "4.0.5"
           bundler-cache: true
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
       - run: bin/generate_files
       - run: git diff --exit-code
