@@ -11,10 +11,10 @@ module LanguageServer
         def document_selector: () -> untyped
 
         %a{pure}
-        def work_done_progress: () -> bool?
+        def work_done_progress: () -> bool
 
         %a{pure}
-        def id: () -> String?
+        def id: () -> String
 
         def to_hash: () -> Hash[Symbol, untyped]
 

@@ -1,6 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Represents an incoming call, e.g. a caller of a method or constructor.
+      #
+      # @since 3.16.0
+      #
       class CallHierarchyIncomingCall
         def initialize(from:, from_ranges:)
           @attributes = {}
@@ -21,7 +26,7 @@ module LanguageServer
 
         #
         # The ranges at which the calls appear. This is relative to the caller
-        # denoted by [`this.from`](#CallHierarchyIncomingCall.from).
+        # denoted by {@link CallHierarchyIncomingCall.from `this.from`}.
         #
         # @return [Range[]]
         def from_ranges

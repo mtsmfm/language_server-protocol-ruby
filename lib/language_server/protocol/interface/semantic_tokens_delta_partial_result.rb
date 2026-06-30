@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # @since 3.16.0
+      #
       class SemanticTokensDeltaPartialResult
         def initialize(edits:)
           @attributes = {}

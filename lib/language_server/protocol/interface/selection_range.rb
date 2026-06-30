@@ -1,6 +1,10 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # A selection range represents a part of a selection hierarchy. A selection range
+      # may have a parent selection range that contains it.
+      #
       class SelectionRange
         def initialize(range:, parent: nil)
           @attributes = {}
@@ -12,7 +16,7 @@ module LanguageServer
         end
 
         #
-        # The [range](#Range) of this selection range.
+        # The {@link Range range} of this selection range.
         #
         # @return [Range]
         def range
@@ -20,8 +24,7 @@ module LanguageServer
         end
 
         #
-        # The parent selection range containing this range. Therefore
-        # `parent.range` must contain `this.range`.
+        # The parent selection range containing this range. Therefore `parent.range` must contain `this.range`.
         #
         # @return [SelectionRange]
         def parent

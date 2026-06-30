@@ -4,24 +4,18 @@ module LanguageServer
       #
       # A parameter literal used in inline value requests.
       #
+      # @since 3.17.0
+      #
       class InlineValueParams
-        def initialize(work_done_token: nil, text_document:, range:, context:)
+        def initialize(text_document:, range:, context:, work_done_token: nil)
           @attributes = {}
 
-          @attributes[:workDoneToken] = work_done_token if work_done_token
           @attributes[:textDocument] = text_document
           @attributes[:range] = range
           @attributes[:context] = context
+          @attributes[:workDoneToken] = work_done_token if work_done_token
 
           @attributes.freeze
-        end
-
-        #
-        # An optional token that a server can use to report work done progress.
-        #
-        # @return [ProgressToken]
-        def work_done_token
-          attributes.fetch(:workDoneToken)
         end
 
         #
@@ -47,6 +41,14 @@ module LanguageServer
         # @return [InlineValueContext]
         def context
           attributes.fetch(:context)
+        end
+
+        #
+        # An optional token that a server can use to report work done progress.
+        #
+        # @return [ProgressToken]
+        def work_done_token
+          attributes.fetch(:workDoneToken)
         end
 
         attr_reader :attributes

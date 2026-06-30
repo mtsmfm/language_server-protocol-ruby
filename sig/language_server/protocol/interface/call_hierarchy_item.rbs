@@ -1,6 +1,12 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Represents programming constructs like functions or constructors in the context
+      # of call hierarchy.
+      #
+      # @since 3.16.0
+      #
       class CallHierarchyItem
         def initialize: (name: String, kind: untyped, ?tags: Array[untyped], ?detail: String, uri: String, range: untyped, selection_range: untyped, ?data: untyped) -> void
 
@@ -14,10 +20,10 @@ module LanguageServer
         def kind: () -> untyped
 
         %a{pure}
-        def tags: () -> Array[untyped]?
+        def tags: () -> Array[untyped]
 
         %a{pure}
-        def detail: () -> String?
+        def detail: () -> String
 
         %a{pure}
         def uri: () -> String

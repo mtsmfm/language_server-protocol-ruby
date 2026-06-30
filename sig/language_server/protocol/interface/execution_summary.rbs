@@ -11,7 +11,7 @@ module LanguageServer
         def execution_order: () -> Integer
 
         %a{pure}
-        def success: () -> bool?
+        def success: () -> bool
 
         def to_hash: () -> Hash[Symbol, untyped]
 

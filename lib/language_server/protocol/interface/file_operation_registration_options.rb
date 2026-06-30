@@ -4,6 +4,8 @@ module LanguageServer
       #
       # The options to register for file operations.
       #
+      # @since 3.16.0
+      #
       class FileOperationRegistrationOptions
         def initialize(filters:)
           @attributes = {}

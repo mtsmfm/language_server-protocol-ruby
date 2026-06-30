@@ -11,7 +11,7 @@ module LanguageServer
         def message: () -> String
 
         %a{pure}
-        def verbose: () -> String?
+        def verbose: () -> String
 
         def to_hash: () -> Hash[Symbol, untyped]
 

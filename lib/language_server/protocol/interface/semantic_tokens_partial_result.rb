@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # @since 3.16.0
+      #
       class SemanticTokensPartialResult
         def initialize(data:)
           @attributes = {}
@@ -10,7 +13,7 @@ module LanguageServer
           @attributes.freeze
         end
 
-        # @return [number[]]
+        # @return [uinteger[]]
         def data
           attributes.fetch(:data)
         end

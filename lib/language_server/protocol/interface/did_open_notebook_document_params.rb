@@ -4,6 +4,8 @@ module LanguageServer
       #
       # The params sent in an open notebook document notification.
       #
+      # @since 3.17.0
+      #
       class DidOpenNotebookDocumentParams
         def initialize(notebook_document:, cell_text_documents:)
           @attributes = {}

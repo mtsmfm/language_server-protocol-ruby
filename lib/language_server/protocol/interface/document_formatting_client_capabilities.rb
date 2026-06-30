@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Client capabilities of a {@link DocumentFormattingRequest}.
+      #
       class DocumentFormattingClientCapabilities
         def initialize(dynamic_registration: nil)
           @attributes = {}

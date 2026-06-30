@@ -14,8 +14,8 @@ module LanguageServer
 
         #
         # The label of this color presentation. It will be shown on the color
-        # picker header. By default this is also the text that is inserted when
-        # selecting this color presentation.
+        # picker header. By default this is also the text that is inserted when selecting
+        # this color presentation.
         #
         # @return [string]
         def label
@@ -23,9 +23,9 @@ module LanguageServer
         end
 
         #
-        # An [edit](#TextEdit) which is applied to a document when selecting
-        # this presentation for the color. When omitted the
-        # [label](#ColorPresentation.label) is used.
+        # An {@link TextEdit edit} which is applied to a document when selecting
+        # this presentation for the color.  When `falsy` the {@link ColorPresentation.label label}
+        # is used.
         #
         # @return [TextEdit]
         def text_edit
@@ -33,9 +33,8 @@ module LanguageServer
         end
 
         #
-        # An optional array of additional [text edits](#TextEdit) that are applied
-        # when selecting this color presentation. Edits must not overlap with the
-        # main [edit](#ColorPresentation.textEdit) nor with themselves.
+        # An optional array of additional {@link TextEdit text edits} that are applied when
+        # selecting this color presentation. Edits must not overlap with the main {@link ColorPresentation.textEdit edit} nor with themselves.
         #
         # @return [TextEdit[]]
         def additional_text_edits

@@ -1,46 +1,41 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Registration options for a {@link CompletionRequest}.
+      #
       class CompletionRegistrationOptions
-        def initialize(document_selector:, work_done_progress: nil, trigger_characters: nil, all_commit_characters: nil, resolve_provider: nil, completion_item: nil)
+        def initialize(document_selector:, trigger_characters: nil, all_commit_characters: nil, resolve_provider: nil, completion_item: nil, work_done_progress: nil)
           @attributes = {}
 
           @attributes[:documentSelector] = document_selector
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:triggerCharacters] = trigger_characters if trigger_characters
           @attributes[:allCommitCharacters] = all_commit_characters if all_commit_characters
           @attributes[:resolveProvider] = resolve_provider if resolve_provider
           @attributes[:completionItem] = completion_item if completion_item
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
 
           @attributes.freeze
         end
 
         #
-        # A document selector to identify the scope of the registration. If set to
-        # null the document selector provided on the client side will be used.
+        # A document selector to identify the scope of the registration. If set to null
+        # the document selector provided on the client side will be used.
         #
-        # @return [DocumentSelector]
+        # @return [DocumentSelector | nil]
         def document_selector
           attributes.fetch(:documentSelector)
         end
 
-        # @return [boolean]
-        def work_done_progress
-          attributes.fetch(:workDoneProgress)
-        end
-
         #
-        # The additional characters, beyond the defaults provided by the client (typically
-        # [a-zA-Z]), that should automatically trigger a completion request. For example
-        # `.` in JavaScript represents the beginning of an object property or method and is
-        # thus a good candidate for triggering a completion request.
+        # Most tools trigger completion request automatically without explicitly requesting
+        # it using a keyboard shortcut (e.g. Ctrl+Space). Typically they do so when the user
+        # starts to type an identifier. For example if the user types `c` in a JavaScript file
+        # code complete will automatically pop up present `console` besides others as a
+        # completion item. Characters that make up identifiers don't need to be listed here.
         #
-        # Most tools trigger a completion request automatically without explicitly
-        # requesting it using a keyboard shortcut (e.g. Ctrl+Space). Typically they
-        # do so when the user starts to type an identifier. For example if the user
-        # types `c` in a JavaScript file code complete will automatically pop up
-        # present `console` besides others as a completion item. Characters that
-        # make up identifiers don't need to be listed here.
+        # If code complete should automatically be trigger on characters not being valid inside
+        # an identifier (for example `.` in JavaScript) list them in `triggerCharacters`.
         #
         # @return [string[]]
         def trigger_characters
@@ -48,13 +43,14 @@ module LanguageServer
         end
 
         #
-        # The list of all possible characters that commit a completion. This field
-        # can be used if clients don't support individual commit characters per
-        # completion item. See client capability
-        # `completion.completionItem.commitCharactersSupport`.
+        # The list of all possible characters that commit a completion. This field can be used
+        # if clients don't support individual commit characters per completion item. See
+        # `ClientCapabilities.textDocument.completion.completionItem.commitCharactersSupport`
         #
-        # If a server provides both `allCommitCharacters` and commit characters on
-        # an individual completion item the ones on the completion item win.
+        # If a server provides both `allCommitCharacters` and commit characters on an individual
+        # completion item the ones on the completion item win.
+        #
+        # @since 3.2.0
         #
         # @return [string[]]
         def all_commit_characters
@@ -74,9 +70,16 @@ module LanguageServer
         # The server supports the following `CompletionItem` specific
         # capabilities.
         #
+        # @since 3.17.0
+        #
         # @return [{ labelDetailsSupport?: boolean; }]
         def completion_item
           attributes.fetch(:completionItem)
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         attr_reader :attributes

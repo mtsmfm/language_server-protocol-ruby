@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Registration options for a {@link DocumentHighlightRequest}.
+      #
       class DocumentHighlightRegistrationOptions
         def initialize(document_selector:, work_done_progress: nil)
           @attributes = {}
@@ -12,10 +15,10 @@ module LanguageServer
         end
 
         #
-        # A document selector to identify the scope of the registration. If set to
-        # null the document selector provided on the client side will be used.
+        # A document selector to identify the scope of the registration. If set to null
+        # the document selector provided on the client side will be used.
         #
-        # @return [DocumentSelector]
+        # @return [DocumentSelector | nil]
         def document_selector
           attributes.fetch(:documentSelector)
         end

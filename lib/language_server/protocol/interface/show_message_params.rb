@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The parameters of a notification message.
+      #
       class ShowMessageParams
         def initialize(type:, message:)
           @attributes = {}
@@ -12,7 +15,7 @@ module LanguageServer
         end
 
         #
-        # The message type. See {@link MessageType}.
+        # The message type. See {@link MessageType}
         #
         # @return [MessageType]
         def type

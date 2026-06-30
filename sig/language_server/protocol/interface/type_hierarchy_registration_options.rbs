@@ -1,6 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Type hierarchy options used during static or dynamic registration.
+      #
+      # @since 3.17.0
+      #
       class TypeHierarchyRegistrationOptions
         def initialize: (document_selector: untyped, ?work_done_progress: bool, ?id: String) -> void
 
@@ -11,10 +16,10 @@ module LanguageServer
         def document_selector: () -> untyped
 
         %a{pure}
-        def work_done_progress: () -> bool?
+        def work_done_progress: () -> bool
 
         %a{pure}
-        def id: () -> String?
+        def id: () -> String
 
         def to_hash: () -> Hash[Symbol, untyped]
 

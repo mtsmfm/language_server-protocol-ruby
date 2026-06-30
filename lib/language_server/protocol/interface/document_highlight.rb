@@ -25,7 +25,7 @@ module LanguageServer
         end
 
         #
-        # The highlight kind, default is DocumentHighlightKind.Text.
+        # The highlight kind, default is {@link DocumentHighlightKind.Text text}.
         #
         # @return [DocumentHighlightKind]
         def kind

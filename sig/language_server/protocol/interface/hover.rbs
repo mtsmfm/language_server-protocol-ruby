@@ -5,13 +5,13 @@ module LanguageServer
       # The result of a hover request.
       #
       class Hover
-        def initialize: (contents: Array[untyped], ?range: untyped) -> void
+        def initialize: (contents: untyped, ?range: untyped) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
-        def contents: () -> Array[untyped]
+        def contents: () -> untyped
 
         %a{pure}
         def range: () -> untyped

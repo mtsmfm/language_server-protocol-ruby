@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Registration options specific to a notebook.
       #
+      # @since 3.17.0
+      #
       class NotebookDocumentSyncRegistrationOptions
         def initialize: (notebook_selector: Array[untyped], ?save: bool, ?id: String) -> void
 
@@ -14,10 +16,10 @@ module LanguageServer
         def notebook_selector: () -> Array[untyped]
 
         %a{pure}
-        def save: () -> bool?
+        def save: () -> bool
 
         %a{pure}
-        def id: () -> String?
+        def id: () -> String
 
         def to_hash: () -> Hash[Symbol, untyped]
 

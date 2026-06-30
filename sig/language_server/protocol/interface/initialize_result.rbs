@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The result returned from an initialize request.
+      #
       class InitializeResult
         def initialize: (capabilities: untyped, ?server_info: untyped) -> void
 

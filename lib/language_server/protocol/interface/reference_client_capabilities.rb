@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Client Capabilities for a {@link ReferencesRequest}.
+      #
       class ReferenceClientCapabilities
         def initialize(dynamic_registration: nil)
           @attributes = {}

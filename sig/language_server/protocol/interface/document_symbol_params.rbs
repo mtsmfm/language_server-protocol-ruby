@@ -1,20 +1,23 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Parameters for a {@link DocumentSymbolRequest}.
+      #
       class DocumentSymbolParams
-        def initialize: (?work_done_token: untyped, ?partial_result_token: untyped, text_document: untyped) -> void
+        def initialize: (text_document: untyped, ?work_done_token: untyped, ?partial_result_token: untyped) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
+
+        %a{pure}
+        def text_document: () -> untyped
 
         %a{pure}
         def work_done_token: () -> untyped
 
         %a{pure}
         def partial_result_token: () -> untyped
-
-        %a{pure}
-        def text_document: () -> untyped
 
         def to_hash: () -> Hash[Symbol, untyped]
 

@@ -4,6 +4,8 @@ module LanguageServer
       #
       # A previous result id in a workspace pull request.
       #
+      # @since 3.17.0
+      #
       class PreviousResultId
         def initialize: (uri: String, value: String) -> void
 

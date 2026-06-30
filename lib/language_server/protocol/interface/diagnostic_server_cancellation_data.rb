@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Cancellation data returned from a diagnostic request.
       #
+      # @since 3.17.0
+      #
       class DiagnosticServerCancellationData
         def initialize(retrigger_request:)
           @attributes = {}

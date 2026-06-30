@@ -11,8 +11,10 @@ module LanguageServer
       #
       # If a selector provides no notebook document
       # filter but only a cell selector all notebook
-      # documents that contain at least one matching
+      # document that contain at least one matching
       # cell will be synced.
+      #
+      # @since 3.17.0
       #
       class NotebookDocumentSyncOptions
         def initialize: (notebook_selector: Array[untyped], ?save: bool) -> void
@@ -24,7 +26,7 @@ module LanguageServer
         def notebook_selector: () -> Array[untyped]
 
         %a{pure}
-        def save: () -> bool?
+        def save: () -> bool
 
         def to_hash: () -> Hash[Symbol, untyped]
 

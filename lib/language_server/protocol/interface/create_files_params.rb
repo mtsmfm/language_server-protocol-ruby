@@ -2,8 +2,10 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # The parameters sent in notifications/requests for user-initiated creation
-      # of files.
+      # The parameters sent in notifications/requests for user-initiated creation of
+      # files.
+      #
+      # @since 3.16.0
       #
       class CreateFilesParams
         def initialize(files:)

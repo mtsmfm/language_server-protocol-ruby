@@ -1,15 +1,26 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The parameters of a {@link CodeLensRequest}.
+      #
       class CodeLensParams
-        def initialize(work_done_token: nil, partial_result_token: nil, text_document:)
+        def initialize(text_document:, work_done_token: nil, partial_result_token: nil)
           @attributes = {}
 
+          @attributes[:textDocument] = text_document
           @attributes[:workDoneToken] = work_done_token if work_done_token
           @attributes[:partialResultToken] = partial_result_token if partial_result_token
-          @attributes[:textDocument] = text_document
 
           @attributes.freeze
+        end
+
+        #
+        # The document to request code lens for.
+        #
+        # @return [TextDocumentIdentifier]
+        def text_document
+          attributes.fetch(:textDocument)
         end
 
         #
@@ -21,20 +32,12 @@ module LanguageServer
         end
 
         #
-        # An optional token that a server can use to report partial results (e.g.
-        # streaming) to the client.
+        # An optional token that a server can use to report partial results (e.g. streaming) to
+        # the client.
         #
         # @return [ProgressToken]
         def partial_result_token
           attributes.fetch(:partialResultToken)
-        end
-
-        #
-        # The document to request code lens for.
-        #
-        # @return [TextDocumentIdentifier]
-        def text_document
-          attributes.fetch(:textDocument)
         end
 
         attr_reader :attributes
