@@ -27,7 +27,7 @@ jobs:
           ref: ${{ matrix.ref }}
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "4.0"
+          ruby-version: "4.0.5"
           bundler-cache: true
       - uses: actions/github-script@v9
         with:
