@@ -23,7 +23,7 @@ module LanguageServer
 <%= prop.comment.indent(8) %>
         #
         <%- end -%>
-        # @return [<%= prop.type %>]
+        # @return [<%= prop.return_type %>]
         def <%= prop.method_name %>
           attributes.fetch(:<%= prop.name %>)
         end
