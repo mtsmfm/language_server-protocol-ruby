@@ -4,6 +4,8 @@ module LanguageServer
       #
       # A diagnostic report with a full set of problems.
       #
+      # @since 3.17.0
+      #
       class FullDocumentDiagnosticReport
         def initialize(kind:, result_id: nil, items:)
           @attributes = {}
@@ -18,7 +20,7 @@ module LanguageServer
         #
         # A full document diagnostic report.
         #
-        # @return [any]
+        # @return ["full"]
         def kind
           attributes.fetch(:kind)
         end

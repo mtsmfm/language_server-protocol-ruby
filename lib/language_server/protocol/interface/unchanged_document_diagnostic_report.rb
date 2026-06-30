@@ -5,6 +5,8 @@ module LanguageServer
       # A diagnostic report indicating that the last returned
       # report is still accurate.
       #
+      # @since 3.17.0
+      #
       class UnchangedDocumentDiagnosticReport
         def initialize(kind:, result_id:)
           @attributes = {}
@@ -21,7 +23,7 @@ module LanguageServer
         # only return `unchanged` if result ids are
         # provided.
         #
-        # @return [any]
+        # @return ["unchanged"]
         def kind
           attributes.fetch(:kind)
         end

@@ -3,11 +3,10 @@ module LanguageServer
     module Interface
       #
       # Provide an inline value through an expression evaluation.
-      #
-      # If only a range is specified, the expression will be extracted from the
-      # underlying document.
-      #
+      # If only a range is specified, the expression will be extracted from the underlying document.
       # An optional expression can be used to override the extracted expression.
+      #
+      # @since 3.17.0
       #
       class InlineValueEvaluatableExpression
         def initialize: (range: untyped, ?expression: String) -> void
@@ -19,7 +18,7 @@ module LanguageServer
         def range: () -> untyped
 
         %a{pure}
-        def expression: () -> String?
+        def expression: () -> String
 
         def to_hash: () -> Hash[Symbol, untyped]
 

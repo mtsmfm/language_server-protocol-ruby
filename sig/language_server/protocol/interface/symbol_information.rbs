@@ -6,10 +6,16 @@ module LanguageServer
       # interfaces etc.
       #
       class SymbolInformation
-        def initialize: (name: String, kind: untyped, ?tags: Array[untyped], ?deprecated: bool, location: untyped, ?container_name: String) -> void
+        def initialize: (?deprecated: bool, location: untyped, name: String, kind: untyped, ?tags: Array[untyped], ?container_name: String) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
+
+        %a{pure}
+        def deprecated: () -> bool
+
+        %a{pure}
+        def location: () -> untyped
 
         %a{pure}
         def name: () -> String
@@ -18,16 +24,10 @@ module LanguageServer
         def kind: () -> untyped
 
         %a{pure}
-        def tags: () -> Array[untyped]?
+        def tags: () -> Array[untyped]
 
         %a{pure}
-        def deprecated: () -> bool?
-
-        %a{pure}
-        def location: () -> untyped
-
-        %a{pure}
-        def container_name: () -> String?
+        def container_name: () -> String
 
         def to_hash: () -> Hash[Symbol, untyped]
 

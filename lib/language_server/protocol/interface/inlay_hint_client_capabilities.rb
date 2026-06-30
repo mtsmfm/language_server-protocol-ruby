@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Inlay hint client capabilities.
       #
+      # @since 3.17.0
+      #
       class InlayHintClientCapabilities
         def initialize(dynamic_registration: nil, resolve_support: nil)
           @attributes = {}

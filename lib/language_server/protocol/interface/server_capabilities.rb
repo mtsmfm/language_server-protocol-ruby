@@ -1,8 +1,12 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Defines the capabilities provided by a language
+      # server.
+      #
       class ServerCapabilities
-        def initialize(position_encoding: nil, text_document_sync: nil, notebook_document_sync: nil, completion_provider: nil, hover_provider: nil, signature_help_provider: nil, declaration_provider: nil, definition_provider: nil, type_definition_provider: nil, implementation_provider: nil, references_provider: nil, document_highlight_provider: nil, document_symbol_provider: nil, code_action_provider: nil, code_lens_provider: nil, document_link_provider: nil, color_provider: nil, document_formatting_provider: nil, document_range_formatting_provider: nil, document_on_type_formatting_provider: nil, rename_provider: nil, folding_range_provider: nil, execute_command_provider: nil, selection_range_provider: nil, linked_editing_range_provider: nil, call_hierarchy_provider: nil, semantic_tokens_provider: nil, moniker_provider: nil, type_hierarchy_provider: nil, inline_value_provider: nil, inlay_hint_provider: nil, diagnostic_provider: nil, workspace_symbol_provider: nil, workspace: nil, experimental: nil)
+        def initialize(position_encoding: nil, text_document_sync: nil, notebook_document_sync: nil, completion_provider: nil, hover_provider: nil, signature_help_provider: nil, declaration_provider: nil, definition_provider: nil, type_definition_provider: nil, implementation_provider: nil, references_provider: nil, document_highlight_provider: nil, document_symbol_provider: nil, code_action_provider: nil, code_lens_provider: nil, document_link_provider: nil, color_provider: nil, workspace_symbol_provider: nil, document_formatting_provider: nil, document_range_formatting_provider: nil, document_on_type_formatting_provider: nil, rename_provider: nil, folding_range_provider: nil, selection_range_provider: nil, execute_command_provider: nil, call_hierarchy_provider: nil, linked_editing_range_provider: nil, semantic_tokens_provider: nil, moniker_provider: nil, type_hierarchy_provider: nil, inline_value_provider: nil, inlay_hint_provider: nil, diagnostic_provider: nil, workspace: nil, experimental: nil)
           @attributes = {}
 
           @attributes[:positionEncoding] = position_encoding if position_encoding
@@ -22,22 +26,22 @@ module LanguageServer
           @attributes[:codeLensProvider] = code_lens_provider if code_lens_provider
           @attributes[:documentLinkProvider] = document_link_provider if document_link_provider
           @attributes[:colorProvider] = color_provider if color_provider
+          @attributes[:workspaceSymbolProvider] = workspace_symbol_provider if workspace_symbol_provider
           @attributes[:documentFormattingProvider] = document_formatting_provider if document_formatting_provider
           @attributes[:documentRangeFormattingProvider] = document_range_formatting_provider if document_range_formatting_provider
           @attributes[:documentOnTypeFormattingProvider] = document_on_type_formatting_provider if document_on_type_formatting_provider
           @attributes[:renameProvider] = rename_provider if rename_provider
           @attributes[:foldingRangeProvider] = folding_range_provider if folding_range_provider
-          @attributes[:executeCommandProvider] = execute_command_provider if execute_command_provider
           @attributes[:selectionRangeProvider] = selection_range_provider if selection_range_provider
-          @attributes[:linkedEditingRangeProvider] = linked_editing_range_provider if linked_editing_range_provider
+          @attributes[:executeCommandProvider] = execute_command_provider if execute_command_provider
           @attributes[:callHierarchyProvider] = call_hierarchy_provider if call_hierarchy_provider
+          @attributes[:linkedEditingRangeProvider] = linked_editing_range_provider if linked_editing_range_provider
           @attributes[:semanticTokensProvider] = semantic_tokens_provider if semantic_tokens_provider
           @attributes[:monikerProvider] = moniker_provider if moniker_provider
           @attributes[:typeHierarchyProvider] = type_hierarchy_provider if type_hierarchy_provider
           @attributes[:inlineValueProvider] = inline_value_provider if inline_value_provider
           @attributes[:inlayHintProvider] = inlay_hint_provider if inlay_hint_provider
           @attributes[:diagnosticProvider] = diagnostic_provider if diagnostic_provider
-          @attributes[:workspaceSymbolProvider] = workspace_symbol_provider if workspace_symbol_provider
           @attributes[:workspace] = workspace if workspace
           @attributes[:experimental] = experimental if experimental
 
@@ -53,7 +57,9 @@ module LanguageServer
         #
         # If omitted it defaults to 'utf-16'.
         #
-        # @return [string]
+        # @since 3.17.0
+        #
+        # @return [PositionEncodingKind]
         def position_encoding
           attributes.fetch(:positionEncoding)
         end
@@ -61,8 +67,7 @@ module LanguageServer
         #
         # Defines how text documents are synced. Is either a detailed structure
         # defining each notification or for backwards compatibility the
-        # TextDocumentSyncKind number. If omitted it defaults to
-        # `TextDocumentSyncKind.None`.
+        # TextDocumentSyncKind number.
         #
         # @return [TextDocumentSyncOptions | TextDocumentSyncKind]
         def text_document_sync
@@ -71,6 +76,8 @@ module LanguageServer
 
         #
         # Defines how notebook documents are synced.
+        #
+        # @since 3.17.0
         #
         # @return [NotebookDocumentSyncOptions | NotebookDocumentSyncRegistrationOptions]
         def notebook_document_sync
@@ -102,7 +109,7 @@ module LanguageServer
         end
 
         #
-        # The server provides go to declaration support.
+        # The server provides Goto Declaration support.
         #
         # @return [boolean | DeclarationOptions | DeclarationRegistrationOptions]
         def declaration_provider
@@ -118,7 +125,7 @@ module LanguageServer
         end
 
         #
-        # The server provides goto type definition support.
+        # The server provides Goto Type Definition support.
         #
         # @return [boolean | TypeDefinitionOptions | TypeDefinitionRegistrationOptions]
         def type_definition_provider
@@ -126,7 +133,7 @@ module LanguageServer
         end
 
         #
-        # The server provides goto implementation support.
+        # The server provides Goto Implementation support.
         #
         # @return [boolean | ImplementationOptions | ImplementationRegistrationOptions]
         def implementation_provider
@@ -158,9 +165,9 @@ module LanguageServer
         end
 
         #
-        # The server provides code actions. The `CodeActionOptions` return type is
-        # only valid if the client signals code action literal support via the
-        # property `textDocument.codeAction.codeActionLiteralSupport`.
+        # The server provides code actions. CodeActionOptions may only be
+        # specified if the client states that it supports
+        # `codeActionLiteralSupport` in its initial `initialize` request.
         #
         # @return [boolean | CodeActionOptions]
         def code_action_provider
@@ -189,6 +196,14 @@ module LanguageServer
         # @return [boolean | DocumentColorOptions | DocumentColorRegistrationOptions]
         def color_provider
           attributes.fetch(:colorProvider)
+        end
+
+        #
+        # The server provides workspace symbol support.
+        #
+        # @return [boolean | WorkspaceSymbolOptions]
+        def workspace_symbol_provider
+          attributes.fetch(:workspaceSymbolProvider)
         end
 
         #
@@ -234,14 +249,6 @@ module LanguageServer
         end
 
         #
-        # The server provides execute command support.
-        #
-        # @return [ExecuteCommandOptions]
-        def execute_command_provider
-          attributes.fetch(:executeCommandProvider)
-        end
-
-        #
         # The server provides selection range support.
         #
         # @return [boolean | SelectionRangeOptions | SelectionRangeRegistrationOptions]
@@ -250,15 +257,17 @@ module LanguageServer
         end
 
         #
-        # The server provides linked editing range support.
+        # The server provides execute command support.
         #
-        # @return [boolean | LinkedEditingRangeOptions | LinkedEditingRangeRegistrationOptions]
-        def linked_editing_range_provider
-          attributes.fetch(:linkedEditingRangeProvider)
+        # @return [ExecuteCommandOptions]
+        def execute_command_provider
+          attributes.fetch(:executeCommandProvider)
         end
 
         #
         # The server provides call hierarchy support.
+        #
+        # @since 3.16.0
         #
         # @return [boolean | CallHierarchyOptions | CallHierarchyRegistrationOptions]
         def call_hierarchy_provider
@@ -266,7 +275,19 @@ module LanguageServer
         end
 
         #
+        # The server provides linked editing range support.
+        #
+        # @since 3.16.0
+        #
+        # @return [boolean | LinkedEditingRangeOptions | LinkedEditingRangeRegistrationOptions]
+        def linked_editing_range_provider
+          attributes.fetch(:linkedEditingRangeProvider)
+        end
+
+        #
         # The server provides semantic tokens support.
+        #
+        # @since 3.16.0
         #
         # @return [SemanticTokensOptions | SemanticTokensRegistrationOptions]
         def semantic_tokens_provider
@@ -274,7 +295,9 @@ module LanguageServer
         end
 
         #
-        # Whether server provides moniker support.
+        # The server provides moniker support.
+        #
+        # @since 3.16.0
         #
         # @return [boolean | MonikerOptions | MonikerRegistrationOptions]
         def moniker_provider
@@ -284,6 +307,8 @@ module LanguageServer
         #
         # The server provides type hierarchy support.
         #
+        # @since 3.17.0
+        #
         # @return [boolean | TypeHierarchyOptions | TypeHierarchyRegistrationOptions]
         def type_hierarchy_provider
           attributes.fetch(:typeHierarchyProvider)
@@ -291,6 +316,8 @@ module LanguageServer
 
         #
         # The server provides inline values.
+        #
+        # @since 3.17.0
         #
         # @return [boolean | InlineValueOptions | InlineValueRegistrationOptions]
         def inline_value_provider
@@ -300,6 +327,8 @@ module LanguageServer
         #
         # The server provides inlay hints.
         #
+        # @since 3.17.0
+        #
         # @return [boolean | InlayHintOptions | InlayHintRegistrationOptions]
         def inlay_hint_provider
           attributes.fetch(:inlayHintProvider)
@@ -308,23 +337,17 @@ module LanguageServer
         #
         # The server has support for pull model diagnostics.
         #
+        # @since 3.17.0
+        #
         # @return [DiagnosticOptions | DiagnosticRegistrationOptions]
         def diagnostic_provider
           attributes.fetch(:diagnosticProvider)
         end
 
         #
-        # The server provides workspace symbol support.
+        # Workspace specific server capabilities.
         #
-        # @return [boolean | WorkspaceSymbolOptions]
-        def workspace_symbol_provider
-          attributes.fetch(:workspaceSymbolProvider)
-        end
-
-        #
-        # Workspace specific server capabilities
-        #
-        # @return [{ workspaceFolders?: WorkspaceFoldersServerCapabilities; fileOperations?: { didCreate?: FileOperationRegistrationOptions; ... 4 more ...; willDelete?: FileOperationRegistrationOptions; }; }]
+        # @return [{ workspaceFolders?: WorkspaceFoldersServerCapabilities; fileOperations?: FileOperationOptions; }]
         def workspace
           attributes.fetch(:workspace)
         end

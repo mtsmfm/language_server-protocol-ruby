@@ -4,6 +4,8 @@ module LanguageServer
       #
       # A notebook document.
       #
+      # @since 3.17.0
+      #
       class NotebookDocument
         def initialize(uri:, notebook_type:, version:, metadata: nil, cells:)
           @attributes = {}
@@ -18,9 +20,9 @@ module LanguageServer
         end
 
         #
-        # The notebook document's URI.
+        # The notebook document's uri.
         #
-        # @return [string]
+        # @return [URI]
         def uri
           attributes.fetch(:uri)
         end
@@ -37,7 +39,7 @@ module LanguageServer
         # The version number of this document (it will increase after each
         # change, including undo/redo).
         #
-        # @return [number]
+        # @return [integer]
         def version
           attributes.fetch(:version)
         end
@@ -45,6 +47,8 @@ module LanguageServer
         #
         # Additional metadata stored with the notebook
         # document.
+        #
+        # Note: should always be an object literal (e.g. LSPObject)
         #
         # @return [LSPObject]
         def metadata

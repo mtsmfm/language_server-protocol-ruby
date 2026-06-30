@@ -30,7 +30,7 @@ module LanguageServer
         # per document. The value serves as a hint, servers are free to follow the
         # limit.
         #
-        # @return [number]
+        # @return [uinteger]
         def range_limit
           attributes.fetch(:rangeLimit)
         end
@@ -48,13 +48,17 @@ module LanguageServer
         #
         # Specific options for the folding range kind.
         #
-        # @return [{ valueSet?: string[]; }]
+        # @since 3.17.0
+        #
+        # @return [{ valueSet?: FoldingRangeKind[]; }]
         def folding_range_kind
           attributes.fetch(:foldingRangeKind)
         end
 
         #
         # Specific options for the folding range.
+        #
+        # @since 3.17.0
         #
         # @return [{ collapsedText?: boolean; }]
         def folding_range

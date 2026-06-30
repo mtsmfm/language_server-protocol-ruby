@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The Client Capabilities of a {@link CodeActionRequest}.
+      #
       class CodeActionClientCapabilities
         def initialize(dynamic_registration: nil, code_action_literal_support: nil, is_preferred_support: nil, disabled_support: nil, data_support: nil, resolve_support: nil, honors_change_annotations: nil)
           @attributes = {}
@@ -25,16 +28,21 @@ module LanguageServer
         end
 
         #
-        # The client supports code action literals as a valid
-        # response of the `textDocument/codeAction` request.
+        # The client support code action literals of type `CodeAction` as a valid
+        # response of the `textDocument/codeAction` request. If the property is not
+        # set the request can only return `Command` literals.
         #
-        # @return [{ codeActionKind: { valueSet: string[]; }; }]
+        # @since 3.8.0
+        #
+        # @return [{ codeActionKind: { valueSet: CodeActionKind[]; }; }]
         def code_action_literal_support
           attributes.fetch(:codeActionLiteralSupport)
         end
 
         #
         # Whether code action supports the `isPreferred` property.
+        #
+        # @since 3.15.0
         #
         # @return [boolean]
         def is_preferred_support
@@ -43,6 +51,8 @@ module LanguageServer
 
         #
         # Whether code action supports the `disabled` property.
+        #
+        # @since 3.16.0
         #
         # @return [boolean]
         def disabled_support
@@ -54,6 +64,8 @@ module LanguageServer
         # preserved between a `textDocument/codeAction` and a
         # `codeAction/resolve` request.
         #
+        # @since 3.16.0
+        #
         # @return [boolean]
         def data_support
           attributes.fetch(:dataSupport)
@@ -62,6 +74,8 @@ module LanguageServer
         #
         # Whether the client supports resolving additional code action
         # properties via a separate `codeAction/resolve` request.
+        #
+        # @since 3.16.0
         #
         # @return [{ properties: string[]; }]
         def resolve_support
@@ -74,6 +88,8 @@ module LanguageServer
         # `CodeAction#edit` property by for example presenting
         # the workspace edit in the user interface and asking
         # for confirmation.
+        #
+        # @since 3.16.0
         #
         # @return [boolean]
         def honors_change_annotations

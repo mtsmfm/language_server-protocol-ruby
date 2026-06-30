@@ -19,10 +19,10 @@ module LanguageServer
         def documentation: () -> untyped
 
         %a{pure}
-        def parameters: () -> Array[untyped]?
+        def parameters: () -> Array[untyped]
 
         %a{pure}
-        def active_parameter: () -> Integer?
+        def active_parameter: () -> Integer
 
         def to_hash: () -> Hash[Symbol, untyped]
 

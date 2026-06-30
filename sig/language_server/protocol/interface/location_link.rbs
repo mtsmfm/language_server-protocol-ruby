@@ -1,6 +1,10 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Represents the connection of two locations. Provides additional metadata over normal {@link Location locations},
+      # including an origin range.
+      #
       class LocationLink
         def initialize: (?origin_selection_range: untyped, target_uri: String, target_range: untyped, target_selection_range: untyped) -> void
 

@@ -3,7 +3,9 @@ module LanguageServer
     module Interface
       #
       # A pattern to describe in which file operation requests or notifications
-      # the server is interested in.
+      # the server is interested in receiving.
+      #
+      # @since 3.16.0
       #
       class FileOperationPattern
         def initialize: (glob: String, ?matches: untyped, ?options: untyped) -> void

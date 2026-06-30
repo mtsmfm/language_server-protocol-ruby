@@ -15,10 +15,8 @@ module LanguageServer
         end
 
         #
-        # Open and close notifications are sent to the server. If omitted open
-        # close notifications should not be sent.
-        # Open and close notifications are sent to the server. If omitted open
-        # close notification should not be sent.
+        # Open and close notifications are sent to the server. If omitted open close notification should not
+        # be sent.
         #
         # @return [boolean]
         def open_close
@@ -26,10 +24,8 @@ module LanguageServer
         end
 
         #
-        # Change notifications are sent to the server. See
-        # TextDocumentSyncKind.None, TextDocumentSyncKind.Full and
-        # TextDocumentSyncKind.Incremental. If omitted it defaults to
-        # TextDocumentSyncKind.None.
+        # Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
+        # and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
         #
         # @return [TextDocumentSyncKind]
         def change
@@ -37,8 +33,8 @@ module LanguageServer
         end
 
         #
-        # If present will save notifications are sent to the server. If omitted
-        # the notification should not be sent.
+        # If present will save notifications are sent to the server. If omitted the notification should not be
+        # sent.
         #
         # @return [boolean]
         def will_save
@@ -46,8 +42,8 @@ module LanguageServer
         end
 
         #
-        # If present will save wait until requests are sent to the server. If
-        # omitted the request should not be sent.
+        # If present will save wait until requests are sent to the server. If omitted the request should not be
+        # sent.
         #
         # @return [boolean]
         def will_save_wait_until
@@ -55,8 +51,8 @@ module LanguageServer
         end
 
         #
-        # If present save notifications are sent to the server. If omitted the
-        # notification should not be sent.
+        # If present save notifications are sent to the server. If omitted the notification should not be
+        # sent.
         #
         # @return [boolean | SaveOptions]
         def save

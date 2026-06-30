@@ -2,19 +2,13 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Params for the CodeActionRequest
+      # The parameters of a {@link CodeActionRequest}.
       #
       class CodeActionParams
-        def initialize: (?work_done_token: untyped, ?partial_result_token: untyped, text_document: untyped, range: untyped, context: untyped) -> void
+        def initialize: (text_document: untyped, range: untyped, context: untyped, ?work_done_token: untyped, ?partial_result_token: untyped) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
-
-        %a{pure}
-        def work_done_token: () -> untyped
-
-        %a{pure}
-        def partial_result_token: () -> untyped
 
         %a{pure}
         def text_document: () -> untyped
@@ -24,6 +18,12 @@ module LanguageServer
 
         %a{pure}
         def context: () -> untyped
+
+        %a{pure}
+        def work_done_token: () -> untyped
+
+        %a{pure}
+        def partial_result_token: () -> untyped
 
         def to_hash: () -> Hash[Symbol, untyped]
 

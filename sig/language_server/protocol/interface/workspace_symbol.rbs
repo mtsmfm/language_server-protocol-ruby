@@ -2,13 +2,23 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # A special workspace symbol that supports locations without a range
+      # A special workspace symbol that supports locations without a range.
+      #
+      # See also SymbolInformation.
+      #
+      # @since 3.17.0
       #
       class WorkspaceSymbol
-        def initialize: (name: String, kind: untyped, ?tags: Array[untyped], ?container_name: String, location: untyped, ?data: untyped) -> void
+        def initialize: (location: untyped, ?data: untyped, name: String, kind: untyped, ?tags: Array[untyped], ?container_name: String) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
+
+        %a{pure}
+        def location: () -> untyped
+
+        %a{pure}
+        def data: () -> untyped
 
         %a{pure}
         def name: () -> String
@@ -17,16 +27,10 @@ module LanguageServer
         def kind: () -> untyped
 
         %a{pure}
-        def tags: () -> Array[untyped]?
+        def tags: () -> Array[untyped]
 
         %a{pure}
-        def container_name: () -> String?
-
-        %a{pure}
-        def location: () -> untyped
-
-        %a{pure}
-        def data: () -> untyped
+        def container_name: () -> String
 
         def to_hash: () -> Hash[Symbol, untyped]
 

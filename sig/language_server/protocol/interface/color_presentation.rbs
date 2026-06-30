@@ -14,7 +14,7 @@ module LanguageServer
         def text_edit: () -> untyped
 
         %a{pure}
-        def additional_text_edits: () -> Array[untyped]?
+        def additional_text_edits: () -> Array[untyped]
 
         def to_hash: () -> Hash[Symbol, untyped]
 

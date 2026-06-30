@@ -6,8 +6,10 @@ module LanguageServer
       # relatively to a base URI. The common value for a `baseUri` is a workspace
       # folder root, but it can be another absolute URI as well.
       #
+      # @since 3.17.0
+      #
       class RelativePattern
-        def initialize: (base_uri: untyped, pattern: String) -> void
+        def initialize: (base_uri: untyped, pattern: untyped) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
@@ -16,7 +18,7 @@ module LanguageServer
         def base_uri: () -> untyped
 
         %a{pure}
-        def pattern: () -> String
+        def pattern: () -> untyped
 
         def to_hash: () -> Hash[Symbol, untyped]
 

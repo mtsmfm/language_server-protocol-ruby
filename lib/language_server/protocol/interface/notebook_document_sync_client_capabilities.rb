@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Notebook specific client capabilities.
       #
+      # @since 3.17.0
+      #
       class NotebookDocumentSyncClientCapabilities
         def initialize(dynamic_registration: nil, execution_summary_support: nil)
           @attributes = {}

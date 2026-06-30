@@ -1,15 +1,25 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The parameter of a `typeHierarchy/supertypes` request.
+      #
+      # @since 3.17.0
+      #
       class TypeHierarchySupertypesParams
-        def initialize(work_done_token: nil, partial_result_token: nil, item:)
+        def initialize(item:, work_done_token: nil, partial_result_token: nil)
           @attributes = {}
 
+          @attributes[:item] = item
           @attributes[:workDoneToken] = work_done_token if work_done_token
           @attributes[:partialResultToken] = partial_result_token if partial_result_token
-          @attributes[:item] = item
 
           @attributes.freeze
+        end
+
+        # @return [TypeHierarchyItem]
+        def item
+          attributes.fetch(:item)
         end
 
         #
@@ -21,17 +31,12 @@ module LanguageServer
         end
 
         #
-        # An optional token that a server can use to report partial results (e.g.
-        # streaming) to the client.
+        # An optional token that a server can use to report partial results (e.g. streaming) to
+        # the client.
         #
         # @return [ProgressToken]
         def partial_result_token
           attributes.fetch(:partialResultToken)
-        end
-
-        # @return [TypeHierarchyItem]
-        def item
-          attributes.fetch(:item)
         end
 
         attr_reader :attributes

@@ -49,7 +49,9 @@ module LanguageServer
         #
         # If provided, this is used in place of `SignatureHelp.activeParameter`.
         #
-        # @return [number]
+        # @since 3.16.0
+        #
+        # @return [uinteger]
         def active_parameter
           attributes.fetch(:activeParameter)
         end

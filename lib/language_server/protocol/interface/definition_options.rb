@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Server Capabilities for a {@link DefinitionRequest}.
+      #
       class DefinitionOptions
         def initialize(work_done_progress: nil)
           @attributes = {}

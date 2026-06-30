@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # @since 3.17.0
+      #
       class TypeHierarchyItem
         def initialize: (name: String, kind: untyped, ?tags: Array[untyped], ?detail: String, uri: String, range: untyped, selection_range: untyped, ?data: untyped) -> void
 
@@ -14,10 +17,10 @@ module LanguageServer
         def kind: () -> untyped
 
         %a{pure}
-        def tags: () -> Array[untyped]?
+        def tags: () -> Array[untyped]
 
         %a{pure}
-        def detail: () -> String?
+        def detail: () -> String
 
         %a{pure}
         def uri: () -> String

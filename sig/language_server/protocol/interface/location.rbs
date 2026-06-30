@@ -1,6 +1,10 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Represents a location inside a resource, such as a line
+      # inside a text file.
+      #
       class Location
         def initialize: (uri: String, range: untyped) -> void
 

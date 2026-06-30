@@ -2,14 +2,13 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # A code action represents a change that can be performed in code, e.g. to fix
-      # a problem or to refactor code.
+      # A code action represents a change that can be performed in code, e.g. to fix a problem or
+      # to refactor code.
       #
-      # A CodeAction must set either `edit` and/or a `command`. If both are supplied,
-      # the `edit` is applied first, then the `command` is executed.
+      # A CodeAction must set either `edit` and/or a `command`. If both are supplied, the `edit` is applied first, then the `command` is executed.
       #
       class CodeAction
-        def initialize: (title: String, ?kind: String, ?diagnostics: Array[untyped], ?is_preferred: bool, ?disabled: untyped, ?edit: untyped, ?command: untyped, ?data: untyped) -> void
+        def initialize: (title: String, ?kind: untyped, ?diagnostics: Array[untyped], ?is_preferred: bool, ?disabled: untyped, ?edit: untyped, ?command: untyped, ?data: untyped) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
@@ -18,13 +17,13 @@ module LanguageServer
         def title: () -> String
 
         %a{pure}
-        def kind: () -> String?
+        def kind: () -> untyped
 
         %a{pure}
-        def diagnostics: () -> Array[untyped]?
+        def diagnostics: () -> Array[untyped]
 
         %a{pure}
-        def is_preferred: () -> bool?
+        def is_preferred: () -> bool
 
         %a{pure}
         def disabled: () -> untyped

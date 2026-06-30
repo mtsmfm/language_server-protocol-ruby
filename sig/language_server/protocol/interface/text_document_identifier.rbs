@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # A literal to identify a text document in the client.
+      #
       class TextDocumentIdentifier
         def initialize: (uri: String) -> void
 

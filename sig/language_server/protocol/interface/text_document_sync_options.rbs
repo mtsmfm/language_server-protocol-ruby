@@ -8,16 +8,16 @@ module LanguageServer
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
-        def open_close: () -> bool?
+        def open_close: () -> bool
 
         %a{pure}
         def change: () -> untyped
 
         %a{pure}
-        def will_save: () -> bool?
+        def will_save: () -> bool
 
         %a{pure}
-        def will_save_wait_until: () -> bool?
+        def will_save_wait_until: () -> bool
 
         %a{pure}
         def save: () -> untyped

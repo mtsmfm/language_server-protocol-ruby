@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Registration options for a {@link ReferencesRequest}.
+      #
       class ReferenceRegistrationOptions
         def initialize: (document_selector: untyped, ?work_done_progress: bool) -> void
 
@@ -11,7 +14,7 @@ module LanguageServer
         def document_selector: () -> untyped
 
         %a{pure}
-        def work_done_progress: () -> bool?
+        def work_done_progress: () -> bool
 
         def to_hash: () -> Hash[Symbol, untyped]
 

@@ -25,19 +25,22 @@ module LanguageServer
         # Client supports testing for validity of rename operations
         # before execution.
         #
+        # @since 3.12.0
+        #
         # @return [boolean]
         def prepare_support
           attributes.fetch(:prepareSupport)
         end
 
         #
-        # Client supports the default behavior result
-        # (`{ defaultBehavior: boolean }`).
+        # Client supports the default behavior result.
         #
         # The value indicates the default behavior used by the
         # client.
         #
-        # @return [1]
+        # @since 3.16.0
+        #
+        # @return [PrepareSupportDefaultBehavior]
         def prepare_support_default_behavior
           attributes.fetch(:prepareSupportDefaultBehavior)
         end
@@ -48,6 +51,8 @@ module LanguageServer
         # rename request's workspace edit by for example presenting
         # the workspace edit in the user interface and asking
         # for confirmation.
+        #
+        # @since 3.16.0
         #
         # @return [boolean]
         def honors_change_annotations

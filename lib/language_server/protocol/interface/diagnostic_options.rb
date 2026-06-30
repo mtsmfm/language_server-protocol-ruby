@@ -4,21 +4,18 @@ module LanguageServer
       #
       # Diagnostic options.
       #
+      # @since 3.17.0
+      #
       class DiagnosticOptions
-        def initialize(work_done_progress: nil, identifier: nil, inter_file_dependencies:, workspace_diagnostics:)
+        def initialize(identifier: nil, inter_file_dependencies:, workspace_diagnostics:, work_done_progress: nil)
           @attributes = {}
 
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:identifier] = identifier if identifier
           @attributes[:interFileDependencies] = inter_file_dependencies
           @attributes[:workspaceDiagnostics] = workspace_diagnostics
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
 
           @attributes.freeze
-        end
-
-        # @return [boolean]
-        def work_done_progress
-          attributes.fetch(:workDoneProgress)
         end
 
         #
@@ -47,6 +44,11 @@ module LanguageServer
         # @return [boolean]
         def workspace_diagnostics
           attributes.fetch(:workspaceDiagnostics)
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         attr_reader :attributes

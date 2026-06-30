@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The parameters of a configuration request.
+      #
       class ConfigurationParams
         def initialize(items:)
           @attributes = {}

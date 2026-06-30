@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Hover options.
+      #
       class HoverOptions
         def initialize(work_done_progress: nil)
           @attributes = {}

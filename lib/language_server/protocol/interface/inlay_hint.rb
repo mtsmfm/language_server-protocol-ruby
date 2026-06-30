@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Inlay hint information.
       #
+      # @since 3.17.0
+      #
       class InlayHint
         def initialize(position:, label:, kind: nil, text_edits: nil, tooltip: nil, padding_left: nil, padding_right: nil, data: nil)
           @attributes = {}
@@ -55,9 +57,6 @@ module LanguageServer
         # hint (or its nearest variant) is now part of the document and the inlay
         # hint itself is now obsolete.
         #
-        # Depending on the client capability `inlayHint.resolveSupport` clients
-        # might resolve this property late using the resolve request.
-        #
         # @return [TextEdit[]]
         def text_edits
           attributes.fetch(:textEdits)
@@ -65,9 +64,6 @@ module LanguageServer
 
         #
         # The tooltip text when you hover over this item.
-        #
-        # Depending on the client capability `inlayHint.resolveSupport` clients
-        # might resolve this property late using the resolve request.
         #
         # @return [string | MarkupContent]
         def tooltip

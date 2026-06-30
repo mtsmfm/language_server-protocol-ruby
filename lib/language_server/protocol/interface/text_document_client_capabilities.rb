@@ -5,7 +5,7 @@ module LanguageServer
       # Text document specific client capabilities.
       #
       class TextDocumentClientCapabilities
-        def initialize(synchronization: nil, completion: nil, hover: nil, signature_help: nil, declaration: nil, definition: nil, type_definition: nil, implementation: nil, references: nil, document_highlight: nil, document_symbol: nil, code_action: nil, code_lens: nil, document_link: nil, color_provider: nil, formatting: nil, range_formatting: nil, on_type_formatting: nil, rename: nil, publish_diagnostics: nil, folding_range: nil, selection_range: nil, linked_editing_range: nil, call_hierarchy: nil, semantic_tokens: nil, moniker: nil, type_hierarchy: nil, inline_value: nil, inlay_hint: nil, diagnostic: nil)
+        def initialize(synchronization: nil, completion: nil, hover: nil, signature_help: nil, declaration: nil, definition: nil, type_definition: nil, implementation: nil, references: nil, document_highlight: nil, document_symbol: nil, code_action: nil, code_lens: nil, document_link: nil, color_provider: nil, formatting: nil, range_formatting: nil, on_type_formatting: nil, rename: nil, folding_range: nil, selection_range: nil, publish_diagnostics: nil, call_hierarchy: nil, semantic_tokens: nil, linked_editing_range: nil, moniker: nil, type_hierarchy: nil, inline_value: nil, inlay_hint: nil, diagnostic: nil)
           @attributes = {}
 
           @attributes[:synchronization] = synchronization if synchronization
@@ -27,12 +27,12 @@ module LanguageServer
           @attributes[:rangeFormatting] = range_formatting if range_formatting
           @attributes[:onTypeFormatting] = on_type_formatting if on_type_formatting
           @attributes[:rename] = rename if rename
-          @attributes[:publishDiagnostics] = publish_diagnostics if publish_diagnostics
           @attributes[:foldingRange] = folding_range if folding_range
           @attributes[:selectionRange] = selection_range if selection_range
-          @attributes[:linkedEditingRange] = linked_editing_range if linked_editing_range
+          @attributes[:publishDiagnostics] = publish_diagnostics if publish_diagnostics
           @attributes[:callHierarchy] = call_hierarchy if call_hierarchy
           @attributes[:semanticTokens] = semantic_tokens if semantic_tokens
+          @attributes[:linkedEditingRange] = linked_editing_range if linked_editing_range
           @attributes[:moniker] = moniker if moniker
           @attributes[:typeHierarchy] = type_hierarchy if type_hierarchy
           @attributes[:inlineValue] = inline_value if inline_value
@@ -42,6 +42,9 @@ module LanguageServer
           @attributes.freeze
         end
 
+        #
+        # Defines which synchronization capabilities the client supports.
+        #
         # @return [TextDocumentSyncClientCapabilities]
         def synchronization
           attributes.fetch(:synchronization)
@@ -74,6 +77,8 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/declaration` request.
         #
+        # @since 3.14.0
+        #
         # @return [DeclarationClientCapabilities]
         def declaration
           attributes.fetch(:declaration)
@@ -90,6 +95,8 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/typeDefinition` request.
         #
+        # @since 3.6.0
+        #
         # @return [TypeDefinitionClientCapabilities]
         def type_definition
           attributes.fetch(:typeDefinition)
@@ -97,6 +104,8 @@ module LanguageServer
 
         #
         # Capabilities specific to the `textDocument/implementation` request.
+        #
+        # @since 3.6.0
         #
         # @return [ImplementationClientCapabilities]
         def implementation
@@ -155,6 +164,8 @@ module LanguageServer
         # Capabilities specific to the `textDocument/documentColor` and the
         # `textDocument/colorPresentation` request.
         #
+        # @since 3.6.0
+        #
         # @return [DocumentColorClientCapabilities]
         def color_provider
           attributes.fetch(:colorProvider)
@@ -177,7 +188,6 @@ module LanguageServer
         end
 
         #
-        # request.
         # Capabilities specific to the `textDocument/onTypeFormatting` request.
         #
         # @return [DocumentOnTypeFormattingClientCapabilities]
@@ -194,16 +204,9 @@ module LanguageServer
         end
 
         #
-        # Capabilities specific to the `textDocument/publishDiagnostics`
-        # notification.
-        #
-        # @return [PublishDiagnosticsClientCapabilities]
-        def publish_diagnostics
-          attributes.fetch(:publishDiagnostics)
-        end
-
-        #
         # Capabilities specific to the `textDocument/foldingRange` request.
+        #
+        # @since 3.10.0
         #
         # @return [FoldingRangeClientCapabilities]
         def folding_range
@@ -213,21 +216,25 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/selectionRange` request.
         #
+        # @since 3.15.0
+        #
         # @return [SelectionRangeClientCapabilities]
         def selection_range
           attributes.fetch(:selectionRange)
         end
 
         #
-        # Capabilities specific to the `textDocument/linkedEditingRange` request.
+        # Capabilities specific to the `textDocument/publishDiagnostics` notification.
         #
-        # @return [LinkedEditingRangeClientCapabilities]
-        def linked_editing_range
-          attributes.fetch(:linkedEditingRange)
+        # @return [PublishDiagnosticsClientCapabilities]
+        def publish_diagnostics
+          attributes.fetch(:publishDiagnostics)
         end
 
         #
         # Capabilities specific to the various call hierarchy requests.
+        #
+        # @since 3.16.0
         #
         # @return [CallHierarchyClientCapabilities]
         def call_hierarchy
@@ -235,7 +242,9 @@ module LanguageServer
         end
 
         #
-        # Capabilities specific to the various semantic token requests.
+        # Capabilities specific to the various semantic token request.
+        #
+        # @since 3.16.0
         #
         # @return [SemanticTokensClientCapabilities]
         def semantic_tokens
@@ -243,7 +252,19 @@ module LanguageServer
         end
 
         #
-        # Capabilities specific to the `textDocument/moniker` request.
+        # Capabilities specific to the `textDocument/linkedEditingRange` request.
+        #
+        # @since 3.16.0
+        #
+        # @return [LinkedEditingRangeClientCapabilities]
+        def linked_editing_range
+          attributes.fetch(:linkedEditingRange)
+        end
+
+        #
+        # Client capabilities specific to the `textDocument/moniker` request.
+        #
+        # @since 3.16.0
         #
         # @return [MonikerClientCapabilities]
         def moniker
@@ -253,6 +274,8 @@ module LanguageServer
         #
         # Capabilities specific to the various type hierarchy requests.
         #
+        # @since 3.17.0
+        #
         # @return [TypeHierarchyClientCapabilities]
         def type_hierarchy
           attributes.fetch(:typeHierarchy)
@@ -260,6 +283,8 @@ module LanguageServer
 
         #
         # Capabilities specific to the `textDocument/inlineValue` request.
+        #
+        # @since 3.17.0
         #
         # @return [InlineValueClientCapabilities]
         def inline_value
@@ -269,6 +294,8 @@ module LanguageServer
         #
         # Capabilities specific to the `textDocument/inlayHint` request.
         #
+        # @since 3.17.0
+        #
         # @return [InlayHintClientCapabilities]
         def inlay_hint
           attributes.fetch(:inlayHint)
@@ -276,6 +303,8 @@ module LanguageServer
 
         #
         # Capabilities specific to the diagnostic pull model.
+        #
+        # @since 3.17.0
         #
         # @return [DiagnosticClientCapabilities]
         def diagnostic

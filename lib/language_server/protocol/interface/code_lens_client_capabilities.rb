@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The client capabilities  of a {@link CodeLensRequest}.
+      #
       class CodeLensClientCapabilities
         def initialize(dynamic_registration: nil)
           @attributes = {}

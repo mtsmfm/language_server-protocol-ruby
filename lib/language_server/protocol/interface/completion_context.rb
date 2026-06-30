@@ -2,8 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Contains additional information about the context in which a completion
-      # request is triggered.
+      # Contains additional information about the context in which a completion request is triggered.
       #
       class CompletionContext
         def initialize(trigger_kind:, trigger_character: nil)
@@ -24,9 +23,8 @@ module LanguageServer
         end
 
         #
-        # The trigger character (a single character) that has trigger code
-        # complete. Is undefined if
-        # `triggerKind !== CompletionTriggerKind.TriggerCharacter`
+        # The trigger character (a single character) that has trigger code complete.
+        # Is undefined if `triggerKind !== CompletionTriggerKind.TriggerCharacter`
         #
         # @return [string]
         def trigger_character

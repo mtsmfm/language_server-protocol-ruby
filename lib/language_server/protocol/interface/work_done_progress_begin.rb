@@ -32,8 +32,8 @@ module LanguageServer
 
         #
         # Controls if a cancel button should show to allow the user to cancel the
-        # long running operation. Clients that don't support cancellation are
-        # allowed to ignore the setting.
+        # long running operation. Clients that don't support cancellation are allowed
+        # to ignore the setting.
         #
         # @return [boolean]
         def cancellable
@@ -58,9 +58,9 @@ module LanguageServer
         # to ignore the `percentage` value in subsequent in report notifications.
         #
         # The value should be steadily rising. Clients are free to ignore values
-        # that are not following this rule. The value range is [0, 100]
+        # that are not following this rule. The value range is [0, 100].
         #
-        # @return [number]
+        # @return [uinteger]
         def percentage
           attributes.fetch(:percentage)
         end

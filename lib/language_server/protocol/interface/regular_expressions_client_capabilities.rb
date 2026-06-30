@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Client capabilities specific to regular expressions.
       #
+      # @since 3.16.0
+      #
       class RegularExpressionsClientCapabilities
         def initialize(engine:, version: nil)
           @attributes = {}

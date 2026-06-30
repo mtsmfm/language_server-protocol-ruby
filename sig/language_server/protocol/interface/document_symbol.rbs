@@ -4,8 +4,8 @@ module LanguageServer
       #
       # Represents programming constructs like variables, classes, interfaces etc.
       # that appear in a document. Document symbols can be hierarchical and they
-      # have two ranges: one that encloses its definition and one that points to its
-      # most interesting range, e.g. the range of an identifier.
+      # have two ranges: one that encloses its definition and one that points to
+      # its most interesting range, e.g. the range of an identifier.
       #
       class DocumentSymbol
         def initialize: (name: String, ?detail: String, kind: untyped, ?tags: Array[untyped], ?deprecated: bool, range: untyped, selection_range: untyped, ?children: Array[untyped]) -> void
@@ -17,16 +17,16 @@ module LanguageServer
         def name: () -> String
 
         %a{pure}
-        def detail: () -> String?
+        def detail: () -> String
 
         %a{pure}
         def kind: () -> untyped
 
         %a{pure}
-        def tags: () -> Array[untyped]?
+        def tags: () -> Array[untyped]
 
         %a{pure}
-        def deprecated: () -> bool?
+        def deprecated: () -> bool
 
         %a{pure}
         def range: () -> untyped
@@ -35,7 +35,7 @@ module LanguageServer
         def selection_range: () -> untyped
 
         %a{pure}
-        def children: () -> Array[untyped]?
+        def children: () -> Array[untyped]
 
         def to_hash: () -> Hash[Symbol, untyped]
 

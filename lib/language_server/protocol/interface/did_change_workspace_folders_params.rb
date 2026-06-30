@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The parameters of a `workspace/didChangeWorkspaceFolders` notification.
+      #
       class DidChangeWorkspaceFoldersParams
         def initialize(event:)
           @attributes = {}

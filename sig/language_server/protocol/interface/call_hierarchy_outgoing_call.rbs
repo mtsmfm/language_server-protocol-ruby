@@ -1,6 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Represents an outgoing call, e.g. calling a getter from a method or a method from a constructor etc.
+      #
+      # @since 3.16.0
+      #
       class CallHierarchyOutgoingCall
         def initialize: (to: untyped, from_ranges: Array[untyped]) -> void
 

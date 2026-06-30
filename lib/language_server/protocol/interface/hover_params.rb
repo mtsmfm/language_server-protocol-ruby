@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Parameters for a {@link HoverRequest}.
+      #
       class HoverParams
         def initialize(text_document:, position:, work_done_token: nil)
           @attributes = {}

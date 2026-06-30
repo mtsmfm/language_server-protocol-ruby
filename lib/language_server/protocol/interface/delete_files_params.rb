@@ -2,8 +2,10 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # The parameters sent in notifications/requests for user-initiated deletes
-      # of files.
+      # The parameters sent in notifications/requests for user-initiated deletes of
+      # files.
+      #
+      # @since 3.16.0
       #
       class DeleteFilesParams
         def initialize(files:)
