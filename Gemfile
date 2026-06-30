@@ -14,7 +14,7 @@ if current_ruby_version < Gem::Version.new("2.7.0")
 end
 
 if current_ruby_version < Gem::Version.new("3.1.0")
-  gem "power_assert", "< 3.0"
+  gem "power_assert", "< 3.1"
 end
 
 if current_ruby_version >= Gem::Version.new("4.0.0")
