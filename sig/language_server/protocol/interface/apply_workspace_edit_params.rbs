@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The parameters passed via an apply workspace edit request.
+      #
       class ApplyWorkspaceEditParams
         def initialize: (?label: String, edit: untyped) -> void
 
@@ -8,7 +11,7 @@ module LanguageServer
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
-        def label: () -> String?
+        def label: () -> String
 
         %a{pure}
         def edit: () -> untyped

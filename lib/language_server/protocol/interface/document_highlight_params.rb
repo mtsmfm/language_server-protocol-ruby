@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Parameters for a {@link DocumentHighlightRequest}.
+      #
       class DocumentHighlightParams
         def initialize(text_document:, position:, work_done_token: nil, partial_result_token: nil)
           @attributes = {}
@@ -38,8 +41,8 @@ module LanguageServer
         end
 
         #
-        # An optional token that a server can use to report partial results (e.g.
-        # streaming) to the client.
+        # An optional token that a server can use to report partial results (e.g. streaming) to
+        # the client.
         #
         # @return [ProgressToken]
         def partial_result_token

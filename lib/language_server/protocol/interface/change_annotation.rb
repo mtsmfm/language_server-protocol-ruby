@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Additional information that describes document changes.
       #
+      # @since 3.16.0
+      #
       class ChangeAnnotation
         def initialize(label:, needs_confirmation: nil, description: nil)
           @attributes = {}

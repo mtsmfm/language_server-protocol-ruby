@@ -12,9 +12,9 @@ module LanguageServer
         end
 
         #
-        # Did change watched files notification supports dynamic registration.
-        # Please note that the current protocol doesn't support static
-        # configuration for file changes from the server side.
+        # Did change watched files notification supports dynamic registration. Please note
+        # that the current protocol doesn't support static configuration for file changes
+        # from the server side.
         #
         # @return [boolean]
         def dynamic_registration
@@ -22,8 +22,10 @@ module LanguageServer
         end
 
         #
-        # Whether the client has support for relative patterns
+        # Whether the client has support for {@link  RelativePattern relative pattern}
         # or not.
+        #
+        # @since 3.17.0
         #
         # @return [boolean]
         def relative_pattern_support

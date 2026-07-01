@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Client capabilities specific to diagnostic pull requests.
       #
+      # @since 3.17.0
+      #
       class DiagnosticClientCapabilities
         def initialize(dynamic_registration: nil, related_document_support: nil)
           @attributes = {}
@@ -15,9 +17,8 @@ module LanguageServer
         end
 
         #
-        # Whether implementation supports dynamic registration. If this is set to
-        # `true` the client supports the new
-        # `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+        # Whether implementation supports dynamic registration. If this is set to `true`
+        # the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
         # return value for the corresponding server capability as well.
         #
         # @return [boolean]
@@ -26,8 +27,7 @@ module LanguageServer
         end
 
         #
-        # Whether the clients supports related documents for document diagnostic
-        # pulls.
+        # Whether the clients supports related documents for document diagnostic pulls.
         #
         # @return [boolean]
         def related_document_support

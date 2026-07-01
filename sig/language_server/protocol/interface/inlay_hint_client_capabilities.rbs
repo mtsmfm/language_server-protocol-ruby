@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Inlay hint client capabilities.
       #
+      # @since 3.17.0
+      #
       class InlayHintClientCapabilities
         def initialize: (?dynamic_registration: bool, ?resolve_support: untyped) -> void
 
@@ -11,7 +13,7 @@ module LanguageServer
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
-        def dynamic_registration: () -> bool?
+        def dynamic_registration: () -> bool
 
         %a{pure}
         def resolve_support: () -> untyped

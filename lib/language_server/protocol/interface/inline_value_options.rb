@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Inline value options used during static registration.
       #
+      # @since 3.17.0
+      #
       class InlineValueOptions
         def initialize(work_done_progress: nil)
           @attributes = {}

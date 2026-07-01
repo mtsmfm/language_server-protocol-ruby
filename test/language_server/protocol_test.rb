@@ -107,4 +107,10 @@ class LanguageServer::ProtocolTest < Minitest::Test
 
     assert { child.attributes == { query: 'a', workDoneToken: 'foo', partialResultToken: 'bar' } }
   end
+
+  def test_optional_false_value_is_omitted_for_compatibility
+    capabilities = LSP::Interface::ServerCapabilities.new(definition_provider: false)
+
+    assert { capabilities.attributes == {} }
+  end
 end

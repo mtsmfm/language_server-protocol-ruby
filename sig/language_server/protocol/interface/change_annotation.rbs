@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Additional information that describes document changes.
       #
+      # @since 3.16.0
+      #
       class ChangeAnnotation
         def initialize: (label: String, ?needs_confirmation: bool, ?description: String) -> void
 
@@ -14,10 +16,10 @@ module LanguageServer
         def label: () -> String
 
         %a{pure}
-        def needs_confirmation: () -> bool?
+        def needs_confirmation: () -> bool
 
         %a{pure}
-        def description: () -> String?
+        def description: () -> String
 
         def to_hash: () -> Hash[Symbol, untyped]
 

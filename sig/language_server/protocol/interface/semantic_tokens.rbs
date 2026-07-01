@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # @since 3.16.0
+      #
       class SemanticTokens
         def initialize: (?result_id: String, data: Array[Integer]) -> void
 
@@ -8,7 +11,7 @@ module LanguageServer
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
-        def result_id: () -> String?
+        def result_id: () -> String
 
         %a{pure}
         def data: () -> Array[Integer]

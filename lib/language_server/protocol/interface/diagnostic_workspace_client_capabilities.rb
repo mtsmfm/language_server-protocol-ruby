@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Workspace client capabilities specific to diagnostic pull requests.
       #
+      # @since 3.17.0
+      #
       class DiagnosticWorkspaceClientCapabilities
         def initialize(refresh_support: nil)
           @attributes = {}
@@ -18,9 +20,9 @@ module LanguageServer
         # the server to the client.
         #
         # Note that this event is global and will force the client to refresh all
-        # pulled diagnostics currently shown. It should be used with absolute care
-        # and is useful for situation where a server for example detects a project
-        # wide change that requires such a calculation.
+        # pulled diagnostics currently shown. It should be used with absolute care and
+        # is useful for situation where a server for example detects a project wide
+        # change that requires such a calculation.
         #
         # @return [boolean]
         def refresh_support

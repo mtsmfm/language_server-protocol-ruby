@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Represents a color range from a document.
+      #
       class ColorInformation
         def initialize(range:, color:)
           @attributes = {}

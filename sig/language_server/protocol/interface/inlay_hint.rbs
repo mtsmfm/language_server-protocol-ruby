@@ -4,8 +4,10 @@ module LanguageServer
       #
       # Inlay hint information.
       #
+      # @since 3.17.0
+      #
       class InlayHint
-        def initialize: (position: untyped, label: Array[untyped], ?kind: untyped, ?text_edits: Array[untyped], ?tooltip: untyped, ?padding_left: bool, ?padding_right: bool, ?data: untyped) -> void
+        def initialize: (position: untyped, label: (String | Array[untyped]), ?kind: untyped, ?text_edits: Array[untyped], ?tooltip: untyped, ?padding_left: bool, ?padding_right: bool, ?data: untyped) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
@@ -14,22 +16,22 @@ module LanguageServer
         def position: () -> untyped
 
         %a{pure}
-        def label: () -> Array[untyped]
+        def label: () -> (String | Array[untyped])
 
         %a{pure}
         def kind: () -> untyped
 
         %a{pure}
-        def text_edits: () -> Array[untyped]?
+        def text_edits: () -> Array[untyped]
 
         %a{pure}
         def tooltip: () -> untyped
 
         %a{pure}
-        def padding_left: () -> bool?
+        def padding_left: () -> bool
 
         %a{pure}
-        def padding_right: () -> bool?
+        def padding_right: () -> bool
 
         %a{pure}
         def data: () -> untyped

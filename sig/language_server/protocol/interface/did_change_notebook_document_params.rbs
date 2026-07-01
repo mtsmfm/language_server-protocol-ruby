@@ -4,6 +4,8 @@ module LanguageServer
       #
       # The params sent in a change notebook document notification.
       #
+      # @since 3.17.0
+      #
       class DidChangeNotebookDocumentParams
         def initialize: (notebook_document: untyped, change: untyped) -> void
 

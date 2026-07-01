@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Client capabilities specific to regular expressions.
       #
+      # @since 3.16.0
+      #
       class RegularExpressionsClientCapabilities
         def initialize: (engine: String, ?version: String) -> void
 
@@ -14,7 +16,7 @@ module LanguageServer
         def engine: () -> String
 
         %a{pure}
-        def version: () -> String?
+        def version: () -> String
 
         def to_hash: () -> Hash[Symbol, untyped]
 

@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Matching options for the file operation pattern.
       #
+      # @since 3.16.0
+      #
       class FileOperationPatternOptions
         def initialize(ignore_case: nil)
           @attributes = {}

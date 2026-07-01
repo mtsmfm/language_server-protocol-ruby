@@ -4,6 +4,8 @@ module LanguageServer
       #
       # A change event for a notebook document.
       #
+      # @since 3.17.0
+      #
       class NotebookDocumentChangeEvent
         def initialize(metadata: nil, cells: nil)
           @attributes = {}
@@ -17,6 +19,8 @@ module LanguageServer
         #
         # The changed meta data if any.
         #
+        # Note: should always be an object literal (e.g. LSPObject)
+        #
         # @return [LSPObject]
         def metadata
           attributes.fetch(:metadata)
@@ -25,7 +29,7 @@ module LanguageServer
         #
         # Changes to cells
         #
-        # @return [{ structure?: { array: NotebookCellArrayChange; didOpen?: TextDocumentItem[]; didClose?: TextDocumentIdentifier[]; }; data?: NotebookCell[]; textContent?: { ...; }[]; }]
+        # @return [{ structure?: { array: NotebookCellArrayChange; didOpen?: TextDocumentItem[]; didClose?: TextDocumentIdentifier[]; }; data?: NotebookCell[]; textContent?: { document: VersionedTextDocumentIdentifier; changes: TextDocumentContentChangeEvent[]; }[]; }]
         def cells
           attributes.fetch(:cells)
         end

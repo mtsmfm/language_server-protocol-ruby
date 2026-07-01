@@ -5,6 +5,8 @@ module LanguageServer
       # A notebook cell text document filter denotes a cell text
       # document by different properties.
       #
+      # @since 3.17.0
+      #
       class NotebookCellTextDocumentFilter
         def initialize(notebook:, language: nil)
           @attributes = {}

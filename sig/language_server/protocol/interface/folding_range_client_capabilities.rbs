@@ -8,13 +8,13 @@ module LanguageServer
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
-        def dynamic_registration: () -> bool?
+        def dynamic_registration: () -> bool
 
         %a{pure}
-        def range_limit: () -> Integer?
+        def range_limit: () -> Integer
 
         %a{pure}
-        def line_folding_only: () -> bool?
+        def line_folding_only: () -> bool
 
         %a{pure}
         def folding_range_kind: () -> untyped

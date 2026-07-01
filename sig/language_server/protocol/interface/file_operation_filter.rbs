@@ -3,7 +3,9 @@ module LanguageServer
     module Interface
       #
       # A filter to describe in which file operation requests or notifications
-      # the server is interested in.
+      # the server is interested in receiving.
+      #
+      # @since 3.16.0
       #
       class FileOperationFilter
         def initialize: (?scheme: String, pattern: untyped) -> void
@@ -12,7 +14,7 @@ module LanguageServer
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
-        def scheme: () -> String?
+        def scheme: () -> String
 
         %a{pure}
         def pattern: () -> untyped

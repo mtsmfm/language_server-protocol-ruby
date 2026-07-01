@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Client capabilities specific to inline values.
       #
+      # @since 3.17.0
+      #
       class InlineValueClientCapabilities
         def initialize(dynamic_registration: nil)
           @attributes = {}
@@ -14,8 +16,7 @@ module LanguageServer
         end
 
         #
-        # Whether implementation supports dynamic registration for inline
-        # value providers.
+        # Whether implementation supports dynamic registration for inline value providers.
         #
         # @return [boolean]
         def dynamic_registration

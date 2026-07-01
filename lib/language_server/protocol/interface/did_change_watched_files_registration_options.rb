@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Describe options to be used when registering for file system change events.
+      # Describe options to be used when registered for text document change events.
       #
       class DidChangeWatchedFilesRegistrationOptions
         def initialize(watchers:)

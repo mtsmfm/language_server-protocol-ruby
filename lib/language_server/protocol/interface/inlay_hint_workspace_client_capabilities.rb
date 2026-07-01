@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Client workspace capabilities specific to inlay hints.
       #
+      # @since 3.17.0
+      #
       class InlayHintWorkspaceClientCapabilities
         def initialize(refresh_support: nil)
           @attributes = {}

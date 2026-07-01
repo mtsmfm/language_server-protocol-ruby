@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Parameters for a {@link DocumentHighlightRequest}.
+      #
       class DocumentHighlightParams
         def initialize: (text_document: untyped, position: untyped, ?work_done_token: untyped, ?partial_result_token: untyped) -> void
 

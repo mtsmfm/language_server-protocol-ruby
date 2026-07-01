@@ -2,23 +2,28 @@ module LanguageServer
   module Protocol
     module Interface
       class DocumentColorRegistrationOptions
-        def initialize(document_selector:, id: nil, work_done_progress: nil)
+        def initialize(document_selector:, work_done_progress: nil, id: nil)
           @attributes = {}
 
           @attributes[:documentSelector] = document_selector
-          @attributes[:id] = id if id
           @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:id] = id if id
 
           @attributes.freeze
         end
 
         #
-        # A document selector to identify the scope of the registration. If set to
-        # null the document selector provided on the client side will be used.
+        # A document selector to identify the scope of the registration. If set to null
+        # the document selector provided on the client side will be used.
         #
-        # @return [DocumentSelector]
+        # @return [DocumentSelector | nil]
         def document_selector
           attributes.fetch(:documentSelector)
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         #
@@ -28,11 +33,6 @@ module LanguageServer
         # @return [string]
         def id
           attributes.fetch(:id)
-        end
-
-        # @return [boolean]
-        def work_done_progress
-          attributes.fetch(:workDoneProgress)
         end
 
         attr_reader :attributes

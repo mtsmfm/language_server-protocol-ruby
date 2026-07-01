@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The change text document notification's parameters.
+      #
       class DidChangeTextDocumentParams
         def initialize: (text_document: untyped, content_changes: Array[untyped]) -> void
 

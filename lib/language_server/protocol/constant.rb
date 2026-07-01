@@ -19,6 +19,7 @@ module LanguageServer
       autoload :InlayHintKind, "language_server/protocol/constant/inlay_hint_kind"
       autoload :InsertTextFormat, "language_server/protocol/constant/insert_text_format"
       autoload :InsertTextMode, "language_server/protocol/constant/insert_text_mode"
+      autoload :LSPErrorCodes, "language_server/protocol/constant/lsp_error_codes"
       autoload :MarkupKind, "language_server/protocol/constant/markup_kind"
       autoload :MessageType, "language_server/protocol/constant/message_type"
       autoload :MonikerKind, "language_server/protocol/constant/moniker_kind"
@@ -34,6 +35,7 @@ module LanguageServer
       autoload :TextDocumentSaveReason, "language_server/protocol/constant/text_document_save_reason"
       autoload :TextDocumentSyncKind, "language_server/protocol/constant/text_document_sync_kind"
       autoload :TokenFormat, "language_server/protocol/constant/token_format"
+      autoload :TraceValues, "language_server/protocol/constant/trace_values"
       autoload :UniquenessLevel, "language_server/protocol/constant/uniqueness_level"
       autoload :WatchKind, "language_server/protocol/constant/watch_kind"
 
@@ -55,6 +57,7 @@ module LanguageServer
       require_relative "constant/inlay_hint_kind"
       require_relative "constant/insert_text_format"
       require_relative "constant/insert_text_mode"
+      require_relative "constant/lsp_error_codes"
       require_relative "constant/markup_kind"
       require_relative "constant/message_type"
       require_relative "constant/moniker_kind"
@@ -70,6 +73,7 @@ module LanguageServer
       require_relative "constant/text_document_save_reason"
       require_relative "constant/text_document_sync_kind"
       require_relative "constant/token_format"
+      require_relative "constant/trace_values"
       require_relative "constant/uniqueness_level"
       require_relative "constant/watch_kind"
     end

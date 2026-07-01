@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The parameters sent in a save text document notification
+      #
       class DidSaveTextDocumentParams
         def initialize(text_document:, text: nil)
           @attributes = {}

@@ -2,7 +2,9 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Params to show a resource.
+      # Params to show a document.
+      #
+      # @since 3.16.0
       #
       class ShowDocumentParams
         def initialize: (uri: String, ?external: bool, ?take_focus: bool, ?selection: untyped) -> void
@@ -14,10 +16,10 @@ module LanguageServer
         def uri: () -> String
 
         %a{pure}
-        def external: () -> bool?
+        def external: () -> bool
 
         %a{pure}
-        def take_focus: () -> bool?
+        def take_focus: () -> bool
 
         %a{pure}
         def selection: () -> untyped

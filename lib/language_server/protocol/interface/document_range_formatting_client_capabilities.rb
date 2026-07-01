@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Client capabilities of a {@link DocumentRangeFormattingRequest}.
+      #
       class DocumentRangeFormattingClientCapabilities
         def initialize(dynamic_registration: nil)
           @attributes = {}
@@ -11,7 +14,7 @@ module LanguageServer
         end
 
         #
-        # Whether formatting supports dynamic registration.
+        # Whether range formatting supports dynamic registration.
         #
         # @return [boolean]
         def dynamic_registration

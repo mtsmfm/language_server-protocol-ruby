@@ -6,6 +6,8 @@ module LanguageServer
       # relatively to a base URI. The common value for a `baseUri` is a workspace
       # folder root, but it can be another absolute URI as well.
       #
+      # @since 3.17.0
+      #
       class RelativePattern
         def initialize(base_uri:, pattern:)
           @attributes = {}
@@ -20,7 +22,7 @@ module LanguageServer
         # A workspace folder or a base URI to which this pattern will be matched
         # against relatively.
         #
-        # @return [string | WorkspaceFolder]
+        # @return [WorkspaceFolder | URI]
         def base_uri
           attributes.fetch(:baseUri)
         end
@@ -28,7 +30,7 @@ module LanguageServer
         #
         # The actual glob pattern;
         #
-        # @return [string]
+        # @return [Pattern]
         def pattern
           attributes.fetch(:pattern)
         end

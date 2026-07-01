@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Client Capabilities for a {@link SignatureHelpRequest}.
+      #
       class SignatureHelpClientCapabilities
         def initialize(dynamic_registration: nil, signature_information: nil, context_support: nil)
           @attributes = {}
@@ -34,6 +37,8 @@ module LanguageServer
         # `textDocument/signatureHelp` request. A client that opts into
         # contextSupport will also support the `retriggerCharacters` on
         # `SignatureHelpOptions`.
+        #
+        # @since 3.15.0
         #
         # @return [boolean]
         def context_support

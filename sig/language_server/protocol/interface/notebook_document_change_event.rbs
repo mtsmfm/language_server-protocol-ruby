@@ -4,6 +4,8 @@ module LanguageServer
       #
       # A change event for a notebook document.
       #
+      # @since 3.17.0
+      #
       class NotebookDocumentChangeEvent
         def initialize: (?metadata: untyped, ?cells: untyped) -> void
 

@@ -4,32 +4,29 @@ module LanguageServer
       #
       # Diagnostic registration options.
       #
+      # @since 3.17.0
+      #
       class DiagnosticRegistrationOptions
-        def initialize(document_selector:, work_done_progress: nil, identifier: nil, inter_file_dependencies:, workspace_diagnostics:, id: nil)
+        def initialize(document_selector:, identifier: nil, inter_file_dependencies:, workspace_diagnostics:, work_done_progress: nil, id: nil)
           @attributes = {}
 
           @attributes[:documentSelector] = document_selector
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:identifier] = identifier if identifier
           @attributes[:interFileDependencies] = inter_file_dependencies
           @attributes[:workspaceDiagnostics] = workspace_diagnostics
+          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
           @attributes[:id] = id if id
 
           @attributes.freeze
         end
 
         #
-        # A document selector to identify the scope of the registration. If set to
-        # null the document selector provided on the client side will be used.
+        # A document selector to identify the scope of the registration. If set to null
+        # the document selector provided on the client side will be used.
         #
-        # @return [DocumentSelector]
+        # @return [DocumentSelector | nil]
         def document_selector
           attributes.fetch(:documentSelector)
-        end
-
-        # @return [boolean]
-        def work_done_progress
-          attributes.fetch(:workDoneProgress)
         end
 
         #
@@ -58,6 +55,11 @@ module LanguageServer
         # @return [boolean]
         def workspace_diagnostics
           attributes.fetch(:workspaceDiagnostics)
+        end
+
+        # @return [boolean]
+        def work_done_progress
+          attributes.fetch(:workDoneProgress)
         end
 
         #

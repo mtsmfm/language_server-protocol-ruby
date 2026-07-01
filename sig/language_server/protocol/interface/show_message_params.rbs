@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The parameters of a notification message.
+      #
       class ShowMessageParams
         def initialize: (type: untyped, message: String) -> void
 

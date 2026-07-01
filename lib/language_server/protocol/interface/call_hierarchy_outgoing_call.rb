@@ -1,6 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Represents an outgoing call, e.g. calling a getter from a method or a method from a constructor etc.
+      #
+      # @since 3.16.0
+      #
       class CallHierarchyOutgoingCall
         def initialize(to:, from_ranges:)
           @attributes = {}
@@ -20,8 +25,9 @@ module LanguageServer
         end
 
         #
-        # The range at which this item is called. This is the range relative to
-        # the caller, e.g the item passed to `callHierarchy/outgoingCalls` request.
+        # The range at which this item is called. This is the range relative to the caller, e.g the item
+        # passed to {@link CallHierarchyItemProvider.provideCallHierarchyOutgoingCalls `provideCallHierarchyOutgoingCalls`}
+        # and not {@link CallHierarchyOutgoingCall.to `this.to`}.
         #
         # @return [Range[]]
         def from_ranges

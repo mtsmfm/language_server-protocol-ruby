@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Structure to capture a description for an error code.
       #
+      # @since 3.16.0
+      #
       class CodeDescription
         def initialize: (href: String) -> void
 

@@ -1,6 +1,10 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Represents a location inside a resource, such as a line
+      # inside a text file.
+      #
       class Location
         def initialize(uri:, range:)
           @attributes = {}
@@ -11,7 +15,7 @@ module LanguageServer
           @attributes.freeze
         end
 
-        # @return [string]
+        # @return [DocumentUri]
         def uri
           attributes.fetch(:uri)
         end

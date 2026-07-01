@@ -1,6 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The parameter of a `textDocument/prepareCallHierarchy` request.
+      #
+      # @since 3.16.0
+      #
       class CallHierarchyPrepareParams
         def initialize(text_document:, position:, work_done_token: nil)
           @attributes = {}

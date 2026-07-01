@@ -1,6 +1,10 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # An item to transfer a text document from the client to the
+      # server.
+      #
       class TextDocumentItem
         def initialize: (uri: String, language_id: String, version: Integer, text: String) -> void
 

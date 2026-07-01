@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Capabilities specific to the notebook document support.
       #
+      # @since 3.17.0
+      #
       class NotebookDocumentClientCapabilities
         def initialize(synchronization:)
           @attributes = {}
@@ -15,6 +17,8 @@ module LanguageServer
 
         #
         # Capabilities specific to notebook document synchronization
+        #
+        # @since 3.17.0
         #
         # @return [NotebookDocumentSyncClientCapabilities]
         def synchronization

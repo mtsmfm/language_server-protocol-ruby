@@ -2,16 +2,16 @@ module LanguageServer
   module Protocol
     module Interface
       class WorkDoneProgressEnd
-        def initialize: (kind: untyped, ?message: String) -> void
+        def initialize: (kind: "end", ?message: String) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
-        def kind: () -> untyped
+        def kind: () -> "end"
 
         %a{pure}
-        def message: () -> String?
+        def message: () -> String
 
         def to_hash: () -> Hash[Symbol, untyped]
 

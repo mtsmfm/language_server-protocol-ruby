@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Client Capabilities for a {@link DefinitionRequest}.
+      #
       class DefinitionClientCapabilities
         def initialize(dynamic_registration: nil, link_support: nil)
           @attributes = {}
@@ -21,6 +24,8 @@ module LanguageServer
 
         #
         # The client supports additional metadata in the form of definition links.
+        #
+        # @since 3.14.0
         #
         # @return [boolean]
         def link_support

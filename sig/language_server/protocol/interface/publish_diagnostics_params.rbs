@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The publish diagnostic notification's parameters.
+      #
       class PublishDiagnosticsParams
         def initialize: (uri: String, ?version: Integer, diagnostics: Array[untyped]) -> void
 
@@ -11,7 +14,7 @@ module LanguageServer
         def uri: () -> String
 
         %a{pure}
-        def version: () -> Integer?
+        def version: () -> Integer
 
         %a{pure}
         def diagnostics: () -> Array[untyped]

@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Provider options for a {@link DocumentRangeFormattingRequest}.
+      #
       class DocumentRangeFormattingOptions
         def initialize(work_done_progress: nil)
           @attributes = {}
