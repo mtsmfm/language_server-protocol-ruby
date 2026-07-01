@@ -1,0 +1,72 @@
+name: Dependent Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: rubocop
+            repository: rubocop/rubocop
+            test_command: bundle exec rake spec
+          - name: standard
+            repository: standardrb/standard
+            test_command: bundle exec rake test
+          - name: ruby-lsp
+            repository: Shopify/ruby-lsp
+            test_command: bundle exec rake test
+          - name: steep
+            repository: soutaro/steep
+            test_command: bundle exec rake test
+
+    steps:
+      - name: Checkout language_server-protocol-ruby
+        uses: actions/checkout@v7
+        with:
+          path: language_server-protocol-ruby
+
+      - name: Resolve dependent path
+        id: dependent
+        env:
+          REPOSITORY: ${{ matrix.repository }}
+        run: echo "path=${REPOSITORY#*/}" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout dependent
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ matrix.repository }}
+          path: ${{ steps.dependent.outputs.path }}
+          submodules: recursive
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ruby
+
+      - name: Use local language_server-protocol
+        working-directory: ${{ steps.dependent.outputs.path }}
+        run: |
+          printf '\ngem "language_server-protocol", path: "%s"\n' "$GITHUB_WORKSPACE/language_server-protocol-ruby" >> Gemfile
+          bundle install
+          bundle info language_server-protocol
+
+      - name: Run dependent tests
+        working-directory: ${{ steps.dependent.outputs.path }}
+        run: ${{ matrix.test_command }}
