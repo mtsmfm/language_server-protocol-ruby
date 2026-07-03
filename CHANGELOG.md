@@ -1,5 +1,12 @@
 # Change log
 
+## 3.17.0.6
+
+- Regenerate protocol files with the Ruby generator (#141)
+  - Add missing LSP 3.17 interfaces and constants
+- Include RBS signature files in the gem package
+- Add dependent gem test workflow (#142)
+
 ## 3.17.0.5
 
 - Use JSON.generate() instead to improve performance (#115)
