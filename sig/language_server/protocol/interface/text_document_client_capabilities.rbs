@@ -5,7 +5,7 @@ module LanguageServer
       # Text document specific client capabilities.
       #
       class TextDocumentClientCapabilities
-        def initialize: (?synchronization: untyped, ?completion: untyped, ?hover: untyped, ?signature_help: untyped, ?declaration: untyped, ?definition: untyped, ?type_definition: untyped, ?implementation: untyped, ?references: untyped, ?document_highlight: untyped, ?document_symbol: untyped, ?code_action: untyped, ?code_lens: untyped, ?document_link: untyped, ?color_provider: untyped, ?formatting: untyped, ?range_formatting: untyped, ?on_type_formatting: untyped, ?rename: untyped, ?publish_diagnostics: untyped, ?folding_range: untyped, ?selection_range: untyped, ?linked_editing_range: untyped, ?call_hierarchy: untyped, ?semantic_tokens: untyped, ?moniker: untyped, ?type_hierarchy: untyped, ?inline_value: untyped, ?inlay_hint: untyped, ?diagnostic: untyped) -> void
+        def initialize: (?synchronization: untyped, ?completion: untyped, ?hover: untyped, ?signature_help: untyped, ?declaration: untyped, ?definition: untyped, ?type_definition: untyped, ?implementation: untyped, ?references: untyped, ?document_highlight: untyped, ?document_symbol: untyped, ?code_action: untyped, ?code_lens: untyped, ?document_link: untyped, ?color_provider: untyped, ?formatting: untyped, ?range_formatting: untyped, ?on_type_formatting: untyped, ?rename: untyped, ?folding_range: untyped, ?selection_range: untyped, ?publish_diagnostics: untyped, ?call_hierarchy: untyped, ?semantic_tokens: untyped, ?linked_editing_range: untyped, ?moniker: untyped, ?type_hierarchy: untyped, ?inline_value: untyped, ?inlay_hint: untyped, ?diagnostic: untyped) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
@@ -68,22 +68,22 @@ module LanguageServer
         def rename: () -> untyped
 
         %a{pure}
-        def publish_diagnostics: () -> untyped
-
-        %a{pure}
         def folding_range: () -> untyped
 
         %a{pure}
         def selection_range: () -> untyped
 
         %a{pure}
-        def linked_editing_range: () -> untyped
+        def publish_diagnostics: () -> untyped
 
         %a{pure}
         def call_hierarchy: () -> untyped
 
         %a{pure}
         def semantic_tokens: () -> untyped
+
+        %a{pure}
+        def linked_editing_range: () -> untyped
 
         %a{pure}
         def moniker: () -> untyped

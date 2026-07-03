@@ -16,10 +16,10 @@ module LanguageServer
         def signatures: () -> Array[untyped]
 
         %a{pure}
-        def active_signature: () -> Integer?
+        def active_signature: () -> Integer
 
         %a{pure}
-        def active_parameter: () -> Integer?
+        def active_parameter: () -> Integer
 
         def to_hash: () -> Hash[Symbol, untyped]
 

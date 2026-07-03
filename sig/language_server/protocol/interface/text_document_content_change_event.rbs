@@ -6,7 +6,7 @@ module LanguageServer
       # it is considered to be the full content of the document.
       #
       class TextDocumentContentChangeEvent
-        def initialize: (?range: untyped?, ?range_length: Integer?, text: String) -> void
+        def initialize: (?range: untyped, ?range_length: Integer, text: String) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
@@ -15,7 +15,7 @@ module LanguageServer
         def range: () -> untyped
 
         %a{pure}
-        def range_length: () -> Integer?
+        def range_length: () -> Integer
 
         %a{pure}
         def text: () -> String

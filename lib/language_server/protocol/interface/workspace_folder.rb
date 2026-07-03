@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # A workspace folder inside a client.
+      #
       class WorkspaceFolder
         def initialize(uri:, name:)
           @attributes = {}
@@ -14,7 +17,7 @@ module LanguageServer
         #
         # The associated URI for this workspace folder.
         #
-        # @return [string]
+        # @return [URI]
         def uri
           attributes.fetch(:uri)
         end

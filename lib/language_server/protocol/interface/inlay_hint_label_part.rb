@@ -5,6 +5,8 @@ module LanguageServer
       # An inlay hint label part allows for interactive and composite labels
       # of inlay hints.
       #
+      # @since 3.17.0
+      #
       class InlayHintLabelPart
         def initialize(value:, tooltip: nil, location: nil, command: nil)
           @attributes = {}

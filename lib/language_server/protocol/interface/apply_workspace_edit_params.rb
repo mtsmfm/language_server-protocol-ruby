@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The parameters passed via an apply workspace edit request.
+      #
       class ApplyWorkspaceEditParams
         def initialize(label: nil, edit:)
           @attributes = {}

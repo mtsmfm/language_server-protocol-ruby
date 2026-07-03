@@ -4,6 +4,8 @@ module LanguageServer
       #
       # A versioned notebook document identifier.
       #
+      # @since 3.17.0
+      #
       class VersionedNotebookDocumentIdentifier
         def initialize: (version: Integer, uri: String) -> void
 

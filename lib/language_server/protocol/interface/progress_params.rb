@@ -22,7 +22,7 @@ module LanguageServer
         #
         # The progress data.
         #
-        # @return [T]
+        # @return [LSPAny]
         def value
           attributes.fetch(:value)
         end

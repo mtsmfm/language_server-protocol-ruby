@@ -2,16 +2,16 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Create file operation
+      # Create file operation.
       #
       class CreateFile
-        def initialize: (kind: untyped, uri: String, ?options: untyped, ?annotation_id: String) -> void
+        def initialize: (kind: "create", uri: String, ?options: untyped, ?annotation_id: untyped) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
-        def kind: () -> untyped
+        def kind: () -> "create"
 
         %a{pure}
         def uri: () -> String
@@ -20,7 +20,7 @@ module LanguageServer
         def options: () -> untyped
 
         %a{pure}
-        def annotation_id: () -> String?
+        def annotation_id: () -> untyped
 
         def to_hash: () -> Hash[Symbol, untyped]
 

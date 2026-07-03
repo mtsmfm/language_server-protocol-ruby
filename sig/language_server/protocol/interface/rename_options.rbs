@@ -1,17 +1,20 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Provider options for a {@link RenameRequest}.
+      #
       class RenameOptions
-        def initialize: (?work_done_progress: bool, ?prepare_provider: bool) -> void
+        def initialize: (?prepare_provider: bool, ?work_done_progress: bool) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
-        def work_done_progress: () -> bool?
+        def prepare_provider: () -> bool
 
         %a{pure}
-        def prepare_provider: () -> bool?
+        def work_done_progress: () -> bool
 
         def to_hash: () -> Hash[Symbol, untyped]
 

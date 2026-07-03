@@ -1,0 +1,26 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      <%- if comment -%>
+      #
+<%= comment.indent(6) %>
+      #
+      <%- end -%>
+      class <%= name %>
+        def initialize: (<%= rbs_constructor_signature %>) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+      <%- properties.each do |prop| -%>
+
+        %a{pure}
+        def <%= prop.method_name %>: () -> <%= prop.rbs_return_type %>
+      <%- end -%>
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

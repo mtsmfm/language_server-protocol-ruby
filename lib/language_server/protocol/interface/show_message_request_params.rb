@@ -21,7 +21,7 @@ module LanguageServer
         end
 
         #
-        # The actual message
+        # The actual message.
         #
         # @return [string]
         def message

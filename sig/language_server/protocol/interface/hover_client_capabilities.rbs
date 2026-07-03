@@ -8,10 +8,10 @@ module LanguageServer
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
-        def dynamic_registration: () -> bool?
+        def dynamic_registration: () -> bool
 
         %a{pure}
-        def content_format: () -> Array[untyped]?
+        def content_format: () -> Array[untyped]
 
         def to_hash: () -> Hash[Symbol, untyped]
 

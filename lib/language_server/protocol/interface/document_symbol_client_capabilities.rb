@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Client Capabilities for a {@link DocumentSymbolRequest}.
+      #
       class DocumentSymbolClientCapabilities
         def initialize(dynamic_registration: nil, symbol_kind: nil, hierarchical_document_symbol_support: nil, tag_support: nil, label_support: nil)
           @attributes = {}
@@ -44,7 +47,9 @@ module LanguageServer
         # `DocumentSymbol` if `hierarchicalDocumentSymbolSupport` is set to true.
         # Clients supporting tags have to handle unknown tags gracefully.
         #
-        # @return [{ valueSet: 1[]; }]
+        # @since 3.16.0
+        #
+        # @return [{ valueSet: SymbolTag[]; }]
         def tag_support
           attributes.fetch(:tagSupport)
         end
@@ -52,6 +57,8 @@ module LanguageServer
         #
         # The client supports an additional label presented in the UI when
         # registering a document symbol provider.
+        #
+        # @since 3.16.0
         #
         # @return [boolean]
         def label_support

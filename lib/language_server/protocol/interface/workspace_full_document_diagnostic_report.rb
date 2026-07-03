@@ -4,23 +4,42 @@ module LanguageServer
       #
       # A full document diagnostic report for a workspace diagnostic result.
       #
+      # @since 3.17.0
+      #
       class WorkspaceFullDocumentDiagnosticReport
-        def initialize(kind:, result_id: nil, items:, uri:, version:)
+        def initialize(uri:, version:, kind:, result_id: nil, items:)
           @attributes = {}
 
+          @attributes[:uri] = uri
+          @attributes[:version] = version
           @attributes[:kind] = kind
           @attributes[:resultId] = result_id if result_id
           @attributes[:items] = items
-          @attributes[:uri] = uri
-          @attributes[:version] = version
 
           @attributes.freeze
         end
 
         #
+        # The URI for which diagnostic information is reported.
+        #
+        # @return [DocumentUri]
+        def uri
+          attributes.fetch(:uri)
+        end
+
+        #
+        # The version number for which the diagnostics are reported.
+        # If the document is not marked as open `null` can be provided.
+        #
+        # @return [integer | nil]
+        def version
+          attributes.fetch(:version)
+        end
+
+        #
         # A full document diagnostic report.
         #
-        # @return [any]
+        # @return ["full"]
         def kind
           attributes.fetch(:kind)
         end
@@ -41,23 +60,6 @@ module LanguageServer
         # @return [Diagnostic[]]
         def items
           attributes.fetch(:items)
-        end
-
-        #
-        # The URI for which diagnostic information is reported.
-        #
-        # @return [string]
-        def uri
-          attributes.fetch(:uri)
-        end
-
-        #
-        # The version number for which the diagnostics are reported.
-        # If the document is not marked as open `null` can be provided.
-        #
-        # @return [number]
-        def version
-          attributes.fetch(:version)
         end
 
         attr_reader :attributes

@@ -4,6 +4,8 @@ module LanguageServer
       #
       # A literal to identify a notebook document in the client.
       #
+      # @since 3.17.0
+      #
       class NotebookDocumentIdentifier
         def initialize(uri:)
           @attributes = {}
@@ -14,9 +16,9 @@ module LanguageServer
         end
 
         #
-        # The notebook document's URI.
+        # The notebook document's uri.
         #
-        # @return [string]
+        # @return [URI]
         def uri
           attributes.fetch(:uri)
         end

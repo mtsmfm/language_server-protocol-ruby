@@ -1,6 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Call hierarchy options used during static registration.
+      #
+      # @since 3.16.0
+      #
       class CallHierarchyOptions
         def initialize(work_done_progress: nil)
           @attributes = {}

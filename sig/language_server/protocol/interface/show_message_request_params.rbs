@@ -14,7 +14,7 @@ module LanguageServer
         def message: () -> String
 
         %a{pure}
-        def actions: () -> Array[untyped]?
+        def actions: () -> Array[untyped]
 
         def to_hash: () -> Hash[Symbol, untyped]
 

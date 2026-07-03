@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The result returned from an initialize request.
+      #
       class InitializeResult
         def initialize(capabilities:, server_info: nil)
           @attributes = {}
@@ -21,6 +24,8 @@ module LanguageServer
 
         #
         # Information about the server.
+        #
+        # @since 3.15.0
         #
         # @return [{ name: string; version?: string; }]
         def server_info

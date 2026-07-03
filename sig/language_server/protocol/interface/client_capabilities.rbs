@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Defines the capabilities provided by the client.
+      #
       class ClientCapabilities
         def initialize: (?workspace: untyped, ?text_document: untyped, ?notebook_document: untyped, ?window: untyped, ?general: untyped, ?experimental: untyped) -> void
 

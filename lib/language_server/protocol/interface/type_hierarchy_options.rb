@@ -1,6 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Type hierarchy options used during static registration.
+      #
+      # @since 3.17.0
+      #
       class TypeHierarchyOptions
         def initialize(work_done_progress: nil)
           @attributes = {}

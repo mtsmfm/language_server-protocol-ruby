@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Registration options specific to a notebook.
       #
+      # @since 3.17.0
+      #
       class NotebookDocumentSyncRegistrationOptions
         def initialize(notebook_selector:, save: nil, id: nil)
           @attributes = {}
@@ -18,7 +20,7 @@ module LanguageServer
         #
         # The notebooks to be synced
         #
-        # @return [({ notebook: string | NotebookDocumentFilter; cells?: { language: string; }[]; } | { notebook?: string | NotebookDocumentFilter; cells: { ...; }[]; })[]]
+        # @return [{ notebook: string | NotebookDocumentFilter; cells?: { language: string; }[]; } | { notebook?: string | NotebookDocumentFilter; cells: { language: string; }[]; }[]]
         def notebook_selector
           attributes.fetch(:notebookSelector)
         end

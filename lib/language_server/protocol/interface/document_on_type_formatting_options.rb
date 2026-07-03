@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Provider options for a {@link DocumentOnTypeFormattingRequest}.
+      #
       class DocumentOnTypeFormattingOptions
         def initialize(first_trigger_character:, more_trigger_character: nil)
           @attributes = {}

@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 
 set -ex
-npm install
-npx ts-node scripts/generateFiles.ts
+bundle exec ruby scripts/generate_file.rb

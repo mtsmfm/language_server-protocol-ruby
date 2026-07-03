@@ -19,7 +19,7 @@ module LanguageServer
         #
         # The range of the document that changed.
         #
-        # @return [Range, nil]
+        # @return [Range]
         def range
           attributes.fetch(:range)
         end
@@ -27,7 +27,9 @@ module LanguageServer
         #
         # The optional length of the range that got replaced.
         #
-        # @return [number, nil]
+        # @deprecated use range instead.
+        #
+        # @return [uinteger]
         def range_length
           attributes.fetch(:rangeLength)
         end

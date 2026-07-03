@@ -1,6 +1,11 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # The result returned from the apply workspace edit request.
+      #
+      # @since 3.17 renamed from ApplyWorkspaceEditResponse
+      #
       class ApplyWorkspaceEditResult
         def initialize: (applied: bool, ?failure_reason: String, ?failed_change: Integer) -> void
 
@@ -11,10 +16,10 @@ module LanguageServer
         def applied: () -> bool
 
         %a{pure}
-        def failure_reason: () -> String?
+        def failure_reason: () -> String
 
         %a{pure}
-        def failed_change: () -> Integer?
+        def failed_change: () -> Integer
 
         def to_hash: () -> Hash[Symbol, untyped]
 

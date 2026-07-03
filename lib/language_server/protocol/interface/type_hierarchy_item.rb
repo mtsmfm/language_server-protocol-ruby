@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # @since 3.17.0
+      #
       class TypeHierarchyItem
         def initialize(name:, kind:, tags: nil, detail: nil, uri:, range:, selection_range:, data: nil)
           @attributes = {}
@@ -36,7 +39,7 @@ module LanguageServer
         #
         # Tags for this item.
         #
-        # @return [1[]]
+        # @return [SymbolTag[]]
         def tags
           attributes.fetch(:tags)
         end
@@ -52,7 +55,7 @@ module LanguageServer
         #
         # The resource identifier of this item.
         #
-        # @return [string]
+        # @return [DocumentUri]
         def uri
           attributes.fetch(:uri)
         end
@@ -69,7 +72,7 @@ module LanguageServer
         #
         # The range that should be selected and revealed when this symbol is being
         # picked, e.g. the name of a function. Must be contained by the
-        # [`range`](#TypeHierarchyItem.range).
+        # {@link TypeHierarchyItem.range `range`}.
         #
         # @return [Range]
         def selection_range

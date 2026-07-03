@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Client capabilities for a {@link WorkspaceSymbolRequest}.
+      #
       class WorkspaceSymbolClientCapabilities
         def initialize: (?dynamic_registration: bool, ?symbol_kind: untyped, ?tag_support: untyped, ?resolve_support: untyped) -> void
 
@@ -8,7 +11,7 @@ module LanguageServer
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
-        def dynamic_registration: () -> bool?
+        def dynamic_registration: () -> bool
 
         %a{pure}
         def symbol_kind: () -> untyped

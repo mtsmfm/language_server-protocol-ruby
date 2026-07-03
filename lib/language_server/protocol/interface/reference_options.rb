@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Reference options.
+      #
       class ReferenceOptions
         def initialize(work_done_progress: nil)
           @attributes = {}

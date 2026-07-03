@@ -3,10 +3,10 @@ module LanguageServer
     module Interface
       #
       # Contains additional diagnostic information about the context in which
-      # a code action is run.
+      # a {@link CodeActionProvider.provideCodeActions code action} is run.
       #
       class CodeActionContext
-        def initialize: (diagnostics: Array[untyped], ?only: Array[String], ?trigger_kind: untyped) -> void
+        def initialize: (diagnostics: Array[untyped], ?only: Array[untyped], ?trigger_kind: untyped) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
@@ -15,7 +15,7 @@ module LanguageServer
         def diagnostics: () -> Array[untyped]
 
         %a{pure}
-        def only: () -> Array[String]?
+        def only: () -> Array[untyped]
 
         %a{pure}
         def trigger_kind: () -> untyped

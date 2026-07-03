@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Save options.
+      #
       class SaveOptions
         def initialize(include_text: nil)
           @attributes = {}

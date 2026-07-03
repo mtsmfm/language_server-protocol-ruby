@@ -13,7 +13,7 @@ module LanguageServer
 <%= value.comment.indent(8) %>
         #
         <%- end -%>
-        <%= value.name.underscore.upcase %> = <%= value.serialized %>
+        <%= value.constant_name %> = <%= value.serialized %>
         <%- end -%>
       end
     end

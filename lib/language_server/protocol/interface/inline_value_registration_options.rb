@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Inline value options used during static or dynamic registration.
       #
+      # @since 3.17.0
+      #
       class InlineValueRegistrationOptions
         def initialize(work_done_progress: nil, document_selector:, id: nil)
           @attributes = {}
@@ -21,10 +23,10 @@ module LanguageServer
         end
 
         #
-        # A document selector to identify the scope of the registration. If set to
-        # null the document selector provided on the client side will be used.
+        # A document selector to identify the scope of the registration. If set to null
+        # the document selector provided on the client side will be used.
         #
-        # @return [DocumentSelector]
+        # @return [DocumentSelector | nil]
         def document_selector
           attributes.fetch(:documentSelector)
         end

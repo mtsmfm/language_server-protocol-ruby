@@ -4,6 +4,8 @@ module LanguageServer
       #
       # A notebook document.
       #
+      # @since 3.17.0
+      #
       class NotebookDocument
         def initialize: (uri: String, notebook_type: String, version: Integer, ?metadata: untyped, cells: Array[untyped]) -> void
 

@@ -5,6 +5,8 @@ module LanguageServer
       # A change describing how to move a `NotebookCell`
       # array from state S to S'.
       #
+      # @since 3.17.0
+      #
       class NotebookCellArrayChange
         def initialize: (start: Integer, delete_count: Integer, ?cells: Array[untyped]) -> void
 
@@ -18,7 +20,7 @@ module LanguageServer
         def delete_count: () -> Integer
 
         %a{pure}
-        def cells: () -> Array[untyped]?
+        def cells: () -> Array[untyped]
 
         def to_hash: () -> Hash[Symbol, untyped]
 

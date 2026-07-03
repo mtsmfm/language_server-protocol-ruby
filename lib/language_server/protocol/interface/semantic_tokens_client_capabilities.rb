@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # @since 3.16.0
+      #
       class SemanticTokensClientCapabilities
         def initialize(dynamic_registration: nil, requests:, token_types:, token_modifiers:, formats:, overlapping_token_support: nil, multiline_token_support: nil, server_cancel_support: nil, augments_syntax_tokens: nil)
           @attributes = {}
@@ -19,10 +22,9 @@ module LanguageServer
         end
 
         #
-        # Whether implementation supports dynamic registration. If this is set to
-        # `true` the client supports the new `(TextDocumentRegistrationOptions &
-        # StaticRegistrationOptions)` return value for the corresponding server
-        # capability as well.
+        # Whether implementation supports dynamic registration. If this is set to `true`
+        # the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+        # return value for the corresponding server capability as well.
         #
         # @return [boolean]
         def dynamic_registration
@@ -39,7 +41,7 @@ module LanguageServer
         # range provider the client might not render a minimap correctly or might
         # even decide to not show any semantic tokens at all.
         #
-        # @return [{ range?: boolean | {}; full?: boolean | { delta?: boolean; }; }]
+        # @return [{ range?: boolean | { ; }; full?: boolean | { delta?: boolean; }; }]
         def requests
           attributes.fetch(:requests)
         end
@@ -61,9 +63,9 @@ module LanguageServer
         end
 
         #
-        # The formats the clients supports.
+        # The token formats the clients supports.
         #
-        # @return ["relative"[]]
+        # @return [TokenFormat[]]
         def formats
           attributes.fetch(:formats)
         end
@@ -87,8 +89,10 @@ module LanguageServer
         #
         # Whether the client allows the server to actively cancel a
         # semantic token request, e.g. supports returning
-        # ErrorCodes.ServerCancelled. If a server does the client
+        # LSPErrorCodes.ServerCancelled. If a server does the client
         # needs to retrigger the request.
+        #
+        # @since 3.17.0
         #
         # @return [boolean]
         def server_cancel_support
@@ -104,6 +108,8 @@ module LanguageServer
         #
         # If the value is `undefined` then the client behavior is not
         # specified.
+        #
+        # @since 3.17.0
         #
         # @return [boolean]
         def augments_syntax_tokens

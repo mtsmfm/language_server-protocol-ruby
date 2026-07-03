@@ -2,7 +2,8 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Static registration options to be returned in the initialize request.
+      # Static registration options to be returned in the initialize
+      # request.
       #
       class StaticRegistrationOptions
         def initialize(id: nil)

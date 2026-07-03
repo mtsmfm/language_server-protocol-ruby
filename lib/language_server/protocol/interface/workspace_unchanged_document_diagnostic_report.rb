@@ -4,16 +4,35 @@ module LanguageServer
       #
       # An unchanged document diagnostic report for a workspace diagnostic result.
       #
+      # @since 3.17.0
+      #
       class WorkspaceUnchangedDocumentDiagnosticReport
-        def initialize(kind:, result_id:, uri:, version:)
+        def initialize(uri:, version:, kind:, result_id:)
           @attributes = {}
 
-          @attributes[:kind] = kind
-          @attributes[:resultId] = result_id
           @attributes[:uri] = uri
           @attributes[:version] = version
+          @attributes[:kind] = kind
+          @attributes[:resultId] = result_id
 
           @attributes.freeze
+        end
+
+        #
+        # The URI for which diagnostic information is reported.
+        #
+        # @return [DocumentUri]
+        def uri
+          attributes.fetch(:uri)
+        end
+
+        #
+        # The version number for which the diagnostics are reported.
+        # If the document is not marked as open `null` can be provided.
+        #
+        # @return [integer | nil]
+        def version
+          attributes.fetch(:version)
         end
 
         #
@@ -22,7 +41,7 @@ module LanguageServer
         # only return `unchanged` if result ids are
         # provided.
         #
-        # @return [any]
+        # @return ["unchanged"]
         def kind
           attributes.fetch(:kind)
         end
@@ -34,23 +53,6 @@ module LanguageServer
         # @return [string]
         def result_id
           attributes.fetch(:resultId)
-        end
-
-        #
-        # The URI for which diagnostic information is reported.
-        #
-        # @return [string]
-        def uri
-          attributes.fetch(:uri)
-        end
-
-        #
-        # The version number for which the diagnostics are reported.
-        # If the document is not marked as open `null` can be provided.
-        #
-        # @return [number]
-        def version
-          attributes.fetch(:version)
         end
 
         attr_reader :attributes

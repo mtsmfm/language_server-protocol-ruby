@@ -8,6 +8,8 @@ module LanguageServer
       # cells and can therefore be used to uniquely identify a
       # notebook cell or the cell's text document.
       #
+      # @since 3.17.0
+      #
       class NotebookCell
         def initialize: (kind: untyped, document: String, ?metadata: untyped, ?execution_summary: untyped) -> void
 

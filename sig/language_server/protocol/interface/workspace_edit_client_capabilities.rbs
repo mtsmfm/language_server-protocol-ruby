@@ -8,16 +8,16 @@ module LanguageServer
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
-        def document_changes: () -> bool?
+        def document_changes: () -> bool
 
         %a{pure}
-        def resource_operations: () -> Array[untyped]?
+        def resource_operations: () -> Array[untyped]
 
         %a{pure}
         def failure_handling: () -> untyped
 
         %a{pure}
-        def normalizes_line_endings: () -> bool?
+        def normalizes_line_endings: () -> bool
 
         %a{pure}
         def change_annotation_support: () -> untyped

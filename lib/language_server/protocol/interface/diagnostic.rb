@@ -1,6 +1,10 @@
 module LanguageServer
   module Protocol
     module Interface
+      #
+      # Represents a diagnostic, such as a compiler error or warning. Diagnostic objects
+      # are only valid in the scope of a resource.
+      #
       class Diagnostic
         def initialize(range:, severity: nil, code: nil, code_description: nil, source: nil, message:, tags: nil, related_information: nil, data: nil)
           @attributes = {}
@@ -19,7 +23,7 @@ module LanguageServer
         end
 
         #
-        # The range at which the message applies.
+        # The range at which the message applies
         #
         # @return [Range]
         def range
@@ -36,15 +40,18 @@ module LanguageServer
         end
 
         #
-        # The diagnostic's code, which might appear in the user interface.
+        # The diagnostic's code, which usually appear in the user interface.
         #
-        # @return [string | number]
+        # @return [integer | string]
         def code
           attributes.fetch(:code)
         end
 
         #
         # An optional property to describe the error code.
+        # Requires the code field (above) to be present/not null.
+        #
+        # @since 3.16.0
         #
         # @return [CodeDescription]
         def code_description
@@ -53,7 +60,8 @@ module LanguageServer
 
         #
         # A human-readable string describing the source of this
-        # diagnostic, e.g. 'typescript' or 'super lint'.
+        # diagnostic, e.g. 'typescript' or 'super lint'. It usually
+        # appears in the user interface.
         #
         # @return [string]
         def source
@@ -61,7 +69,7 @@ module LanguageServer
         end
 
         #
-        # The diagnostic's message.
+        # The diagnostic's message. It usually appears in the user interface
         #
         # @return [string]
         def message
@@ -70,6 +78,8 @@ module LanguageServer
 
         #
         # Additional metadata about the diagnostic.
+        #
+        # @since 3.15.0
         #
         # @return [DiagnosticTag[]]
         def tags
@@ -86,11 +96,12 @@ module LanguageServer
         end
 
         #
-        # A data entry field that is preserved between a
-        # `textDocument/publishDiagnostics` notification and
-        # `textDocument/codeAction` request.
+        # A data entry field that is preserved between a `textDocument/publishDiagnostics`
+        # notification and `textDocument/codeAction` request.
         #
-        # @return [unknown]
+        # @since 3.16.0
+        #
+        # @return [LSPAny]
         def data
           attributes.fetch(:data)
         end
