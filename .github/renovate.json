@@ -2,6 +2,16 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base", ":dependencyDashboard"],
   "recreateClosed": true,
+  "packageRules": [
+    {
+      "description": "Do not update the Ruby < 3.1 power_assert constraint",
+      "matchManagers": ["bundler"],
+      "matchFileNames": ["Gemfile"],
+      "matchPackageNames": ["power_assert"],
+      "matchCurrentValue": "< 3.0",
+      "enabled": false
+    }
+  ],
   "git-submodules": {
     "enabled": true
   }
