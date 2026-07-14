@@ -16,7 +16,7 @@ jobs:
       - run: git submodule update --init
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "4.0.5"
+          ruby-version: "4.0.6"
           bundler-cache: true
       - run: bin/generate_files
       - run: git diff --exit-code
