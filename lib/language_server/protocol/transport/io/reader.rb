@@ -14,7 +14,10 @@ module LanguageServer
 
           def read(&block)
             while buffer = io.gets("\r\n\r\n")
-              content_length = buffer.match(/Content-Length: (\d+)/i)[1].to_i
+              content_length = buffer[/^Content-Length: (\d+)\r$/i, 1]
+              raise ArgumentError, "Missing or invalid Content-Length header" unless content_length
+
+              content_length = content_length.to_i
               message = io.read(content_length) or raise
               request = JSON.parse(message, symbolize_names: true)
               block.call(request)
