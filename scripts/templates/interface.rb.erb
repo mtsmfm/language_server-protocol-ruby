@@ -7,11 +7,16 @@ module LanguageServer
       #
       <%- end -%>
       class <%= name %>
+        <%- if properties.any?(&:preserve_falsy) -%>
+        UNSPECIFIED = Object.new.freeze
+        private_constant :UNSPECIFIED
+
+        <%- end -%>
         def initialize(<%= params %>)
           @attributes = {}
 
         <%- properties.each do |prop| -%>
-          @attributes[:<%= prop.name %>] = <%= prop.local_name %><% if prop.optional %> if <%= prop.local_name %><% end %>
+          @attributes[:<%= prop.name %>] = <%= prop.local_name %><% if prop.preserve_falsy %> unless <%= prop.local_name %>.equal?(UNSPECIFIED)<% elsif prop.optional %> if <%= prop.local_name %><% end %>
         <%- end -%>
 
           @attributes.freeze

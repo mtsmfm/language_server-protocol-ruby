@@ -2,12 +2,15 @@ module LanguageServer
   module Protocol
     module Interface
       class ResponseMessage
-        def initialize(jsonrpc:, id:, result: nil, error: nil)
+        UNSPECIFIED = Object.new.freeze
+        private_constant :UNSPECIFIED
+
+        def initialize(jsonrpc:, id:, result: UNSPECIFIED, error: nil)
           @attributes = {}
 
           @attributes[:jsonrpc] = jsonrpc
           @attributes[:id] = id
-          @attributes[:result] = result if result
+          @attributes[:result] = result unless result.equal?(UNSPECIFIED)
           @attributes[:error] = error if error
 
           @attributes.freeze

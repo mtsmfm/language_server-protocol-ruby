@@ -7,6 +7,10 @@ module LanguageServer
       #
       <%- end -%>
       class <%= name %>
+        <%- if properties.any?(&:preserve_falsy) -%>
+        UNSPECIFIED: Object
+
+        <%- end -%>
         def initialize: (<%= rbs_constructor_signature %>) -> void
 
         @attributes: Hash[Symbol, untyped]

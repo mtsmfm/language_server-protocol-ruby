@@ -2,6 +2,8 @@ module LanguageServer
   module Protocol
     module Interface
       class ResponseMessage
+        UNSPECIFIED: Object
+
         def initialize: (jsonrpc: String, id: untyped, ?result: untyped, ?error: untyped) -> void
 
         @attributes: Hash[Symbol, untyped]
