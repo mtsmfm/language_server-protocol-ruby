@@ -184,7 +184,8 @@ class Parser
   Interface = Struct.new(:name, :properties, :comment, keyword_init: true) do
     def params
       properties.map do |prop|
-        default = " nil" if prop.optional
+        default = " UNSPECIFIED" if prop.preserve_falsy
+        default = " nil" if prop.optional && !prop.preserve_falsy
         "#{prop.method_name}:#{default}"
       end.join(", ")
     end
@@ -194,7 +195,7 @@ class Parser
     end
   end
 
-  Property = Struct.new(:name, :type, :rbs_type, :optional, :comment, keyword_init: true) do
+  Property = Struct.new(:name, :type, :rbs_type, :optional, :comment, :preserve_falsy, keyword_init: true) do
     def local_name
       if RESERVED_WORDS.include?(method_name)
         "binding.local_variable_get(:#{method_name})"
@@ -515,7 +516,7 @@ class BaseProtocolInterfaceParser
           match[:name],
           {
             extends: extends(match[:extends]),
-            properties: properties(match[:body])
+            properties: properties(match[:body], interface_name: match[:name])
           }
         ]
       end
@@ -554,7 +555,7 @@ class BaseProtocolInterfaceParser
     raw_extends.split(",").map(&:strip).reject(&:empty?)
   end
 
-  def properties(body)
+  def properties(body, interface_name:)
     scan_matches(body, PROPERTY_PATTERN).map do |match|
       raw_type = match[:type].strip
       Parser::Property.new(
@@ -562,7 +563,8 @@ class BaseProtocolInterfaceParser
         type: protocol_type(raw_type),
         rbs_type: rbs_type(raw_type),
         optional: !!match[:optional],
-        comment: comment(clean_doc(match[:doc]&.sub(%r{\A/\*\*}, "")&.sub(%r{\*/\s*\z}, "")))
+        comment: comment(clean_doc(match[:doc]&.sub(%r{\A/\*\*}, "")&.sub(%r{\*/\s*\z}, ""))),
+        preserve_falsy: interface_name == "ResponseMessage" && match[:name] == "result"
       )
     end
   end
