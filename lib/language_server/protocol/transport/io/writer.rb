@@ -1,3 +1,5 @@
+require "json"
+
 module LanguageServer
   module Protocol
     module Transport
