@@ -5,10 +5,11 @@ module LanguageServer
       # The client capabilities  of a {@link CodeLensRequest}.
       #
       class CodeLensClientCapabilities
-        def initialize(dynamic_registration: nil)
+        def initialize(dynamic_registration: nil, resolve_support: nil)
           @attributes = {}
 
           @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
+          @attributes[:resolveSupport] = resolve_support if resolve_support
 
           @attributes.freeze
         end
@@ -19,6 +20,17 @@ module LanguageServer
         # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
+        end
+
+        #
+        # Whether the client supports resolving additional code lens
+        # properties via a separate `codeLens/resolve` request.
+        #
+        # @since 3.18.0
+        #
+        # @return [ClientCodeLensResolveOptions]
+        def resolve_support
+          attributes.fetch(:resolveSupport)
         end
 
         attr_reader :attributes

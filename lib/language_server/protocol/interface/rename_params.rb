@@ -5,31 +5,15 @@ module LanguageServer
       # The parameters of a {@link RenameRequest}.
       #
       class RenameParams
-        def initialize(text_document:, position:, new_name:, work_done_token: nil)
+        def initialize(new_name:, text_document:, position:, work_done_token: nil)
           @attributes = {}
 
+          @attributes[:newName] = new_name
           @attributes[:textDocument] = text_document
           @attributes[:position] = position
-          @attributes[:newName] = new_name
           @attributes[:workDoneToken] = work_done_token if work_done_token
 
           @attributes.freeze
-        end
-
-        #
-        # The document to rename.
-        #
-        # @return [TextDocumentIdentifier]
-        def text_document
-          attributes.fetch(:textDocument)
-        end
-
-        #
-        # The position at which this request was sent.
-        #
-        # @return [Position]
-        def position
-          attributes.fetch(:position)
         end
 
         #
@@ -40,6 +24,22 @@ module LanguageServer
         # @return [string]
         def new_name
           attributes.fetch(:newName)
+        end
+
+        #
+        # The text document.
+        #
+        # @return [TextDocumentIdentifier]
+        def text_document
+          attributes.fetch(:textDocument)
+        end
+
+        #
+        # The position inside the text document.
+        #
+        # @return [Position]
+        def position
+          attributes.fetch(:position)
         end
 
         #

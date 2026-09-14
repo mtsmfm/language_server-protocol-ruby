@@ -36,7 +36,7 @@ module LanguageServer
         #
         # Server supports providing semantic tokens for a full document.
         #
-        # @return [boolean | { delta?: boolean; }]
+        # @return [boolean | SemanticTokensFullDelta]
         def full
           attributes.fetch(:full)
         end

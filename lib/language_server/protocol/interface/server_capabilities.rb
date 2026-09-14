@@ -6,7 +6,7 @@ module LanguageServer
       # server.
       #
       class ServerCapabilities
-        def initialize(position_encoding: nil, text_document_sync: nil, notebook_document_sync: nil, completion_provider: nil, hover_provider: nil, signature_help_provider: nil, declaration_provider: nil, definition_provider: nil, type_definition_provider: nil, implementation_provider: nil, references_provider: nil, document_highlight_provider: nil, document_symbol_provider: nil, code_action_provider: nil, code_lens_provider: nil, document_link_provider: nil, color_provider: nil, workspace_symbol_provider: nil, document_formatting_provider: nil, document_range_formatting_provider: nil, document_on_type_formatting_provider: nil, rename_provider: nil, folding_range_provider: nil, selection_range_provider: nil, execute_command_provider: nil, call_hierarchy_provider: nil, linked_editing_range_provider: nil, semantic_tokens_provider: nil, moniker_provider: nil, type_hierarchy_provider: nil, inline_value_provider: nil, inlay_hint_provider: nil, diagnostic_provider: nil, workspace: nil, experimental: nil)
+        def initialize(position_encoding: nil, text_document_sync: nil, notebook_document_sync: nil, completion_provider: nil, hover_provider: nil, signature_help_provider: nil, declaration_provider: nil, definition_provider: nil, type_definition_provider: nil, implementation_provider: nil, references_provider: nil, document_highlight_provider: nil, document_symbol_provider: nil, code_action_provider: nil, code_lens_provider: nil, document_link_provider: nil, color_provider: nil, workspace_symbol_provider: nil, document_formatting_provider: nil, document_range_formatting_provider: nil, document_on_type_formatting_provider: nil, rename_provider: nil, folding_range_provider: nil, selection_range_provider: nil, execute_command_provider: nil, call_hierarchy_provider: nil, linked_editing_range_provider: nil, semantic_tokens_provider: nil, moniker_provider: nil, type_hierarchy_provider: nil, inline_value_provider: nil, inlay_hint_provider: nil, diagnostic_provider: nil, inline_completion_provider: nil, workspace: nil, experimental: nil)
           @attributes = {}
 
           @attributes[:positionEncoding] = position_encoding if position_encoding
@@ -42,6 +42,7 @@ module LanguageServer
           @attributes[:inlineValueProvider] = inline_value_provider if inline_value_provider
           @attributes[:inlayHintProvider] = inlay_hint_provider if inlay_hint_provider
           @attributes[:diagnosticProvider] = diagnostic_provider if diagnostic_provider
+          @attributes[:inlineCompletionProvider] = inline_completion_provider if inline_completion_provider
           @attributes[:workspace] = workspace if workspace
           @attributes[:experimental] = experimental if experimental
 
@@ -345,9 +346,19 @@ module LanguageServer
         end
 
         #
+        # Inline completion options used during static registration.
+        #
+        # @since 3.18.0
+        #
+        # @return [boolean | InlineCompletionOptions]
+        def inline_completion_provider
+          attributes.fetch(:inlineCompletionProvider)
+        end
+
+        #
         # Workspace specific server capabilities.
         #
-        # @return [{ workspaceFolders?: WorkspaceFoldersServerCapabilities; fileOperations?: FileOperationOptions; }]
+        # @return [WorkspaceOptions]
         def workspace
           attributes.fetch(:workspace)
         end

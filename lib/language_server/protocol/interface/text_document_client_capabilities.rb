@@ -5,10 +5,11 @@ module LanguageServer
       # Text document specific client capabilities.
       #
       class TextDocumentClientCapabilities
-        def initialize(synchronization: nil, completion: nil, hover: nil, signature_help: nil, declaration: nil, definition: nil, type_definition: nil, implementation: nil, references: nil, document_highlight: nil, document_symbol: nil, code_action: nil, code_lens: nil, document_link: nil, color_provider: nil, formatting: nil, range_formatting: nil, on_type_formatting: nil, rename: nil, folding_range: nil, selection_range: nil, publish_diagnostics: nil, call_hierarchy: nil, semantic_tokens: nil, linked_editing_range: nil, moniker: nil, type_hierarchy: nil, inline_value: nil, inlay_hint: nil, diagnostic: nil)
+        def initialize(synchronization: nil, filters: nil, completion: nil, hover: nil, signature_help: nil, declaration: nil, definition: nil, type_definition: nil, implementation: nil, references: nil, document_highlight: nil, document_symbol: nil, code_action: nil, code_lens: nil, document_link: nil, color_provider: nil, formatting: nil, range_formatting: nil, on_type_formatting: nil, rename: nil, folding_range: nil, selection_range: nil, publish_diagnostics: nil, call_hierarchy: nil, semantic_tokens: nil, linked_editing_range: nil, moniker: nil, type_hierarchy: nil, inline_value: nil, inlay_hint: nil, diagnostic: nil, inline_completion: nil)
           @attributes = {}
 
           @attributes[:synchronization] = synchronization if synchronization
+          @attributes[:filters] = filters if filters
           @attributes[:completion] = completion if completion
           @attributes[:hover] = hover if hover
           @attributes[:signatureHelp] = signature_help if signature_help
@@ -38,6 +39,7 @@ module LanguageServer
           @attributes[:inlineValue] = inline_value if inline_value
           @attributes[:inlayHint] = inlay_hint if inlay_hint
           @attributes[:diagnostic] = diagnostic if diagnostic
+          @attributes[:inlineCompletion] = inline_completion if inline_completion
 
           @attributes.freeze
         end
@@ -48,6 +50,16 @@ module LanguageServer
         # @return [TextDocumentSyncClientCapabilities]
         def synchronization
           attributes.fetch(:synchronization)
+        end
+
+        #
+        # Defines which filters the client supports.
+        #
+        # @since 3.18.0
+        #
+        # @return [TextDocumentFilterClientCapabilities]
+        def filters
+          attributes.fetch(:filters)
         end
 
         #
@@ -309,6 +321,16 @@ module LanguageServer
         # @return [DiagnosticClientCapabilities]
         def diagnostic
           attributes.fetch(:diagnostic)
+        end
+
+        #
+        # Client capabilities specific to inline completions.
+        #
+        # @since 3.18.0
+        #
+        # @return [InlineCompletionClientCapabilities]
+        def inline_completion
+          attributes.fetch(:inlineCompletion)
         end
 
         attr_reader :attributes

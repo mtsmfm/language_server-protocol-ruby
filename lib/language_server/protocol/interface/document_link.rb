@@ -28,7 +28,7 @@ module LanguageServer
         #
         # The uri this link points to. If missing a resolve request is sent later.
         #
-        # @return [string]
+        # @return [URI]
         def target
           attributes.fetch(:target)
         end

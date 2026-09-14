@@ -27,7 +27,7 @@ module LanguageServer
         #
         # @since 3.15.0
         #
-        # @return [{ name: string; version?: string; }]
+        # @return [ServerInfo]
         def server_info
           attributes.fetch(:serverInfo)
         end

@@ -29,7 +29,7 @@ module LanguageServer
         #
         # See SymbolInformation#location for more details.
         #
-        # @return [Location | { uri: DocumentUri; }]
+        # @return [Location | LocationUriOnly]
         def location
           attributes.fetch(:location)
         end

@@ -7,7 +7,7 @@ module LanguageServer
       # its resource, or a glob-pattern that is applied to the {@link TextDocument.fileName path}.
       #
       # Glob patterns can have the following syntax:
-      # - `*` to match one or more characters in a path segment
+      # - `*` to match zero or more characters in a path segment
       # - `?` to match on one character in a path segment
       # - `**` to match any number of path segments, including none
       # - `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)
@@ -47,9 +47,13 @@ module LanguageServer
         end
 
         #
-        # A glob pattern, like `*.{ts,js}`.
+        # A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples.
         #
-        # @return [string]
+        # @since 3.18.0 - support for relative patterns. Whether clients support
+        # relative patterns depends on the client capability
+        # `textDocuments.filters.relativePatternSupport`.
+        #
+        # @return [GlobPattern]
         def pattern
           attributes.fetch(:pattern)
         end

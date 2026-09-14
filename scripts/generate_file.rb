@@ -5,8 +5,8 @@ require "fileutils"
 require "open-uri"
 require "active_support/core_ext/string"
 
-LSP_VERSION = ENV.fetch("LSP_VERSION", "3.17")
-LSP_REPO_REVISION = "98dfd44d349411c557127b7379c67b837bf1660c"
+LSP_VERSION = ENV.fetch("LSP_VERSION", "3.18")
+LSP_REPO_REVISION = "9b3b38b4d0d78cda7e1aa6e4243b5c3e38a217bc"
 ROOT_DIR = Pathname(__dir__) + ".."
 PROTOCOL_DIR = ROOT_DIR / "lib" / "language_server" / "protocol"
 SIG_DIR = ROOT_DIR / "sig" / "language_server" / "protocol"
@@ -585,7 +585,7 @@ class BaseProtocolInterfaceParser
       "number"
     when "string", "boolean", "object"
       type
-    when "array"
+    when "array", "LSPAny"
       "any"
     when *BASE_PROTOCOL_INTERFACE_NAMES
       type
@@ -727,8 +727,8 @@ class NamespaceConstantParser
     scan_matches(body, CONST_PATTERN).map do |match|
       name = match[:name]
       raw_type = match[:type]&.strip
-      raw_value = match[:value].strip
-      value = parse_value(raw_value.strip)
+      raw_value = normalize_raw_value(match[:value])
+      value = parse_value(raw_value)
       Parser::Value.new(
         name: name,
         value: value,
@@ -742,7 +742,7 @@ class NamespaceConstantParser
 
   def parse_enum_values(body)
     scan_matches(body, ENUM_VALUE_PATTERN).map do |match|
-      raw_value = match[:value].strip
+      raw_value = normalize_raw_value(match[:value])
       Parser::Value.new(
         name: match[:name],
         value: parse_value(raw_value),
@@ -752,6 +752,12 @@ class NamespaceConstantParser
         rbs_type: rbs_type(nil, raw_value)
       )
     end
+  end
+
+  # TypeScript literal values may carry an `as const` assertion
+  # (e.g. `export const ES2020 = 'ES2020' as const;`).
+  def normalize_raw_value(raw_value)
+    raw_value.strip.sub(/\s+as\s+const\z/, "")
   end
 
   def parse_value(raw_value)

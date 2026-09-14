@@ -15,7 +15,7 @@ module LanguageServer
         #
         # Deprecated or obsolete code.
         #
-        # Clients are allowed to rendered diagnostics with this tag strike through.
+        # Clients are allowed to render diagnostics with this tag strike through.
         #
         DEPRECATED = 2
       end

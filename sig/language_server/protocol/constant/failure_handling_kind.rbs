@@ -9,13 +9,13 @@ module LanguageServer
         #
         ABORT: 'abort'
         #
-        # All operations are executed transactional. That means they either all
+        # All operations are executed transactionally. That means they either all
         # succeed or no changes at all are applied to the workspace.
         #
         TRANSACTIONAL: 'transactional'
         #
         # If the workspace edit contains only textual file changes they are
-        # executed transactional. If resource changes (create, rename or delete
+        # executed transactionally. If resource changes (create, rename or delete
         # file) are part of the change the failure handling strategy is abort.
         #
         TEXT_ONLY_TRANSACTIONAL: 'textOnlyTransactional'

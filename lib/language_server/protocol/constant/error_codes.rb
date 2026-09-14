@@ -18,7 +18,7 @@ module LanguageServer
         SERVER_ERROR_START = JSONRPC_RESERVED_ERROR_RANGE_START
         #
         # Error code indicating that a server received a notification or
-        # request before the server has received the `initialize` request.
+        # request before the server received the `initialize` request.
         #
         SERVER_NOT_INITIALIZED = -32002
         UNKNOWN_ERROR_CODE = -32001
@@ -50,7 +50,7 @@ module LanguageServer
         # The server detected that the content of a document got
         # modified outside normal conditions. A server should
         # NOT send this error code if it detects a content change
-        # in it unprocessed messages. The result even computed
+        # in its unprocessed messages. The result even computed
         # on an older state might still be useful for the client.
         #
         # If a client decides that a result is not of any use anymore
@@ -58,7 +58,7 @@ module LanguageServer
         #
         CONTENT_MODIFIED = -32801
         #
-        # The client has canceled a request and a server as detected
+        # The client has canceled a request and a server has detected
         # the cancel.
         #
         REQUEST_CANCELLED = -32800

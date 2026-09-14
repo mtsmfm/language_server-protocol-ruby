@@ -30,12 +30,15 @@ module LanguageServer
         # The client supports the following `CompletionItem` specific
         # capabilities.
         #
-        # @return [{ snippetSupport?: boolean; commitCharactersSupport?: boolean; documentationFormat?: MarkupKind[]; deprecatedSupport?: boolean; preselectSupport?: boolean; tagSupport?: { valueSet: CompletionItemTag[]; }; insertReplaceSupport?: boolean; resolveSupport?: { properties: string[]; }; insertTextModeSupport?: { valueSet: InsertTextMode[]; }; labelDetailsSupport?: boolean; }]
+        # @return [ClientCompletionItemOptions]
         def completion_item
           attributes.fetch(:completionItem)
         end
 
-        # @return [{ valueSet?: CompletionItemKind[]; }]
+        #
+        # The client supports the following completion item kinds.
+        #
+        # @return [ClientCompletionItemOptionsKind]
         def completion_item_kind
           attributes.fetch(:completionItemKind)
         end
@@ -67,7 +70,7 @@ module LanguageServer
         #
         # @since 3.17.0
         #
-        # @return [{ itemDefaults?: string[]; }]
+        # @return [CompletionListCapabilities]
         def completion_list
           attributes.fetch(:completionList)
         end

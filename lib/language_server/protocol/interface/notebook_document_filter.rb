@@ -38,7 +38,7 @@ module LanguageServer
         #
         # A glob pattern.
         #
-        # @return [string]
+        # @return [GlobPattern]
         def pattern
           attributes.fetch(:pattern)
         end

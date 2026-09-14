@@ -41,7 +41,7 @@ module LanguageServer
         # range provider the client might not render a minimap correctly or might
         # even decide to not show any semantic tokens at all.
         #
-        # @return [{ range?: boolean | { ; }; full?: boolean | { delta?: boolean; }; }]
+        # @return [ClientSemanticTokensRequestOptions]
         def requests
           attributes.fetch(:requests)
         end

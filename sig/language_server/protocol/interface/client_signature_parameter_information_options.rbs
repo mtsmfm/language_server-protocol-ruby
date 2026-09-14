@@ -1,0 +1,22 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # @since 3.18.0
+      #
+      class ClientSignatureParameterInformationOptions
+        def initialize: (?label_offset_support: bool) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        %a{pure}
+        def label_offset_support: () -> bool
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

@@ -54,7 +54,7 @@ module LanguageServer
         end
 
         #
-        # Describes the kind of the folding range such as `comment' or 'region'. The kind
+        # Describes the kind of the folding range such as 'comment' or 'region'. The kind
         # is used to categorize folding ranges and used by commands like 'Fold all comments'.
         # See {@link FoldingRangeKind} for an enumeration of standardized kinds.
         #

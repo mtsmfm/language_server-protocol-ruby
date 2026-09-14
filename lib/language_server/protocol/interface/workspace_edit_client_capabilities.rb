@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       class WorkspaceEditClientCapabilities
-        def initialize(document_changes: nil, resource_operations: nil, failure_handling: nil, normalizes_line_endings: nil, change_annotation_support: nil)
+        def initialize(document_changes: nil, resource_operations: nil, failure_handling: nil, normalizes_line_endings: nil, change_annotation_support: nil, metadata_support: nil, snippet_edit_support: nil)
           @attributes = {}
 
           @attributes[:documentChanges] = document_changes if document_changes
@@ -10,6 +10,8 @@ module LanguageServer
           @attributes[:failureHandling] = failure_handling if failure_handling
           @attributes[:normalizesLineEndings] = normalizes_line_endings if normalizes_line_endings
           @attributes[:changeAnnotationSupport] = change_annotation_support if change_annotation_support
+          @attributes[:metadataSupport] = metadata_support if metadata_support
+          @attributes[:snippetEditSupport] = snippet_edit_support if snippet_edit_support
 
           @attributes.freeze
         end
@@ -64,9 +66,29 @@ module LanguageServer
         #
         # @since 3.16.0
         #
-        # @return [{ groupsOnLabel?: boolean; }]
+        # @return [ChangeAnnotationsSupportOptions]
         def change_annotation_support
           attributes.fetch(:changeAnnotationSupport)
+        end
+
+        #
+        # Whether the client supports `WorkspaceEditMetadata` in `WorkspaceEdit`s.
+        #
+        # @since 3.18.0
+        #
+        # @return [boolean]
+        def metadata_support
+          attributes.fetch(:metadataSupport)
+        end
+
+        #
+        # Whether the client supports snippets as text edits.
+        #
+        # @since 3.18.0
+        #
+        # @return [boolean]
+        def snippet_edit_support
+          attributes.fetch(:snippetEditSupport)
         end
 
         attr_reader :attributes

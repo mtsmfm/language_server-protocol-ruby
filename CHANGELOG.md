@@ -1,5 +1,12 @@
 # Change log
 
+## 3.18.0.0
+
+- Generate protocol files from the finalized LSP 3.18 specification (digest `9b3b38b`)
+  - Add many new interfaces and constants, e.g. `InlineCompletion*`, `TextDocumentContent*`, `SnippetTextEdit`, `CodeActionTag`, `LanguageKind`, `ApplyKind`
+  - **Breaking:** `Constant::TraceValues` is renamed to `Constant::TraceValue` following the meta model
+- Support TypeScript `as const` assertions in the constant generator
+
 ## 3.17.0.6
 
 - Regenerate protocol files with the Ruby generator (#141)

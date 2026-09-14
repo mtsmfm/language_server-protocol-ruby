@@ -1,0 +1,30 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # A document filter where `pattern` is required field.
+      #
+      # @since 3.18.0
+      #
+      class TextDocumentFilterPattern
+        def initialize: (?language: String, ?scheme: String, pattern: untyped) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        %a{pure}
+        def language: () -> String
+
+        %a{pure}
+        def scheme: () -> String
+
+        %a{pure}
+        def pattern: () -> untyped
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

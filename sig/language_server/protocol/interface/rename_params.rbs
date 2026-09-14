@@ -5,19 +5,19 @@ module LanguageServer
       # The parameters of a {@link RenameRequest}.
       #
       class RenameParams
-        def initialize: (text_document: untyped, position: untyped, new_name: String, ?work_done_token: untyped) -> void
+        def initialize: (new_name: String, text_document: untyped, position: untyped, ?work_done_token: untyped) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
+
+        %a{pure}
+        def new_name: () -> String
 
         %a{pure}
         def text_document: () -> untyped
 
         %a{pure}
         def position: () -> untyped
-
-        %a{pure}
-        def new_name: () -> String
 
         %a{pure}
         def work_done_token: () -> untyped

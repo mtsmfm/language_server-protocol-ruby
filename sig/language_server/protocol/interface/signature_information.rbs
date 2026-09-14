@@ -7,7 +7,7 @@ module LanguageServer
       # a set of parameters.
       #
       class SignatureInformation
-        def initialize: (label: String, ?documentation: untyped, ?parameters: Array[untyped], ?active_parameter: Integer) -> void
+        def initialize: (label: String, ?documentation: untyped, ?parameters: Array[untyped], ?active_parameter: Integer?) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]

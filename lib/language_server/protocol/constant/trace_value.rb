@@ -1,19 +1,19 @@
 module LanguageServer
   module Protocol
     module Constant
-      module TraceValues
+      module TraceValue
         #
         # Turn tracing off.
         #
-        OFF: "off"
+        OFF = "off"
         #
         # Trace messages only.
         #
-        MESSAGES: "messages"
+        MESSAGES = "messages"
         #
         # Verbose message tracing.
         #
-        VERBOSE: "verbose"
+        VERBOSE = "verbose"
       end
     end
   end

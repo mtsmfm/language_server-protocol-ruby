@@ -29,12 +29,16 @@ module LanguageServer
         # --- OR ---
         #
         # The document range for which the inline value applies.
-        # The range is used to extract the variable name from the underlying document.
+        #
+        # The range could be used to extract the variable name
+        # from the underlying document.
         #
         # --- OR ---
         #
         # The document range for which the inline value applies.
-        # The range is used to extract the evaluatable expression from the underlying document.
+        #
+        # The range could be used to extract the evaluatable expression
+        # from the underlying document.
         #
         # @return [Range]
         def range
@@ -66,7 +70,7 @@ module LanguageServer
         end
 
         #
-        # If specified the expression overrides the extracted expression.
+        # If specified the expression could be evaluated instead.
         #
         # @return [string]
         def expression

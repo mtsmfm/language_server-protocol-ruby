@@ -12,8 +12,8 @@ module LanguageServer
         #
         # Code actions were requested automatically.
         #
-        # This typically happens when current selection in a file changes, but can
-        # also be triggered when file content changes.
+        # This typically happens when the current selection in a file changes,
+        # but can also be triggered when file content changes.
         #
         AUTOMATIC = 2
       end

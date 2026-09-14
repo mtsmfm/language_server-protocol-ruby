@@ -29,7 +29,7 @@ module LanguageServer
         # Specific capabilities for the `SymbolKind` in the
         # `textDocument/documentSymbol` request.
         #
-        # @return [{ valueSet?: SymbolKind[]; }]
+        # @return [ClientSymbolKindOptions]
         def symbol_kind
           attributes.fetch(:symbolKind)
         end
@@ -49,7 +49,7 @@ module LanguageServer
         #
         # @since 3.16.0
         #
-        # @return [{ valueSet: SymbolTag[]; }]
+        # @return [ClientSymbolTagOptions]
         def tag_support
           attributes.fetch(:tagSupport)
         end

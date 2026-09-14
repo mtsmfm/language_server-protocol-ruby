@@ -1,0 +1,22 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # @since 3.18.0
+      #
+      class PrepareRenameDefaultBehavior
+        def initialize: (default_behavior: bool) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        %a{pure}
+        def default_behavior: () -> bool
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

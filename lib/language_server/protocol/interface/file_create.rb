@@ -16,9 +16,9 @@ module LanguageServer
         end
 
         #
-        # A file:// URI for the location of the file/folder being created.
+        # A URI for the location of the file/folder being created.
         #
-        # @return [string]
+        # @return [DocumentUri]
         def uri
           attributes.fetch(:uri)
         end

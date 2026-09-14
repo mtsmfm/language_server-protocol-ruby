@@ -28,7 +28,7 @@ module LanguageServer
         #
         # The text document's language identifier.
         #
-        # @return [string]
+        # @return [LanguageKind]
         def language_id
           attributes.fetch(:languageId)
         end

@@ -2,8 +2,8 @@ module LanguageServer
   module Protocol
     module Constant
       #
-      # A pattern kind describing if a glob pattern matches a file a folder or
-      # both.
+      # A pattern kind describing if a glob pattern matches a file,
+      # a folder, or both.
       #
       module FileOperationPatternKind
         #

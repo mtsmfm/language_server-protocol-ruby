@@ -5,19 +5,19 @@ module LanguageServer
       # The publish diagnostic client capabilities.
       #
       class PublishDiagnosticsClientCapabilities
-        def initialize: (?related_information: bool, ?tag_support: untyped, ?version_support: bool, ?code_description_support: bool, ?data_support: bool) -> void
+        def initialize: (?version_support: bool, ?related_information: bool, ?tag_support: untyped, ?code_description_support: bool, ?data_support: bool) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
+
+        %a{pure}
+        def version_support: () -> bool
 
         %a{pure}
         def related_information: () -> bool
 
         %a{pure}
         def tag_support: () -> untyped
-
-        %a{pure}
-        def version_support: () -> bool
 
         %a{pure}
         def code_description_support: () -> bool

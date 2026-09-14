@@ -36,7 +36,7 @@ module LanguageServer
         #
         # @since 3.15.0
         #
-        # @return [{ name: string; version?: string; }]
+        # @return [ClientInfo]
         def client_info
           attributes.fetch(:clientInfo)
         end
@@ -98,7 +98,7 @@ module LanguageServer
         #
         # The initial trace setting. If omitted trace is disabled ('off').
         #
-        # @return [TraceValues]
+        # @return [TraceValue]
         def trace
           attributes.fetch(:trace)
         end

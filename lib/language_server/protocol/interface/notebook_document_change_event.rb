@@ -29,7 +29,7 @@ module LanguageServer
         #
         # Changes to cells
         #
-        # @return [{ structure?: { array: NotebookCellArrayChange; didOpen?: TextDocumentItem[]; didClose?: TextDocumentIdentifier[]; }; data?: NotebookCell[]; textContent?: { document: VersionedTextDocumentIdentifier; changes: TextDocumentContentChangeEvent[]; }[]; }]
+        # @return [NotebookDocumentCellChanges]
         def cells
           attributes.fetch(:cells)
         end

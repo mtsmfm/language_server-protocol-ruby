@@ -27,7 +27,7 @@ module LanguageServer
         #
         # Specific capabilities for the `SymbolKind` in the `workspace/symbol` request.
         #
-        # @return [{ valueSet?: SymbolKind[]; }]
+        # @return [ClientSymbolKindOptions]
         def symbol_kind
           attributes.fetch(:symbolKind)
         end
@@ -38,7 +38,7 @@ module LanguageServer
         #
         # @since 3.16.0
         #
-        # @return [{ valueSet: SymbolTag[]; }]
+        # @return [ClientSymbolTagOptions]
         def tag_support
           attributes.fetch(:tagSupport)
         end
@@ -50,7 +50,7 @@ module LanguageServer
         #
         # @since 3.17.0
         #
-        # @return [{ properties: string[]; }]
+        # @return [ClientSymbolResolveOptions]
         def resolve_support
           attributes.fetch(:resolveSupport)
         end

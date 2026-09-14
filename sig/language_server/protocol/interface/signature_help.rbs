@@ -7,7 +7,7 @@ module LanguageServer
       # active and only one active parameter.
       #
       class SignatureHelp
-        def initialize: (signatures: Array[untyped], ?active_signature: Integer, ?active_parameter: Integer) -> void
+        def initialize: (signatures: Array[untyped], ?active_signature: Integer, ?active_parameter: Integer?) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]

@@ -2,9 +2,13 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Provide an inline value through an expression evaluation.
-      # If only a range is specified, the expression will be extracted from the underlying document.
-      # An optional expression can be used to override the extracted expression.
+      # To compute an inline value through an expression evaluation.
+      #
+      # If only a range is specified, the expression should be
+      # extracted from the underlying document.
+      #
+      # An optional expression could be evaluated instead of
+      # the extracted expression.
       #
       # @since 3.17.0
       #
@@ -20,7 +24,9 @@ module LanguageServer
 
         #
         # The document range for which the inline value applies.
-        # The range is used to extract the evaluatable expression from the underlying document.
+        #
+        # The range could be used to extract the evaluatable expression
+        # from the underlying document.
         #
         # @return [Range]
         def range
@@ -28,7 +34,7 @@ module LanguageServer
         end
 
         #
-        # If specified the expression overrides the extracted expression.
+        # If specified the expression could be evaluated instead.
         #
         # @return [string]
         def expression

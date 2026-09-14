@@ -6,7 +6,7 @@ module LanguageServer
       # are only valid in the scope of a resource.
       #
       class Diagnostic
-        def initialize: (range: untyped, ?severity: untyped, ?code: (Integer | String), ?code_description: untyped, ?source: String, message: String, ?tags: Array[untyped], ?related_information: Array[untyped], ?data: untyped) -> void
+        def initialize: (range: untyped, ?severity: untyped, ?code: (Integer | String), ?code_description: untyped, ?source: String, message: untyped, ?tags: Array[untyped], ?related_information: Array[untyped], ?data: untyped) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
@@ -27,7 +27,7 @@ module LanguageServer
         def source: () -> String
 
         %a{pure}
-        def message: () -> String
+        def message: () -> untyped
 
         %a{pure}
         def tags: () -> Array[untyped]

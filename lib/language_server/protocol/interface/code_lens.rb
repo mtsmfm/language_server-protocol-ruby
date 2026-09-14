@@ -37,8 +37,7 @@ module LanguageServer
 
         #
         # A data entry field that is preserved on a code lens item between
-        # a {@link CodeLensRequest} and a [CodeLensResolveRequest]
-        # (#CodeLensResolveRequest)
+        # a {@link CodeLensRequest} and a {@link CodeLensResolveRequest}
         #
         # @return [LSPAny]
         def data

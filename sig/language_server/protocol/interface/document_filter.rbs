@@ -5,10 +5,10 @@ module LanguageServer
       # A document filter describes a top level text document or
       # a notebook cell document.
       #
-      # @since 3.17.0 - proposed support for NotebookCellTextDocumentFilter.
+      # @since 3.17.0 - support for NotebookCellTextDocumentFilter.
       #
       class DocumentFilter
-        def initialize: (?language: String, ?scheme: String, ?pattern: String, ?notebook: untyped) -> void
+        def initialize: (?language: String, ?scheme: String, ?pattern: untyped, ?notebook: untyped) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
@@ -20,7 +20,7 @@ module LanguageServer
         def scheme: () -> String
 
         %a{pure}
-        def pattern: () -> String
+        def pattern: () -> untyped
 
         %a{pure}
         def notebook: () -> untyped

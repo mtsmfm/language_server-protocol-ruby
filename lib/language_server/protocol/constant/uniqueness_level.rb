@@ -6,15 +6,15 @@ module LanguageServer
       #
       module UniquenessLevel
         #
-        # The moniker is only unique inside a document
+        # The moniker is only unique inside a document.
         #
         DOCUMENT = 'document'
         #
-        # The moniker is unique inside a project for which a dump got created
+        # The moniker is unique inside a project for which a dump got created.
         #
         PROJECT = 'project'
         #
-        # The moniker is unique inside the group to which a project belongs
+        # The moniker is unique inside the group to which a project belongs.
         #
         GROUP = 'group'
         #
@@ -22,7 +22,7 @@ module LanguageServer
         #
         SCHEME = 'scheme'
         #
-        # The moniker is globally unique
+        # The moniker is globally unique.
         #
         GLOBAL = 'global'
       end

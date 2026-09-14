@@ -5,7 +5,7 @@ module LanguageServer
       # Workspace specific client capabilities.
       #
       class WorkspaceClientCapabilities
-        def initialize(apply_edit: nil, workspace_edit: nil, did_change_configuration: nil, did_change_watched_files: nil, symbol: nil, execute_command: nil, workspace_folders: nil, configuration: nil, semantic_tokens: nil, code_lens: nil, file_operations: nil, inline_value: nil, inlay_hint: nil, diagnostics: nil)
+        def initialize(apply_edit: nil, workspace_edit: nil, did_change_configuration: nil, did_change_watched_files: nil, symbol: nil, execute_command: nil, workspace_folders: nil, configuration: nil, semantic_tokens: nil, code_lens: nil, file_operations: nil, inline_value: nil, inlay_hint: nil, diagnostics: nil, folding_range: nil, text_document_content: nil)
           @attributes = {}
 
           @attributes[:applyEdit] = apply_edit if apply_edit
@@ -22,6 +22,8 @@ module LanguageServer
           @attributes[:inlineValue] = inline_value if inline_value
           @attributes[:inlayHint] = inlay_hint if inlay_hint
           @attributes[:diagnostics] = diagnostics if diagnostics
+          @attributes[:foldingRange] = folding_range if folding_range
+          @attributes[:textDocumentContent] = text_document_content if text_document_content
 
           @attributes.freeze
         end
@@ -159,6 +161,26 @@ module LanguageServer
         # @return [DiagnosticWorkspaceClientCapabilities]
         def diagnostics
           attributes.fetch(:diagnostics)
+        end
+
+        #
+        # Capabilities specific to the folding range requests scoped to the workspace.
+        #
+        # @since 3.18.0
+        #
+        # @return [FoldingRangeWorkspaceClientCapabilities]
+        def folding_range
+          attributes.fetch(:foldingRange)
+        end
+
+        #
+        # Capabilities specific to the `workspace/textDocumentContent` request.
+        #
+        # @since 3.18.0
+        #
+        # @return [TextDocumentContentClientCapabilities]
+        def text_document_content
+          attributes.fetch(:textDocumentContent)
         end
 
         attr_reader :attributes

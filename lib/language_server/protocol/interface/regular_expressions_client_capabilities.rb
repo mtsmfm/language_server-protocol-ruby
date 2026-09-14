@@ -19,7 +19,7 @@ module LanguageServer
         #
         # The engine's name.
         #
-        # @return [string]
+        # @return [RegularExpressionEngineKind]
         def engine
           attributes.fetch(:engine)
         end

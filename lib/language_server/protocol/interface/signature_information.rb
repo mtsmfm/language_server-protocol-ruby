@@ -47,7 +47,13 @@ module LanguageServer
         #
         # The index of the active parameter.
         #
-        # If provided, this is used in place of `SignatureHelp.activeParameter`.
+        # If `null`, no parameter of the signature is active (for example a named
+        # argument that does not match any declared parameters). This is only valid
+        # if the client specifies the client capability
+        # `textDocument.signatureHelp.noActiveParameterSupport === true`
+        #
+        # If provided (or `null`), this is used in place of
+        # `SignatureHelp.activeParameter`.
         #
         # @since 3.16.0
         #

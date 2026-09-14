@@ -6,7 +6,7 @@ module LanguageServer
       #
       module InlayHintKind
         #
-        # An inlay hint that for a type annotation.
+        # An inlay hint that is for a type annotation.
         #
         TYPE = 1
         #

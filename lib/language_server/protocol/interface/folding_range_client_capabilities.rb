@@ -50,7 +50,7 @@ module LanguageServer
         #
         # @since 3.17.0
         #
-        # @return [{ valueSet?: FoldingRangeKind[]; }]
+        # @return [ClientFoldingRangeKindOptions]
         def folding_range_kind
           attributes.fetch(:foldingRangeKind)
         end
@@ -60,7 +60,7 @@ module LanguageServer
         #
         # @since 3.17.0
         #
-        # @return [{ collapsedText?: boolean; }]
+        # @return [ClientFoldingRangeOptions]
         def folding_range
           attributes.fetch(:foldingRange)
         end

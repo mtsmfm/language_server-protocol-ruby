@@ -5,7 +5,7 @@ module LanguageServer
       # A document filter describes a top level text document or
       # a notebook cell document.
       #
-      # @since 3.17.0 - proposed support for NotebookCellTextDocumentFilter.
+      # @since 3.17.0 - support for NotebookCellTextDocumentFilter.
       #
       class DocumentFilter
         def initialize(language: nil, scheme: nil, pattern: nil, notebook: nil)
@@ -43,9 +43,13 @@ module LanguageServer
         end
 
         #
-        # A glob pattern, like `*.{ts,js}`.
+        # A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples.
         #
-        # @return [string]
+        # @since 3.18.0 - support for relative patterns. Whether clients support
+        # relative patterns depends on the client capability
+        # `textDocuments.filters.relativePatternSupport`.
+        #
+        # @return [GlobPattern]
         def pattern
           attributes.fetch(:pattern)
         end

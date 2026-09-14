@@ -72,7 +72,7 @@ module LanguageServer
         #
         # @since 3.17.0
         #
-        # @return [{ labelDetailsSupport?: boolean; }]
+        # @return [ServerCompletionItemOptions]
         def completion_item
           attributes.fetch(:completionItem)
         end

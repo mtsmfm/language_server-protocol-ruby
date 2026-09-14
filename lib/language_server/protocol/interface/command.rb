@@ -8,10 +8,11 @@ module LanguageServer
       # function when invoked.
       #
       class Command
-        def initialize(title:, command:, arguments: nil)
+        def initialize(title:, tooltip: nil, command:, arguments: nil)
           @attributes = {}
 
           @attributes[:title] = title
+          @attributes[:tooltip] = tooltip if tooltip
           @attributes[:command] = command
           @attributes[:arguments] = arguments if arguments
 
@@ -24,6 +25,16 @@ module LanguageServer
         # @return [string]
         def title
           attributes.fetch(:title)
+        end
+
+        #
+        # An optional tooltip.
+        #
+        # @since 3.18.0
+        #
+        # @return [string]
+        def tooltip
+          attributes.fetch(:tooltip)
         end
 
         #

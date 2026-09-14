@@ -6,7 +6,7 @@ module LanguageServer
       # server.
       #
       class TextDocumentItem
-        def initialize: (uri: String, language_id: String, version: Integer, text: String) -> void
+        def initialize: (uri: String, language_id: untyped, version: Integer, text: String) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
@@ -15,7 +15,7 @@ module LanguageServer
         def uri: () -> String
 
         %a{pure}
-        def language_id: () -> String
+        def language_id: () -> untyped
 
         %a{pure}
         def version: () -> Integer

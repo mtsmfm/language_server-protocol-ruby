@@ -29,6 +29,7 @@ module LanguageServer
         REGEXP = 'regexp'
         OPERATOR = 'operator'
         DECORATOR = 'decorator'
+        LABEL = 'label'
       end
     end
   end

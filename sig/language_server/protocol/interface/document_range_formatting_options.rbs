@@ -5,10 +5,13 @@ module LanguageServer
       # Provider options for a {@link DocumentRangeFormattingRequest}.
       #
       class DocumentRangeFormattingOptions
-        def initialize: (?work_done_progress: bool) -> void
+        def initialize: (?ranges_support: bool, ?work_done_progress: bool) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
+
+        %a{pure}
+        def ranges_support: () -> bool
 
         %a{pure}
         def work_done_progress: () -> bool

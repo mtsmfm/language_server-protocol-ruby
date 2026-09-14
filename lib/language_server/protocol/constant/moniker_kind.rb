@@ -6,11 +6,11 @@ module LanguageServer
       #
       module MonikerKind
         #
-        # The moniker represent a symbol that is imported into a project
+        # The moniker represent a symbol that is imported into a project.
         #
         IMPORT = 'import'
         #
-        # The moniker represents a symbol that is exported from a project
+        # The moniker represents a symbol that is exported from a project.
         #
         EXPORT = 'export'
         #

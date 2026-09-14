@@ -28,7 +28,7 @@ module LanguageServer
         # Indicates which properties a client can resolve lazily on an inlay
         # hint.
         #
-        # @return [{ properties: string[]; }]
+        # @return [ClientInlayHintResolveOptions]
         def resolve_support
           attributes.fetch(:resolveSupport)
         end

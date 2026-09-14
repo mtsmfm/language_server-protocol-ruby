@@ -11,7 +11,7 @@ module LanguageServer
         #
         WARNING: 2
         #
-        # Reports an information.
+        # Reports information.
         #
         INFORMATION: 3
         #

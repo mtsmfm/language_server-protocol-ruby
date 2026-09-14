@@ -26,7 +26,7 @@ module LanguageServer
         #
         # @since 3.17.0
         #
-        # @return [{ cancel: boolean; retryOnContentModified: string[]; }]
+        # @return [StaleRequestSupportOptions]
         def stale_request_support
           attributes.fetch(:staleRequestSupport)
         end

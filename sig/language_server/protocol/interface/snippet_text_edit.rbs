@@ -1,0 +1,30 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # An interactive text edit.
+      #
+      # @since 3.18.0
+      #
+      class SnippetTextEdit
+        def initialize: (range: untyped, snippet: untyped, ?annotation_id: untyped) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        %a{pure}
+        def range: () -> untyped
+
+        %a{pure}
+        def snippet: () -> untyped
+
+        %a{pure}
+        def annotation_id: () -> untyped
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end
