@@ -1,22 +1,19 @@
 module LanguageServer
   module Protocol
     module Constant
-      #
-      # The kind of resource operations supported by the client.
-      #
       module ResourceOperationKind
         #
         # Supports creating new files and folders.
         #
-        CREATE = 'create'
+        CREATE = "create"
         #
         # Supports renaming existing files and folders.
         #
-        RENAME = 'rename'
+        RENAME = "rename"
         #
         # Supports deleting existing files and folders.
         #
-        DELETE = 'delete'
+        DELETE = "delete"
       end
     end
   end

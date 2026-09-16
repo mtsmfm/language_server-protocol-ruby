@@ -4,6 +4,8 @@ module LanguageServer
       #
       # Code action tags are extra annotations that tweak the behavior of a code action.
       #
+      # @since 3.18.0
+      #
       module CodeActionTag
         #
         # Marks the code action as LLM-generated.

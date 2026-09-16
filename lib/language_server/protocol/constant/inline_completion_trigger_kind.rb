@@ -2,18 +2,17 @@ module LanguageServer
   module Protocol
     module Constant
       #
-      # Describes how an {@link InlineCompletionItemProvider inline completion
-      # provider} was triggered.
+      # Describes how an {@link InlineCompletionItemProvider inline completion provider} was triggered.
+      #
+      # @since 3.18.0
       #
       module InlineCompletionTriggerKind
         #
         # Completion was triggered explicitly by a user gesture.
-        # Return multiple completion items to enable cycling through them.
         #
         INVOKED = 1
         #
         # Completion was triggered automatically while editing.
-        # It is sufficient to return a single completion item in this case.
         #
         AUTOMATIC = 2
       end
