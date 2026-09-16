@@ -60,12 +60,34 @@ jobs:
         with:
           ruby-version: ruby
 
+      - name: Install dependencies
+        working-directory: ${{ steps.dependent.outputs.path }}
+        run: bundle install
+
       - name: Use local language_server-protocol
         working-directory: ${{ steps.dependent.outputs.path }}
+        # Dependents and their transitive dependencies from rubygems.org
+        # (e.g. standard -> rubocop, rubocop -> ruby-lsp) pin
+        # language_server-protocol to a released version range such as
+        # "~> 3.17.0", so bundler cannot resolve an unreleased version from
+        # this repository. Instead, let bundler install the released gem and
+        # then replace its contents with the local checkout.
+        env:
+          LOCAL_DIR: ${{ github.workspace }}/language_server-protocol-ruby
         run: |
-          printf '\ngem "language_server-protocol", path: "%s"\n' "$GITHUB_WORKSPACE/language_server-protocol-ruby" >> Gemfile
-          bundle install
-          bundle info language_server-protocol
+          gem_dir="$(bundle info --path language_server-protocol)"
+          echo "Replacing $gem_dir with $LOCAL_DIR"
+          rm -rf "$gem_dir/lib" "$gem_dir/sig"
+          cp -R "$LOCAL_DIR/lib" "$LOCAL_DIR/sig" "$gem_dir/"
+
+          expected="$(ruby -I "$LOCAL_DIR/lib" -e 'require "language_server/protocol/version"; puts LanguageServer::Protocol::VERSION')"
+          actual="$(bundle exec ruby -e 'require "language_server/protocol"; puts LanguageServer::Protocol::VERSION')"
+          echo "Loaded language_server-protocol $actual (expected $expected)"
+          test "$actual" = "$expected"
+
+      - name: Check references to language_server-protocol constants
+        working-directory: ${{ steps.dependent.outputs.path }}
+        run: ruby "$GITHUB_WORKSPACE/language_server-protocol-ruby/bin/check_references" .
 
       - name: Run dependent tests
         working-directory: ${{ steps.dependent.outputs.path }}
