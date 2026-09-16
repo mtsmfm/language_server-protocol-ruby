@@ -8,7 +8,7 @@
       "matchManagers": ["bundler"],
       "matchFileNames": ["Gemfile"],
       "matchPackageNames": ["power_assert"],
-      "matchCurrentValue": "< 3.0",
+      "matchCurrentValue": "/^\"< 3\\.0\"$/",
       "enabled": false
     },
     {
@@ -16,7 +16,7 @@
       "matchManagers": ["bundler"],
       "matchFileNames": ["Gemfile"],
       "matchPackageNames": ["json"],
-      "matchCurrentValue": "< 3.0",
+      "matchCurrentValue": "/^\"< 3\\.0\"$/",
       "enabled": false
     }
   ],
