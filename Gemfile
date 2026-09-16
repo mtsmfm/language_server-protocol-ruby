@@ -17,6 +17,13 @@ if current_ruby_version < Gem::Version.new("3.1.0")
   gem "power_assert", "< 3.0"
 end
 
+# activesupport < 8.1 passes the `quirks_mode` option to JSON.generate, which
+# json 3.0 rejects with ArgumentError. Rubies older than 3.2 cannot use
+# activesupport 8.1, so keep them on json 2.x.
+if current_ruby_version < Gem::Version.new("3.2.0")
+  gem "json", "< 3.0"
+end
+
 if current_ruby_version >= Gem::Version.new("4.0.0")
   gem "fiddle"
 end
