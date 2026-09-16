@@ -4,8 +4,8 @@ module LanguageServer
       #
       # Defines how values from a set of defaults and an individual item will be
       # merged.
-      #
-      # @since 3.18.0
+      # Defines how values from a set of defaults and an individual item will be
+      # merged.
       #
       module ApplyKind
         #
@@ -16,7 +16,7 @@ module LanguageServer
         #
         # The value from the item will be merged with the default.
         #
-        # The specific rules for mergeing values are defined against each field
+        # The specific rules for merging values are defined against each field
         # that supports merging.
         #
         MERGE = 2

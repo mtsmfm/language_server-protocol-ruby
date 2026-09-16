@@ -4,19 +4,17 @@ module LanguageServer
       #
       # The document diagnostic report kinds.
       #
-      # @since 3.17.0
-      #
       module DocumentDiagnosticReportKind
         #
         # A diagnostic report with a full
         # set of problems.
         #
-        FULL: "full"
+        FULL: 'full'
         #
         # A report indicating that the last
         # returned report is still accurate.
         #
-        UNCHANGED: "unchanged"
+        UNCHANGED: 'unchanged'
       end
     end
   end

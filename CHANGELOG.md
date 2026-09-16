@@ -5,9 +5,7 @@
 - Generate protocol files from the finalized LSP 3.18 specification (digest `9b3b38b`)
   - Add many new interfaces and constants, e.g. `InlineCompletion*`, `TextDocumentContent*`, `SnippetTextEdit`, `CodeActionTag`, `LanguageKind`, `ApplyKind`
   - **Breaking:** `Constant::TraceValues` is renamed to `Constant::TraceValue` following the meta model
-- Generate constants only from the meta model instead of also extracting `export namespace` blocks from the specification markdown
-  - **Breaking:** Remove `Constant::InitializeErrorCodes`, which is not part of the meta model
-  - **Breaking:** Remove the range markers and aliases from `Constant::ErrorCodes` (`JSONRPC_RESERVED_ERROR_RANGE_START`, `JSONRPC_RESERVED_ERROR_RANGE_END`, `SERVER_ERROR_START`, `SERVER_ERROR_END`, `LSP_RESERVED_ERROR_RANGE_START`, `LSP_RESERVED_ERROR_RANGE_END`) and the LSP error codes duplicated from `Constant::LSPErrorCodes` (`REQUEST_FAILED`, `SERVER_CANCELLED`, `CONTENT_MODIFIED`, `REQUEST_CANCELLED`)
+- Support TypeScript `as const` assertions in the constant generator
 
 ## 3.17.0.6
 

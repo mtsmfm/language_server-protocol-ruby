@@ -1,9 +1,6 @@
 module LanguageServer
   module Protocol
     module Constant
-      #
-      # The diagnostic's severity.
-      #
       module DiagnosticSeverity
         #
         # Reports an error.
@@ -14,7 +11,7 @@ module LanguageServer
         #
         WARNING = 2
         #
-        # Reports an information.
+        # Reports information.
         #
         INFORMATION = 3
         #
