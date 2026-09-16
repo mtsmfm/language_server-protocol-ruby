@@ -85,6 +85,10 @@ jobs:
           echo "Loaded language_server-protocol $actual (expected $expected)"
           test "$actual" = "$expected"
 
+      - name: Check references to language_server-protocol constants
+        working-directory: ${{ steps.dependent.outputs.path }}
+        run: ruby "$GITHUB_WORKSPACE/language_server-protocol-ruby/bin/check_references" .
+
       - name: Run dependent tests
         working-directory: ${{ steps.dependent.outputs.path }}
         run: ${{ matrix.test_command }}

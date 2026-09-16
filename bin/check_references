@@ -1,0 +1,169 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Statically checks that every constant a dependent project references under
+# LanguageServer::Protocol actually exists in this gem.
+#
+# The dependent test workflow runs each dependent's test suite against the
+# local checkout, but a removed or renamed constant only fails that suite if a
+# test happens to exercise it. This script walks the dependent's Ruby sources
+# instead, resolves aliases such as `LSP = LanguageServer::Protocol` or
+# `Interface = LanguageServer::Protocol::Interface`, and reports every
+# reference that cannot be resolved against the loaded gem.
+#
+# Usage: bin/check_references DEPENDENT_DIR [DEPENDENT_DIR...]
+#
+# Run it with plain `ruby`, not `bundle exec`: the Prism dependency is
+# declared inline below so that the script works from any directory,
+# including a dependent's checkout. Prism ships with Ruby 3.3+, so no
+# download is needed on a current Ruby.
+
+require "bundler/inline"
+
+gemfile do
+  source "https://rubygems.org"
+  gem "prism"
+  gem "language_server-protocol", path: File.expand_path("..", __dir__)
+end
+
+require "pathname"
+require "set"
+require "language_server/protocol"
+
+ROOT = "LanguageServer::Protocol"
+
+class ReferenceChecker
+  Reference = Struct.new(:path, :file, :line, keyword_init: true)
+
+  def initialize(dir)
+    @dir = Pathname(dir)
+    @files = Dir.glob(@dir.join("{lib,exe,app}/**/*.rb").to_s).sort
+    @aliases = {}
+    @defined = Set.new
+    @references = []
+  end
+
+  def run
+    parsed = @files.map { |file| [file, Prism.parse_file(file).value] }
+    parsed.each { |file, ast| collect_definitions_and_aliases(ast, [], file) }
+    parsed.each { |file, ast| collect_references(ast, [], file) }
+    resolve
+  end
+
+  private
+
+  # ----- pass 1: what the dependent defines and how it aliases this gem -----
+
+  def collect_definitions_and_aliases(node, nesting, file)
+    case node
+    when Prism::ModuleNode, Prism::ClassNode
+      name = constant_path(node.constant_path)
+      full = nesting + name.split("::")
+      @defined << full.join("::")
+      node.compact_child_nodes.each { |child| collect_definitions_and_aliases(child, full, file) }
+      return
+    when Prism::ConstantWriteNode
+      @defined << (nesting + [node.name.to_s]).join("::")
+      if node.value.is_a?(Prism::ConstantReadNode) || node.value.is_a?(Prism::ConstantPathNode)
+        target = constant_path(node.value)
+        @aliases[node.name.to_s] = target if target.start_with?(ROOT)
+      end
+    end
+
+    node.compact_child_nodes.each { |child| collect_definitions_and_aliases(child, nesting, file) }
+  end
+
+  # ----- pass 2: every constant path referenced anywhere -----
+
+  def collect_references(node, nesting, file)
+    case node
+    when Prism::ModuleNode, Prism::ClassNode
+      full = nesting + constant_path(node.constant_path).split("::")
+      node.compact_child_nodes.each { |child| collect_references(child, full, file) }
+      return
+    when Prism::ConstantPathNode
+      path = constant_path(node)
+      @references << Reference.new(path: path, file: file, line: node.location.start_line) if path
+      # Do not descend: the children are the segments of this same path.
+      return
+    end
+
+    node.compact_child_nodes.each { |child| collect_references(child, nesting, file) }
+  end
+
+  def constant_path(node)
+    case node
+    when Prism::ConstantReadNode
+      node.name.to_s
+    when Prism::ConstantPathNode
+      parent = node.parent ? constant_path(node.parent) : ""
+      return nil if parent.nil?
+
+      parent.empty? ? node.name.to_s : "#{parent}::#{node.name}"
+    end
+  end
+
+  # ----- pass 3: resolve against the loaded gem -----
+
+  def resolve
+    resolved = 0
+    missing = []
+
+    @references.each do |ref|
+      full = expand(ref.path)
+      next unless full
+
+      if gem_constant?(full)
+        resolved += 1
+      elsif !defined_by_dependent?(ref.path)
+        missing << [ref, full]
+      end
+    end
+
+    [resolved, missing]
+  end
+
+  # Expand a referenced path to a full LanguageServer::Protocol::... path, or
+  # nil if it does not point into this gem.
+  def expand(path)
+    segments = path.split("::")
+    segments.shift if segments.first == ""
+
+    return path if path.start_with?("#{ROOT}::")
+
+    target = @aliases[segments.first]
+    return nil unless target
+
+    ([target] + segments.drop(1)).join("::")
+  end
+
+  def gem_constant?(full)
+    full.split("::").reduce(Object) do |mod, name|
+      return false unless mod.const_defined?(name, false)
+
+      mod.const_get(name, false)
+    end
+    true
+  rescue NameError
+    false
+  end
+
+  # e.g. steep's own Steep::Interface::Substitution must not be reported just
+  # because the project also aliases Interface = LanguageServer::Protocol::Interface.
+  def defined_by_dependent?(path)
+    @defined.any? { |name| name == path || name.end_with?("::#{path}") }
+  end
+end
+
+status = 0
+ARGV.each do |dir|
+  resolved, missing = ReferenceChecker.new(dir).run
+  puts "#{dir}: #{resolved} references resolved, #{missing.size} missing"
+  missing.each do |ref, full|
+    relative = Pathname(ref.file).relative_path_from(Pathname(dir))
+    puts "  #{relative}:#{ref.line}: #{ref.path} (#{full})"
+  end
+  status = 1 if missing.any?
+end
+
+exit status
