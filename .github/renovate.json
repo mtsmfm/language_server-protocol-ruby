@@ -10,6 +10,14 @@
       "matchPackageNames": ["power_assert"],
       "matchCurrentValue": "< 3.0",
       "enabled": false
+    },
+    {
+      "description": "Do not update the Ruby < 3.2 json constraint",
+      "matchManagers": ["bundler"],
+      "matchFileNames": ["Gemfile"],
+      "matchPackageNames": ["json"],
+      "matchCurrentValue": "< 3.0",
+      "enabled": false
     }
   ],
   "git-submodules": {
