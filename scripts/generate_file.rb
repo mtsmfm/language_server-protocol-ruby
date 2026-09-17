@@ -22,9 +22,6 @@ BASE_PROTOCOL_INTERFACE_NAMES = %w[
   ResponseError
   ResponseMessage
 ].freeze
-# HoverResult is only an old example type from specification.md, not a real LSP
-# 3.17 payload type. Keep it for compatibility until a future breaking release.
-LEGACY_EXAMPLE_INTERFACE_NAMES = %w[HoverResult].freeze
 # The meta model splits the error codes into two enumerations, but the
 # `ErrorCodes` namespace in specification.md declares all of them and
 # dependents reference the LSP specific codes through `ErrorCodes` as well
@@ -47,7 +44,7 @@ class Renderer
   private
 
   def render_interfaces
-    cleanup("interface", preserved_names: LEGACY_EXAMPLE_INTERFACE_NAMES)
+    cleanup("interface")
 
     @parser.interfaces.each do |interface|
       render_template(
@@ -104,30 +101,13 @@ class Renderer
     File.write(path, template.result(b))
   end
 
-  def cleanup(type, preserved_names: [])
-    allowed_ruby_files = preserved_names.map { |name| "#{name.underscore}.rb" }
-    allowed_rbs_files = preserved_names.map { |name| "#{name.underscore}.rbs" }
-
-    remove_unpreserved_files(PROTOCOL_DIR / type, "*.rb", allowed_ruby_files)
-    remove_unpreserved_files(SIG_DIR / type, "*.rbs", allowed_rbs_files)
+  def cleanup(type)
+    FileUtils.rm_f(Dir.glob((PROTOCOL_DIR / type / "*.rb").to_s))
+    FileUtils.rm_f(Dir.glob((SIG_DIR / type / "*.rbs").to_s))
   end
 
-  def remove_unpreserved_files(dir, pattern, allowed_files)
-    Dir.glob((dir / pattern).to_s).each do |path|
-      next if allowed_files.include?(File.basename(path))
-
-      FileUtils.rm_f(path)
-    end
-  end
-
-  def loader_names(type, generated_names)
-    generated_names_by_path = generated_names.to_h { |name| [name.underscore, name] }
-    existing_names = Dir.glob((PROTOCOL_DIR / type / "*.rb").to_s).map do |path|
-      basename = File.basename(path, ".rb")
-      generated_names_by_path.fetch(basename, basename.camelize)
-    end
-
-    (generated_names + existing_names).uniq.sort
+  def loader_names(_type, generated_names)
+    generated_names.uniq.sort
   end
 end
 
