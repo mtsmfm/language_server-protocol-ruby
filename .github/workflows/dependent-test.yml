@@ -31,7 +31,11 @@ jobs:
             repository: standardrb/standard
             test_command: bundle exec rake test
           - name: ruby-lsp
-            repository: Shopify/ruby-lsp
+            # TODO: switch back to Shopify/ruby-lsp once the test fix in
+            # https://github.com/mtsmfm/ruby-lsp/tree/count-enabled-capabilities
+            # is merged upstream
+            repository: mtsmfm/ruby-lsp
+            ref: count-enabled-capabilities
             test_command: bundle exec rake test
           - name: steep
             repository: soutaro/steep
@@ -53,6 +57,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: ${{ matrix.repository }}
+          ref: ${{ matrix.ref }}
           path: ${{ steps.dependent.outputs.path }}
           submodules: recursive
 
