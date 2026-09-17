@@ -9,7 +9,7 @@ module LanguageServer
         def initialize(id: nil)
           @attributes = {}
 
-          @attributes[:id] = id if id
+          @attributes[:id] = id unless id.nil?
 
           @attributes.freeze
         end

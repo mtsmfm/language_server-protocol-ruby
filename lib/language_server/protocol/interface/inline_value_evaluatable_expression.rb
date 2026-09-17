@@ -17,7 +17,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:range] = range
-          @attributes[:expression] = expression if expression
+          @attributes[:expression] = expression unless expression.nil?
 
           @attributes.freeze
         end

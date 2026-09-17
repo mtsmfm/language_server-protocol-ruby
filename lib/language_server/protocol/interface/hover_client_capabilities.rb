@@ -5,8 +5,8 @@ module LanguageServer
         def initialize(dynamic_registration: nil, content_format: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
-          @attributes[:contentFormat] = content_format if content_format
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:contentFormat] = content_format unless content_format.nil?
 
           @attributes.freeze
         end

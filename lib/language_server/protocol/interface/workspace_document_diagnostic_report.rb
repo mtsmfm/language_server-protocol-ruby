@@ -13,8 +13,8 @@ module LanguageServer
           @attributes[:uri] = uri
           @attributes[:version] = version
           @attributes[:kind] = kind
-          @attributes[:resultId] = result_id if result_id
-          @attributes[:items] = items if items
+          @attributes[:resultId] = result_id unless result_id.nil?
+          @attributes[:items] = items unless items.nil?
 
           @attributes.freeze
         end

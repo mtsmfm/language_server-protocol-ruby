@@ -8,7 +8,7 @@ module LanguageServer
         def initialize(collapsed_text: nil)
           @attributes = {}
 
-          @attributes[:collapsedText] = collapsed_text if collapsed_text
+          @attributes[:collapsedText] = collapsed_text unless collapsed_text.nil?
 
           @attributes.freeze
         end

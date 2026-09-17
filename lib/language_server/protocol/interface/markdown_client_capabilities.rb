@@ -11,8 +11,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:parser] = parser
-          @attributes[:version] = version if version
-          @attributes[:allowedTags] = allowed_tags if allowed_tags
+          @attributes[:version] = version unless version.nil?
+          @attributes[:allowedTags] = allowed_tags unless allowed_tags.nil?
 
           @attributes.freeze
         end

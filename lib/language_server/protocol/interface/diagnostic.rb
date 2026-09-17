@@ -10,14 +10,14 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:range] = range
-          @attributes[:severity] = severity if severity
-          @attributes[:code] = code if code
-          @attributes[:codeDescription] = code_description if code_description
-          @attributes[:source] = source if source
+          @attributes[:severity] = severity unless severity.nil?
+          @attributes[:code] = code unless code.nil?
+          @attributes[:codeDescription] = code_description unless code_description.nil?
+          @attributes[:source] = source unless source.nil?
           @attributes[:message] = message
-          @attributes[:tags] = tags if tags
-          @attributes[:relatedInformation] = related_information if related_information
-          @attributes[:data] = data if data
+          @attributes[:tags] = tags unless tags.nil?
+          @attributes[:relatedInformation] = related_information unless related_information.nil?
+          @attributes[:data] = data unless data.nil?
 
           @attributes.freeze
         end

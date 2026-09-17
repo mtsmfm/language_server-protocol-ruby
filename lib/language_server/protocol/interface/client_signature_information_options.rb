@@ -8,10 +8,10 @@ module LanguageServer
         def initialize(documentation_format: nil, parameter_information: nil, active_parameter_support: nil, no_active_parameter_support: nil)
           @attributes = {}
 
-          @attributes[:documentationFormat] = documentation_format if documentation_format
-          @attributes[:parameterInformation] = parameter_information if parameter_information
-          @attributes[:activeParameterSupport] = active_parameter_support if active_parameter_support
-          @attributes[:noActiveParameterSupport] = no_active_parameter_support if no_active_parameter_support
+          @attributes[:documentationFormat] = documentation_format unless documentation_format.nil?
+          @attributes[:parameterInformation] = parameter_information unless parameter_information.nil?
+          @attributes[:activeParameterSupport] = active_parameter_support unless active_parameter_support.nil?
+          @attributes[:noActiveParameterSupport] = no_active_parameter_support unless no_active_parameter_support.nil?
 
           @attributes.freeze
         end

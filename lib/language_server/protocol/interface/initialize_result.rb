@@ -9,7 +9,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:capabilities] = capabilities
-          @attributes[:serverInfo] = server_info if server_info
+          @attributes[:serverInfo] = server_info unless server_info.nil?
 
           @attributes.freeze
         end

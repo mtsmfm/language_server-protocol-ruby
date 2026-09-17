@@ -10,11 +10,11 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:startLine] = start_line
-          @attributes[:startCharacter] = start_character if start_character
+          @attributes[:startCharacter] = start_character unless start_character.nil?
           @attributes[:endLine] = end_line
-          @attributes[:endCharacter] = end_character if end_character
-          @attributes[:kind] = kind if kind
-          @attributes[:collapsedText] = collapsed_text if collapsed_text
+          @attributes[:endCharacter] = end_character unless end_character.nil?
+          @attributes[:kind] = kind unless kind.nil?
+          @attributes[:collapsedText] = collapsed_text unless collapsed_text.nil?
 
           @attributes.freeze
         end

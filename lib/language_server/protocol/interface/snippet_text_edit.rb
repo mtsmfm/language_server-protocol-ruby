@@ -12,7 +12,7 @@ module LanguageServer
 
           @attributes[:range] = range
           @attributes[:snippet] = snippet
-          @attributes[:annotationId] = annotation_id if annotation_id
+          @attributes[:annotationId] = annotation_id unless annotation_id.nil?
 
           @attributes.freeze
         end

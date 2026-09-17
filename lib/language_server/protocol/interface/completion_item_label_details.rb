@@ -10,8 +10,8 @@ module LanguageServer
         def initialize(detail: nil, description: nil)
           @attributes = {}
 
-          @attributes[:detail] = detail if detail
-          @attributes[:description] = description if description
+          @attributes[:detail] = detail unless detail.nil?
+          @attributes[:description] = description unless description.nil?
 
           @attributes.freeze
         end

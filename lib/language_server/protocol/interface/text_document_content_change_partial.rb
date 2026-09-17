@@ -9,7 +9,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:range] = range
-          @attributes[:rangeLength] = range_length if range_length
+          @attributes[:rangeLength] = range_length unless range_length.nil?
           @attributes[:text] = text
 
           @attributes.freeze

@@ -8,8 +8,8 @@ module LanguageServer
         def initialize(range: nil, full: nil)
           @attributes = {}
 
-          @attributes[:range] = range if range
-          @attributes[:full] = full if full
+          @attributes[:range] = range unless range.nil?
+          @attributes[:full] = full unless full.nil?
 
           @attributes.freeze
         end

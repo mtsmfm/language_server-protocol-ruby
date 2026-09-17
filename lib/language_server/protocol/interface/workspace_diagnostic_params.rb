@@ -10,10 +10,10 @@ module LanguageServer
         def initialize(identifier: nil, previous_result_ids:, work_done_token: nil, partial_result_token: nil)
           @attributes = {}
 
-          @attributes[:identifier] = identifier if identifier
+          @attributes[:identifier] = identifier unless identifier.nil?
           @attributes[:previousResultIds] = previous_result_ids
-          @attributes[:workDoneToken] = work_done_token if work_done_token
-          @attributes[:partialResultToken] = partial_result_token if partial_result_token
+          @attributes[:workDoneToken] = work_done_token unless work_done_token.nil?
+          @attributes[:partialResultToken] = partial_result_token unless partial_result_token.nil?
 
           @attributes.freeze
         end

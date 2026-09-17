@@ -7,7 +7,7 @@ module LanguageServer
 
           @attributes[:type] = type
           @attributes[:message] = message
-          @attributes[:actions] = actions if actions
+          @attributes[:actions] = actions unless actions.nil?
 
           @attributes.freeze
         end

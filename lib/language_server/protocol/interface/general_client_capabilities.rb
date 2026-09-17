@@ -10,10 +10,10 @@ module LanguageServer
         def initialize(stale_request_support: nil, regular_expressions: nil, markdown: nil, position_encodings: nil)
           @attributes = {}
 
-          @attributes[:staleRequestSupport] = stale_request_support if stale_request_support
-          @attributes[:regularExpressions] = regular_expressions if regular_expressions
-          @attributes[:markdown] = markdown if markdown
-          @attributes[:positionEncodings] = position_encodings if position_encodings
+          @attributes[:staleRequestSupport] = stale_request_support unless stale_request_support.nil?
+          @attributes[:regularExpressions] = regular_expressions unless regular_expressions.nil?
+          @attributes[:markdown] = markdown unless markdown.nil?
+          @attributes[:positionEncodings] = position_encodings unless position_encodings.nil?
 
           @attributes.freeze
         end

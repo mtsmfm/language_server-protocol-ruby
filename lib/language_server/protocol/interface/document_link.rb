@@ -10,9 +10,9 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:range] = range
-          @attributes[:target] = target if target
-          @attributes[:tooltip] = tooltip if tooltip
-          @attributes[:data] = data if data
+          @attributes[:target] = target unless target.nil?
+          @attributes[:tooltip] = tooltip unless tooltip.nil?
+          @attributes[:data] = data unless data.nil?
 
           @attributes.freeze
         end

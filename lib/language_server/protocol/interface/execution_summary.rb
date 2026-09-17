@@ -6,7 +6,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:executionOrder] = execution_order
-          @attributes[:success] = success if success
+          @attributes[:success] = success unless success.nil?
 
           @attributes.freeze
         end

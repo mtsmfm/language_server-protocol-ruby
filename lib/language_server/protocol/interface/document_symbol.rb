@@ -12,13 +12,13 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:name] = name
-          @attributes[:detail] = detail if detail
+          @attributes[:detail] = detail unless detail.nil?
           @attributes[:kind] = kind
-          @attributes[:tags] = tags if tags
-          @attributes[:deprecated] = deprecated if deprecated
+          @attributes[:tags] = tags unless tags.nil?
+          @attributes[:deprecated] = deprecated unless deprecated.nil?
           @attributes[:range] = range
           @attributes[:selectionRange] = selection_range
-          @attributes[:children] = children if children
+          @attributes[:children] = children unless children.nil?
 
           @attributes.freeze
         end

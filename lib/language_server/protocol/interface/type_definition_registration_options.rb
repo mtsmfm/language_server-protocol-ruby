@@ -6,8 +6,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:documentSelector] = document_selector
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
-          @attributes[:id] = id if id
+          @attributes[:workDoneProgress] = work_done_progress unless work_done_progress.nil?
+          @attributes[:id] = id unless id.nil?
 
           @attributes.freeze
         end

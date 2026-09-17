@@ -10,8 +10,8 @@ module LanguageServer
 
           @attributes[:kind] = kind
           @attributes[:uri] = uri
-          @attributes[:options] = options if options
-          @attributes[:annotationId] = annotation_id if annotation_id
+          @attributes[:options] = options unless options.nil?
+          @attributes[:annotationId] = annotation_id unless annotation_id.nil?
 
           @attributes.freeze
         end

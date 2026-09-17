@@ -10,8 +10,8 @@ module LanguageServer
         def initialize(dynamic_registration: nil, resolve_support: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
-          @attributes[:resolveSupport] = resolve_support if resolve_support
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:resolveSupport] = resolve_support unless resolve_support.nil?
 
           @attributes.freeze
         end

@@ -7,7 +7,7 @@ module LanguageServer
 
           @attributes[:code] = code
           @attributes[:message] = message
-          @attributes[:data] = data if data
+          @attributes[:data] = data unless data.nil?
 
           @attributes.freeze
         end

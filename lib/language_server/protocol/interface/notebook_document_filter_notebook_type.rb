@@ -11,8 +11,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:notebookType] = notebook_type
-          @attributes[:scheme] = scheme if scheme
-          @attributes[:pattern] = pattern if pattern
+          @attributes[:scheme] = scheme unless scheme.nil?
+          @attributes[:pattern] = pattern unless pattern.nil?
 
           @attributes.freeze
         end

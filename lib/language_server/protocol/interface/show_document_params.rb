@@ -11,9 +11,9 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:uri] = uri
-          @attributes[:external] = external if external
-          @attributes[:takeFocus] = take_focus if take_focus
-          @attributes[:selection] = selection if selection
+          @attributes[:external] = external unless external.nil?
+          @attributes[:takeFocus] = take_focus unless take_focus.nil?
+          @attributes[:selection] = selection unless selection.nil?
 
           @attributes.freeze
         end

@@ -17,7 +17,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:range] = range
-          @attributes[:variableName] = variable_name if variable_name
+          @attributes[:variableName] = variable_name unless variable_name.nil?
           @attributes[:caseSensitiveLookup] = case_sensitive_lookup
 
           @attributes.freeze

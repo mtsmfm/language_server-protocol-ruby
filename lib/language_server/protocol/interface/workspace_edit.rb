@@ -19,9 +19,9 @@ module LanguageServer
         def initialize(changes: nil, document_changes: nil, change_annotations: nil)
           @attributes = {}
 
-          @attributes[:changes] = changes if changes
-          @attributes[:documentChanges] = document_changes if document_changes
-          @attributes[:changeAnnotations] = change_annotations if change_annotations
+          @attributes[:changes] = changes unless changes.nil?
+          @attributes[:documentChanges] = document_changes unless document_changes.nil?
+          @attributes[:changeAnnotations] = change_annotations unless change_annotations.nil?
 
           @attributes.freeze
         end

@@ -24,8 +24,8 @@ module LanguageServer
         def initialize(commit_characters: nil, data: nil)
           @attributes = {}
 
-          @attributes[:commitCharacters] = commit_characters if commit_characters
-          @attributes[:data] = data if data
+          @attributes[:commitCharacters] = commit_characters unless commit_characters.nil?
+          @attributes[:data] = data unless data.nil?
 
           @attributes.freeze
         end

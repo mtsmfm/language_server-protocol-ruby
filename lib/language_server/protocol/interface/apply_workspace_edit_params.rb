@@ -8,9 +8,9 @@ module LanguageServer
         def initialize(label: nil, edit:, metadata: nil)
           @attributes = {}
 
-          @attributes[:label] = label if label
+          @attributes[:label] = label unless label.nil?
           @attributes[:edit] = edit
-          @attributes[:metadata] = metadata if metadata
+          @attributes[:metadata] = metadata unless metadata.nil?
 
           @attributes.freeze
         end

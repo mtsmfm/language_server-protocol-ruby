@@ -8,8 +8,8 @@ module LanguageServer
         def initialize(ranges_support: nil, work_done_progress: nil)
           @attributes = {}
 
-          @attributes[:rangesSupport] = ranges_support if ranges_support
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:rangesSupport] = ranges_support unless ranges_support.nil?
+          @attributes[:workDoneProgress] = work_done_progress unless work_done_progress.nil?
 
           @attributes.freeze
         end

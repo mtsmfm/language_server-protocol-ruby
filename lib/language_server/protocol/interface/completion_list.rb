@@ -10,8 +10,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:isIncomplete] = is_incomplete
-          @attributes[:itemDefaults] = item_defaults if item_defaults
-          @attributes[:applyKind] = apply_kind if apply_kind
+          @attributes[:itemDefaults] = item_defaults unless item_defaults.nil?
+          @attributes[:applyKind] = apply_kind unless apply_kind.nil?
           @attributes[:items] = items
 
           @attributes.freeze

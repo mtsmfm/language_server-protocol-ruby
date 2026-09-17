@@ -21,7 +21,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:notebookSelector] = notebook_selector
-          @attributes[:save] = save if save
+          @attributes[:save] = save unless save.nil?
 
           @attributes.freeze
         end

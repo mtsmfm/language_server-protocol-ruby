@@ -10,7 +10,7 @@ module LanguageServer
         def initialize(ignore_case: nil)
           @attributes = {}
 
-          @attributes[:ignoreCase] = ignore_case if ignore_case
+          @attributes[:ignoreCase] = ignore_case unless ignore_case.nil?
 
           @attributes.freeze
         end

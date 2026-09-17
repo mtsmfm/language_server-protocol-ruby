@@ -8,7 +8,7 @@ module LanguageServer
         def initialize(value_set: nil)
           @attributes = {}
 
-          @attributes[:valueSet] = value_set if value_set
+          @attributes[:valueSet] = value_set unless value_set.nil?
 
           @attributes.freeze
         end

@@ -8,10 +8,10 @@ module LanguageServer
         def initialize(code_action_kinds: nil, documentation: nil, resolve_provider: nil, work_done_progress: nil)
           @attributes = {}
 
-          @attributes[:codeActionKinds] = code_action_kinds if code_action_kinds
-          @attributes[:documentation] = documentation if documentation
-          @attributes[:resolveProvider] = resolve_provider if resolve_provider
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:codeActionKinds] = code_action_kinds unless code_action_kinds.nil?
+          @attributes[:documentation] = documentation unless documentation.nil?
+          @attributes[:resolveProvider] = resolve_provider unless resolve_provider.nil?
+          @attributes[:workDoneProgress] = work_done_progress unless work_done_progress.nil?
 
           @attributes.freeze
         end

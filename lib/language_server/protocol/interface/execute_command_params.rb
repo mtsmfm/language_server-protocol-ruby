@@ -9,8 +9,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:command] = command
-          @attributes[:arguments] = arguments if arguments
-          @attributes[:workDoneToken] = work_done_token if work_done_token
+          @attributes[:arguments] = arguments unless arguments.nil?
+          @attributes[:workDoneToken] = work_done_token unless work_done_token.nil?
 
           @attributes.freeze
         end

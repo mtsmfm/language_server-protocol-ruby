@@ -10,9 +10,9 @@ module LanguageServer
 
           @attributes[:tabSize] = tab_size
           @attributes[:insertSpaces] = insert_spaces
-          @attributes[:trimTrailingWhitespace] = trim_trailing_whitespace if trim_trailing_whitespace
-          @attributes[:insertFinalNewline] = insert_final_newline if insert_final_newline
-          @attributes[:trimFinalNewlines] = trim_final_newlines if trim_final_newlines
+          @attributes[:trimTrailingWhitespace] = trim_trailing_whitespace unless trim_trailing_whitespace.nil?
+          @attributes[:insertFinalNewline] = insert_final_newline unless insert_final_newline.nil?
+          @attributes[:trimFinalNewlines] = trim_final_newlines unless trim_final_newlines.nil?
 
           @attributes.freeze
         end

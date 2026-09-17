@@ -5,7 +5,7 @@ module LanguageServer
         def initialize(relative_pattern_support: nil)
           @attributes = {}
 
-          @attributes[:relativePatternSupport] = relative_pattern_support if relative_pattern_support
+          @attributes[:relativePatternSupport] = relative_pattern_support unless relative_pattern_support.nil?
 
           @attributes.freeze
         end

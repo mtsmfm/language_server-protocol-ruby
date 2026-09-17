@@ -11,7 +11,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:engine] = engine
-          @attributes[:version] = version if version
+          @attributes[:version] = version unless version.nil?
 
           @attributes.freeze
         end

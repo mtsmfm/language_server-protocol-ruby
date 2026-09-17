@@ -13,8 +13,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:range] = range
-          @attributes[:command] = command if command
-          @attributes[:data] = data if data
+          @attributes[:command] = command unless command.nil?
+          @attributes[:data] = data unless data.nil?
 
           @attributes.freeze
         end

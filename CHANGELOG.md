@@ -6,6 +6,7 @@
   - Add many new interfaces and constants, e.g. `InlineCompletion*`, `TextDocumentContent*`, `SnippetTextEdit`, `CodeActionTag`, `LanguageKind`, `ApplyKind`
   - **Breaking:** `Constant::TraceValues` is renamed to `Constant::TraceValue` following the meta model
   - **Breaking:** Remove `Interface::HoverResult`, which was only an example type in the old specification markdown and is not part of the meta model
+- **Breaking:** Keep `false` for optional interface properties instead of omitting it; only `nil` is omitted now (e.g. `CompletionItem.new(deprecated: false)` serializes `"deprecated": false`)
 - Generate constants only from the meta model instead of also extracting `export namespace` blocks from the specification markdown
   - **Breaking:** Remove `Constant::InitializeErrorCodes`, which is not part of the meta model
   - **Breaking:** Remove `Constant::RegularExpressionEngineKind`, which the meta model defines as a plain string alias

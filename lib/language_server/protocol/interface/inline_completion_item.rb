@@ -11,9 +11,9 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:insertText] = insert_text
-          @attributes[:filterText] = filter_text if filter_text
-          @attributes[:range] = range if range
-          @attributes[:command] = command if command
+          @attributes[:filterText] = filter_text unless filter_text.nil?
+          @attributes[:range] = range unless range.nil?
+          @attributes[:command] = command unless command.nil?
 
           @attributes.freeze
         end

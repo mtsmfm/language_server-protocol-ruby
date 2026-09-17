@@ -9,7 +9,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:triggerKind] = trigger_kind
-          @attributes[:triggerCharacter] = trigger_character if trigger_character
+          @attributes[:triggerCharacter] = trigger_character unless trigger_character.nil?
 
           @attributes.freeze
         end

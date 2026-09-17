@@ -8,7 +8,7 @@ module LanguageServer
         def initialize(notebook: nil, cells:)
           @attributes = {}
 
-          @attributes[:notebook] = notebook if notebook
+          @attributes[:notebook] = notebook unless notebook.nil?
           @attributes[:cells] = cells
 
           @attributes.freeze

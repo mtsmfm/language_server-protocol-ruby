@@ -11,7 +11,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:kind] = kind
-          @attributes[:resultId] = result_id if result_id
+          @attributes[:resultId] = result_id unless result_id.nil?
           @attributes[:items] = items
 
           @attributes.freeze

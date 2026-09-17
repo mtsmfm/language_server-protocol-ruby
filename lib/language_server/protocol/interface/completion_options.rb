@@ -8,11 +8,11 @@ module LanguageServer
         def initialize(trigger_characters: nil, all_commit_characters: nil, resolve_provider: nil, completion_item: nil, work_done_progress: nil)
           @attributes = {}
 
-          @attributes[:triggerCharacters] = trigger_characters if trigger_characters
-          @attributes[:allCommitCharacters] = all_commit_characters if all_commit_characters
-          @attributes[:resolveProvider] = resolve_provider if resolve_provider
-          @attributes[:completionItem] = completion_item if completion_item
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:triggerCharacters] = trigger_characters unless trigger_characters.nil?
+          @attributes[:allCommitCharacters] = all_commit_characters unless all_commit_characters.nil?
+          @attributes[:resolveProvider] = resolve_provider unless resolve_provider.nil?
+          @attributes[:completionItem] = completion_item unless completion_item.nil?
+          @attributes[:workDoneProgress] = work_done_progress unless work_done_progress.nil?
 
           @attributes.freeze
         end

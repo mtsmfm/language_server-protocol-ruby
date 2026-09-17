@@ -11,8 +11,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:signatures] = signatures
-          @attributes[:activeSignature] = active_signature if active_signature
-          @attributes[:activeParameter] = active_parameter if active_parameter
+          @attributes[:activeSignature] = active_signature unless active_signature.nil?
+          @attributes[:activeParameter] = active_parameter unless active_parameter.nil?
 
           @attributes.freeze
         end

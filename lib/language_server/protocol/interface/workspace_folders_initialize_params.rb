@@ -5,7 +5,7 @@ module LanguageServer
         def initialize(workspace_folders: nil)
           @attributes = {}
 
-          @attributes[:workspaceFolders] = workspace_folders if workspace_folders
+          @attributes[:workspaceFolders] = workspace_folders unless workspace_folders.nil?
 
           @attributes.freeze
         end

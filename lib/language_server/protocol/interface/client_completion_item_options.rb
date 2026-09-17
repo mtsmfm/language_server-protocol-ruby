@@ -8,16 +8,16 @@ module LanguageServer
         def initialize(snippet_support: nil, commit_characters_support: nil, documentation_format: nil, deprecated_support: nil, preselect_support: nil, tag_support: nil, insert_replace_support: nil, resolve_support: nil, insert_text_mode_support: nil, label_details_support: nil)
           @attributes = {}
 
-          @attributes[:snippetSupport] = snippet_support if snippet_support
-          @attributes[:commitCharactersSupport] = commit_characters_support if commit_characters_support
-          @attributes[:documentationFormat] = documentation_format if documentation_format
-          @attributes[:deprecatedSupport] = deprecated_support if deprecated_support
-          @attributes[:preselectSupport] = preselect_support if preselect_support
-          @attributes[:tagSupport] = tag_support if tag_support
-          @attributes[:insertReplaceSupport] = insert_replace_support if insert_replace_support
-          @attributes[:resolveSupport] = resolve_support if resolve_support
-          @attributes[:insertTextModeSupport] = insert_text_mode_support if insert_text_mode_support
-          @attributes[:labelDetailsSupport] = label_details_support if label_details_support
+          @attributes[:snippetSupport] = snippet_support unless snippet_support.nil?
+          @attributes[:commitCharactersSupport] = commit_characters_support unless commit_characters_support.nil?
+          @attributes[:documentationFormat] = documentation_format unless documentation_format.nil?
+          @attributes[:deprecatedSupport] = deprecated_support unless deprecated_support.nil?
+          @attributes[:preselectSupport] = preselect_support unless preselect_support.nil?
+          @attributes[:tagSupport] = tag_support unless tag_support.nil?
+          @attributes[:insertReplaceSupport] = insert_replace_support unless insert_replace_support.nil?
+          @attributes[:resolveSupport] = resolve_support unless resolve_support.nil?
+          @attributes[:insertTextModeSupport] = insert_text_mode_support unless insert_text_mode_support.nil?
+          @attributes[:labelDetailsSupport] = label_details_support unless label_details_support.nil?
 
           @attributes.freeze
         end

@@ -12,9 +12,9 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:value] = value
-          @attributes[:tooltip] = tooltip if tooltip
-          @attributes[:location] = location if location
-          @attributes[:command] = command if command
+          @attributes[:tooltip] = tooltip unless tooltip.nil?
+          @attributes[:location] = location unless location.nil?
+          @attributes[:command] = command unless command.nil?
 
           @attributes.freeze
         end

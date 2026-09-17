@@ -10,13 +10,13 @@ module LanguageServer
         def initialize(dynamic_registration: nil, related_document_support: nil, markup_message_support: nil, related_information: nil, tag_support: nil, code_description_support: nil, data_support: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
-          @attributes[:relatedDocumentSupport] = related_document_support if related_document_support
-          @attributes[:markupMessageSupport] = markup_message_support if markup_message_support
-          @attributes[:relatedInformation] = related_information if related_information
-          @attributes[:tagSupport] = tag_support if tag_support
-          @attributes[:codeDescriptionSupport] = code_description_support if code_description_support
-          @attributes[:dataSupport] = data_support if data_support
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:relatedDocumentSupport] = related_document_support unless related_document_support.nil?
+          @attributes[:markupMessageSupport] = markup_message_support unless markup_message_support.nil?
+          @attributes[:relatedInformation] = related_information unless related_information.nil?
+          @attributes[:tagSupport] = tag_support unless tag_support.nil?
+          @attributes[:codeDescriptionSupport] = code_description_support unless code_description_support.nil?
+          @attributes[:dataSupport] = data_support unless data_support.nil?
 
           @attributes.freeze
         end

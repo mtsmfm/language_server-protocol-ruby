@@ -12,14 +12,14 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:title] = title
-          @attributes[:kind] = kind if kind
-          @attributes[:diagnostics] = diagnostics if diagnostics
-          @attributes[:isPreferred] = is_preferred if is_preferred
-          @attributes[:disabled] = disabled if disabled
-          @attributes[:edit] = edit if edit
-          @attributes[:command] = command if command
-          @attributes[:data] = data if data
-          @attributes[:tags] = tags if tags
+          @attributes[:kind] = kind unless kind.nil?
+          @attributes[:diagnostics] = diagnostics unless diagnostics.nil?
+          @attributes[:isPreferred] = is_preferred unless is_preferred.nil?
+          @attributes[:disabled] = disabled unless disabled.nil?
+          @attributes[:edit] = edit unless edit.nil?
+          @attributes[:command] = command unless command.nil?
+          @attributes[:data] = data unless data.nil?
+          @attributes[:tags] = tags unless tags.nil?
 
           @attributes.freeze
         end

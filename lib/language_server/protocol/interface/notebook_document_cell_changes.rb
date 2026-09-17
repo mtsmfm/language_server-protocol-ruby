@@ -10,9 +10,9 @@ module LanguageServer
         def initialize(structure: nil, data: nil, text_content: nil)
           @attributes = {}
 
-          @attributes[:structure] = structure if structure
-          @attributes[:data] = data if data
-          @attributes[:textContent] = text_content if text_content
+          @attributes[:structure] = structure unless structure.nil?
+          @attributes[:data] = data unless data.nil?
+          @attributes[:textContent] = text_content unless text_content.nil?
 
           @attributes.freeze
         end

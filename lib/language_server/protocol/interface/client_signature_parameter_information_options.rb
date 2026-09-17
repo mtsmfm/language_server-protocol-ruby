@@ -8,7 +8,7 @@ module LanguageServer
         def initialize(label_offset_support: nil)
           @attributes = {}
 
-          @attributes[:labelOffsetSupport] = label_offset_support if label_offset_support
+          @attributes[:labelOffsetSupport] = label_offset_support unless label_offset_support.nil?
 
           @attributes.freeze
         end

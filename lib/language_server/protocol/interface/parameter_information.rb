@@ -10,7 +10,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:label] = label
-          @attributes[:documentation] = documentation if documentation
+          @attributes[:documentation] = documentation unless documentation.nil?
 
           @attributes.freeze
         end

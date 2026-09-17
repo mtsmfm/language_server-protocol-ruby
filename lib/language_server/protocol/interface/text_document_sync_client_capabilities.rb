@@ -5,10 +5,10 @@ module LanguageServer
         def initialize(dynamic_registration: nil, will_save: nil, will_save_wait_until: nil, did_save: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
-          @attributes[:willSave] = will_save if will_save
-          @attributes[:willSaveWaitUntil] = will_save_wait_until if will_save_wait_until
-          @attributes[:didSave] = did_save if did_save
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:willSave] = will_save unless will_save.nil?
+          @attributes[:willSaveWaitUntil] = will_save_wait_until unless will_save_wait_until.nil?
+          @attributes[:didSave] = did_save unless did_save.nil?
 
           @attributes.freeze
         end

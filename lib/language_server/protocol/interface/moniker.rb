@@ -13,7 +13,7 @@ module LanguageServer
           @attributes[:scheme] = scheme
           @attributes[:identifier] = identifier
           @attributes[:unique] = unique
-          @attributes[:kind] = kind if kind
+          @attributes[:kind] = kind unless kind.nil?
 
           @attributes.freeze
         end

@@ -10,10 +10,10 @@ module LanguageServer
         def initialize(identifier: nil, inter_file_dependencies:, workspace_diagnostics:, work_done_progress: nil)
           @attributes = {}
 
-          @attributes[:identifier] = identifier if identifier
+          @attributes[:identifier] = identifier unless identifier.nil?
           @attributes[:interFileDependencies] = inter_file_dependencies
           @attributes[:workspaceDiagnostics] = workspace_diagnostics
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:workDoneProgress] = work_done_progress unless work_done_progress.nil?
 
           @attributes.freeze
         end

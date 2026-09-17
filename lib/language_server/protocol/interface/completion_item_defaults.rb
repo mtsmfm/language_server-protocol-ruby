@@ -22,11 +22,11 @@ module LanguageServer
         def initialize(commit_characters: nil, edit_range: nil, insert_text_format: nil, insert_text_mode: nil, data: nil)
           @attributes = {}
 
-          @attributes[:commitCharacters] = commit_characters if commit_characters
-          @attributes[:editRange] = edit_range if edit_range
-          @attributes[:insertTextFormat] = insert_text_format if insert_text_format
-          @attributes[:insertTextMode] = insert_text_mode if insert_text_mode
-          @attributes[:data] = data if data
+          @attributes[:commitCharacters] = commit_characters unless commit_characters.nil?
+          @attributes[:editRange] = edit_range unless edit_range.nil?
+          @attributes[:insertTextFormat] = insert_text_format unless insert_text_format.nil?
+          @attributes[:insertTextMode] = insert_text_mode unless insert_text_mode.nil?
+          @attributes[:data] = data unless data.nil?
 
           @attributes.freeze
         end

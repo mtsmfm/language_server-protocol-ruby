@@ -7,8 +7,8 @@ module LanguageServer
 
           @attributes[:jsonrpc] = jsonrpc
           @attributes[:id] = id
-          @attributes[:result] = result if result
-          @attributes[:error] = error if error
+          @attributes[:result] = result unless result.nil?
+          @attributes[:error] = error unless error.nil?
 
           @attributes.freeze
         end

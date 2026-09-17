@@ -10,9 +10,9 @@ module LanguageServer
         def initialize(work_done_progress: nil, document_selector:, id: nil)
           @attributes = {}
 
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:workDoneProgress] = work_done_progress unless work_done_progress.nil?
           @attributes[:documentSelector] = document_selector
-          @attributes[:id] = id if id
+          @attributes[:id] = id unless id.nil?
 
           @attributes.freeze
         end

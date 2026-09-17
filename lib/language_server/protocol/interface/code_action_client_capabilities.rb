@@ -8,15 +8,15 @@ module LanguageServer
         def initialize(dynamic_registration: nil, code_action_literal_support: nil, is_preferred_support: nil, disabled_support: nil, data_support: nil, resolve_support: nil, honors_change_annotations: nil, documentation_support: nil, tag_support: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
-          @attributes[:codeActionLiteralSupport] = code_action_literal_support if code_action_literal_support
-          @attributes[:isPreferredSupport] = is_preferred_support if is_preferred_support
-          @attributes[:disabledSupport] = disabled_support if disabled_support
-          @attributes[:dataSupport] = data_support if data_support
-          @attributes[:resolveSupport] = resolve_support if resolve_support
-          @attributes[:honorsChangeAnnotations] = honors_change_annotations if honors_change_annotations
-          @attributes[:documentationSupport] = documentation_support if documentation_support
-          @attributes[:tagSupport] = tag_support if tag_support
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:codeActionLiteralSupport] = code_action_literal_support unless code_action_literal_support.nil?
+          @attributes[:isPreferredSupport] = is_preferred_support unless is_preferred_support.nil?
+          @attributes[:disabledSupport] = disabled_support unless disabled_support.nil?
+          @attributes[:dataSupport] = data_support unless data_support.nil?
+          @attributes[:resolveSupport] = resolve_support unless resolve_support.nil?
+          @attributes[:honorsChangeAnnotations] = honors_change_annotations unless honors_change_annotations.nil?
+          @attributes[:documentationSupport] = documentation_support unless documentation_support.nil?
+          @attributes[:tagSupport] = tag_support unless tag_support.nil?
 
           @attributes.freeze
         end

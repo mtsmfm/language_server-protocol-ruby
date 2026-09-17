@@ -10,8 +10,8 @@ module LanguageServer
         def initialize(notebook_type: nil, scheme: nil, pattern:)
           @attributes = {}
 
-          @attributes[:notebookType] = notebook_type if notebook_type
-          @attributes[:scheme] = scheme if scheme
+          @attributes[:notebookType] = notebook_type unless notebook_type.nil?
+          @attributes[:scheme] = scheme unless scheme.nil?
           @attributes[:pattern] = pattern
 
           @attributes.freeze

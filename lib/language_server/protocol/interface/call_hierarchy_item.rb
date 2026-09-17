@@ -13,12 +13,12 @@ module LanguageServer
 
           @attributes[:name] = name
           @attributes[:kind] = kind
-          @attributes[:tags] = tags if tags
-          @attributes[:detail] = detail if detail
+          @attributes[:tags] = tags unless tags.nil?
+          @attributes[:detail] = detail unless detail.nil?
           @attributes[:uri] = uri
           @attributes[:range] = range
           @attributes[:selectionRange] = selection_range
-          @attributes[:data] = data if data
+          @attributes[:data] = data unless data.nil?
 
           @attributes.freeze
         end

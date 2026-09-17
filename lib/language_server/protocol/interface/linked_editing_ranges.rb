@@ -11,7 +11,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:ranges] = ranges
-          @attributes[:wordPattern] = word_pattern if word_pattern
+          @attributes[:wordPattern] = word_pattern unless word_pattern.nil?
 
           @attributes.freeze
         end

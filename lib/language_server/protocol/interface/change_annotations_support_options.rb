@@ -8,7 +8,7 @@ module LanguageServer
         def initialize(groups_on_label: nil)
           @attributes = {}
 
-          @attributes[:groupsOnLabel] = groups_on_label if groups_on_label
+          @attributes[:groupsOnLabel] = groups_on_label unless groups_on_label.nil?
 
           @attributes.freeze
         end

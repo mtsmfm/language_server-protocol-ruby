@@ -5,8 +5,8 @@ module LanguageServer
         def initialize(scope_uri: nil, section: nil)
           @attributes = {}
 
-          @attributes[:scopeUri] = scope_uri if scope_uri
-          @attributes[:section] = section if section
+          @attributes[:scopeUri] = scope_uri unless scope_uri.nil?
+          @attributes[:section] = section unless section.nil?
 
           @attributes.freeze
         end

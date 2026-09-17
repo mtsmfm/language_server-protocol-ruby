@@ -10,7 +10,7 @@ module LanguageServer
         def initialize(is_refactoring: nil)
           @attributes = {}
 
-          @attributes[:isRefactoring] = is_refactoring if is_refactoring
+          @attributes[:isRefactoring] = is_refactoring unless is_refactoring.nil?
 
           @attributes.freeze
         end

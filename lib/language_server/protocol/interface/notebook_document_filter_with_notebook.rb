@@ -9,7 +9,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:notebook] = notebook
-          @attributes[:cells] = cells if cells
+          @attributes[:cells] = cells unless cells.nil?
 
           @attributes.freeze
         end

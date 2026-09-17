@@ -10,7 +10,7 @@ module LanguageServer
         def initialize(refresh_support: nil)
           @attributes = {}
 
-          @attributes[:refreshSupport] = refresh_support if refresh_support
+          @attributes[:refreshSupport] = refresh_support unless refresh_support.nil?
 
           @attributes.freeze
         end

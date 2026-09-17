@@ -6,7 +6,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:kind] = kind
-          @attributes[:message] = message if message
+          @attributes[:message] = message unless message.nil?
 
           @attributes.freeze
         end

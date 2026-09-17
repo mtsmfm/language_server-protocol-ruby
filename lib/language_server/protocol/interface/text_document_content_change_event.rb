@@ -9,8 +9,8 @@ module LanguageServer
         def initialize(range: nil, range_length: nil, text:)
           @attributes = {}
 
-          @attributes[:range] = range if range
-          @attributes[:rangeLength] = range_length if range_length
+          @attributes[:range] = range unless range.nil?
+          @attributes[:rangeLength] = range_length unless range_length.nil?
           @attributes[:text] = text
 
           @attributes.freeze

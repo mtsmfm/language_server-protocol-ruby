@@ -5,7 +5,7 @@ module LanguageServer
         def initialize(section: nil)
           @attributes = {}
 
-          @attributes[:section] = section if section
+          @attributes[:section] = section unless section.nil?
 
           @attributes.freeze
         end

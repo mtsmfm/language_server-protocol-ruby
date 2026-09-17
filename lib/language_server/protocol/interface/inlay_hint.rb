@@ -12,12 +12,12 @@ module LanguageServer
 
           @attributes[:position] = position
           @attributes[:label] = label
-          @attributes[:kind] = kind if kind
-          @attributes[:textEdits] = text_edits if text_edits
-          @attributes[:tooltip] = tooltip if tooltip
-          @attributes[:paddingLeft] = padding_left if padding_left
-          @attributes[:paddingRight] = padding_right if padding_right
-          @attributes[:data] = data if data
+          @attributes[:kind] = kind unless kind.nil?
+          @attributes[:textEdits] = text_edits unless text_edits.nil?
+          @attributes[:tooltip] = tooltip unless tooltip.nil?
+          @attributes[:paddingLeft] = padding_left unless padding_left.nil?
+          @attributes[:paddingRight] = padding_right unless padding_right.nil?
+          @attributes[:data] = data unless data.nil?
 
           @attributes.freeze
         end

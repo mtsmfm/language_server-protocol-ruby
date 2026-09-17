@@ -11,8 +11,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:language] = language
-          @attributes[:scheme] = scheme if scheme
-          @attributes[:pattern] = pattern if pattern
+          @attributes[:scheme] = scheme unless scheme.nil?
+          @attributes[:pattern] = pattern unless pattern.nil?
 
           @attributes.freeze
         end

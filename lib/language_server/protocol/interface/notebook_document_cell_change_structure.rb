@@ -11,8 +11,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:array] = array
-          @attributes[:didOpen] = did_open if did_open
-          @attributes[:didClose] = did_close if did_close
+          @attributes[:didOpen] = did_open unless did_open.nil?
+          @attributes[:didClose] = did_close unless did_close.nil?
 
           @attributes.freeze
         end

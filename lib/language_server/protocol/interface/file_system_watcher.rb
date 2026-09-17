@@ -6,7 +6,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:globPattern] = glob_pattern
-          @attributes[:kind] = kind if kind
+          @attributes[:kind] = kind unless kind.nil?
 
           @attributes.freeze
         end

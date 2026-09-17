@@ -6,7 +6,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:message] = message
-          @attributes[:verbose] = verbose if verbose
+          @attributes[:verbose] = verbose unless verbose.nil?
 
           @attributes.freeze
         end

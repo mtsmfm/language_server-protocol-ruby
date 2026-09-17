@@ -11,9 +11,9 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:label] = label
-          @attributes[:documentation] = documentation if documentation
-          @attributes[:parameters] = parameters if parameters
-          @attributes[:activeParameter] = active_parameter if active_parameter
+          @attributes[:documentation] = documentation unless documentation.nil?
+          @attributes[:parameters] = parameters unless parameters.nil?
+          @attributes[:activeParameter] = active_parameter unless active_parameter.nil?
 
           @attributes.freeze
         end

@@ -10,8 +10,8 @@ module LanguageServer
         def initialize(metadata: nil, cells: nil)
           @attributes = {}
 
-          @attributes[:metadata] = metadata if metadata
-          @attributes[:cells] = cells if cells
+          @attributes[:metadata] = metadata unless metadata.nil?
+          @attributes[:cells] = cells unless cells.nil?
 
           @attributes.freeze
         end

@@ -9,9 +9,9 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:documentSelector] = document_selector
-          @attributes[:triggerCharacters] = trigger_characters if trigger_characters
-          @attributes[:retriggerCharacters] = retrigger_characters if retrigger_characters
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:triggerCharacters] = trigger_characters unless trigger_characters.nil?
+          @attributes[:retriggerCharacters] = retrigger_characters unless retrigger_characters.nil?
+          @attributes[:workDoneProgress] = work_done_progress unless work_done_progress.nil?
 
           @attributes.freeze
         end

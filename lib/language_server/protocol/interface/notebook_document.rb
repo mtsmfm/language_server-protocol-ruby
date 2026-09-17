@@ -13,7 +13,7 @@ module LanguageServer
           @attributes[:uri] = uri
           @attributes[:notebookType] = notebook_type
           @attributes[:version] = version
-          @attributes[:metadata] = metadata if metadata
+          @attributes[:metadata] = metadata unless metadata.nil?
           @attributes[:cells] = cells
 
           @attributes.freeze

@@ -11,7 +11,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:triggerKind] = trigger_kind
-          @attributes[:selectedCompletionInfo] = selected_completion_info if selected_completion_info
+          @attributes[:selectedCompletionInfo] = selected_completion_info unless selected_completion_info.nil?
 
           @attributes.freeze
         end

@@ -22,10 +22,10 @@ module LanguageServer
         def initialize(related_documents: nil, kind: nil, result_id: nil, items: nil)
           @attributes = {}
 
-          @attributes[:relatedDocuments] = related_documents if related_documents
-          @attributes[:kind] = kind if kind
-          @attributes[:resultId] = result_id if result_id
-          @attributes[:items] = items if items
+          @attributes[:relatedDocuments] = related_documents unless related_documents.nil?
+          @attributes[:kind] = kind unless kind.nil?
+          @attributes[:resultId] = result_id unless result_id.nil?
+          @attributes[:items] = items unless items.nil?
 
           @attributes.freeze
         end

@@ -11,8 +11,8 @@ module LanguageServer
         def initialize(item_defaults: nil, apply_kind_support: nil)
           @attributes = {}
 
-          @attributes[:itemDefaults] = item_defaults if item_defaults
-          @attributes[:applyKindSupport] = apply_kind_support if apply_kind_support
+          @attributes[:itemDefaults] = item_defaults unless item_defaults.nil?
+          @attributes[:applyKindSupport] = apply_kind_support unless apply_kind_support.nil?
 
           @attributes.freeze
         end

@@ -23,9 +23,9 @@ module LanguageServer
         def initialize(language: nil, scheme: nil, pattern: nil)
           @attributes = {}
 
-          @attributes[:language] = language if language
-          @attributes[:scheme] = scheme if scheme
-          @attributes[:pattern] = pattern if pattern
+          @attributes[:language] = language unless language.nil?
+          @attributes[:scheme] = scheme unless scheme.nil?
+          @attributes[:pattern] = pattern unless pattern.nil?
 
           @attributes.freeze
         end

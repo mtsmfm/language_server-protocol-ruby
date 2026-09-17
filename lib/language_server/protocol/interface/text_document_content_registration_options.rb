@@ -11,7 +11,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:schemes] = schemes
-          @attributes[:id] = id if id
+          @attributes[:id] = id unless id.nil?
 
           @attributes.freeze
         end

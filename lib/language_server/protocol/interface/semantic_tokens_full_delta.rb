@@ -10,7 +10,7 @@ module LanguageServer
         def initialize(delta: nil)
           @attributes = {}
 
-          @attributes[:delta] = delta if delta
+          @attributes[:delta] = delta unless delta.nil?
 
           @attributes.freeze
         end

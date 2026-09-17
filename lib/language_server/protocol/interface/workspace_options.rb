@@ -10,9 +10,9 @@ module LanguageServer
         def initialize(workspace_folders: nil, file_operations: nil, text_document_content: nil)
           @attributes = {}
 
-          @attributes[:workspaceFolders] = workspace_folders if workspace_folders
-          @attributes[:fileOperations] = file_operations if file_operations
-          @attributes[:textDocumentContent] = text_document_content if text_document_content
+          @attributes[:workspaceFolders] = workspace_folders unless workspace_folders.nil?
+          @attributes[:fileOperations] = file_operations unless file_operations.nil?
+          @attributes[:textDocumentContent] = text_document_content unless text_document_content.nil?
 
           @attributes.freeze
         end

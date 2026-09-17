@@ -8,7 +8,7 @@ module LanguageServer
         def initialize(label_details_support: nil)
           @attributes = {}
 
-          @attributes[:labelDetailsSupport] = label_details_support if label_details_support
+          @attributes[:labelDetailsSupport] = label_details_support unless label_details_support.nil?
 
           @attributes.freeze
         end

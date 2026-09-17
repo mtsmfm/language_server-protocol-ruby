@@ -12,7 +12,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:name] = name
-          @attributes[:version] = version if version
+          @attributes[:version] = version unless version.nil?
 
           @attributes.freeze
         end

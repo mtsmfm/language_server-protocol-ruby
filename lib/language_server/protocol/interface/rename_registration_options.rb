@@ -9,8 +9,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:documentSelector] = document_selector
-          @attributes[:prepareProvider] = prepare_provider if prepare_provider
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:prepareProvider] = prepare_provider unless prepare_provider.nil?
+          @attributes[:workDoneProgress] = work_done_progress unless work_done_progress.nil?
 
           @attributes.freeze
         end

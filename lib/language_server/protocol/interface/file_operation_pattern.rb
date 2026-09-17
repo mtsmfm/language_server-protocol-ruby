@@ -12,8 +12,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:glob] = glob
-          @attributes[:matches] = matches if matches
-          @attributes[:options] = options if options
+          @attributes[:matches] = matches unless matches.nil?
+          @attributes[:options] = options unless options.nil?
 
           @attributes.freeze
         end

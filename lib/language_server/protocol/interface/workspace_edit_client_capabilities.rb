@@ -5,13 +5,13 @@ module LanguageServer
         def initialize(document_changes: nil, resource_operations: nil, failure_handling: nil, normalizes_line_endings: nil, change_annotation_support: nil, metadata_support: nil, snippet_edit_support: nil)
           @attributes = {}
 
-          @attributes[:documentChanges] = document_changes if document_changes
-          @attributes[:resourceOperations] = resource_operations if resource_operations
-          @attributes[:failureHandling] = failure_handling if failure_handling
-          @attributes[:normalizesLineEndings] = normalizes_line_endings if normalizes_line_endings
-          @attributes[:changeAnnotationSupport] = change_annotation_support if change_annotation_support
-          @attributes[:metadataSupport] = metadata_support if metadata_support
-          @attributes[:snippetEditSupport] = snippet_edit_support if snippet_edit_support
+          @attributes[:documentChanges] = document_changes unless document_changes.nil?
+          @attributes[:resourceOperations] = resource_operations unless resource_operations.nil?
+          @attributes[:failureHandling] = failure_handling unless failure_handling.nil?
+          @attributes[:normalizesLineEndings] = normalizes_line_endings unless normalizes_line_endings.nil?
+          @attributes[:changeAnnotationSupport] = change_annotation_support unless change_annotation_support.nil?
+          @attributes[:metadataSupport] = metadata_support unless metadata_support.nil?
+          @attributes[:snippetEditSupport] = snippet_edit_support unless snippet_edit_support.nil?
 
           @attributes.freeze
         end

@@ -8,7 +8,7 @@ module LanguageServer
         def initialize(additional_properties_support: nil)
           @attributes = {}
 
-          @attributes[:additionalPropertiesSupport] = additional_properties_support if additional_properties_support
+          @attributes[:additionalPropertiesSupport] = additional_properties_support unless additional_properties_support.nil?
 
           @attributes.freeze
         end

@@ -8,8 +8,8 @@ module LanguageServer
         def initialize(overwrite: nil, ignore_if_exists: nil)
           @attributes = {}
 
-          @attributes[:overwrite] = overwrite if overwrite
-          @attributes[:ignoreIfExists] = ignore_if_exists if ignore_if_exists
+          @attributes[:overwrite] = overwrite unless overwrite.nil?
+          @attributes[:ignoreIfExists] = ignore_if_exists unless ignore_if_exists.nil?
 
           @attributes.freeze
         end
