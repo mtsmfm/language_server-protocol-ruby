@@ -16,7 +16,9 @@ module LanguageServer
         # A snippet can define tab stops and placeholders with `$1`, `$2`
         # and `${3:foo}`. `$0` defines the final tab stop, it defaults to
         # the end of the snippet. Placeholders with equal identifiers are linked,
-        # that is, typing in one will update others too.
+        # that is typing in one will update others too.
+        #
+        # See also: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#snippet_syntax
         #
         SNIPPET = 2
       end

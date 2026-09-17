@@ -7,11 +7,11 @@ module LanguageServer
         #
         CREATE = 1
         #
-        # Interested in change events.
+        # Interested in change events
         #
         CHANGE = 2
         #
-        # Interested in delete events.
+        # Interested in delete events
         #
         DELETE = 4
       end
