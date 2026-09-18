@@ -1,6 +1,6 @@
 # Change log
 
-## 3.18.0.0
+## 3.18.0.0.pre.1
 
 - Generate protocol files from the finalized LSP 3.18 specification (digest `9b3b38b`)
   - Add many new interfaces and constants, e.g. `InlineCompletion*`, `TextDocumentContent*`, `SnippetTextEdit`, `CodeActionTag`, `LanguageKind`, `ApplyKind`
