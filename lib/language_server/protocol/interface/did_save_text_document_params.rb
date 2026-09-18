@@ -9,7 +9,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:textDocument] = text_document
-          @attributes[:text] = text if text
+          @attributes[:text] = text unless text.nil?
 
           @attributes.freeze
         end

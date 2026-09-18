@@ -5,11 +5,12 @@ module LanguageServer
       # Registration options for a {@link DocumentRangeFormattingRequest}.
       #
       class DocumentRangeFormattingRegistrationOptions
-        def initialize(document_selector:, work_done_progress: nil)
+        def initialize(document_selector:, ranges_support: nil, work_done_progress: nil)
           @attributes = {}
 
           @attributes[:documentSelector] = document_selector
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:rangesSupport] = ranges_support unless ranges_support.nil?
+          @attributes[:workDoneProgress] = work_done_progress unless work_done_progress.nil?
 
           @attributes.freeze
         end
@@ -21,6 +22,16 @@ module LanguageServer
         # @return [DocumentSelector | nil]
         def document_selector
           attributes.fetch(:documentSelector)
+        end
+
+        #
+        # Whether the server supports formatting multiple ranges at once.
+        #
+        # @since 3.18.0
+        #
+        # @return [boolean]
+        def ranges_support
+          attributes.fetch(:rangesSupport)
         end
 
         # @return [boolean]

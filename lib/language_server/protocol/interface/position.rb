@@ -9,14 +9,14 @@ module LanguageServer
       # offset of b is 3 since `𐐀` is represented using two code units in UTF-16.
       # Since 3.17 clients and servers can agree on a different string encoding
       # representation (e.g. UTF-8). The client announces it's supported encoding
-      # via the client capability [`general.positionEncodings`](#clientCapabilities).
+      # via the client capability [`general.positionEncodings`](https://microsoft.github.io/language-server-protocol/specifications/specification-current/#clientCapabilities).
       # The value is an array of position encodings the client supports, with
       # decreasing preference (e.g. the encoding at index `0` is the most preferred
       # one). To stay backwards compatible the only mandatory encoding is UTF-16
       # represented via the string `utf-16`. The server can pick one of the
       # encodings offered by the client and signals that encoding back to the
       # client via the initialize result's property
-      # [`capabilities.positionEncoding`](#serverCapabilities). If the string value
+      # [`capabilities.positionEncoding`](https://microsoft.github.io/language-server-protocol/specifications/specification-current/#serverCapabilities). If the string value
       # `utf-16` is missing from the client's capability `general.positionEncodings`
       # servers can safely assume that the client supports UTF-16. If the server
       # omits the position encoding in its initialize result the encoding defaults
@@ -43,9 +43,6 @@ module LanguageServer
         #
         # Line position in a document (zero-based).
         #
-        # If a line number is greater than the number of lines in a document, it defaults back to the number of lines in the document.
-        # If a line number is negative, it defaults to 0.
-        #
         # @return [uinteger]
         def line
           attributes.fetch(:line)
@@ -56,9 +53,6 @@ module LanguageServer
         #
         # The meaning of this offset is determined by the negotiated
         # `PositionEncodingKind`.
-        #
-        # If the character value is greater than the line length it defaults back to the
-        # line length.
         #
         # @return [uinteger]
         def character

@@ -5,13 +5,16 @@ module LanguageServer
       # Provider options for a {@link CodeActionRequest}.
       #
       class CodeActionOptions
-        def initialize: (?code_action_kinds: Array[untyped], ?resolve_provider: bool, ?work_done_progress: bool) -> void
+        def initialize: (?code_action_kinds: Array[untyped], ?documentation: Array[untyped], ?resolve_provider: bool, ?work_done_progress: bool) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
         def code_action_kinds: () -> Array[untyped]
+
+        %a{pure}
+        def documentation: () -> Array[untyped]
 
         %a{pure}
         def resolve_provider: () -> bool

@@ -10,14 +10,14 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:range] = range
-          @attributes[:severity] = severity if severity
-          @attributes[:code] = code if code
-          @attributes[:codeDescription] = code_description if code_description
-          @attributes[:source] = source if source
+          @attributes[:severity] = severity unless severity.nil?
+          @attributes[:code] = code unless code.nil?
+          @attributes[:codeDescription] = code_description unless code_description.nil?
+          @attributes[:source] = source unless source.nil?
           @attributes[:message] = message
-          @attributes[:tags] = tags if tags
-          @attributes[:relatedInformation] = related_information if related_information
-          @attributes[:data] = data if data
+          @attributes[:tags] = tags unless tags.nil?
+          @attributes[:relatedInformation] = related_information unless related_information.nil?
+          @attributes[:data] = data unless data.nil?
 
           @attributes.freeze
         end
@@ -31,8 +31,9 @@ module LanguageServer
         end
 
         #
-        # The diagnostic's severity. Can be omitted. If omitted it is up to the
-        # client to interpret diagnostics as error, warning, info or hint.
+        # The diagnostic's severity. To avoid interpretation mismatches when a
+        # server is used with different clients it is highly recommended that servers
+        # always provide a severity value.
         #
         # @return [DiagnosticSeverity]
         def severity
@@ -69,9 +70,12 @@ module LanguageServer
         end
 
         #
-        # The diagnostic's message. It usually appears in the user interface
+        # The diagnostic's message. It usually appears in the user interface.
         #
-        # @return [string]
+        # @since 3.18.0 - support for MarkupContent. This is guarded by the client
+        # capability `textDocument.diagnostic.markupMessageSupport`.
+        #
+        # @return [string | MarkupContent]
         def message
           attributes.fetch(:message)
         end

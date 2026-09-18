@@ -1,0 +1,27 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # Provides information about the context in which an inline completion was requested.
+      #
+      # @since 3.18.0
+      #
+      class InlineCompletionContext
+        def initialize: (trigger_kind: untyped, ?selected_completion_info: untyped) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        %a{pure}
+        def trigger_kind: () -> untyped
+
+        %a{pure}
+        def selected_completion_info: () -> untyped
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

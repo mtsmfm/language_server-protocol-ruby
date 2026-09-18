@@ -6,11 +6,12 @@ module LanguageServer
       # in the editor.
       #
       class CompletionList
-        def initialize(is_incomplete:, item_defaults: nil, items:)
+        def initialize(is_incomplete:, item_defaults: nil, apply_kind: nil, items:)
           @attributes = {}
 
           @attributes[:isIncomplete] = is_incomplete
-          @attributes[:itemDefaults] = item_defaults if item_defaults
+          @attributes[:itemDefaults] = item_defaults unless item_defaults.nil?
+          @attributes[:applyKind] = apply_kind unless apply_kind.nil?
           @attributes[:items] = items
 
           @attributes.freeze
@@ -34,7 +35,9 @@ module LanguageServer
         # be used if a completion item itself doesn't specify the value.
         #
         # If a completion list specifies a default value and a completion item
-        # also specifies a corresponding value the one from the item is used.
+        # also specifies a corresponding value, the rules for combining these are
+        # defined by `applyKinds` (if the client supports it), defaulting to
+        # ApplyKind.Replace.
         #
         # Servers are only allowed to return default values if the client
         # signals support for this via the `completionList.itemDefaults`
@@ -42,9 +45,33 @@ module LanguageServer
         #
         # @since 3.17.0
         #
-        # @return [{ commitCharacters?: string[]; editRange?: Range | { insert: Range; replace: Range; }; insertTextFormat?: InsertTextFormat; insertTextMode?: InsertTextMode; data?: LSPAny; }]
+        # @return [CompletionItemDefaults]
         def item_defaults
           attributes.fetch(:itemDefaults)
+        end
+
+        #
+        # Specifies how fields from a completion item should be combined with those
+        # from `completionList.itemDefaults`.
+        #
+        # If unspecified, all fields will be treated as ApplyKind.Replace.
+        #
+        # If a field's value is ApplyKind.Replace, the value from a completion item
+        # (if provided and not `null`) will always be used instead of the value
+        # from `completionItem.itemDefaults`.
+        #
+        # If a field's value is ApplyKind.Merge, the values will be merged using
+        # the rules defined against each field below.
+        #
+        # Servers are only allowed to return `applyKind` if the client
+        # signals support for this via the `completionList.applyKindSupport`
+        # capability.
+        #
+        # @since 3.18.0
+        #
+        # @return [CompletionItemApplyKinds]
+        def apply_kind
+          attributes.fetch(:applyKind)
         end
 
         #

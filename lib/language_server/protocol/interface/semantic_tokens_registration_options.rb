@@ -10,10 +10,10 @@ module LanguageServer
 
           @attributes[:documentSelector] = document_selector
           @attributes[:legend] = legend
-          @attributes[:range] = range if range
-          @attributes[:full] = full if full
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
-          @attributes[:id] = id if id
+          @attributes[:range] = range unless range.nil?
+          @attributes[:full] = full unless full.nil?
+          @attributes[:workDoneProgress] = work_done_progress unless work_done_progress.nil?
+          @attributes[:id] = id unless id.nil?
 
           @attributes.freeze
         end
@@ -47,7 +47,7 @@ module LanguageServer
         #
         # Server supports providing semantic tokens for a full document.
         #
-        # @return [boolean | { delta?: boolean; }]
+        # @return [boolean | SemanticTokensFullDelta]
         def full
           attributes.fetch(:full)
         end

@@ -4,6 +4,8 @@ module LanguageServer
       #
       # A notebook cell kind.
       #
+      # @since 3.17.0
+      #
       module NotebookCellKind
         #
         # A markup-cell is formatted source that is used for display.

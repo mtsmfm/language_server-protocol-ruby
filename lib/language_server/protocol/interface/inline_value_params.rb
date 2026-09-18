@@ -13,7 +13,7 @@ module LanguageServer
           @attributes[:textDocument] = text_document
           @attributes[:range] = range
           @attributes[:context] = context
-          @attributes[:workDoneToken] = work_done_token if work_done_token
+          @attributes[:workDoneToken] = work_done_token unless work_done_token.nil?
 
           @attributes.freeze
         end
@@ -27,7 +27,7 @@ module LanguageServer
         end
 
         #
-        # The document range for which inline values should be computed.
+        # The document range for which inline values information will be returned.
         #
         # @return [Range]
         def range
@@ -35,7 +35,7 @@ module LanguageServer
         end
 
         #
-        # Additional information about the context in which inline values were
+        # Additional information about the context in which inline values information was
         # requested.
         #
         # @return [InlineValueContext]

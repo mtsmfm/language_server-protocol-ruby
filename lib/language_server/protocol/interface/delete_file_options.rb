@@ -8,8 +8,8 @@ module LanguageServer
         def initialize(recursive: nil, ignore_if_not_exists: nil)
           @attributes = {}
 
-          @attributes[:recursive] = recursive if recursive
-          @attributes[:ignoreIfNotExists] = ignore_if_not_exists if ignore_if_not_exists
+          @attributes[:recursive] = recursive unless recursive.nil?
+          @attributes[:ignoreIfNotExists] = ignore_if_not_exists unless ignore_if_not_exists.nil?
 
           @attributes.freeze
         end

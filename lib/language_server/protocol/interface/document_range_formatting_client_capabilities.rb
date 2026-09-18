@@ -5,10 +5,11 @@ module LanguageServer
       # Client capabilities of a {@link DocumentRangeFormattingRequest}.
       #
       class DocumentRangeFormattingClientCapabilities
-        def initialize(dynamic_registration: nil)
+        def initialize(dynamic_registration: nil, ranges_support: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:rangesSupport] = ranges_support unless ranges_support.nil?
 
           @attributes.freeze
         end
@@ -19,6 +20,16 @@ module LanguageServer
         # @return [boolean]
         def dynamic_registration
           attributes.fetch(:dynamicRegistration)
+        end
+
+        #
+        # Whether the client supports formatting multiple ranges at once.
+        #
+        # @since 3.18.0
+        #
+        # @return [boolean]
+        def ranges_support
+          attributes.fetch(:rangesSupport)
         end
 
         attr_reader :attributes

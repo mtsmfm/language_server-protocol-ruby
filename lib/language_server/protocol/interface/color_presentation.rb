@@ -6,8 +6,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:label] = label
-          @attributes[:textEdit] = text_edit if text_edit
-          @attributes[:additionalTextEdits] = additional_text_edits if additional_text_edits
+          @attributes[:textEdit] = text_edit unless text_edit.nil?
+          @attributes[:additionalTextEdits] = additional_text_edits unless additional_text_edits.nil?
 
           @attributes.freeze
         end

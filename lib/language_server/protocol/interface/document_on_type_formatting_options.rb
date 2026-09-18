@@ -9,7 +9,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:firstTriggerCharacter] = first_trigger_character
-          @attributes[:moreTriggerCharacter] = more_trigger_character if more_trigger_character
+          @attributes[:moreTriggerCharacter] = more_trigger_character unless more_trigger_character.nil?
 
           @attributes.freeze
         end

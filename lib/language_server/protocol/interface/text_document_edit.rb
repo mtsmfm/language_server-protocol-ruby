@@ -31,7 +31,10 @@ module LanguageServer
         # @since 3.16.0 - support for AnnotatedTextEdit. This is guarded using a
         # client capability.
         #
-        # @return [TextEdit | AnnotatedTextEdit[]]
+        # @since 3.18.0 - support for SnippetTextEdit. This is guarded using a
+        # client capability.
+        #
+        # @return [TextEdit | AnnotatedTextEdit | SnippetTextEdit[]]
         def edits
           attributes.fetch(:edits)
         end

@@ -10,7 +10,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:range] = range
-          @attributes[:parent] = parent if parent
+          @attributes[:parent] = parent unless parent.nil?
 
           @attributes.freeze
         end

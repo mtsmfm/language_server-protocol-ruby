@@ -5,7 +5,7 @@ module LanguageServer
         def initialize(dynamic_registration: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
 
           @attributes.freeze
         end

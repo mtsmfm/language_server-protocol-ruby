@@ -8,13 +8,16 @@ module LanguageServer
       # function when invoked.
       #
       class Command
-        def initialize: (title: String, command: String, ?arguments: Array[untyped]) -> void
+        def initialize: (title: String, ?tooltip: String, command: String, ?arguments: Array[untyped]) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
         def title: () -> String
+
+        %a{pure}
+        def tooltip: () -> String
 
         %a{pure}
         def command: () -> String

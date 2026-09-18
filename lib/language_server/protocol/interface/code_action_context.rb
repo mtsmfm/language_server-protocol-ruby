@@ -10,8 +10,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:diagnostics] = diagnostics
-          @attributes[:only] = only if only
-          @attributes[:triggerKind] = trigger_kind if trigger_kind
+          @attributes[:only] = only unless only.nil?
+          @attributes[:triggerKind] = trigger_kind unless trigger_kind.nil?
 
           @attributes.freeze
         end

@@ -5,7 +5,7 @@ module LanguageServer
         def initialize(work_done_progress: nil)
           @attributes = {}
 
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:workDoneProgress] = work_done_progress unless work_done_progress.nil?
 
           @attributes.freeze
         end

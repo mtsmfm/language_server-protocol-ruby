@@ -9,12 +9,12 @@ module LanguageServer
         def initialize(deprecated: nil, location:, name:, kind:, tags: nil, container_name: nil)
           @attributes = {}
 
-          @attributes[:deprecated] = deprecated if deprecated
+          @attributes[:deprecated] = deprecated unless deprecated.nil?
           @attributes[:location] = location
           @attributes[:name] = name
           @attributes[:kind] = kind
-          @attributes[:tags] = tags if tags
-          @attributes[:containerName] = container_name if container_name
+          @attributes[:tags] = tags unless tags.nil?
+          @attributes[:containerName] = container_name unless container_name.nil?
 
           @attributes.freeze
         end

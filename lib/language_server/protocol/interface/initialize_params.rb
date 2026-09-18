@@ -6,15 +6,15 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:processId] = process_id
-          @attributes[:clientInfo] = client_info if client_info
-          @attributes[:locale] = locale if locale
-          @attributes[:rootPath] = root_path if root_path
+          @attributes[:clientInfo] = client_info unless client_info.nil?
+          @attributes[:locale] = locale unless locale.nil?
+          @attributes[:rootPath] = root_path unless root_path.nil?
           @attributes[:rootUri] = root_uri
           @attributes[:capabilities] = capabilities
-          @attributes[:initializationOptions] = initialization_options if initialization_options
-          @attributes[:trace] = trace if trace
-          @attributes[:workDoneToken] = work_done_token if work_done_token
-          @attributes[:workspaceFolders] = workspace_folders if workspace_folders
+          @attributes[:initializationOptions] = initialization_options unless initialization_options.nil?
+          @attributes[:trace] = trace unless trace.nil?
+          @attributes[:workDoneToken] = work_done_token unless work_done_token.nil?
+          @attributes[:workspaceFolders] = workspace_folders unless workspace_folders.nil?
 
           @attributes.freeze
         end
@@ -36,7 +36,7 @@ module LanguageServer
         #
         # @since 3.15.0
         #
-        # @return [{ name: string; version?: string; }]
+        # @return [ClientInfo]
         def client_info
           attributes.fetch(:clientInfo)
         end
@@ -98,7 +98,7 @@ module LanguageServer
         #
         # The initial trace setting. If omitted trace is disabled ('off').
         #
-        # @return [TraceValues]
+        # @return [TraceValue]
         def trace
           attributes.fetch(:trace)
         end

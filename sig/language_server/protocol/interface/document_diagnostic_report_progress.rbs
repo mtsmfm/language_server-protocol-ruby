@@ -1,0 +1,45 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # The document diagnostic report used when reporting partial result.
+      #
+      # When using partial results, the first literal sent needs to be a
+      # DocumentDiagnosticReport providing the diagnostics on the document
+      # followed by n DocumentDiagnosticReportPartialResult literals providing
+      # the diagnostics for related documents.
+      #
+      # ```
+      # DocumentDiagnosticReport
+      # DocumentDiagnosticReportPartialResult
+      # DocumentDiagnosticReportPartialResult
+      # ...
+      # ```
+      #
+      # @since 3.18.1
+      #
+      class DocumentDiagnosticReportProgress
+        def initialize: (?related_documents: untyped, ?kind: ("full" | "unchanged"), ?result_id: String, ?items: Array[untyped]) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        %a{pure}
+        def related_documents: () -> untyped
+
+        %a{pure}
+        def kind: () -> ("full" | "unchanged")
+
+        %a{pure}
+        def result_id: () -> String
+
+        %a{pure}
+        def items: () -> Array[untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

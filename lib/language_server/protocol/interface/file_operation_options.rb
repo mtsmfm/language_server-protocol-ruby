@@ -10,12 +10,12 @@ module LanguageServer
         def initialize(did_create: nil, will_create: nil, did_rename: nil, will_rename: nil, did_delete: nil, will_delete: nil)
           @attributes = {}
 
-          @attributes[:didCreate] = did_create if did_create
-          @attributes[:willCreate] = will_create if will_create
-          @attributes[:didRename] = did_rename if did_rename
-          @attributes[:willRename] = will_rename if will_rename
-          @attributes[:didDelete] = did_delete if did_delete
-          @attributes[:willDelete] = will_delete if will_delete
+          @attributes[:didCreate] = did_create unless did_create.nil?
+          @attributes[:willCreate] = will_create unless will_create.nil?
+          @attributes[:didRename] = did_rename unless did_rename.nil?
+          @attributes[:willRename] = will_rename unless will_rename.nil?
+          @attributes[:didDelete] = did_delete unless did_delete.nil?
+          @attributes[:willDelete] = will_delete unless will_delete.nil?
 
           @attributes.freeze
         end

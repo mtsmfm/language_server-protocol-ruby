@@ -2,9 +2,13 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Provide inline value through a variable lookup.
-      # If only a range is specified, the variable name will be extracted from the underlying document.
-      # An optional variable name can be used to override the extracted name.
+      # To compute inline value through a variable lookup.
+      #
+      # If only a range is specified, the variable name should
+      # be extracted from the underlying document.
+      #
+      # An optional variable name could be used to lookup instead
+      # of the extracted name.
       #
       # @since 3.17.0
       #
@@ -13,7 +17,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:range] = range
-          @attributes[:variableName] = variable_name if variable_name
+          @attributes[:variableName] = variable_name unless variable_name.nil?
           @attributes[:caseSensitiveLookup] = case_sensitive_lookup
 
           @attributes.freeze
@@ -21,7 +25,9 @@ module LanguageServer
 
         #
         # The document range for which the inline value applies.
-        # The range is used to extract the variable name from the underlying document.
+        #
+        # The range could be used to extract the variable name
+        # from the underlying document.
         #
         # @return [Range]
         def range

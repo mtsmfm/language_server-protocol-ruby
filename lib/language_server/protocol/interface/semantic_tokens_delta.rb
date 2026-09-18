@@ -8,7 +8,7 @@ module LanguageServer
         def initialize(result_id: nil, edits:)
           @attributes = {}
 
-          @attributes[:resultId] = result_id if result_id
+          @attributes[:resultId] = result_id unless result_id.nil?
           @attributes[:edits] = edits
 
           @attributes.freeze

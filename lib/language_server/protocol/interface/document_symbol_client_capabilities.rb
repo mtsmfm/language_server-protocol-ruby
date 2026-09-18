@@ -8,11 +8,11 @@ module LanguageServer
         def initialize(dynamic_registration: nil, symbol_kind: nil, hierarchical_document_symbol_support: nil, tag_support: nil, label_support: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
-          @attributes[:symbolKind] = symbol_kind if symbol_kind
-          @attributes[:hierarchicalDocumentSymbolSupport] = hierarchical_document_symbol_support if hierarchical_document_symbol_support
-          @attributes[:tagSupport] = tag_support if tag_support
-          @attributes[:labelSupport] = label_support if label_support
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:symbolKind] = symbol_kind unless symbol_kind.nil?
+          @attributes[:hierarchicalDocumentSymbolSupport] = hierarchical_document_symbol_support unless hierarchical_document_symbol_support.nil?
+          @attributes[:tagSupport] = tag_support unless tag_support.nil?
+          @attributes[:labelSupport] = label_support unless label_support.nil?
 
           @attributes.freeze
         end
@@ -29,7 +29,7 @@ module LanguageServer
         # Specific capabilities for the `SymbolKind` in the
         # `textDocument/documentSymbol` request.
         #
-        # @return [{ valueSet?: SymbolKind[]; }]
+        # @return [ClientSymbolKindOptions]
         def symbol_kind
           attributes.fetch(:symbolKind)
         end
@@ -49,7 +49,7 @@ module LanguageServer
         #
         # @since 3.16.0
         #
-        # @return [{ valueSet: SymbolTag[]; }]
+        # @return [ClientSymbolTagOptions]
         def tag_support
           attributes.fetch(:tagSupport)
         end

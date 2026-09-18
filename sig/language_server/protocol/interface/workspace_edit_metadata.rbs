@@ -1,0 +1,24 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # Additional data about a workspace edit.
+      #
+      # @since 3.18.0
+      #
+      class WorkspaceEditMetadata
+        def initialize: (?is_refactoring: bool) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        %a{pure}
+        def is_refactoring: () -> bool
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

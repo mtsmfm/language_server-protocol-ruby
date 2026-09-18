@@ -13,7 +13,7 @@ module LanguageServer
 
           @attributes[:start] = start
           @attributes[:deleteCount] = delete_count
-          @attributes[:cells] = cells if cells
+          @attributes[:cells] = cells unless cells.nil?
 
           @attributes.freeze
         end

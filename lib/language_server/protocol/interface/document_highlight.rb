@@ -11,7 +11,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:range] = range
-          @attributes[:kind] = kind if kind
+          @attributes[:kind] = kind unless kind.nil?
 
           @attributes.freeze
         end

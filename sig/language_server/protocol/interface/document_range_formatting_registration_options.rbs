@@ -5,13 +5,16 @@ module LanguageServer
       # Registration options for a {@link DocumentRangeFormattingRequest}.
       #
       class DocumentRangeFormattingRegistrationOptions
-        def initialize: (document_selector: untyped, ?work_done_progress: bool) -> void
+        def initialize: (document_selector: untyped, ?ranges_support: bool, ?work_done_progress: bool) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
         def document_selector: () -> untyped
+
+        %a{pure}
+        def ranges_support: () -> bool
 
         %a{pure}
         def work_done_progress: () -> bool

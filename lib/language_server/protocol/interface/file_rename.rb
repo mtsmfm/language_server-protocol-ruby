@@ -17,17 +17,17 @@ module LanguageServer
         end
 
         #
-        # A file:// URI for the original location of the file/folder being renamed.
+        # A URI for the original location of the file/folder being renamed.
         #
-        # @return [string]
+        # @return [DocumentUri]
         def old_uri
           attributes.fetch(:oldUri)
         end
 
         #
-        # A file:// URI for the new location of the file/folder being renamed.
+        # A URI for the new location of the file/folder being renamed.
         #
-        # @return [string]
+        # @return [DocumentUri]
         def new_uri
           attributes.fetch(:newUri)
         end

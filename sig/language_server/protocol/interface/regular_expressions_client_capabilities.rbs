@@ -7,13 +7,13 @@ module LanguageServer
       # @since 3.16.0
       #
       class RegularExpressionsClientCapabilities
-        def initialize: (engine: String, ?version: String) -> void
+        def initialize: (engine: untyped, ?version: String) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
-        def engine: () -> String
+        def engine: () -> untyped
 
         %a{pure}
         def version: () -> String

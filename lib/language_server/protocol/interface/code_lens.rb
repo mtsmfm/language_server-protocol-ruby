@@ -13,8 +13,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:range] = range
-          @attributes[:command] = command if command
-          @attributes[:data] = data if data
+          @attributes[:command] = command unless command.nil?
+          @attributes[:data] = data unless data.nil?
 
           @attributes.freeze
         end
@@ -37,8 +37,7 @@ module LanguageServer
 
         #
         # A data entry field that is preserved on a code lens item between
-        # a {@link CodeLensRequest} and a [CodeLensResolveRequest]
-        # (#CodeLensResolveRequest)
+        # a {@link CodeLensRequest} and a {@link CodeLensResolveRequest}
         #
         # @return [LSPAny]
         def data

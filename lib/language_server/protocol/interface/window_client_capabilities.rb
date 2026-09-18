@@ -5,9 +5,9 @@ module LanguageServer
         def initialize(work_done_progress: nil, show_message: nil, show_document: nil)
           @attributes = {}
 
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
-          @attributes[:showMessage] = show_message if show_message
-          @attributes[:showDocument] = show_document if show_document
+          @attributes[:workDoneProgress] = work_done_progress unless work_done_progress.nil?
+          @attributes[:showMessage] = show_message unless show_message.nil?
+          @attributes[:showDocument] = show_document unless show_document.nil?
 
           @attributes.freeze
         end

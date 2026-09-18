@@ -10,8 +10,8 @@ module LanguageServer
 
           @attributes[:name] = name
           @attributes[:kind] = kind
-          @attributes[:tags] = tags if tags
-          @attributes[:containerName] = container_name if container_name
+          @attributes[:tags] = tags unless tags.nil?
+          @attributes[:containerName] = container_name unless container_name.nil?
 
           @attributes.freeze
         end

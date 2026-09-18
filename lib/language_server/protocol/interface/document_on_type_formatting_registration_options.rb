@@ -10,7 +10,7 @@ module LanguageServer
 
           @attributes[:documentSelector] = document_selector
           @attributes[:firstTriggerCharacter] = first_trigger_character
-          @attributes[:moreTriggerCharacter] = more_trigger_character if more_trigger_character
+          @attributes[:moreTriggerCharacter] = more_trigger_character unless more_trigger_character.nil?
 
           @attributes.freeze
         end

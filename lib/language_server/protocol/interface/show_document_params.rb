@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Params to show a document.
+      # Params to show a resource in the UI.
       #
       # @since 3.16.0
       #
@@ -11,15 +11,15 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:uri] = uri
-          @attributes[:external] = external if external
-          @attributes[:takeFocus] = take_focus if take_focus
-          @attributes[:selection] = selection if selection
+          @attributes[:external] = external unless external.nil?
+          @attributes[:takeFocus] = take_focus unless take_focus.nil?
+          @attributes[:selection] = selection unless selection.nil?
 
           @attributes.freeze
         end
 
         #
-        # The document uri to show.
+        # The uri to show.
         #
         # @return [URI]
         def uri
@@ -28,7 +28,7 @@ module LanguageServer
 
         #
         # Indicates to show the resource in an external program.
-        # To show for example `https://code.visualstudio.com/`
+        # To show, for example, `https://code.visualstudio.com/`
         # in the default WEB browser set `external` to `true`.
         #
         # @return [boolean]

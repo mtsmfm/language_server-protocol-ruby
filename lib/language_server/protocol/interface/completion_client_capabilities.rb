@@ -8,12 +8,12 @@ module LanguageServer
         def initialize(dynamic_registration: nil, completion_item: nil, completion_item_kind: nil, insert_text_mode: nil, context_support: nil, completion_list: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
-          @attributes[:completionItem] = completion_item if completion_item
-          @attributes[:completionItemKind] = completion_item_kind if completion_item_kind
-          @attributes[:insertTextMode] = insert_text_mode if insert_text_mode
-          @attributes[:contextSupport] = context_support if context_support
-          @attributes[:completionList] = completion_list if completion_list
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:completionItem] = completion_item unless completion_item.nil?
+          @attributes[:completionItemKind] = completion_item_kind unless completion_item_kind.nil?
+          @attributes[:insertTextMode] = insert_text_mode unless insert_text_mode.nil?
+          @attributes[:contextSupport] = context_support unless context_support.nil?
+          @attributes[:completionList] = completion_list unless completion_list.nil?
 
           @attributes.freeze
         end
@@ -30,12 +30,15 @@ module LanguageServer
         # The client supports the following `CompletionItem` specific
         # capabilities.
         #
-        # @return [{ snippetSupport?: boolean; commitCharactersSupport?: boolean; documentationFormat?: MarkupKind[]; deprecatedSupport?: boolean; preselectSupport?: boolean; tagSupport?: { valueSet: CompletionItemTag[]; }; insertReplaceSupport?: boolean; resolveSupport?: { properties: string[]; }; insertTextModeSupport?: { valueSet: InsertTextMode[]; }; labelDetailsSupport?: boolean; }]
+        # @return [ClientCompletionItemOptions]
         def completion_item
           attributes.fetch(:completionItem)
         end
 
-        # @return [{ valueSet?: CompletionItemKind[]; }]
+        #
+        # The client supports the following completion item kinds.
+        #
+        # @return [ClientCompletionItemOptionsKind]
         def completion_item_kind
           attributes.fetch(:completionItemKind)
         end
@@ -67,7 +70,7 @@ module LanguageServer
         #
         # @since 3.17.0
         #
-        # @return [{ itemDefaults?: string[]; }]
+        # @return [CompletionListCapabilities]
         def completion_list
           attributes.fetch(:completionList)
         end

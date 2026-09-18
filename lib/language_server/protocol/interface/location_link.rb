@@ -9,7 +9,7 @@ module LanguageServer
         def initialize(origin_selection_range: nil, target_uri:, target_range:, target_selection_range:)
           @attributes = {}
 
-          @attributes[:originSelectionRange] = origin_selection_range if origin_selection_range
+          @attributes[:originSelectionRange] = origin_selection_range unless origin_selection_range.nil?
           @attributes[:targetUri] = target_uri
           @attributes[:targetRange] = target_range
           @attributes[:targetSelectionRange] = target_selection_range

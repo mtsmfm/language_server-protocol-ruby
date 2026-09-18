@@ -5,16 +5,18 @@ module LanguageServer
       # The Client Capabilities of a {@link CodeActionRequest}.
       #
       class CodeActionClientCapabilities
-        def initialize(dynamic_registration: nil, code_action_literal_support: nil, is_preferred_support: nil, disabled_support: nil, data_support: nil, resolve_support: nil, honors_change_annotations: nil)
+        def initialize(dynamic_registration: nil, code_action_literal_support: nil, is_preferred_support: nil, disabled_support: nil, data_support: nil, resolve_support: nil, honors_change_annotations: nil, documentation_support: nil, tag_support: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
-          @attributes[:codeActionLiteralSupport] = code_action_literal_support if code_action_literal_support
-          @attributes[:isPreferredSupport] = is_preferred_support if is_preferred_support
-          @attributes[:disabledSupport] = disabled_support if disabled_support
-          @attributes[:dataSupport] = data_support if data_support
-          @attributes[:resolveSupport] = resolve_support if resolve_support
-          @attributes[:honorsChangeAnnotations] = honors_change_annotations if honors_change_annotations
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:codeActionLiteralSupport] = code_action_literal_support unless code_action_literal_support.nil?
+          @attributes[:isPreferredSupport] = is_preferred_support unless is_preferred_support.nil?
+          @attributes[:disabledSupport] = disabled_support unless disabled_support.nil?
+          @attributes[:dataSupport] = data_support unless data_support.nil?
+          @attributes[:resolveSupport] = resolve_support unless resolve_support.nil?
+          @attributes[:honorsChangeAnnotations] = honors_change_annotations unless honors_change_annotations.nil?
+          @attributes[:documentationSupport] = documentation_support unless documentation_support.nil?
+          @attributes[:tagSupport] = tag_support unless tag_support.nil?
 
           @attributes.freeze
         end
@@ -34,7 +36,7 @@ module LanguageServer
         #
         # @since 3.8.0
         #
-        # @return [{ codeActionKind: { valueSet: CodeActionKind[]; }; }]
+        # @return [ClientCodeActionLiteralOptions]
         def code_action_literal_support
           attributes.fetch(:codeActionLiteralSupport)
         end
@@ -77,7 +79,7 @@ module LanguageServer
         #
         # @since 3.16.0
         #
-        # @return [{ properties: string[]; }]
+        # @return [ClientCodeActionResolveOptions]
         def resolve_support
           attributes.fetch(:resolveSupport)
         end
@@ -94,6 +96,28 @@ module LanguageServer
         # @return [boolean]
         def honors_change_annotations
           attributes.fetch(:honorsChangeAnnotations)
+        end
+
+        #
+        # Whether the client supports documentation for a class of
+        # code actions.
+        #
+        # @since 3.18.0
+        #
+        # @return [boolean]
+        def documentation_support
+          attributes.fetch(:documentationSupport)
+        end
+
+        #
+        # Client supports the tag property on a code action. Clients
+        # supporting tags have to handle unknown tags gracefully.
+        #
+        # @since 3.18.0
+        #
+        # @return [CodeActionTagOptions]
+        def tag_support
+          attributes.fetch(:tagSupport)
         end
 
         attr_reader :attributes

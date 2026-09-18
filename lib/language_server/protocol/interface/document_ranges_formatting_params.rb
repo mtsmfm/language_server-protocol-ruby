@@ -1,0 +1,65 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # The parameters of a {@link DocumentRangesFormattingRequest}.
+      #
+      # @since 3.18.0
+      #
+      class DocumentRangesFormattingParams
+        def initialize(text_document:, ranges:, options:, work_done_token: nil)
+          @attributes = {}
+
+          @attributes[:textDocument] = text_document
+          @attributes[:ranges] = ranges
+          @attributes[:options] = options
+          @attributes[:workDoneToken] = work_done_token unless work_done_token.nil?
+
+          @attributes.freeze
+        end
+
+        #
+        # The document to format.
+        #
+        # @return [TextDocumentIdentifier]
+        def text_document
+          attributes.fetch(:textDocument)
+        end
+
+        #
+        # The ranges to format
+        #
+        # @return [Range[]]
+        def ranges
+          attributes.fetch(:ranges)
+        end
+
+        #
+        # The format options
+        #
+        # @return [FormattingOptions]
+        def options
+          attributes.fetch(:options)
+        end
+
+        #
+        # An optional token that a server can use to report work done progress.
+        #
+        # @return [ProgressToken]
+        def work_done_token
+          attributes.fetch(:workDoneToken)
+        end
+
+        attr_reader :attributes
+
+        def to_hash
+          attributes
+        end
+
+        def to_json(*args)
+          to_hash.to_json(*args)
+        end
+      end
+    end
+  end
+end

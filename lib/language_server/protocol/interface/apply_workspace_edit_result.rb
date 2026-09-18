@@ -11,8 +11,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:applied] = applied
-          @attributes[:failureReason] = failure_reason if failure_reason
-          @attributes[:failedChange] = failed_change if failed_change
+          @attributes[:failureReason] = failure_reason unless failure_reason.nil?
+          @attributes[:failedChange] = failed_change unless failed_change.nil?
 
           @attributes.freeze
         end

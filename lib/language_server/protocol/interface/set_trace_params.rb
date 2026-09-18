@@ -10,7 +10,7 @@ module LanguageServer
           @attributes.freeze
         end
 
-        # @return [TraceValues]
+        # @return [TraceValue]
         def value
           attributes.fetch(:value)
         end

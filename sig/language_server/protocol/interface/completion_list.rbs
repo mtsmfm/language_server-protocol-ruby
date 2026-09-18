@@ -6,7 +6,7 @@ module LanguageServer
       # in the editor.
       #
       class CompletionList
-        def initialize: (is_incomplete: bool, ?item_defaults: untyped, items: Array[untyped]) -> void
+        def initialize: (is_incomplete: bool, ?item_defaults: untyped, ?apply_kind: untyped, items: Array[untyped]) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
@@ -16,6 +16,9 @@ module LanguageServer
 
         %a{pure}
         def item_defaults: () -> untyped
+
+        %a{pure}
+        def apply_kind: () -> untyped
 
         %a{pure}
         def items: () -> Array[untyped]

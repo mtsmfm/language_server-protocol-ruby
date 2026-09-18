@@ -11,7 +11,7 @@ module LanguageServer
           @attributes = {}
 
         <%- properties.each do |prop| -%>
-          @attributes[:<%= prop.name %>] = <%= prop.local_name %><% if prop.optional %> if <%= prop.local_name %><% end %>
+          @attributes[:<%= prop.name %>] = <%= prop.local_name %><% if prop.optional %> unless <%= prop.local_name %>.nil?<% end %>
         <%- end -%>
 
           @attributes.freeze

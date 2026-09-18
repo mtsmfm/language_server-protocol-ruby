@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Constant
+      #
+      # Predefined error codes.
+      #
       module ErrorCodes
         PARSE_ERROR = -32700
         INVALID_REQUEST = -32600
@@ -8,42 +11,26 @@ module LanguageServer
         INVALID_PARAMS = -32602
         INTERNAL_ERROR = -32603
         #
-        # This is the start range of JSON-RPC reserved error codes.
-        # It doesn't denote a real error code. No LSP error codes should
-        # be defined between the start and end range. For backwards
-        # compatibility the `ServerNotInitialized` and the `UnknownErrorCode`
-        # are left in the range.
-        #
-        JSONRPC_RESERVED_ERROR_RANGE_START = -32099
-        SERVER_ERROR_START = JSONRPC_RESERVED_ERROR_RANGE_START
-        #
         # Error code indicating that a server received a notification or
         # request before the server has received the `initialize` request.
         #
         SERVER_NOT_INITIALIZED = -32002
         UNKNOWN_ERROR_CODE = -32001
         #
-        # This is the end range of JSON-RPC reserved error codes.
-        # It doesn't denote a real error code.
-        #
-        JSONRPC_RESERVED_ERROR_RANGE_END = -32000
-        SERVER_ERROR_END = JSONRPC_RESERVED_ERROR_RANGE_END
-        #
-        # This is the start range of LSP reserved error codes.
-        # It doesn't denote a real error code.
-        #
-        LSP_RESERVED_ERROR_RANGE_START = -32899
-        #
         # A request failed but it was syntactically correct, e.g the
         # method name was known and the parameters were valid. The error
         # message should contain human readable information about why
         # the request failed.
+        #
+        # @since 3.17.0
         #
         REQUEST_FAILED = -32803
         #
         # The server cancelled the request. This error code should
         # only be used for requests that explicitly support being
         # server cancellable.
+        #
+        # @since 3.17.0
         #
         SERVER_CANCELLED = -32802
         #
@@ -58,15 +45,10 @@ module LanguageServer
         #
         CONTENT_MODIFIED = -32801
         #
-        # The client has canceled a request and a server as detected
+        # The client has canceled a request and a server has detected
         # the cancel.
         #
         REQUEST_CANCELLED = -32800
-        #
-        # This is the end range of LSP reserved error codes.
-        # It doesn't denote a real error code.
-        #
-        LSP_RESERVED_ERROR_RANGE_END = -32800
       end
     end
   end

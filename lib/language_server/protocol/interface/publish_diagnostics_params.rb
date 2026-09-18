@@ -9,7 +9,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:uri] = uri
-          @attributes[:version] = version if version
+          @attributes[:version] = version unless version.nil?
           @attributes[:diagnostics] = diagnostics
 
           @attributes.freeze

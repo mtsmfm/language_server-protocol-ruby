@@ -1,6 +1,9 @@
 module LanguageServer
   module Protocol
     module Constant
+      #
+      # The message type
+      #
       module MessageType
         #
         # An error message.
@@ -18,6 +21,12 @@ module LanguageServer
         # A log message.
         #
         LOG: 4
+        #
+        # A debug message.
+        #
+        # @since 3.18.0
+        #
+        DEBUG: 5
       end
     end
   end

@@ -11,10 +11,10 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:textDocument] = text_document
-          @attributes[:identifier] = identifier if identifier
-          @attributes[:previousResultId] = previous_result_id if previous_result_id
-          @attributes[:workDoneToken] = work_done_token if work_done_token
-          @attributes[:partialResultToken] = partial_result_token if partial_result_token
+          @attributes[:identifier] = identifier unless identifier.nil?
+          @attributes[:previousResultId] = previous_result_id unless previous_result_id.nil?
+          @attributes[:workDoneToken] = work_done_token unless work_done_token.nil?
+          @attributes[:partialResultToken] = partial_result_token unless partial_result_token.nil?
 
           @attributes.freeze
         end

@@ -8,10 +8,10 @@ module LanguageServer
         def initialize(dynamic_registration: nil, symbol_kind: nil, tag_support: nil, resolve_support: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
-          @attributes[:symbolKind] = symbol_kind if symbol_kind
-          @attributes[:tagSupport] = tag_support if tag_support
-          @attributes[:resolveSupport] = resolve_support if resolve_support
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:symbolKind] = symbol_kind unless symbol_kind.nil?
+          @attributes[:tagSupport] = tag_support unless tag_support.nil?
+          @attributes[:resolveSupport] = resolve_support unless resolve_support.nil?
 
           @attributes.freeze
         end
@@ -27,7 +27,7 @@ module LanguageServer
         #
         # Specific capabilities for the `SymbolKind` in the `workspace/symbol` request.
         #
-        # @return [{ valueSet?: SymbolKind[]; }]
+        # @return [ClientSymbolKindOptions]
         def symbol_kind
           attributes.fetch(:symbolKind)
         end
@@ -38,7 +38,7 @@ module LanguageServer
         #
         # @since 3.16.0
         #
-        # @return [{ valueSet: SymbolTag[]; }]
+        # @return [ClientSymbolTagOptions]
         def tag_support
           attributes.fetch(:tagSupport)
         end
@@ -50,7 +50,7 @@ module LanguageServer
         #
         # @since 3.17.0
         #
-        # @return [{ properties: string[]; }]
+        # @return [ClientSymbolResolveOptions]
         def resolve_support
           attributes.fetch(:resolveSupport)
         end

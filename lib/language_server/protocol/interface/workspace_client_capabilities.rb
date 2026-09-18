@@ -5,23 +5,25 @@ module LanguageServer
       # Workspace specific client capabilities.
       #
       class WorkspaceClientCapabilities
-        def initialize(apply_edit: nil, workspace_edit: nil, did_change_configuration: nil, did_change_watched_files: nil, symbol: nil, execute_command: nil, workspace_folders: nil, configuration: nil, semantic_tokens: nil, code_lens: nil, file_operations: nil, inline_value: nil, inlay_hint: nil, diagnostics: nil)
+        def initialize(apply_edit: nil, workspace_edit: nil, did_change_configuration: nil, did_change_watched_files: nil, symbol: nil, execute_command: nil, workspace_folders: nil, configuration: nil, semantic_tokens: nil, code_lens: nil, file_operations: nil, inline_value: nil, inlay_hint: nil, diagnostics: nil, folding_range: nil, text_document_content: nil)
           @attributes = {}
 
-          @attributes[:applyEdit] = apply_edit if apply_edit
-          @attributes[:workspaceEdit] = workspace_edit if workspace_edit
-          @attributes[:didChangeConfiguration] = did_change_configuration if did_change_configuration
-          @attributes[:didChangeWatchedFiles] = did_change_watched_files if did_change_watched_files
-          @attributes[:symbol] = symbol if symbol
-          @attributes[:executeCommand] = execute_command if execute_command
-          @attributes[:workspaceFolders] = workspace_folders if workspace_folders
-          @attributes[:configuration] = configuration if configuration
-          @attributes[:semanticTokens] = semantic_tokens if semantic_tokens
-          @attributes[:codeLens] = code_lens if code_lens
-          @attributes[:fileOperations] = file_operations if file_operations
-          @attributes[:inlineValue] = inline_value if inline_value
-          @attributes[:inlayHint] = inlay_hint if inlay_hint
-          @attributes[:diagnostics] = diagnostics if diagnostics
+          @attributes[:applyEdit] = apply_edit unless apply_edit.nil?
+          @attributes[:workspaceEdit] = workspace_edit unless workspace_edit.nil?
+          @attributes[:didChangeConfiguration] = did_change_configuration unless did_change_configuration.nil?
+          @attributes[:didChangeWatchedFiles] = did_change_watched_files unless did_change_watched_files.nil?
+          @attributes[:symbol] = symbol unless symbol.nil?
+          @attributes[:executeCommand] = execute_command unless execute_command.nil?
+          @attributes[:workspaceFolders] = workspace_folders unless workspace_folders.nil?
+          @attributes[:configuration] = configuration unless configuration.nil?
+          @attributes[:semanticTokens] = semantic_tokens unless semantic_tokens.nil?
+          @attributes[:codeLens] = code_lens unless code_lens.nil?
+          @attributes[:fileOperations] = file_operations unless file_operations.nil?
+          @attributes[:inlineValue] = inline_value unless inline_value.nil?
+          @attributes[:inlayHint] = inlay_hint unless inlay_hint.nil?
+          @attributes[:diagnostics] = diagnostics unless diagnostics.nil?
+          @attributes[:foldingRange] = folding_range unless folding_range.nil?
+          @attributes[:textDocumentContent] = text_document_content unless text_document_content.nil?
 
           @attributes.freeze
         end
@@ -159,6 +161,26 @@ module LanguageServer
         # @return [DiagnosticWorkspaceClientCapabilities]
         def diagnostics
           attributes.fetch(:diagnostics)
+        end
+
+        #
+        # Capabilities specific to the folding range requests scoped to the workspace.
+        #
+        # @since 3.18.0
+        #
+        # @return [FoldingRangeWorkspaceClientCapabilities]
+        def folding_range
+          attributes.fetch(:foldingRange)
+        end
+
+        #
+        # Capabilities specific to the `workspace/textDocumentContent` request.
+        #
+        # @since 3.18.0
+        #
+        # @return [TextDocumentContentClientCapabilities]
+        def text_document_content
+          attributes.fetch(:textDocumentContent)
         end
 
         attr_reader :attributes

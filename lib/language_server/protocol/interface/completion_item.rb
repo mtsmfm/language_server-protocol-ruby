@@ -10,24 +10,24 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:label] = label
-          @attributes[:labelDetails] = label_details if label_details
-          @attributes[:kind] = kind if kind
-          @attributes[:tags] = tags if tags
-          @attributes[:detail] = detail if detail
-          @attributes[:documentation] = documentation if documentation
-          @attributes[:deprecated] = deprecated if deprecated
-          @attributes[:preselect] = preselect if preselect
-          @attributes[:sortText] = sort_text if sort_text
-          @attributes[:filterText] = filter_text if filter_text
-          @attributes[:insertText] = insert_text if insert_text
-          @attributes[:insertTextFormat] = insert_text_format if insert_text_format
-          @attributes[:insertTextMode] = insert_text_mode if insert_text_mode
-          @attributes[:textEdit] = text_edit if text_edit
-          @attributes[:textEditText] = text_edit_text if text_edit_text
-          @attributes[:additionalTextEdits] = additional_text_edits if additional_text_edits
-          @attributes[:commitCharacters] = commit_characters if commit_characters
-          @attributes[:command] = command if command
-          @attributes[:data] = data if data
+          @attributes[:labelDetails] = label_details unless label_details.nil?
+          @attributes[:kind] = kind unless kind.nil?
+          @attributes[:tags] = tags unless tags.nil?
+          @attributes[:detail] = detail unless detail.nil?
+          @attributes[:documentation] = documentation unless documentation.nil?
+          @attributes[:deprecated] = deprecated unless deprecated.nil?
+          @attributes[:preselect] = preselect unless preselect.nil?
+          @attributes[:sortText] = sort_text unless sort_text.nil?
+          @attributes[:filterText] = filter_text unless filter_text.nil?
+          @attributes[:insertText] = insert_text unless insert_text.nil?
+          @attributes[:insertTextFormat] = insert_text_format unless insert_text_format.nil?
+          @attributes[:insertTextMode] = insert_text_mode unless insert_text_mode.nil?
+          @attributes[:textEdit] = text_edit unless text_edit.nil?
+          @attributes[:textEditText] = text_edit_text unless text_edit_text.nil?
+          @attributes[:additionalTextEdits] = additional_text_edits unless additional_text_edits.nil?
+          @attributes[:commitCharacters] = commit_characters unless commit_characters.nil?
+          @attributes[:command] = command unless command.nil?
+          @attributes[:data] = data unless data.nil?
 
           @attributes.freeze
         end

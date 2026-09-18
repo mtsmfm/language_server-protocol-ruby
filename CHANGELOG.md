@@ -1,5 +1,18 @@
 # Change log
 
+## 3.18.0.0
+
+- Generate protocol files from the finalized LSP 3.18 specification (digest `9b3b38b`)
+  - Add many new interfaces and constants, e.g. `InlineCompletion*`, `TextDocumentContent*`, `SnippetTextEdit`, `CodeActionTag`, `LanguageKind`, `ApplyKind`
+  - **Breaking:** `Constant::TraceValues` is renamed to `Constant::TraceValue` following the meta model
+  - **Breaking:** Remove `Interface::HoverResult`, which was only an example type in the old specification markdown and is not part of the meta model
+- **Breaking:** Keep `false` for optional interface properties instead of omitting it; only `nil` is omitted now (e.g. `CompletionItem.new(deprecated: false)` serializes `"deprecated": false`)
+- Generate constants only from the meta model instead of also extracting `export namespace` blocks from the specification markdown
+  - **Breaking:** Remove `Constant::InitializeErrorCodes`, which is not part of the meta model
+  - **Breaking:** Remove `Constant::RegularExpressionEngineKind`, which the meta model defines as a plain string alias
+  - **Breaking:** Remove the range markers and aliases from `Constant::ErrorCodes` (`JSONRPC_RESERVED_ERROR_RANGE_START`, `JSONRPC_RESERVED_ERROR_RANGE_END`, `SERVER_ERROR_START`, `SERVER_ERROR_END`, `LSP_RESERVED_ERROR_RANGE_START`, `LSP_RESERVED_ERROR_RANGE_END`)
+  - `Constant::ErrorCodes` keeps the LSP specific codes (`REQUEST_FAILED`, `SERVER_CANCELLED`, `CONTENT_MODIFIED`, `REQUEST_CANCELLED`) by merging the `LSPErrorCodes` enumeration of the meta model, as the `ErrorCodes` namespace in the specification declares them
+
 ## 3.17.0.6
 
 - Regenerate protocol files with the Ruby generator (#141)

@@ -9,7 +9,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:documentSelector] = document_selector
-          @attributes[:includeText] = include_text if include_text
+          @attributes[:includeText] = include_text unless include_text.nil?
 
           @attributes.freeze
         end

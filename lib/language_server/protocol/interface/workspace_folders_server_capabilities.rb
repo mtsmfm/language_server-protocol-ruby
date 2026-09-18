@@ -5,8 +5,8 @@ module LanguageServer
         def initialize(supported: nil, change_notifications: nil)
           @attributes = {}
 
-          @attributes[:supported] = supported if supported
-          @attributes[:changeNotifications] = change_notifications if change_notifications
+          @attributes[:supported] = supported unless supported.nil?
+          @attributes[:changeNotifications] = change_notifications unless change_notifications.nil?
 
           @attributes.freeze
         end

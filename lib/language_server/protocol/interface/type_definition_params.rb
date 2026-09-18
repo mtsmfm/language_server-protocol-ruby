@@ -7,8 +7,8 @@ module LanguageServer
 
           @attributes[:textDocument] = text_document
           @attributes[:position] = position
-          @attributes[:workDoneToken] = work_done_token if work_done_token
-          @attributes[:partialResultToken] = partial_result_token if partial_result_token
+          @attributes[:workDoneToken] = work_done_token unless work_done_token.nil?
+          @attributes[:partialResultToken] = partial_result_token unless partial_result_token.nil?
 
           @attributes.freeze
         end

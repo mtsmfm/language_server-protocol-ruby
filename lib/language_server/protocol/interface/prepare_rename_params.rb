@@ -7,7 +7,7 @@ module LanguageServer
 
           @attributes[:textDocument] = text_document
           @attributes[:position] = position
-          @attributes[:workDoneToken] = work_done_token if work_done_token
+          @attributes[:workDoneToken] = work_done_token unless work_done_token.nil?
 
           @attributes.freeze
         end

@@ -15,10 +15,10 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:range] = range
-          @attributes[:text] = text if text
-          @attributes[:variableName] = variable_name if variable_name
-          @attributes[:caseSensitiveLookup] = case_sensitive_lookup if case_sensitive_lookup
-          @attributes[:expression] = expression if expression
+          @attributes[:text] = text unless text.nil?
+          @attributes[:variableName] = variable_name unless variable_name.nil?
+          @attributes[:caseSensitiveLookup] = case_sensitive_lookup unless case_sensitive_lookup.nil?
+          @attributes[:expression] = expression unless expression.nil?
 
           @attributes.freeze
         end
@@ -29,12 +29,16 @@ module LanguageServer
         # --- OR ---
         #
         # The document range for which the inline value applies.
-        # The range is used to extract the variable name from the underlying document.
+        #
+        # The range could be used to extract the variable name
+        # from the underlying document.
         #
         # --- OR ---
         #
         # The document range for which the inline value applies.
-        # The range is used to extract the evaluatable expression from the underlying document.
+        #
+        # The range could be used to extract the evaluatable expression
+        # from the underlying document.
         #
         # @return [Range]
         def range
@@ -66,7 +70,7 @@ module LanguageServer
         end
 
         #
-        # If specified the expression overrides the extracted expression.
+        # If specified the expression could be evaluated instead.
         #
         # @return [string]
         def expression

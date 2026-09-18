@@ -12,9 +12,9 @@ module LanguageServer
         def initialize(notebook_type: nil, scheme: nil, pattern: nil)
           @attributes = {}
 
-          @attributes[:notebookType] = notebook_type if notebook_type
-          @attributes[:scheme] = scheme if scheme
-          @attributes[:pattern] = pattern if pattern
+          @attributes[:notebookType] = notebook_type unless notebook_type.nil?
+          @attributes[:scheme] = scheme unless scheme.nil?
+          @attributes[:pattern] = pattern unless pattern.nil?
 
           @attributes.freeze
         end
@@ -38,7 +38,7 @@ module LanguageServer
         #
         # A glob pattern.
         #
-        # @return [string]
+        # @return [GlobPattern]
         def pattern
           attributes.fetch(:pattern)
         end

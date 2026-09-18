@@ -16,9 +16,9 @@ module LanguageServer
         end
 
         #
-        # A file:// URI for the location of the file/folder being deleted.
+        # A URI for the location of the file/folder being deleted.
         #
-        # @return [string]
+        # @return [DocumentUri]
         def uri
           attributes.fetch(:uri)
         end

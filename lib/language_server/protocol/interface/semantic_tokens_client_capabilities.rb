@@ -8,15 +8,15 @@ module LanguageServer
         def initialize(dynamic_registration: nil, requests:, token_types:, token_modifiers:, formats:, overlapping_token_support: nil, multiline_token_support: nil, server_cancel_support: nil, augments_syntax_tokens: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
           @attributes[:requests] = requests
           @attributes[:tokenTypes] = token_types
           @attributes[:tokenModifiers] = token_modifiers
           @attributes[:formats] = formats
-          @attributes[:overlappingTokenSupport] = overlapping_token_support if overlapping_token_support
-          @attributes[:multilineTokenSupport] = multiline_token_support if multiline_token_support
-          @attributes[:serverCancelSupport] = server_cancel_support if server_cancel_support
-          @attributes[:augmentsSyntaxTokens] = augments_syntax_tokens if augments_syntax_tokens
+          @attributes[:overlappingTokenSupport] = overlapping_token_support unless overlapping_token_support.nil?
+          @attributes[:multilineTokenSupport] = multiline_token_support unless multiline_token_support.nil?
+          @attributes[:serverCancelSupport] = server_cancel_support unless server_cancel_support.nil?
+          @attributes[:augmentsSyntaxTokens] = augments_syntax_tokens unless augments_syntax_tokens.nil?
 
           @attributes.freeze
         end
@@ -41,7 +41,7 @@ module LanguageServer
         # range provider the client might not render a minimap correctly or might
         # even decide to not show any semantic tokens at all.
         #
-        # @return [{ range?: boolean | { ; }; full?: boolean | { delta?: boolean; }; }]
+        # @return [ClientSemanticTokensRequestOptions]
         def requests
           attributes.fetch(:requests)
         end

@@ -6,9 +6,9 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:kind] = kind
-          @attributes[:cancellable] = cancellable if cancellable
-          @attributes[:message] = message if message
-          @attributes[:percentage] = percentage if percentage
+          @attributes[:cancellable] = cancellable unless cancellable.nil?
+          @attributes[:message] = message unless message.nil?
+          @attributes[:percentage] = percentage unless percentage.nil?
 
           @attributes.freeze
         end

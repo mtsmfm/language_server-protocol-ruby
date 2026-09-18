@@ -7,8 +7,8 @@ module LanguageServer
 
           @attributes[:jsonrpc] = jsonrpc
           @attributes[:id] = id
-          @attributes[:result] = result if result
-          @attributes[:error] = error if error
+          @attributes[:result] = result unless result.nil?
+          @attributes[:error] = error unless error.nil?
 
           @attributes.freeze
         end
@@ -30,7 +30,7 @@ module LanguageServer
         # The result of a request. This member is REQUIRED on success.
         # This member MUST NOT exist if there was an error invoking the method.
         #
-        # @return [string | number | boolean | object]
+        # @return [any]
         def result
           attributes.fetch(:result)
         end

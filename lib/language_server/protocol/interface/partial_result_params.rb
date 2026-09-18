@@ -5,7 +5,7 @@ module LanguageServer
         def initialize(partial_result_token: nil)
           @attributes = {}
 
-          @attributes[:partialResultToken] = partial_result_token if partial_result_token
+          @attributes[:partialResultToken] = partial_result_token unless partial_result_token.nil?
 
           @attributes.freeze
         end

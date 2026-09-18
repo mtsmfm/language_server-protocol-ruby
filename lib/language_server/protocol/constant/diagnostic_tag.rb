@@ -4,12 +4,14 @@ module LanguageServer
       #
       # The diagnostic tags.
       #
+      # @since 3.15.0
+      #
       module DiagnosticTag
         #
         # Unused or unnecessary code.
         #
-        # Clients are allowed to render diagnostics with this tag faded out
-        # instead of having an error squiggle.
+        # Clients are allowed to render diagnostics with this tag faded out instead of having
+        # an error squiggle.
         #
         UNNECESSARY = 1
         #

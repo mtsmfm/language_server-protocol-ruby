@@ -5,11 +5,11 @@ module LanguageServer
         def initialize(dynamic_registration: nil, range_limit: nil, line_folding_only: nil, folding_range_kind: nil, folding_range: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
-          @attributes[:rangeLimit] = range_limit if range_limit
-          @attributes[:lineFoldingOnly] = line_folding_only if line_folding_only
-          @attributes[:foldingRangeKind] = folding_range_kind if folding_range_kind
-          @attributes[:foldingRange] = folding_range if folding_range
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:rangeLimit] = range_limit unless range_limit.nil?
+          @attributes[:lineFoldingOnly] = line_folding_only unless line_folding_only.nil?
+          @attributes[:foldingRangeKind] = folding_range_kind unless folding_range_kind.nil?
+          @attributes[:foldingRange] = folding_range unless folding_range.nil?
 
           @attributes.freeze
         end
@@ -50,7 +50,7 @@ module LanguageServer
         #
         # @since 3.17.0
         #
-        # @return [{ valueSet?: FoldingRangeKind[]; }]
+        # @return [ClientFoldingRangeKindOptions]
         def folding_range_kind
           attributes.fetch(:foldingRangeKind)
         end
@@ -60,7 +60,7 @@ module LanguageServer
         #
         # @since 3.17.0
         #
-        # @return [{ collapsedText?: boolean; }]
+        # @return [ClientFoldingRangeOptions]
         def folding_range
           attributes.fetch(:foldingRange)
         end

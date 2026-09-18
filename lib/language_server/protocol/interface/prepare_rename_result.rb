@@ -5,11 +5,11 @@ module LanguageServer
         def initialize(start: nil, end: nil, range: nil, placeholder: nil, default_behavior: nil)
           @attributes = {}
 
-          @attributes[:start] = start if start
-          @attributes[:end] = binding.local_variable_get(:end) if binding.local_variable_get(:end)
-          @attributes[:range] = range if range
-          @attributes[:placeholder] = placeholder if placeholder
-          @attributes[:defaultBehavior] = default_behavior if default_behavior
+          @attributes[:start] = start unless start.nil?
+          @attributes[:end] = binding.local_variable_get(:end) unless binding.local_variable_get(:end).nil?
+          @attributes[:range] = range unless range.nil?
+          @attributes[:placeholder] = placeholder unless placeholder.nil?
+          @attributes[:defaultBehavior] = default_behavior unless default_behavior.nil?
 
           @attributes.freeze
         end

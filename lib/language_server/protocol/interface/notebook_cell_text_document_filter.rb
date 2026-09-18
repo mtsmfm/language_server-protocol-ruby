@@ -12,7 +12,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:notebook] = notebook
-          @attributes[:language] = language if language
+          @attributes[:language] = language unless language.nil?
 
           @attributes.freeze
         end

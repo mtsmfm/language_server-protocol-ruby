@@ -11,8 +11,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:label] = label
-          @attributes[:needsConfirmation] = needs_confirmation if needs_confirmation
-          @attributes[:description] = description if description
+          @attributes[:needsConfirmation] = needs_confirmation unless needs_confirmation.nil?
+          @attributes[:description] = description unless description.nil?
 
           @attributes.freeze
         end

@@ -8,17 +8,18 @@ module LanguageServer
       # A CodeAction must set either `edit` and/or a `command`. If both are supplied, the `edit` is applied first, then the `command` is executed.
       #
       class CodeAction
-        def initialize(title:, kind: nil, diagnostics: nil, is_preferred: nil, disabled: nil, edit: nil, command: nil, data: nil)
+        def initialize(title:, kind: nil, diagnostics: nil, is_preferred: nil, disabled: nil, edit: nil, command: nil, data: nil, tags: nil)
           @attributes = {}
 
           @attributes[:title] = title
-          @attributes[:kind] = kind if kind
-          @attributes[:diagnostics] = diagnostics if diagnostics
-          @attributes[:isPreferred] = is_preferred if is_preferred
-          @attributes[:disabled] = disabled if disabled
-          @attributes[:edit] = edit if edit
-          @attributes[:command] = command if command
-          @attributes[:data] = data if data
+          @attributes[:kind] = kind unless kind.nil?
+          @attributes[:diagnostics] = diagnostics unless diagnostics.nil?
+          @attributes[:isPreferred] = is_preferred unless is_preferred.nil?
+          @attributes[:disabled] = disabled unless disabled.nil?
+          @attributes[:edit] = edit unless edit.nil?
+          @attributes[:command] = command unless command.nil?
+          @attributes[:data] = data unless data.nil?
+          @attributes[:tags] = tags unless tags.nil?
 
           @attributes.freeze
         end
@@ -80,7 +81,7 @@ module LanguageServer
         #
         # @since 3.16.0
         #
-        # @return [{ reason: string; }]
+        # @return [CodeActionDisabled]
         def disabled
           attributes.fetch(:disabled)
         end
@@ -112,6 +113,16 @@ module LanguageServer
         # @return [LSPAny]
         def data
           attributes.fetch(:data)
+        end
+
+        #
+        # Tags for this code action.
+        #
+        # @since 3.18.0
+        #
+        # @return [CodeActionTag[]]
+        def tags
+          attributes.fetch(:tags)
         end
 
         attr_reader :attributes

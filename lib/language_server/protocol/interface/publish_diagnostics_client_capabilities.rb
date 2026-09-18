@@ -5,16 +5,27 @@ module LanguageServer
       # The publish diagnostic client capabilities.
       #
       class PublishDiagnosticsClientCapabilities
-        def initialize(related_information: nil, tag_support: nil, version_support: nil, code_description_support: nil, data_support: nil)
+        def initialize(version_support: nil, related_information: nil, tag_support: nil, code_description_support: nil, data_support: nil)
           @attributes = {}
 
-          @attributes[:relatedInformation] = related_information if related_information
-          @attributes[:tagSupport] = tag_support if tag_support
-          @attributes[:versionSupport] = version_support if version_support
-          @attributes[:codeDescriptionSupport] = code_description_support if code_description_support
-          @attributes[:dataSupport] = data_support if data_support
+          @attributes[:versionSupport] = version_support unless version_support.nil?
+          @attributes[:relatedInformation] = related_information unless related_information.nil?
+          @attributes[:tagSupport] = tag_support unless tag_support.nil?
+          @attributes[:codeDescriptionSupport] = code_description_support unless code_description_support.nil?
+          @attributes[:dataSupport] = data_support unless data_support.nil?
 
           @attributes.freeze
+        end
+
+        #
+        # Whether the client interprets the version property of the
+        # `textDocument/publishDiagnostics` notification's parameter.
+        #
+        # @since 3.15.0
+        #
+        # @return [boolean]
+        def version_support
+          attributes.fetch(:versionSupport)
         end
 
         #
@@ -31,20 +42,9 @@ module LanguageServer
         #
         # @since 3.15.0
         #
-        # @return [{ valueSet: DiagnosticTag[]; }]
+        # @return [ClientDiagnosticsTagOptions]
         def tag_support
           attributes.fetch(:tagSupport)
-        end
-
-        #
-        # Whether the client interprets the version property of the
-        # `textDocument/publishDiagnostics` notification's parameter.
-        #
-        # @since 3.15.0
-        #
-        # @return [boolean]
-        def version_support
-          attributes.fetch(:versionSupport)
         end
 
         #

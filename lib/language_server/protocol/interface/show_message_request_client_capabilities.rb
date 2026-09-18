@@ -8,7 +8,7 @@ module LanguageServer
         def initialize(message_action_item: nil)
           @attributes = {}
 
-          @attributes[:messageActionItem] = message_action_item if message_action_item
+          @attributes[:messageActionItem] = message_action_item unless message_action_item.nil?
 
           @attributes.freeze
         end
@@ -16,7 +16,7 @@ module LanguageServer
         #
         # Capabilities specific to the `MessageActionItem` type.
         #
-        # @return [{ additionalPropertiesSupport?: boolean; }]
+        # @return [ClientShowMessageActionItemOptions]
         def message_action_item
           attributes.fetch(:messageActionItem)
         end

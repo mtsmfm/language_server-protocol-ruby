@@ -10,7 +10,7 @@ module LanguageServer
 
           @attributes[:id] = id
           @attributes[:method] = method
-          @attributes[:registerOptions] = register_options if register_options
+          @attributes[:registerOptions] = register_options unless register_options.nil?
 
           @attributes.freeze
         end

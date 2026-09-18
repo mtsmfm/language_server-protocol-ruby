@@ -2,7 +2,7 @@ module LanguageServer
   module Protocol
     module Interface
       #
-      # Provide inline value as text.
+      # Returns inline value information as the complete text to be shown.
       #
       # @since 3.17.0
       #

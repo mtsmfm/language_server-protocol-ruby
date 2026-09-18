@@ -9,8 +9,8 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:documentSelector] = document_selector
-          @attributes[:label] = label if label
-          @attributes[:workDoneProgress] = work_done_progress if work_done_progress
+          @attributes[:label] = label unless label.nil?
+          @attributes[:workDoneProgress] = work_done_progress unless work_done_progress.nil?
 
           @attributes.freeze
         end

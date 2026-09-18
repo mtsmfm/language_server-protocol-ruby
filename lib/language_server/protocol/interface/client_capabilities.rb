@@ -8,12 +8,12 @@ module LanguageServer
         def initialize(workspace: nil, text_document: nil, notebook_document: nil, window: nil, general: nil, experimental: nil)
           @attributes = {}
 
-          @attributes[:workspace] = workspace if workspace
-          @attributes[:textDocument] = text_document if text_document
-          @attributes[:notebookDocument] = notebook_document if notebook_document
-          @attributes[:window] = window if window
-          @attributes[:general] = general if general
-          @attributes[:experimental] = experimental if experimental
+          @attributes[:workspace] = workspace unless workspace.nil?
+          @attributes[:textDocument] = text_document unless text_document.nil?
+          @attributes[:notebookDocument] = notebook_document unless notebook_document.nil?
+          @attributes[:window] = window unless window.nil?
+          @attributes[:general] = general unless general.nil?
+          @attributes[:experimental] = experimental unless experimental.nil?
 
           @attributes.freeze
         end

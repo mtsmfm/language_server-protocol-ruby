@@ -7,7 +7,7 @@ module LanguageServer
 
           @attributes[:jsonrpc] = jsonrpc
           @attributes[:method] = method
-          @attributes[:params] = params if params
+          @attributes[:params] = params unless params.nil?
 
           @attributes.freeze
         end

@@ -5,10 +5,10 @@ module LanguageServer
         def initialize(dynamic_registration: nil, prepare_support: nil, prepare_support_default_behavior: nil, honors_change_annotations: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
-          @attributes[:prepareSupport] = prepare_support if prepare_support
-          @attributes[:prepareSupportDefaultBehavior] = prepare_support_default_behavior if prepare_support_default_behavior
-          @attributes[:honorsChangeAnnotations] = honors_change_annotations if honors_change_annotations
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:prepareSupport] = prepare_support unless prepare_support.nil?
+          @attributes[:prepareSupportDefaultBehavior] = prepare_support_default_behavior unless prepare_support_default_behavior.nil?
+          @attributes[:honorsChangeAnnotations] = honors_change_annotations unless honors_change_annotations.nil?
 
           @attributes.freeze
         end

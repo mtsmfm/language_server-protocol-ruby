@@ -5,13 +5,16 @@ module LanguageServer
       # Client capabilities of a {@link DocumentRangeFormattingRequest}.
       #
       class DocumentRangeFormattingClientCapabilities
-        def initialize: (?dynamic_registration: bool) -> void
+        def initialize: (?dynamic_registration: bool, ?ranges_support: bool) -> void
 
         @attributes: Hash[Symbol, untyped]
         attr_reader attributes: Hash[Symbol, untyped]
 
         %a{pure}
         def dynamic_registration: () -> bool
+
+        %a{pure}
+        def ranges_support: () -> bool
 
         def to_hash: () -> Hash[Symbol, untyped]
 

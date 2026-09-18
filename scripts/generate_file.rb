@@ -5,8 +5,8 @@ require "fileutils"
 require "open-uri"
 require "active_support/core_ext/string"
 
-LSP_VERSION = ENV.fetch("LSP_VERSION", "3.17")
-LSP_REPO_REVISION = "98dfd44d349411c557127b7379c67b837bf1660c"
+LSP_VERSION = ENV.fetch("LSP_VERSION", "3.18")
+LSP_REPO_REVISION = "9b3b38b4d0d78cda7e1aa6e4243b5c3e38a217bc"
 ROOT_DIR = Pathname(__dir__) + ".."
 PROTOCOL_DIR = ROOT_DIR / "lib" / "language_server" / "protocol"
 SIG_DIR = ROOT_DIR / "sig" / "language_server" / "protocol"
@@ -22,9 +22,14 @@ BASE_PROTOCOL_INTERFACE_NAMES = %w[
   ResponseError
   ResponseMessage
 ].freeze
-# HoverResult is only an old example type from specification.md, not a real LSP
-# 3.17 payload type. Keep it for compatibility until a future breaking release.
-LEGACY_EXAMPLE_INTERFACE_NAMES = %w[HoverResult].freeze
+# The meta model splits the error codes into two enumerations, but the
+# `ErrorCodes` namespace in specification.md declares all of them and
+# dependents reference the LSP specific codes through `ErrorCodes` as well
+# (e.g. `ErrorCodes::REQUEST_FAILED`). Merge the values of the listed
+# enumerations into the key enumeration to keep both spellings available.
+MERGED_ENUMERATION_NAMES = {
+  "ErrorCodes" => %w[LSPErrorCodes]
+}.freeze
 
 class Renderer
   def initialize(parser)
@@ -39,7 +44,7 @@ class Renderer
   private
 
   def render_interfaces
-    cleanup("interface", preserved_names: LEGACY_EXAMPLE_INTERFACE_NAMES)
+    cleanup("interface")
 
     @parser.interfaces.each do |interface|
       render_template(
@@ -96,30 +101,13 @@ class Renderer
     File.write(path, template.result(b))
   end
 
-  def cleanup(type, preserved_names: [])
-    allowed_ruby_files = preserved_names.map { |name| "#{name.underscore}.rb" }
-    allowed_rbs_files = preserved_names.map { |name| "#{name.underscore}.rbs" }
-
-    remove_unpreserved_files(PROTOCOL_DIR / type, "*.rb", allowed_ruby_files)
-    remove_unpreserved_files(SIG_DIR / type, "*.rbs", allowed_rbs_files)
+  def cleanup(type)
+    FileUtils.rm_f(Dir.glob((PROTOCOL_DIR / type / "*.rb").to_s))
+    FileUtils.rm_f(Dir.glob((SIG_DIR / type / "*.rbs").to_s))
   end
 
-  def remove_unpreserved_files(dir, pattern, allowed_files)
-    Dir.glob((dir / pattern).to_s).each do |path|
-      next if allowed_files.include?(File.basename(path))
-
-      FileUtils.rm_f(path)
-    end
-  end
-
-  def loader_names(type, generated_names)
-    generated_names_by_path = generated_names.to_h { |name| [name.underscore, name] }
-    existing_names = Dir.glob((PROTOCOL_DIR / type / "*.rb").to_s).map do |path|
-      basename = File.basename(path, ".rb")
-      generated_names_by_path.fetch(basename, basename.camelize)
-    end
-
-    (generated_names + existing_names).uniq.sort
+  def loader_names(_type, generated_names)
+    generated_names.uniq.sort
   end
 end
 
@@ -227,10 +215,8 @@ class Parser
 
   Constant = Struct.new(:name, :values, :type, :comment, keyword_init: true)
 
-  Value = Struct.new(:name, :value, :literal, :comment, :serialized_value, :rbs_type, keyword_init: true) do
+  Value = Struct.new(:name, :value, :literal, :comment, keyword_init: true) do
     def serialized
-      return serialized_value if serialized_value
-
       if literal
         value.inspect
       else
@@ -241,22 +227,18 @@ class Parser
     def constant_name
       name.underscore.upcase
     end
-
-    def rbs_serialized
-      rbs_type || serialized
-    end
   end
 
   attr_reader :interfaces, :constants
 
-  def initialize(schema, namespace_constants: [], base_protocol_interfaces: [])
+  def initialize(schema, base_protocol_interfaces: [])
     @schema = schema
     @structures = schema.fetch(:structures)
     @enumerations = schema.fetch(:enumerations)
     @aliases = schema.fetch(:typeAliases)
     @lookup = (@structures + @enumerations + @aliases).to_h { |entry| [entry.fetch(:name), entry] }
     @interfaces = collect_interfaces(base_protocol_interfaces)
-    @constants = collect_constants(namespace_constants)
+    @constants = collect_constants
   end
 
   private
@@ -293,20 +275,29 @@ class Parser
     end
   end
 
-  def collect_constants(markdown_constants)
-    markdown_constant_names = markdown_constants.map(&:name)
-    constants = @enumerations.reject do |entry|
-      markdown_constant_names.include?(entry.fetch(:name))
-    end.map do |entry|
+  def collect_constants
+    @enumerations.map do |entry|
       Constant.new(
         name: entry.fetch(:name),
-        values: map_values(entry),
+        values: merged_values(entry),
         type: entry.fetch(:type),
         comment: comment(entry[:documentation])
       )
     end
+  end
 
-    markdown_constants + constants
+  def merged_values(entry)
+    merged_names = MERGED_ENUMERATION_NAMES.fetch(entry.fetch(:name), [])
+    values = merged_names.reduce(map_values(entry)) do |acc, name|
+      merged = @enumerations.find { |e| e.fetch(:name) == name } or raise "Unknown enumeration: #{name}"
+      raise "Cannot merge #{name} into #{entry.fetch(:name)}: type mismatch" if merged.fetch(:type) != entry.fetch(:type)
+
+      acc + map_values(merged)
+    end
+    duplicate = values.map(&:name).tally.select { |_, count| count > 1 }.keys
+    raise "Duplicate values in #{entry.fetch(:name)}: #{duplicate.join(", ")}" if duplicate.any?
+
+    values
   end
 
   def map_values(entry)
@@ -585,7 +576,7 @@ class BaseProtocolInterfaceParser
       "number"
     when "string", "boolean", "object"
       type
-    when "array"
+    when "array", "LSPAny"
       "any"
     when *BASE_PROTOCOL_INTERFACE_NAMES
       type
@@ -644,188 +635,6 @@ class BaseProtocolInterfaceParser
   end
 end
 
-class NamespaceConstantParser
-  TYPE_PATTERN = /
-    export\s+type\s+(?<name>[A-Za-z0-9_]+)\s*=[^;]+;
-  /mx.freeze
-
-  NAMESPACE_PATTERN = /
-    export\s+namespace\s+(?<name>[A-Za-z0-9_]+)\s*\{(?<body>.*?)\n\}
-  /mx.freeze
-
-  ENUM_PATTERN = /
-    export\s+enum\s+(?<name>[A-Za-z0-9_]+)\s*\{(?<body>.*?)\n\}
-  /mx.freeze
-
-  CONST_PATTERN = /
-    export\s+const\s+(?<name>[A-Za-z0-9_]+)
-    (?:\s*:\s*(?<type>[^=;]+?))?
-    \s*=\s*(?<value>[^;]+);
-  /mx.freeze
-
-  ENUM_VALUE_PATTERN = /
-    (?<name>[A-Za-z0-9_]+)\s*=\s*(?<value>[^,\n]+),?
-  /mx.freeze
-
-  def initialize(spec_dir)
-    @spec_dir = spec_dir
-  end
-
-  def parse
-    code_blocks.flat_map do |code|
-      type_docs = parse_type_docs(code)
-      parse_namespaces(code, type_docs) + parse_enums(code)
-    end
-  end
-
-  private
-
-  def parse_type_docs(code)
-    scan_matches(code, TYPE_PATTERN).group_by do |match|
-      match[:name]
-    end.transform_values do |matches|
-      matches.map { |match| [match.begin(0), clean_doc(preceding_doc(code, match.begin(0)))] }
-    end
-  end
-
-  def parse_namespaces(code, type_docs)
-    scan_matches(code, NAMESPACE_PATTERN).map do |match|
-      name = match[:name]
-      docs = (type_docs[name] || []) + [[match.begin(0), clean_doc(preceding_doc(code, match.begin(0)))]]
-
-      Parser::Constant.new(
-        name: name,
-        values: parse_namespace_values(match[:body]),
-        type: { kind: "base", name: "integer" },
-        comment: comment(join_docs(docs))
-      )
-    end
-  end
-
-  def parse_enums(code)
-    scan_matches(code, ENUM_PATTERN).map do |match|
-      Parser::Constant.new(
-        name: match[:name],
-        values: parse_enum_values(match[:body]),
-        type: { kind: "base", name: "integer" },
-        comment: comment(clean_doc(preceding_doc(code, match.begin(0))))
-      )
-    end
-  end
-
-  def code_blocks
-    Dir.glob((@spec_dir / "**" / "*.md").to_s).sort.flat_map do |path|
-      File.read(path).scan(/^```typescript\r?\n(.*?)(?:^```\r?\n|^```\r?\z)/m).flatten
-    end
-  end
-
-  def scan_matches(string, pattern)
-    string.to_enum(:scan, pattern).map { Regexp.last_match }
-  end
-
-  def parse_namespace_values(body)
-    scan_matches(body, CONST_PATTERN).map do |match|
-      name = match[:name]
-      raw_type = match[:type]&.strip
-      raw_value = match[:value].strip
-      value = parse_value(raw_value.strip)
-      Parser::Value.new(
-        name: name,
-        value: value,
-        literal: literal?(raw_value),
-        comment: comment(clean_doc(preceding_doc(body, match.begin(0)))),
-        serialized_value: serialized_value(raw_value),
-        rbs_type: rbs_type(raw_type, raw_value)
-      )
-    end
-  end
-
-  def parse_enum_values(body)
-    scan_matches(body, ENUM_VALUE_PATTERN).map do |match|
-      raw_value = match[:value].strip
-      Parser::Value.new(
-        name: match[:name],
-        value: parse_value(raw_value),
-        literal: literal?(raw_value),
-        comment: comment(clean_doc(preceding_doc(body, match.begin(0)))),
-        serialized_value: serialized_value(raw_value),
-        rbs_type: rbs_type(nil, raw_value)
-      )
-    end
-  end
-
-  def parse_value(raw_value)
-    case raw_value
-    when /\A-?\d+\z/
-      raw_value.to_i
-    when /\A(["'])(.*)\1\z/m
-      Regexp.last_match(2)
-    else
-      raw_value
-    end
-  end
-
-  def preceding_doc(string, index)
-    prefix = string[0...index].rstrip
-    return unless prefix.end_with?("*/")
-
-    start_index = prefix.rindex("/**")
-    return unless start_index
-
-    prefix[(start_index + 3)...-2]
-  end
-
-  def serialized_value(raw_value)
-    return raw_value if literal?(raw_value)
-
-    raw_value.underscore.upcase
-  end
-
-  def literal?(raw_value)
-    raw_value.match?(/\A-?\d+\z/) || raw_value.match?(/\A(["']).*\1\z/m)
-  end
-
-  def rbs_type(raw_type, raw_value)
-    return serialized_value(raw_value) if literal?(raw_value)
-
-    case raw_type
-    when "integer", "uinteger"
-      "Integer"
-    when "decimal"
-      "Numeric"
-    when "string"
-      "String"
-    when "boolean"
-      "bool"
-    else
-      "untyped"
-    end
-  end
-
-  def clean_doc(doc)
-    return unless doc
-
-    lines = doc.lines.map do |line|
-      line.sub(/\A\s*\*\s?/, "").rstrip
-    end
-
-    lines.reject! { |line| line.match?(/\A\s*@[a-zA-Z]/) }
-    lines.join("\n").gsub(/\n{3,}/, "\n\n").strip
-  end
-
-  def join_docs(docs)
-    docs.sort_by(&:first).map(&:last).compact.reject(&:empty?).join("\n")
-  end
-
-  def comment(string)
-    return if string.nil? || string.empty?
-
-    string.lines.map do |line|
-      "# #{line}".rstrip
-    end.join("\n")
-  end
-end
-
 def read_schema
   if META_MODEL_PATH.file?
     puts "Reading schema from #{META_MODEL_PATH}..."
@@ -839,8 +648,7 @@ end
 puts "Parsing schema..."
 schema = JSON.parse(read_schema, symbolize_names: true)
 base_protocol_interfaces = BaseProtocolInterfaceParser.new(SPEC_DIR).parse
-namespace_constants = NamespaceConstantParser.new(SPEC_DIR).parse
-parser = Parser.new(schema, namespace_constants: namespace_constants, base_protocol_interfaces: base_protocol_interfaces)
+parser = Parser.new(schema, base_protocol_interfaces: base_protocol_interfaces)
 puts "Rendering files..."
 Renderer.new(parser).render
 puts "Done."

@@ -1,18 +1,24 @@
 module LanguageServer
   module Protocol
     module Interface
-      class HoverResult
-        def initialize(value:)
+      #
+      # @since 3.18.0
+      #
+      class TextDocumentContentChangeWholeDocument
+        def initialize(text:)
           @attributes = {}
 
-          @attributes[:value] = value
+          @attributes[:text] = text
 
           @attributes.freeze
         end
 
+        #
+        # The new text of the whole document.
+        #
         # @return [string]
-        def value
-          attributes.fetch(:value)
+        def text
+          attributes.fetch(:text)
         end
 
         attr_reader :attributes

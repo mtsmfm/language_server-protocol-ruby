@@ -5,8 +5,8 @@ module LanguageServer
         def initialize(dynamic_registration: nil, relative_pattern_support: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
-          @attributes[:relativePatternSupport] = relative_pattern_support if relative_pattern_support
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:relativePatternSupport] = relative_pattern_support unless relative_pattern_support.nil?
 
           @attributes.freeze
         end

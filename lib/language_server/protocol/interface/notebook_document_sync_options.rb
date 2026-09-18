@@ -21,7 +21,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:notebookSelector] = notebook_selector
-          @attributes[:save] = save if save
+          @attributes[:save] = save unless save.nil?
 
           @attributes.freeze
         end
@@ -29,7 +29,7 @@ module LanguageServer
         #
         # The notebooks to be synced
         #
-        # @return [{ notebook: string | NotebookDocumentFilter; cells?: { language: string; }[]; } | { notebook?: string | NotebookDocumentFilter; cells: { language: string; }[]; }[]]
+        # @return [NotebookDocumentFilterWithNotebook | NotebookDocumentFilterWithCells[]]
         def notebook_selector
           attributes.fetch(:notebookSelector)
         end

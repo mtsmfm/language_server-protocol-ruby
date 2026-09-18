@@ -9,7 +9,7 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:kind] = kind
-          @attributes[:annotationId] = annotation_id if annotation_id
+          @attributes[:annotationId] = annotation_id unless annotation_id.nil?
 
           @attributes.freeze
         end

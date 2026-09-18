@@ -8,7 +8,7 @@ module LanguageServer
         def initialize(include_text: nil)
           @attributes = {}
 
-          @attributes[:includeText] = include_text if include_text
+          @attributes[:includeText] = include_text unless include_text.nil?
 
           @attributes.freeze
         end

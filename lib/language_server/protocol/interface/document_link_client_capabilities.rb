@@ -8,8 +8,8 @@ module LanguageServer
         def initialize(dynamic_registration: nil, tooltip_support: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
-          @attributes[:tooltipSupport] = tooltip_support if tooltip_support
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:tooltipSupport] = tooltip_support unless tooltip_support.nil?
 
           @attributes.freeze
         end

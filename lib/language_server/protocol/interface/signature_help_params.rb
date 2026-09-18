@@ -8,10 +8,10 @@ module LanguageServer
         def initialize(context: nil, text_document:, position:, work_done_token: nil)
           @attributes = {}
 
-          @attributes[:context] = context if context
+          @attributes[:context] = context unless context.nil?
           @attributes[:textDocument] = text_document
           @attributes[:position] = position
-          @attributes[:workDoneToken] = work_done_token if work_done_token
+          @attributes[:workDoneToken] = work_done_token unless work_done_token.nil?
 
           @attributes.freeze
         end

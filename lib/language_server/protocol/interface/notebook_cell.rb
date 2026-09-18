@@ -16,8 +16,8 @@ module LanguageServer
 
           @attributes[:kind] = kind
           @attributes[:document] = document
-          @attributes[:metadata] = metadata if metadata
-          @attributes[:executionSummary] = execution_summary if execution_summary
+          @attributes[:metadata] = metadata unless metadata.nil?
+          @attributes[:executionSummary] = execution_summary unless execution_summary.nil?
 
           @attributes.freeze
         end

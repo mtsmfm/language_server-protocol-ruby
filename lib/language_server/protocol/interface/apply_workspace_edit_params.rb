@@ -5,11 +5,12 @@ module LanguageServer
       # The parameters passed via an apply workspace edit request.
       #
       class ApplyWorkspaceEditParams
-        def initialize(label: nil, edit:)
+        def initialize(label: nil, edit:, metadata: nil)
           @attributes = {}
 
-          @attributes[:label] = label if label
+          @attributes[:label] = label unless label.nil?
           @attributes[:edit] = edit
+          @attributes[:metadata] = metadata unless metadata.nil?
 
           @attributes.freeze
         end
@@ -30,6 +31,16 @@ module LanguageServer
         # @return [WorkspaceEdit]
         def edit
           attributes.fetch(:edit)
+        end
+
+        #
+        # Additional data about the edit.
+        #
+        # @since 3.18.0
+        #
+        # @return [WorkspaceEditMetadata]
+        def metadata
+          attributes.fetch(:metadata)
         end
 
         attr_reader :attributes

@@ -5,11 +5,11 @@ module LanguageServer
         def initialize(open_close: nil, change: nil, will_save: nil, will_save_wait_until: nil, save: nil)
           @attributes = {}
 
-          @attributes[:openClose] = open_close if open_close
-          @attributes[:change] = change if change
-          @attributes[:willSave] = will_save if will_save
-          @attributes[:willSaveWaitUntil] = will_save_wait_until if will_save_wait_until
-          @attributes[:save] = save if save
+          @attributes[:openClose] = open_close unless open_close.nil?
+          @attributes[:change] = change unless change.nil?
+          @attributes[:willSave] = will_save unless will_save.nil?
+          @attributes[:willSaveWaitUntil] = will_save_wait_until unless will_save_wait_until.nil?
+          @attributes[:save] = save unless save.nil?
 
           @attributes.freeze
         end

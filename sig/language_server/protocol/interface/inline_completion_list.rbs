@@ -1,0 +1,24 @@
+module LanguageServer
+  module Protocol
+    module Interface
+      #
+      # Represents a collection of {@link InlineCompletionItem inline completion items} to be presented in the editor.
+      #
+      # @since 3.18.0
+      #
+      class InlineCompletionList
+        def initialize: (items: Array[untyped]) -> void
+
+        @attributes: Hash[Symbol, untyped]
+        attr_reader attributes: Hash[Symbol, untyped]
+
+        %a{pure}
+        def items: () -> Array[untyped]
+
+        def to_hash: () -> Hash[Symbol, untyped]
+
+        def to_json: (*untyped) -> String
+      end
+    end
+  end
+end

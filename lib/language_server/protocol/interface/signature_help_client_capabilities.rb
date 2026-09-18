@@ -8,9 +8,9 @@ module LanguageServer
         def initialize(dynamic_registration: nil, signature_information: nil, context_support: nil)
           @attributes = {}
 
-          @attributes[:dynamicRegistration] = dynamic_registration if dynamic_registration
-          @attributes[:signatureInformation] = signature_information if signature_information
-          @attributes[:contextSupport] = context_support if context_support
+          @attributes[:dynamicRegistration] = dynamic_registration unless dynamic_registration.nil?
+          @attributes[:signatureInformation] = signature_information unless signature_information.nil?
+          @attributes[:contextSupport] = context_support unless context_support.nil?
 
           @attributes.freeze
         end
@@ -27,7 +27,7 @@ module LanguageServer
         # The client supports the following `SignatureInformation`
         # specific properties.
         #
-        # @return [{ documentationFormat?: MarkupKind[]; parameterInformation?: { labelOffsetSupport?: boolean; }; activeParameterSupport?: boolean; }]
+        # @return [ClientSignatureInformationOptions]
         def signature_information
           attributes.fetch(:signatureInformation)
         end

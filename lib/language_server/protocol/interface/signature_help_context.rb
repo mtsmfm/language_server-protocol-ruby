@@ -11,9 +11,9 @@ module LanguageServer
           @attributes = {}
 
           @attributes[:triggerKind] = trigger_kind
-          @attributes[:triggerCharacter] = trigger_character if trigger_character
+          @attributes[:triggerCharacter] = trigger_character unless trigger_character.nil?
           @attributes[:isRetrigger] = is_retrigger
-          @attributes[:activeSignatureHelp] = active_signature_help if active_signature_help
+          @attributes[:activeSignatureHelp] = active_signature_help unless active_signature_help.nil?
 
           @attributes.freeze
         end
