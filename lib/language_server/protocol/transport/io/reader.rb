@@ -15,7 +15,11 @@ module LanguageServer
           def read(&block)
             while buffer = io.gets("\r\n\r\n")
               content_length = buffer.match(/Content-Length: (\d+)/i)[1].to_i
-              message = io.read(content_length) or raise
+              message = io.read(content_length)
+              unless message && message.bytesize == content_length
+                raise EOFError, "Unexpected end of JSON-RPC message body"
+              end
+
               request = JSON.parse(message, symbolize_names: true)
               block.call(request)
             end
